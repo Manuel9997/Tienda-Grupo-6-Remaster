@@ -24,6 +24,7 @@ public class V1 extends JFrame {
 	private JLabel lblNewLabel_3;
 	private JScrollPane scrollPane;
 	private JTextArea textArea;
+	private JTextField txtEmpleado;
 
 	/**
 	 * Launch the application.
@@ -90,6 +91,12 @@ public class V1 extends JFrame {
 				textArea = new JTextArea();
 				scrollPane.setViewportView(textArea);
 			}
+		}
+		{
+			txtEmpleado = new JTextField();
+			txtEmpleado.setColumns(10);
+			txtEmpleado.setBounds(140, 99, 326, 19);
+			contentPane.add(txtEmpleado);
 		}
 	}
 }
