@@ -27,7 +27,7 @@ public class V1 extends JFrame {
 	private JTextField txtEmpleado;
 
 	/**
-	 * Launch the application.
+	 * Launch the application
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
