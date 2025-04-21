@@ -25,6 +25,7 @@ public class V1 extends JFrame {
 	private JScrollPane scrollPane;
 	private JTextArea textArea;
 	private JTextField txtEmpleado;
+	private JTextField txtIDproducto;
 
 	/**
 	 * Launch the application.
@@ -97,6 +98,12 @@ public class V1 extends JFrame {
 			txtEmpleado.setColumns(10);
 			txtEmpleado.setBounds(140, 99, 326, 19);
 			contentPane.add(txtEmpleado);
+		}
+		{
+			txtIDproducto = new JTextField();
+			txtIDproducto.setColumns(10);
+			txtIDproducto.setBounds(140, 138, 326, 19);
+			contentPane.add(txtIDproducto);
 		}
 	}
 }
