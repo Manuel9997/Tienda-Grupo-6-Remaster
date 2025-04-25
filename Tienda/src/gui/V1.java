@@ -12,8 +12,10 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class V1 extends JFrame {
+public class V1 extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -26,6 +28,7 @@ public class V1 extends JFrame {
 	private JTextArea textArea;
 	private JTextField txtEmpleado;
 	private JTextField txtIDproducto;
+	private JButton btnBuscar;
 
 	/**
 	 * Launch the application.
@@ -105,5 +108,19 @@ public class V1 extends JFrame {
 			txtIDproducto.setBounds(140, 138, 326, 19);
 			contentPane.add(txtIDproducto);
 		}
+		{
+			btnBuscar = new JButton("Buscar");
+			btnBuscar.addActionListener(this);
+			btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			btnBuscar.setBounds(535, 83, 85, 27);
+			contentPane.add(btnBuscar);
+		}
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnBuscar) {
+			do_btnBuscar_actionPerformed(e);
+		}
+	}
+	protected void do_btnBuscar_actionPerformed(ActionEvent e) {
 	}
 }
