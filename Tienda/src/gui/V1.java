@@ -29,6 +29,7 @@ public class V1 extends JFrame implements ActionListener {
 	private JTextField txtEmpleado;
 	private JTextField txtIDproducto;
 	private JButton btnBuscar;
+	private JButton btnBorrar;
 
 	/**
 	 * Launch the application.
@@ -115,12 +116,24 @@ public class V1 extends JFrame implements ActionListener {
 			btnBuscar.setBounds(535, 83, 85, 27);
 			contentPane.add(btnBuscar);
 		}
+		{
+			btnBorrar = new JButton("Borrar");
+			btnBorrar.addActionListener(this);
+			btnBorrar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			btnBorrar.setBounds(535, 282, 85, 27);
+			contentPane.add(btnBorrar);
+		}
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnBorrar) {
+			do_btnBorrar_actionPerformed(e);
+		}
 		if (e.getSource() == btnBuscar) {
 			do_btnBuscar_actionPerformed(e);
 		}
 	}
 	protected void do_btnBuscar_actionPerformed(ActionEvent e) {
+	}
+	protected void do_btnBorrar_actionPerformed(ActionEvent e) {
 	}
 }
