@@ -30,6 +30,7 @@ public class V1 extends JFrame implements ActionListener {
 	private JTextField txtIDproducto;
 	private JButton btnBuscar;
 	private JButton btnBorrar;
+	private JButton btnRegistrar1;
 
 	/**
 	 * Launch the application.
@@ -60,7 +61,7 @@ public class V1 extends JFrame implements ActionListener {
 		contentPane.setLayout(null);
 		{
 			lblNewLabel = new JLabel("TIENDA TECNOLÓGICA \"TECNOBOX\"");
-			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
+			lblNewLabel.setFont(new Font("Sitka Text", Font.PLAIN, 22));
 			lblNewLabel.setBounds(128, 20, 377, 27);
 			contentPane.add(lblNewLabel);
 		}
@@ -123,8 +124,20 @@ public class V1 extends JFrame implements ActionListener {
 			btnBorrar.setBounds(535, 282, 85, 27);
 			contentPane.add(btnBorrar);
 		}
+
+		{
+			btnRegistrar1 = new JButton("Registrar");
+			btnRegistrar1.addActionListener(this);
+			btnRegistrar1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			btnRegistrar1.setBounds(527, 121, 93, 27);
+			contentPane.add(btnRegistrar1);
+		}
+
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnRegistrar1) {
+			do_btnRegistrar1_actionPerformed(e);
+		}
 		if (e.getSource() == btnBorrar) {
 			do_btnBorrar_actionPerformed(e);
 		}
@@ -135,5 +148,7 @@ public class V1 extends JFrame implements ActionListener {
 	protected void do_btnBuscar_actionPerformed(ActionEvent e) {
 	}
 	protected void do_btnBorrar_actionPerformed(ActionEvent e) {
+	}
+	protected void do_btnRegistrar1_actionPerformed(ActionEvent e) {
 	}
 }
