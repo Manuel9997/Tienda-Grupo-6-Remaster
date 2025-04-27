@@ -20,15 +20,15 @@ public class V1 extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JLabel lblNewLabel;
-	private JTextField txtCliente;
+	private JTextField txtID;
 	private JScrollPane scrollPane;
-	private JTextArea textArea;
-	private JButton btnBuscar;
+	private JTextArea txtS;
+	private JButton btnClientes;
 	private JButton btnBorrar;
 	private JLabel lblNewLabel_2;
-	private JButton btnBuscar_2;
-	private JButton btnEmpleados_1;
-	private JButton btnProductos_1;
+	private JButton btnCliente;
+	private JButton btnEmpleado;
+	private JButton btnProducto;
 
 	/**
 	 * Launch the application.
@@ -60,30 +60,30 @@ public class V1 extends JFrame implements ActionListener {
 		{
 			lblNewLabel = new JLabel("TIENDA TECNOLÓGICA \"TECNOBOX\"");
 			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
-			lblNewLabel.setBounds(160, 10, 423, 27);
+			lblNewLabel.setBounds(160, 20, 423, 27);
 			contentPane.add(lblNewLabel);
 		}
 		{
-			txtCliente = new JTextField();
-			txtCliente.setBounds(219, 72, 333, 19);
-			contentPane.add(txtCliente);
-			txtCliente.setColumns(10);
+			txtID = new JTextField();
+			txtID.setBounds(219, 72, 333, 19);
+			contentPane.add(txtID);
+			txtID.setColumns(10);
 		}
 		{
 			scrollPane = new JScrollPane();
 			scrollPane.setBounds(10, 225, 660, 231);
 			contentPane.add(scrollPane);
 			{
-				textArea = new JTextArea();
-				scrollPane.setViewportView(textArea);
+				txtS = new JTextArea();
+				scrollPane.setViewportView(txtS);
 			}
 		}
 		{
-			btnBuscar = new JButton("Clientes");
-			btnBuscar.addActionListener(this);
-			btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			btnBuscar.setBounds(10, 99, 100, 27);
-			contentPane.add(btnBuscar);
+			btnClientes = new JButton("Clientes");
+			btnClientes.addActionListener(this);
+			btnClientes.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			btnClientes.setBounds(10, 99, 100, 27);
+			contentPane.add(btnClientes);
 		}
 		{
 			btnBorrar = new JButton("Borrar");
@@ -93,10 +93,10 @@ public class V1 extends JFrame implements ActionListener {
 			contentPane.add(btnBorrar);
 		}
 		
-		JButton btnBuscar_1 = new JButton("Buscar");
-		btnBuscar_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnBuscar_1.setBounds(585, 66, 85, 27);
-		contentPane.add(btnBuscar_1);
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnBuscar.setBounds(585, 66, 85, 27);
+		contentPane.add(btnBuscar);
 		
 		JButton btnEmpleados = new JButton("Empleados");
 		btnEmpleados.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -124,22 +124,22 @@ public class V1 extends JFrame implements ActionListener {
 			contentPane.add(lblNewLabel_2);
 		}
 		{
-			btnBuscar_2 = new JButton("Cliente");
-			btnBuscar_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			btnBuscar_2.setBounds(178, 143, 100, 27);
-			contentPane.add(btnBuscar_2);
+			btnCliente = new JButton("Cliente");
+			btnCliente.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			btnCliente.setBounds(178, 143, 100, 27);
+			contentPane.add(btnCliente);
 		}
 		{
-			btnEmpleados_1 = new JButton("Empleado");
-			btnEmpleados_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			btnEmpleados_1.setBounds(315, 143, 100, 27);
-			contentPane.add(btnEmpleados_1);
+			btnEmpleado = new JButton("Empleado");
+			btnEmpleado.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			btnEmpleado.setBounds(315, 143, 100, 27);
+			contentPane.add(btnEmpleado);
 		}
 		{
-			btnProductos_1 = new JButton("Producto");
-			btnProductos_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			btnProductos_1.setBounds(452, 143, 100, 27);
-			contentPane.add(btnProductos_1);
+			btnProducto = new JButton("Producto");
+			btnProducto.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			btnProducto.setBounds(452, 143, 100, 27);
+			contentPane.add(btnProducto);
 		}
 
 	}
@@ -147,7 +147,7 @@ public class V1 extends JFrame implements ActionListener {
 		if (e.getSource() == btnBorrar) {
 			do_btnBorrar_actionPerformed(e);
 		}
-		if (e.getSource() == btnBuscar) {
+		if (e.getSource() == btnClientes) {
 			do_btnBuscar_actionPerformed(e);
 		}
 	}
