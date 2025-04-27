@@ -1,74 +1,97 @@
 package clase;
 
 public class Producto {
-	public String ID_Producto,Nombre,Categoria;
-	public int Entrada,Salida,Stock;
+private String id_producto, nombre, categoria, garantia;
+private double precio;
+private int entrada, salida, stock = 0;
+
+public Producto(String id_producto, String nombre, String categoria, String garantia, double precio, int entrada,
+		int salida) {
 	
-	public Producto(String iD_Producto, String nombre, String categoria, int entrada, int salida, int stock) {
-		ID_Producto = iD_Producto;
-		Nombre = nombre;
-		Categoria = categoria;
-		Entrada = entrada;
-		Salida = salida;
-		Stock = stock;
-	}
+	this.id_producto = id_producto;
+	this.nombre = nombre;
+	this.categoria = categoria;
+	this.garantia = garantia;
+	this.precio = precio;
+	this.entrada = entrada;
+	this.salida = salida;
+}
 
-	public String getID_Producto() {
-		return ID_Producto;
-	}
+public String getId_producto() {
+	return id_producto;
+}
 
-	public void setID_Producto(String iD_Producto) {
-		ID_Producto = iD_Producto;
-	}
+public void setId_producto(String id_producto) {
+	this.id_producto = id_producto;
+}
 
-	public String getNombre() {
-		return Nombre;
-	}
+public String getNombre() {
+	return nombre;
+}
 
-	public void setNombre(String nombre) {
-		Nombre = nombre;
-	}
+public void setNombre(String nombre) {
+	this.nombre = nombre;
+}
 
-	public String getCategoria() {
-		return Categoria;
-	}
+public String getCategoria() {
+	return categoria;
+}
 
-	public void setCategoria(String categoria) {
-		Categoria = categoria;
-	}
+public void setCategoria(String categoria) {
+	this.categoria = categoria;
+}
 
-	public int getEntrada() {
-		return Entrada;
-	}
+public String getGarantia() {
+	return garantia;
+}
 
-	public void setEntrada(int entrada) {
-		Entrada = entrada;
-	}
+public void setGarantia(String garantia) {
+	this.garantia = garantia;
+}
 
-	public int getSalida() {
-		return Salida;
-	}
+public double getPrecio() {
+	return precio;
+}
 
-	public void setSalida(int salida) {
-		Salida = salida;
-	}
+public void setPrecio(double precio) {
+	this.precio = precio;
+}
 
-	public int getStock() {
-		return Stock;
-	}
-	
-	public int getStock(int Stock_int, boolean Stock_Boo) {
-		if(Stock_Boo) {
-			return Stock_int;
-		}
-		else {
-		return 0;
-		}
-	}
+public int getEntrada() {
+	return entrada;
+}
 
-	public void setStock(int stock) {
-		Stock = stock;
-	}
+public void setEntrada(int entrada) {
+	this.entrada = entrada;
+}
 
-	
+public int getSalida() {
+	return salida;
+}
+
+public void setSalida(int salida) {
+	this.salida = salida;
+}
+
+public int getStock() {
+	return stock;
+}
+
+public void setStock(int stock) {
+	this.stock = stock;
+}
+//SOBRECARGA DE MÉTODOS
+public int Stock() {
+	stock += entrada;
+    stock -= salida;
+    return stock;
+}
+public String Stock(int stock) {
+	if(stock <= 0) {
+		return "No disponible";
+	}
+	else {
+		return "Disponible";
+	}
+}
 }

@@ -1,113 +1,84 @@
 package clase;
 
 public class Cliente {
-	public String Codigo_compra,Dni,Nombre_apellido,Producto,
-	Telefono,Fecha,Tipo_pago;
-	public int Cantidad, Total;
+
+private String codigo_compra, dni, nombre_apellido, producto, telefono, fecha, tipo_pago;
+private int cantidad;
+
+public Cliente(String codigo_compra, String dni, String nombre_apellido, String producto, String telefono, String fecha,
+		String tipo_pago, int cantidad) {
 	
-	
-	public Cliente(String codigo_compra, String dni, String nombre_apellido, String producto, String telefono,
-			String fecha, String tipo_pago, int cantidad, int total) {
-		Codigo_compra = codigo_compra;
-		Dni = dni;
-		Nombre_apellido = nombre_apellido;
-		Producto = producto;
-		Telefono = telefono;
-		Fecha = fecha;
-		Tipo_pago = tipo_pago;
-		Cantidad = cantidad;
-		Total = total;
-	}
+	this.codigo_compra = codigo_compra;
+	this.dni = dni;
+	this.nombre_apellido = nombre_apellido;
+	this.producto = producto;
+	this.telefono = telefono;
+	this.fecha = fecha;
+	this.tipo_pago = tipo_pago;
+	this.cantidad = cantidad;
+}
 
+public String getCodigo_compra() {
+	return codigo_compra;
+}
 
-	public String getCodigo_compra() {
-		return Codigo_compra;
-	}
+public void setCodigo_compra(String codigo_compra) {
+	this.codigo_compra = codigo_compra;
+}
 
+public String getDni() {
+	return dni;
+}
 
-	public void setCodigo_compra(String codigo_compra) {
-		Codigo_compra = codigo_compra;
-	}
+public void setDni(String dni) {
+	this.dni = dni;
+}
 
+public String getNombre_apellido() {
+	return nombre_apellido;
+}
 
-	public String getDni() {
-		return Dni;
-	}
+public void setNombre_apellido(String nombre_apellido) {
+	this.nombre_apellido = nombre_apellido;
+}
 
+public String getProducto() {
+	return producto;
+}
 
-	public void setDni(String dni) {
-		Dni = dni;
-	}
+public void setProducto(String producto) {
+	this.producto = producto;
+}
 
+public String getTelefono() {
+	return telefono;
+}
 
-	public String getNombre_apellido() {
-		return Nombre_apellido;
-	}
+public void setTelefono(String telefono) {
+	this.telefono = telefono;
+}
 
+public String getFecha() {
+	return fecha;
+}
 
-	public void setNombre_apellido(String nombre_apellido) {
-		Nombre_apellido = nombre_apellido;
-	}
+public void setFecha(String fecha) {
+	this.fecha = fecha;
+}
 
+public String getTipo_pago() {
+	return tipo_pago;
+}
 
-	public String getProducto() {
-		return Producto;
-	}
+public void setTipo_pago(String tipo_pago) {
+	this.tipo_pago = tipo_pago;
+}
 
+public int getCantidad() {
+	return cantidad;
+}
 
-	public void setProducto(String producto) {
-		Producto = producto;
-	}
-
-
-	public String getTelefono() {
-		return Telefono;
-	}
-
-
-	public void setTelefono(String telefono) {
-		Telefono = telefono;
-	}
-
-
-	public String getFecha() {
-		return Fecha;
-	}
-
-
-	public void setFecha(String fecha) {
-		Fecha = fecha;
-	}
-
-
-	public String getTipo_pago() {
-		return Tipo_pago;
-	}
-
-
-	public void setTipo_pago(String tipo_pago) {
-		Tipo_pago = tipo_pago;
-	}
-
-
-	public int getCantidad() {
-		return Cantidad;
-	}
-
-
-	public void setCantidad(int cantidad) {
-		Cantidad = cantidad;
-	}
-
-
-	public int getTotal() {
-		return Total;
-	}
-
-
-	public void setTotal(int total) {
-		Total = total;
-	}
-	
-
+public void setCantidad(int cantidad) {
+	this.cantidad = cantidad;
+}
 }
