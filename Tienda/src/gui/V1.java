@@ -20,17 +20,15 @@ public class V1 extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_1;
 	private JTextField txtCliente;
-	private JLabel lblNewLabel_2;
-	private JLabel lblNewLabel_3;
 	private JScrollPane scrollPane;
 	private JTextArea textArea;
-	private JTextField txtEmpleado;
-	private JTextField txtIDproducto;
 	private JButton btnBuscar;
 	private JButton btnBorrar;
-	private JButton btnRegistrar1;
+	private JLabel lblNewLabel_2;
+	private JButton btnBuscar_2;
+	private JButton btnEmpleados_1;
+	private JButton btnProductos_1;
 
 	/**
 	 * Launch the application.
@@ -53,7 +51,7 @@ public class V1 extends JFrame implements ActionListener {
 	 */
 	public V1() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 644, 455);
+		setBounds(100, 100, 694, 503);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -61,37 +59,19 @@ public class V1 extends JFrame implements ActionListener {
 		contentPane.setLayout(null);
 		{
 			lblNewLabel = new JLabel("TIENDA TECNOLÓGICA \"TECNOBOX\"");
-			lblNewLabel.setFont(new Font("Sitka Text", Font.PLAIN, 22));
-			lblNewLabel.setBounds(128, 20, 377, 27);
+			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
+			lblNewLabel.setBounds(160, 10, 423, 27);
 			contentPane.add(lblNewLabel);
 		}
 		{
-			lblNewLabel_1 = new JLabel("CLIENTE:");
-			lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			lblNewLabel_1.setBounds(24, 71, 69, 13);
-			contentPane.add(lblNewLabel_1);
-		}
-		{
 			txtCliente = new JTextField();
-			txtCliente.setBounds(140, 70, 326, 19);
+			txtCliente.setBounds(219, 72, 333, 19);
 			contentPane.add(txtCliente);
 			txtCliente.setColumns(10);
 		}
 		{
-			lblNewLabel_2 = new JLabel("EMPLEADO:");
-			lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			lblNewLabel_2.setBounds(24, 106, 93, 13);
-			contentPane.add(lblNewLabel_2);
-		}
-		{
-			lblNewLabel_3 = new JLabel("ID PRODUCTO:");
-			lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			lblNewLabel_3.setBounds(24, 140, 106, 13);
-			contentPane.add(lblNewLabel_3);
-		}
-		{
 			scrollPane = new JScrollPane();
-			scrollPane.setBounds(10, 177, 515, 231);
+			scrollPane.setBounds(10, 225, 660, 231);
 			contentPane.add(scrollPane);
 			{
 				textArea = new JTextArea();
@@ -99,45 +79,71 @@ public class V1 extends JFrame implements ActionListener {
 			}
 		}
 		{
-			txtEmpleado = new JTextField();
-			txtEmpleado.setColumns(10);
-			txtEmpleado.setBounds(140, 99, 326, 19);
-			contentPane.add(txtEmpleado);
-		}
-		{
-			txtIDproducto = new JTextField();
-			txtIDproducto.setColumns(10);
-			txtIDproducto.setBounds(140, 138, 326, 19);
-			contentPane.add(txtIDproducto);
-		}
-		{
-			btnBuscar = new JButton("Buscar");
+			btnBuscar = new JButton("Clientes");
 			btnBuscar.addActionListener(this);
 			btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			btnBuscar.setBounds(535, 83, 85, 27);
+			btnBuscar.setBounds(10, 99, 100, 27);
 			contentPane.add(btnBuscar);
 		}
 		{
 			btnBorrar = new JButton("Borrar");
 			btnBorrar.addActionListener(this);
 			btnBorrar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			btnBorrar.setBounds(535, 282, 85, 27);
+			btnBorrar.setBounds(585, 188, 85, 27);
 			contentPane.add(btnBorrar);
 		}
-
+		
+		JButton btnBuscar_1 = new JButton("Buscar");
+		btnBuscar_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnBuscar_1.setBounds(585, 66, 85, 27);
+		contentPane.add(btnBuscar_1);
+		
+		JButton btnEmpleados = new JButton("Empleados");
+		btnEmpleados.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnEmpleados.setBounds(10, 136, 100, 27);
+		contentPane.add(btnEmpleados);
+		
+		JButton btnProductos = new JButton("Productos");
+		btnProductos.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnProductos.setBounds(10, 173, 100, 27);
+		contentPane.add(btnProductos);
+		
+		JLabel lblNewLabel_1 = new JLabel("MOSTRAR");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_1.setBounds(28, 70, 72, 19);
+		contentPane.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("ID/DNI:");
+		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_1_1.setBounds(154, 70, 72, 19);
+		contentPane.add(lblNewLabel_1_1);
 		{
-			btnRegistrar1 = new JButton("Registrar");
-			btnRegistrar1.addActionListener(this);
-			btnRegistrar1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			btnRegistrar1.setBounds(527, 121, 93, 27);
-			contentPane.add(btnRegistrar1);
+			lblNewLabel_2 = new JLabel("REGISTRAR");
+			lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			lblNewLabel_2.setBounds(330, 115, 85, 19);
+			contentPane.add(lblNewLabel_2);
+		}
+		{
+			btnBuscar_2 = new JButton("Cliente");
+			btnBuscar_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			btnBuscar_2.setBounds(178, 143, 100, 27);
+			contentPane.add(btnBuscar_2);
+		}
+		{
+			btnEmpleados_1 = new JButton("Empleado");
+			btnEmpleados_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			btnEmpleados_1.setBounds(315, 143, 100, 27);
+			contentPane.add(btnEmpleados_1);
+		}
+		{
+			btnProductos_1 = new JButton("Producto");
+			btnProductos_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			btnProductos_1.setBounds(452, 143, 100, 27);
+			contentPane.add(btnProductos_1);
 		}
 
 	}
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnRegistrar1) {
-			do_btnRegistrar1_actionPerformed(e);
-		}
 		if (e.getSource() == btnBorrar) {
 			do_btnBorrar_actionPerformed(e);
 		}
@@ -148,7 +154,5 @@ public class V1 extends JFrame implements ActionListener {
 	protected void do_btnBuscar_actionPerformed(ActionEvent e) {
 	}
 	protected void do_btnBorrar_actionPerformed(ActionEvent e) {
-	}
-	protected void do_btnRegistrar1_actionPerformed(ActionEvent e) {
 	}
 }
