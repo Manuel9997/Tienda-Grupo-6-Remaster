@@ -6,7 +6,15 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import arreglo.ArregloCliente;
+import arreglo.ArregloEmpleado;
+import arreglo.ArregloProducto;
+import clase.Cliente;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -93,12 +101,14 @@ public class V1 extends JFrame implements ActionListener {
 			contentPane.add(btnBorrar);
 		}
 		
-		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(this);
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnBuscar.setBounds(585, 66, 85, 27);
 		contentPane.add(btnBuscar);
 		
-		JButton btnEmpleados = new JButton("Empleados");
+		btnEmpleados = new JButton("Empleados");
+		btnEmpleados.addActionListener(this);
 		btnEmpleados.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnEmpleados.setBounds(10, 136, 100, 27);
 		contentPane.add(btnEmpleados);
@@ -142,17 +152,61 @@ public class V1 extends JFrame implements ActionListener {
 			contentPane.add(btnProducto);
 		}
 
-	}
+	}	
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnBorrar) {
-			do_btnBorrar_actionPerformed(e);
-		}
-		if (e.getSource() == btnClientes) {
+		if (e.getSource() == btnBuscar) {
 			do_btnBuscar_actionPerformed(e);
 		}
+		if (e.getSource() == btnClientes) {
+			do_btnClientes_actionPerformed(e);
+		}
+	}
+	
+	ArregloCliente ac = new ArregloCliente();
+	ArregloEmpleado ae = new ArregloEmpleado();
+	ArregloProducto ap = new ArregloProducto();
+	private JButton btnEmpleados;
+	private JButton btnBuscar;
+	
+	protected void do_btnClientes_actionPerformed(ActionEvent e) {
+		txtS.setText("");
+		Listado_Cliente();
+	}
+	void Imprimir(String s) {
+		txtS.append(s+"\n");
+	}
+	void Listado_Cliente() {
+		Imprimir("Código\tDNI\tNombres y apellidos\tProducto\tTeléfono\tFecha\tTipo de pago\tCantidad");
+		for(int i = 0; i <ac.Tamaño(); i++) {
+			Imprimir("" + ac.Obtener(i).getCodigo_compra() + "\t" +
+			"" + ac.Obtener(i).getDni() + "\t" +
+			"" + ac.Obtener(i).getNombre_apellido() + "\t" +
+			"" + ac.Obtener(i).getProducto() + "\t" +
+			"" + ac.Obtener(i).getTelefono() + "\t" +
+			"" + ac.Obtener(i).getFecha() + "\t" +
+			"" + ac.Obtener(i).getTipo_pago() + "\t" +
+			"" + ac.Obtener(i).getCantidad() + "\t");
+		}
+	}	
+	int LeerCodigo() {
+		return Integer.parseInt(txtID.getText());		
 	}
 	protected void do_btnBuscar_actionPerformed(ActionEvent e) {
+		try {
+			txtS.setText("");
+			Cliente cli = ac.Buscar(LeerCodigo());
+			if(cli != null) {
+				Imprimir("Código\tDNI\tNombres y apellidos\tProducto\tTeléfono\tFecha\tTipo de pago\tCantidad");
+				Imprimir(""+cli.getCodigo_compra() + "\t"+ cli.getNombre_apellido() + "\t" + cli.getProducto() + "\t" + cli.getTelefono() + "\t" + cli.getFecha() + "\t" + cli.getTipo_pago() + "\t" + cli.getCantidad());
+			}
+			else {
+				JOptionPane.showMessageDialog(this, "El código NO existe");
+			}
+		} catch(Exception e2) {
+			MostrarError();
+		}		
 	}
-	protected void do_btnBorrar_actionPerformed(ActionEvent e) {
+	private void MostrarError() {
+		JOptionPane.showMessageDialog(this,  "Ingrese número(s) válido(s)");
 	}
 }
