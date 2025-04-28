@@ -14,12 +14,15 @@ public class ArregloProducto {
 		Adicionar_Producto(new Producto("P002","Smartphone","Electrónica","6 meses",800.0,100,30));
 		Adicionar_Producto(new Producto("P003","Impresora","Oficina","1 año",300.0,40,5));
 	}
+	
 	public void Adicionar_Producto(Producto x) {
 		pro.add(x);
 	}
+	
 	public int Tamaño_Producto() {
 		return pro.size();
 	}
+	
 	public Producto Obtener_Producto(int x) {
 		return pro.get(x);
 	}

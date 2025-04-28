@@ -14,12 +14,15 @@ public class ArregloCliente {
 		Adicionar_Cliente(new Cliente("C002","7654321","Ana Gómez Sánchez","Smartphone","555987654","2025-05-10","Crédito",1));
 		Adicionar_Cliente(new Cliente("C003","2345678","Carlos Díaz Moreno","Tablet","555567890","2025-06-01","Débito",3));
 	}
+	
 	public void Adicionar_Cliente(Cliente x) {
 		clie.add(x);
 	}
+	
 	public int Tamaño_Cliente() {
 		return clie.size();
 	}
+	
 	public Cliente Obtener_Cliente(int x) {
 		return clie.get(x);
 	}
