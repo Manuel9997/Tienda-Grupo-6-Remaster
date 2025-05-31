@@ -28,6 +28,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
+import javax.swing.UIManager;
 
 public class VenAdministrador extends JFrame implements ActionListener {
 
@@ -68,6 +69,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 	public int minute;
 	public int hour;
 	public String tmam;
+	public int Switch=0;
 	
 	
 
@@ -134,7 +136,9 @@ public class VenAdministrador extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 930, 730);
 		contentPane = new JPanel();
+		contentPane.setBackground(UIManager.getColor("Button.light"));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -328,11 +332,20 @@ public class VenAdministrador extends JFrame implements ActionListener {
 					scrollPane.setViewportView(txtS);
 				}
 			}
+			{
+				jlabelmodo = new JButton("Modo Oscuro");
+				jlabelmodo.addActionListener(this);
+				jlabelmodo.setBounds(31, 228, 133, 33);
+				contentPane.add(jlabelmodo);
+			}
 			
 		    clock();
 		}
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == jlabelmodo) {
+			do_btnNewButton_actionPerformed(e);
+		}
 		if (e.getSource() == btnModificarEmpleado) {
 			do_btnModificarEmpleado_actionPerformed(e);
 		}
@@ -355,6 +368,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 	private JLabel lblclock;
 	private JScrollPane scrollPane;
 	private JTextArea txtS;
+	private JButton jlabelmodo;
 	
 	protected void do_btnHistorialVentas_actionPerformed(ActionEvent e) {
 		ListadoHistorialVentas();
@@ -514,5 +528,18 @@ public class VenAdministrador extends JFrame implements ActionListener {
 		catch(Exception e2){
 			JOptionPane.showMessageDialog(this, "Verifique el ID ingresado. Intente de nuevo.");
 		}
+	}
+	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
+		Switch++;
+		if(Switch %2== 0) {		
+			contentPane.setBackground(UIManager.getColor("Button.light"));
+			jlabelmodo.setText("Modo Oscuro");
+		}
+		else {
+			contentPane.setBackground(UIManager.getColor("Button.focus"));
+			jlabelmodo.setText("Modo Normal");
+		}
+		
+		
 	}
 }
