@@ -83,98 +83,98 @@ public class VenEmpleado extends JFrame implements ActionListener {
 			cboTipoPago = new JComboBox();
 			cboTipoPago.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			cboTipoPago.setModel(new DefaultComboBoxModel(new String[] {"Efectivo", "Débito", "Crédito", "Yape/Plin"}));
-			cboTipoPago.setBounds(360, 259, 116, 25);
+			cboTipoPago.setBounds(370, 239, 116, 25);
 			contentPane.add(cboTipoPago);
 		}
 		{
 			cboComprobante = new JComboBox();
 			cboComprobante.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			cboComprobante.setModel(new DefaultComboBoxModel(new String[] {"Boleta", "Factura"}));
-			cboComprobante.setBounds(604, 259, 116, 25);
+			cboComprobante.setBounds(614, 239, 116, 25);
 			contentPane.add(cboComprobante);
 		}
 		{
 			lblNewLabel = new JLabel("Tipo de pago:");
 			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			lblNewLabel.setBounds(251, 259, 99, 25);
+			lblNewLabel.setBounds(261, 239, 99, 25);
 			contentPane.add(lblNewLabel);
 		}
 		{
 			lblComprobante = new JLabel("Comprobante:");
 			lblComprobante.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			lblComprobante.setBounds(495, 259, 99, 25);
+			lblComprobante.setBounds(505, 239, 99, 25);
 			contentPane.add(lblComprobante);
 		}
 		{
 			lblId = new JLabel("ID Producto:");
 			lblId.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			lblId.setBounds(251, 176, 99, 25);
+			lblId.setBounds(261, 156, 99, 25);
 			contentPane.add(lblId);
 		}
 		{
 			txtIdProducto = new JTextField();
-			txtIdProducto.setBounds(360, 178, 96, 25);
+			txtIdProducto.setBounds(370, 158, 96, 25);
 			contentPane.add(txtIdProducto);
 			txtIdProducto.setColumns(10);
 		}
 		{
 			lblDni = new JLabel("DNI:");
 			lblDni.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			lblDni.setBounds(21, 71, 44, 25);
+			lblDni.setBounds(35, 151, 44, 25);
 			contentPane.add(lblDni);
 		}
 		{
 			lblNombresYApellidos = new JLabel("Nombre completo:");
 			lblNombresYApellidos.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			lblNombresYApellidos.setBounds(275, 71, 147, 25);
+			lblNombresYApellidos.setBounds(261, 90, 147, 25);
 			contentPane.add(lblNombresYApellidos);
 		}
 		{
 			txtDNI = new JTextField();
-			txtDNI.setBounds(92, 73, 117, 25);
+			txtDNI.setBounds(106, 153, 117, 25);
 			contentPane.add(txtDNI);
 			txtDNI.setColumns(10);
 		}
 		{
 			txtNombre = new JTextField();
 			txtNombre.setColumns(10);
-			txtNombre.setBounds(407, 71, 406, 25);
+			txtNombre.setBounds(407, 92, 416, 25);
 			contentPane.add(txtNombre);
 		}
 		{
 			txtCod = new JTextField();
 			txtCod.setColumns(10);
-			txtCod.setBounds(113, 20, 96, 25);
+			txtCod.setBounds(127, 100, 96, 25);
 			contentPane.add(txtCod);
 		}
 		{
 			lblCdcompra = new JLabel("Cód.Venta:");
 			lblCdcompra.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			lblCdcompra.setBounds(21, 18, 96, 25);
+			lblCdcompra.setBounds(35, 98, 96, 25);
 			contentPane.add(lblCdcompra);
 		}
 		{
 			lblTelfono = new JLabel("Teléfono:");
 			lblTelfono.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			lblTelfono.setBounds(21, 121, 73, 25);
+			lblTelfono.setBounds(35, 201, 73, 25);
 			contentPane.add(lblTelfono);
 		}
 		{
 			txtTelefono = new JTextField();
 			txtTelefono.setColumns(10);
-			txtTelefono.setBounds(92, 123, 117, 25);
+			txtTelefono.setBounds(106, 203, 117, 25);
 			contentPane.add(txtTelefono);
 		}
 		{
 			lblCantidad = new JLabel("Cantidad:");
 			lblCantidad.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			lblCantidad.setBounds(495, 176, 99, 25);
+			lblCantidad.setBounds(505, 156, 99, 25);
 			contentPane.add(lblCantidad);
 		}
 		{
 			txtCantidad = new JTextField();
 			txtCantidad.setColumns(10);
-			txtCantidad.setBounds(573, 176, 96, 25);
+			txtCantidad.setBounds(583, 156, 96, 25);
 			contentPane.add(txtCantidad);
 		}
 		{
@@ -203,14 +203,14 @@ public class VenEmpleado extends JFrame implements ActionListener {
 		{
 			lblVendedor = new JLabel("Vendedor:");
 			lblVendedor.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			lblVendedor.setBounds(251, 334, 84, 25);
+			lblVendedor.setBounds(261, 314, 84, 25);
 			contentPane.add(lblVendedor);
 		}
 		{
 			cboVendedor = new JComboBox();
 			cboVendedor.setModel(new DefaultComboBoxModel(new String[] {"Ana Torres", "Sara Palacios", "Rogelio Vargas", "Fabricio Peña", "José Meza"}));
 			cboVendedor.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			cboVendedor.setBounds(360, 334, 116, 25);
+			cboVendedor.setBounds(370, 314, 116, 25);
 			contentPane.add(cboVendedor);
 		}
 		{
@@ -220,8 +220,36 @@ public class VenEmpleado extends JFrame implements ActionListener {
 			btnMostrarProductos.setBounds(10, 402, 147, 25);
 			contentPane.add(btnMostrarProductos);
 		}
+		{
+			btnBuscar = new JButton("Buscar");
+			btnBuscar.addActionListener(this);
+			btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			btnBuscar.setBounds(683, 11, 116, 25);
+			contentPane.add(btnBuscar);
+		}
+		{
+			txtID = new JTextField();
+			txtID.setColumns(10);
+			txtID.setBounds(267, 12, 406, 25);
+			contentPane.add(txtID);
+		}
+		{
+			lblId_1 = new JLabel("ID Producto:");
+			lblId_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			lblId_1.setBounds(172, 10, 99, 25);
+			contentPane.add(lblId_1);
+		}
+		{
+			lblRegistroDeVentas = new JLabel("REGISTRO DE VENTAS");
+			lblRegistroDeVentas.setFont(new Font("Tahoma", Font.PLAIN, 20));
+			lblRegistroDeVentas.setBounds(35, 49, 210, 25);
+			contentPane.add(lblRegistroDeVentas);
+		}
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnBuscar) {
+			do_btnBuscar_actionPerformed(e);
+		}
 		if (e.getSource() == btnMostrarProductos) {
 			do_btnMostrarProductos_actionPerformed(e);
 		}
@@ -240,9 +268,15 @@ public class VenEmpleado extends JFrame implements ActionListener {
 	private JButton btnMostrarProductos;
 	
 	ArregloProducto ap = new ArregloProducto();
+	private JButton btnBuscar;
+	private JTextField txtID;
+	private JLabel lblId_1;
+	private JLabel lblRegistroDeVentas;
 	
 	protected void do_btnRegistrar_actionPerformed(ActionEvent e) {	
-		Producto p = ap.Buscar(LeerIdProducto());
+		
+		try {	
+			Producto p = ap.Buscar(LeerIdProducto());
 		
 	    if (p == null) {
 	        JOptionPane.showMessageDialog(this, "El ID del producto no existe");
@@ -253,6 +287,13 @@ public class VenEmpleado extends JFrame implements ActionListener {
 	        JOptionPane.showMessageDialog(this, "Stock insuficiente. Stock actual: " + p.getStock());
 	        return;
 	    }
+	    
+	    if (LeerDNI().length() != 8) {
+	        JOptionPane.showMessageDialog(this, "El DNI debe tener 8 números. Por favor, verifique.");
+	        txtDNI.setText("");
+	        txtDNI.requestFocus();
+	        return; 
+	    }
 		
 		Cliente c = new Cliente(LeerDNI(), LeerNombre(), LeerTelefono());
 		Empleado vendedor = new Empleado(LeerVendedor());
@@ -261,6 +302,12 @@ public class VenEmpleado extends JFrame implements ActionListener {
 		p.reducirStock(LeerCantidad());
 		av.Adicionar(v); 
         ListadoVentas();
+			
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(this, "Uno o más de los valores ingresados no es válido. Intente de nuevo.");	
+		}
+
+
 	}
 	
 	void Imprimir(String s) {
@@ -348,4 +395,27 @@ public class VenEmpleado extends JFrame implements ActionListener {
 			"" + p.getStock()); 
 	}
 }
+	protected void do_btnBuscar_actionPerformed(ActionEvent e) {
+		txtS.setText("");
+		    try {
+		        int id = Integer.parseInt(txtID.getText().trim());
+
+		        Producto producto = ap.Buscar(id);
+		        if (producto != null) {
+		        	Imprimir("ID\tProducto\tNombre del modelo\tGarantía\tPrecio\tStock");
+		            Imprimir(producto.getId_producto()+ "\t"
+		            + "" + producto.getCat_producto()+ "\t"
+		        	+ "" + producto.getNombre()+ "\t" 
+		        	+ "" + producto.getGarantia() + "\t" 
+		        	+ "" + producto.getPrecio()+ "\t" 
+		            + "" + producto.getStock());
+		        } else {
+		            JOptionPane.showMessageDialog(this, "Ingrese dato válido");
+		        }
+
+		    } catch (NumberFormatException ex) {
+		        JOptionPane.showMessageDialog(this, "Ingrese dato válido");
+		    }
+		}
 }
+

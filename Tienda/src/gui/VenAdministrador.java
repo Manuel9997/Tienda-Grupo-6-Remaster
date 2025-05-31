@@ -14,6 +14,8 @@ import clase.Producto;
 import clase.Venta;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -22,7 +24,10 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.awt.event.ActionEvent;
+import javax.swing.JTable;
 
 public class VenAdministrador extends JFrame implements ActionListener {
 
@@ -53,11 +58,18 @@ public class VenAdministrador extends JFrame implements ActionListener {
 	private JLabel lblRegistrarEmpleado;
 	private JButton btnMostrarEmpleado;
 	private JButton btnHistorialVentas;
-	private JScrollPane scrollPane;
-	private JTextArea txtS;
 	private JLabel lblId_1;
 	private JTextField txtID_Cod;
 	private JButton btnBuscar;
+	public int day;
+	public int year;
+	public int month;
+	public int second;
+	public int minute;
+	public int hour;
+	public String tmam;
+	
+	
 
 	/**
 	 * Launch the application.
@@ -74,7 +86,45 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			}
 		});
 	}
+	public void clock() {
+		Thread clock =new Thread() {
+			public void run() {
+				try {
+					for(;;) {
+					Calendar cal= new GregorianCalendar();
+					 day= cal.get(Calendar.DAY_OF_MONTH);
+					month= cal.get(Calendar.MONTH);
+					year= cal.get(Calendar.YEAR);
+					
+					 second= cal.get(Calendar.SECOND);
+					 minute= cal.get(Calendar.MINUTE);
+					 hour= cal.get(Calendar.HOUR);
+					
+					int ampm= cal.get(Calendar.AM_PM);
 
+				if(ampm == 0) {
+					
+					tmam= "am";
+				}
+				else {
+					tmam= "pm";
+				}
+					
+					
+					lblclock.setText("Fecha: "+ day+"/"+month+"/"+year+" Hora: "+hour+":"+minute+":"+second+tmam);
+					sleep(1000);
+					}
+				}
+				catch(InterruptedException e) {
+					e.printStackTrace();
+				}
+				
+			}
+		};
+
+		clock.start();
+	}
+	
 	/**
 	 * Create the frame.
 	 */
@@ -213,12 +263,14 @@ public class VenAdministrador extends JFrame implements ActionListener {
 		}
 		{
 			btnRegistrarEmpleado = new JButton("Registrar");
+			btnRegistrarEmpleado.addActionListener(this);
 			btnRegistrarEmpleado.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			btnRegistrarEmpleado.setBounds(408, 363, 116, 25);
 			contentPane.add(btnRegistrarEmpleado);
 		}
 		{
 			btnModificarEmpleado = new JButton("Modificar");
+			btnModificarEmpleado.addActionListener(this);
 			btnModificarEmpleado.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			btnModificarEmpleado.setBounds(541, 363, 116, 25);
 			contentPane.add(btnModificarEmpleado);
@@ -244,15 +296,6 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			contentPane.add(btnHistorialVentas);
 		}
 		{
-			scrollPane = new JScrollPane();
-			scrollPane.setBounds(10, 426, 896, 257);
-			contentPane.add(scrollPane);
-			{
-				txtS = new JTextArea();
-				scrollPane.setViewportView(txtS);
-			}
-		}
-		{
 			lblId_1 = new JLabel("ID:");
 			lblId_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			lblId_1.setBounds(171, 21, 45, 19);
@@ -266,12 +309,39 @@ public class VenAdministrador extends JFrame implements ActionListener {
 		}
 		{
 			btnBuscar = new JButton("Buscar");
+			btnBuscar.addActionListener(this);
 			btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			btnBuscar.setBounds(668, 20, 116, 25);
 			contentPane.add(btnBuscar);
 		}
+		{
+			lblclock = new JLabel("");
+			lblclock.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			lblclock.setBounds(455, 307, 256, 19);
+			contentPane.add(lblclock);
+			{
+				scrollPane = new JScrollPane();
+				scrollPane.setBounds(10, 424, 810, 256);
+				contentPane.add(scrollPane);
+				{
+					txtS = new JTextArea();
+					scrollPane.setViewportView(txtS);
+				}
+			}
+			
+		    clock();
+		}
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnModificarEmpleado) {
+			do_btnModificarEmpleado_actionPerformed(e);
+		}
+		if (e.getSource() == btnRegistrarEmpleado) {
+			do_btnRegistrarEmpleado_actionPerformed(e);
+		}
+		if (e.getSource() == btnBuscar) {
+			do_btnBuscar_actionPerformed(e);
+		}
 		if (e.getSource() == btnMostrarEmpleado) {
 			do_btnMostrarEmpleado_actionPerformed(e);
 		}
@@ -282,6 +352,9 @@ public class VenAdministrador extends JFrame implements ActionListener {
 	
 	ArregloHistorialVentas ahv = new ArregloHistorialVentas();
 	ArregloEmpleado ae = new ArregloEmpleado();
+	private JLabel lblclock;
+	private JScrollPane scrollPane;
+	private JTextArea txtS;
 	
 	protected void do_btnHistorialVentas_actionPerformed(ActionEvent e) {
 		ListadoHistorialVentas();
@@ -317,7 +390,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 	}
 	void ListadoEmpleados() {
 		txtS.setText("");
-		Imprimir("ID\tDNI\tNombre completo\tTeléfono\tCargo\tJornada laboral\t\tHorario laboral\t\tPago por hora\tHoras trab.\tDescuento\tSueldo");
+		Imprimir("ID\tDNI\tNombre completo\tTeléfono\tCargo\tJornada laboral\tFecha de creación\tHora de creación\tHorario laboral\t\tPago por hora\tHoras trab.\tDescuento\tSueldo");
 		for(int i = 0; i < ae.Tamaño(); i++) {
 			Empleado e = ae.Obtener(i);
 			Imprimir("" + e.getId_empleado() + "\t" +
@@ -326,6 +399,8 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			"" + e.getTelefono() + "\t" +
 			"" + e.getCargo() + "\t" +
 			"" + e.getJornada() + "\t" + 
+			"" + e.getFechacreada() + "\t" + 
+			"" + e.getHoracreada() + "\t" + 
 			"" + e.getHorario() + "\t" + 
 			"" + e.getPago_hora() + "\t" + 
 			"" + e.getHoras_trabajadas() + "\t" + 
@@ -334,4 +409,110 @@ public class VenAdministrador extends JFrame implements ActionListener {
 	}
 }
 
+	protected void do_btnBuscar_actionPerformed(ActionEvent e) {
+		try {
+			int codigo= Integer.parseInt(txtID_Cod.getText());
+			Empleado empleadoEncontrado = ae.Buscar(codigo);
+			if(empleadoEncontrado== null) {
+				txtS.setText("");
+				JOptionPane.showMessageDialog(this, "EL código no se encuentra en el sistema");
+				
+			}
+			else{
+				 txtS.setText(""); 
+				 Imprimir("ID\tDNI\tNombre completo\tTeléfono\tCargo\tJornada laboral\tFecha de creación\tHora de creación\tHorario laboral\t\tPago por hora\tHoras trab.\tDescuento\tSueldo");
+				    Imprimir("" + empleadoEncontrado.getId_empleado() + "\t" +
+							"" + empleadoEncontrado.getDni() + "\t" + "" +
+							"" + empleadoEncontrado.getNombre_apellido() + "\t" +
+							"" + empleadoEncontrado.getTelefono() + "\t" +
+							"" + empleadoEncontrado.getCargo() + "\t" +
+							"" + empleadoEncontrado.getJornada() + "\t" + 
+							"" + empleadoEncontrado.getFechacreada() + "\t" + 
+							"" + empleadoEncontrado.getHoracreada() + "\t" +
+							"" + empleadoEncontrado.getHorario() + "\t" + 
+							"" + empleadoEncontrado.getPago_hora() + "\t" + 
+							"" + empleadoEncontrado.getHoras_trabajadas() + "\t" + 
+							"" + empleadoEncontrado.getDescuento() + "\t" +
+							"" + empleadoEncontrado.Sueldo());
+			};
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(this, "El valor ingresado no es válido. Intente de nuevo.");	
+		}
+				
+	}
+	protected void do_btnRegistrarEmpleado_actionPerformed(ActionEvent e) {
+		try {		
+			int idempleado= Integer.parseInt(txtIdEmpleado.getText());
+			String dniempleado= txtDniEmpleado.getText();
+			  if (dniempleado.length() != 8) {
+			        JOptionPane.showMessageDialog(this, "El DNI debe tener 8 números. Por favor, verifique.");
+			        txtDniEmpleado.setText("");
+			        txtDniEmpleado.requestFocus();
+			        return; 
+			    }
+			String nomempleado= txtNombreEmpleado.getText();
+			String teleempleado = txtTelefono.getText();
+			String carempleado= cboCargo.getSelectedItem().toString();
+			String jorempleado= cboJornada.getSelectedItem().toString();
+			String horaempleado= cboHorario.getSelectedItem().toString();
+			double pxhempleado= Double.parseDouble(txtPago.getText());
+			double htempleado= Double.parseDouble(txtHoras.getText());;
+			double descuento=  Double.parseDouble(txtDescuento.getText());;		
+			
+			if(nomempleado.isEmpty() || teleempleado.isEmpty() || carempleado.isEmpty() ||
+					jorempleado.isEmpty() || horaempleado.isEmpty() ) {
+				
+				JOptionPane.showMessageDialog(this, "Porfavor coloque datos");
+				return;
+				
+			}
+			
+			
+			
+			String fecha= day+"/"+month+"/"+year;
+			String hora= hour+":"+minute+":"+second+tmam;
+			Empleado nuevoempleado= new Empleado(idempleado, dniempleado, nomempleado, teleempleado, carempleado, jorempleado,fecha, hora,horaempleado, pxhempleado, htempleado, descuento);
+			if( ae.Buscar(idempleado) == null) {
+				ae.Adicionar(nuevoempleado);	
+				JOptionPane.showMessageDialog(this, "Nuevo empleado registrado éxitosamente");
+			}
+			else {
+				JOptionPane.showMessageDialog(this, "Empleado ya registrado en el sistema");
+				return;		
+			}
+
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
+		}
+	
+	}
+	protected void do_btnModificarEmpleado_actionPerformed(ActionEvent e) {
+		try {
+			txtS.setText("");
+			int codigo= Integer.parseInt(txtIdEmpleado.getText());
+			Empleado empleadoEncontrado = ae.Buscar(codigo);
+			if(empleadoEncontrado== null) {
+				txtS.setText("");
+				JOptionPane.showMessageDialog(this, "EL código no se encuentra en el sistema");
+				return;
+			}
+			else {
+				txtS.setText("");
+				empleadoEncontrado.setDni(txtDniEmpleado.getText());
+				empleadoEncontrado.setNombre_apellido(txtNombreEmpleado.getText());
+				empleadoEncontrado.setTelefono(txtTelefono.getText());
+				empleadoEncontrado.setCargo(cboCargo.getSelectedItem().toString());
+				empleadoEncontrado.setJornada(cboJornada.getSelectedItem().toString() + "\t");
+				empleadoEncontrado.setHorario(cboHorario.getSelectedItem().toString());
+				empleadoEncontrado.setPago_hora( Double.parseDouble(txtPago.getText()));
+				empleadoEncontrado.setHoras_trabajadas(Double.parseDouble(txtHoras.getText()));
+				empleadoEncontrado.setDescuento(Double.parseDouble(txtDescuento.getText()));
+				ListadoEmpleados();
+			}
+	
+		}
+		catch(Exception e2){
+			JOptionPane.showMessageDialog(this, "Verifique el ID ingresado. Intente de nuevo.");
+		}
+	}
 }
