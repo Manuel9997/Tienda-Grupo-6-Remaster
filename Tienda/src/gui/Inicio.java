@@ -22,8 +22,6 @@ import java.awt.Color;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-
-
 public class Inicio extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
@@ -61,8 +59,7 @@ public class Inicio extends JFrame implements ActionListener {
 					Calendar cal= new GregorianCalendar();
 					int day= cal.get(Calendar.DAY_OF_MONTH);
 					int month= cal.get(Calendar.MONTH);
-					int year= cal.get(Calendar.YEAR);
-					
+					int year= cal.get(Calendar.YEAR);				
 					int second= cal.get(Calendar.SECOND);
 					int minute= cal.get(Calendar.MINUTE);
 					int hour= cal.get(Calendar.HOUR);
@@ -75,23 +72,19 @@ public class Inicio extends JFrame implements ActionListener {
 				}
 				else {
 					tmam= "pm";
-				}
-					
-					
+				}				
 					lblclock.setText("Fecha: "+ day+"/"+month+"/"+year+" Hora: "+hour+":"+minute+":"+second+tmam);
 					sleep(1000);
 					}
 				}
 				catch(InterruptedException e) {
 					e.printStackTrace();
-				}
-				
+				}		
 			}
 		};
 
 		clock.start();
 	}
-	
 	
 	
 	/**
@@ -101,21 +94,14 @@ public class Inicio extends JFrame implements ActionListener {
 	    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	    setBounds(100, 100, 803, 683);
 	    
-	
-	    
-
 	    menuBar = new JMenuBar();
 	    setJMenuBar(menuBar);
-	    
-	    
 	    
 
 	    mnNewMenu = new JMenu("Menú");
 	    mnNewMenu.setFont(new Font("Verdana", Font.PLAIN, 20));
 	    mnNewMenu.setBackground(new Color(0, 255, 255));
 	    menuBar.add(mnNewMenu);
-
-	    
 
 	    try {
             ImageIcon iconomenu = new ImageIcon(getClass().getResource("/recursos/menuicon.png"));
@@ -210,19 +196,6 @@ public class Inicio extends JFrame implements ActionListener {
 
 
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == mnEmpleado) {

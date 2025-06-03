@@ -325,7 +325,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			contentPane.add(lblclock);
 			{
 				scrollPane = new JScrollPane();
-				scrollPane.setBounds(10, 424, 810, 256);
+				scrollPane.setBounds(10, 424, 896, 256);
 				contentPane.add(scrollPane);
 				{
 					txtS = new JTextArea();
@@ -404,7 +404,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 	}
 	void ListadoEmpleados() {
 		txtS.setText("");
-		Imprimir("ID\tDNI\tNombre completo\tTeléfono\tCargo\tJornada laboral\tFecha de creación\tHora de creación\tHorario laboral\t\tPago por hora\tHoras trab.\tDescuento\tSueldo");
+		Imprimir("ID\tDNI\tNombre completo\tTeléfono\tCargo\tJornada laboral\t\tFecha\tHora\tHorario laboral\t\tPago por hora\tHoras trab.\tDescuento\tSueldo");
 		for(int i = 0; i < ae.Tamaño(); i++) {
 			Empleado e = ae.Obtener(i);
 			Imprimir("" + e.getId_empleado() + "\t" +
@@ -477,12 +477,9 @@ public class VenAdministrador extends JFrame implements ActionListener {
 					jorempleado.isEmpty() || horaempleado.isEmpty() ) {
 				
 				JOptionPane.showMessageDialog(this, "Porfavor coloque datos");
-				return;
-				
+				return;		
 			}
-			
-			
-			
+							
 			String fecha= day+"/"+month+"/"+year;
 			String hora= hour+":"+minute+":"+second+tmam;
 			Empleado nuevoempleado= new Empleado(idempleado, dniempleado, nomempleado, teleempleado, carempleado, jorempleado,fecha, hora,horaempleado, pxhempleado, htempleado, descuento);
@@ -538,8 +535,6 @@ public class VenAdministrador extends JFrame implements ActionListener {
 		else {
 			contentPane.setBackground(UIManager.getColor("Button.focus"));
 			jlabelmodo.setText("Modo Normal");
-		}
-		
-		
+		}	
 	}
 }
