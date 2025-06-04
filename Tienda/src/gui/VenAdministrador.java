@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -144,31 +145,31 @@ public class VenAdministrador extends JFrame implements ActionListener {
 		contentPane.setLayout(null);
 		{
 			lblNewLabel = new JLabel("DNI:");
-			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			lblNewLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
 			lblNewLabel.setBounds(400, 110, 45, 19);
 			contentPane.add(lblNewLabel);
 		}
 		{
 			lblNombreCompleto = new JLabel("Nombre completo:");
-			lblNombreCompleto.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			lblNombreCompleto.setBounds(242, 149, 140, 19);
+			lblNombreCompleto.setFont(new Font("Verdana", Font.PLAIN, 15));
+			lblNombreCompleto.setBounds(242, 149, 158, 19);
 			contentPane.add(lblNombreCompleto);
 		}
 		{
 			lblTelfono = new JLabel("Teléfono:");
-			lblTelfono.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			lblTelfono.setBounds(242, 187, 69, 19);
+			lblTelfono.setFont(new Font("Verdana", Font.PLAIN, 15));
+			lblTelfono.setBounds(242, 187, 87, 19);
 			contentPane.add(lblTelfono);
 		}
 		{
 			lblCargo = new JLabel("Cargo:");
-			lblCargo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			lblCargo.setFont(new Font("Verdana", Font.PLAIN, 15));
 			lblCargo.setBounds(455, 189, 69, 19);
 			contentPane.add(lblCargo);
 		}
 		{
 			lblId = new JLabel("ID:");
-			lblId.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			lblId.setFont(new Font("Verdana", Font.PLAIN, 15));
 			lblId.setBounds(242, 110, 45, 19);
 			contentPane.add(lblId);
 		}
@@ -181,7 +182,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 		{
 			txtNombreEmpleado = new JTextField();
 			txtNombreEmpleado.setColumns(10);
-			txtNombreEmpleado.setBounds(373, 148, 349, 25);
+			txtNombreEmpleado.setBounds(390, 148, 349, 25);
 			contentPane.add(txtNombreEmpleado);
 		}
 		{
@@ -193,19 +194,19 @@ public class VenAdministrador extends JFrame implements ActionListener {
 		{
 			txtTelefono = new JTextField();
 			txtTelefono.setColumns(10);
-			txtTelefono.setBounds(321, 186, 117, 25);
+			txtTelefono.setBounds(328, 186, 117, 25);
 			contentPane.add(txtTelefono);
 		}
 		{
 			cboCargo = new JComboBox();
 			cboCargo.setModel(new DefaultComboBoxModel(new String[] {"Cajero", "Vendedor"}));
-			cboCargo.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			cboCargo.setBounds(507, 187, 117, 25);
+			cboCargo.setFont(new Font("Verdana", Font.PLAIN, 15));
+			cboCargo.setBounds(515, 187, 117, 25);
 			contentPane.add(cboCargo);
 		}
 		{
 			lblJornada = new JLabel("Jornada:");
-			lblJornada.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			lblJornada.setFont(new Font("Verdana", Font.PLAIN, 15));
 			lblJornada.setBounds(242, 228, 69, 19);
 			contentPane.add(lblJornada);
 		}
@@ -213,7 +214,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			cboJornada = new JComboBox();
 			cboJornada.setModel(new DefaultComboBoxModel(new String[] {"Tiempo completo", "Medio tiempo"}));
 			cboJornada.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			cboJornada.setBounds(320, 225, 146, 25);
+			cboJornada.setBounds(328, 225, 146, 25);
 			contentPane.add(cboJornada);
 		}
 		{
@@ -231,82 +232,83 @@ public class VenAdministrador extends JFrame implements ActionListener {
 		}
 		{
 			lblPagoPorHora = new JLabel("Pago/hora:");
-			lblPagoPorHora.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			lblPagoPorHora.setFont(new Font("Verdana", Font.PLAIN, 15));
 			lblPagoPorHora.setBounds(242, 266, 87, 19);
 			contentPane.add(lblPagoPorHora);
 		}
 		{
 			txtPago = new JTextField();
 			txtPago.setColumns(10);
-			txtPago.setBounds(321, 265, 117, 25);
+			txtPago.setBounds(340, 265, 117, 25);
 			contentPane.add(txtPago);
 		}
 		{
 			lblHorasTrabajadas = new JLabel("Horas trabajadas:");
-			lblHorasTrabajadas.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			lblHorasTrabajadas.setBounds(455, 266, 124, 19);
+			lblHorasTrabajadas.setFont(new Font("Verdana", Font.PLAIN, 15));
+			lblHorasTrabajadas.setBounds(488, 266, 144, 19);
 			contentPane.add(lblHorasTrabajadas);
 		}
 		{
 			txtHoras = new JTextField();
 			txtHoras.setColumns(10);
-			txtHoras.setBounds(580, 265, 117, 25);
+			txtHoras.setBounds(636, 265, 117, 25);
 			contentPane.add(txtHoras);
 		}
 		{
 			lblDescuento = new JLabel("Descuento:");
-			lblDescuento.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			lblDescuento.setFont(new Font("Verdana", Font.PLAIN, 15));
 			lblDescuento.setBounds(242, 307, 87, 19);
 			contentPane.add(lblDescuento);
 		}
 		{
 			txtDescuento = new JTextField();
 			txtDescuento.setColumns(10);
-			txtDescuento.setBounds(321, 306, 117, 25);
+			txtDescuento.setBounds(340, 306, 117, 25);
 			contentPane.add(txtDescuento);
 		}
 		{
 			btnRegistrarEmpleado = new JButton("Registrar");
 			btnRegistrarEmpleado.addActionListener(this);
-			btnRegistrarEmpleado.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			btnRegistrarEmpleado.setFont(new Font("Verdana", Font.PLAIN, 13));
 			btnRegistrarEmpleado.setBounds(408, 363, 116, 25);
 			contentPane.add(btnRegistrarEmpleado);
 		}
 		{
 			btnModificarEmpleado = new JButton("Modificar");
 			btnModificarEmpleado.addActionListener(this);
-			btnModificarEmpleado.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			btnModificarEmpleado.setFont(new Font("Verdana", Font.PLAIN, 13));
 			btnModificarEmpleado.setBounds(541, 363, 116, 25);
 			contentPane.add(btnModificarEmpleado);
 		}
 		{
 			lblRegistrarEmpleado = new JLabel("REGISTRAR EMPLEADO");
-			lblRegistrarEmpleado.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			lblRegistrarEmpleado.setFont(new Font("Tahoma", Font.PLAIN, 19));
 			lblRegistrarEmpleado.setBounds(242, 70, 203, 19);
 			contentPane.add(lblRegistrarEmpleado);
 		}
 		{
 			btnMostrarEmpleado = new JButton("Mostrar");
 			btnMostrarEmpleado.addActionListener(this);
-			btnMostrarEmpleado.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			btnMostrarEmpleado.setFont(new Font("Verdana", Font.PLAIN, 13));
 			btnMostrarEmpleado.setBounds(274, 363, 116, 25);
 			contentPane.add(btnMostrarEmpleado);
 		}
 		{
 			btnHistorialVentas = new JButton("Historial de ventas");
 			btnHistorialVentas.addActionListener(this);
-			btnHistorialVentas.setFont(new Font("Tahoma", Font.PLAIN, 13));
-			btnHistorialVentas.setBounds(10, 391, 154, 25);
+			btnHistorialVentas.setFont(new Font("Verdana", Font.PLAIN, 13));
+			btnHistorialVentas.setBounds(10, 391, 173, 25);
 			contentPane.add(btnHistorialVentas);
 		}
 		{
 			lblId_1 = new JLabel("ID:");
-			lblId_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			lblId_1.setFont(new Font("Verdana", Font.PLAIN, 15));
 			lblId_1.setBounds(171, 21, 45, 19);
 			contentPane.add(lblId_1);
 		}
 		{
 			txtID_Cod = new JTextField();
+			txtID_Cod.setBackground(Color.WHITE);
 			txtID_Cod.setColumns(10);
 			txtID_Cod.setBounds(203, 20, 447, 25);
 			contentPane.add(txtID_Cod);
@@ -314,14 +316,14 @@ public class VenAdministrador extends JFrame implements ActionListener {
 		{
 			btnBuscar = new JButton("Buscar");
 			btnBuscar.addActionListener(this);
-			btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			btnBuscar.setFont(new Font("Verdana", Font.PLAIN, 13));
 			btnBuscar.setBounds(668, 20, 116, 25);
 			contentPane.add(btnBuscar);
 		}
 		{
 			lblclock = new JLabel("");
 			lblclock.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			lblclock.setBounds(455, 307, 256, 19);
+			lblclock.setBounds(486, 307, 256, 19);
 			contentPane.add(lblclock);
 			{
 				scrollPane = new JScrollPane();
@@ -329,11 +331,13 @@ public class VenAdministrador extends JFrame implements ActionListener {
 				contentPane.add(scrollPane);
 				{
 					txtS = new JTextArea();
+					txtS.setBackground(Color.WHITE);
 					scrollPane.setViewportView(txtS);
 				}
 			}
 			{
 				jlabelmodo = new JButton("Modo Oscuro");
+				jlabelmodo.setFont(new Font("Verdana", Font.PLAIN, 14));
 				jlabelmodo.addActionListener(this);
 				jlabelmodo.setBounds(31, 228, 133, 33);
 				contentPane.add(jlabelmodo);
@@ -530,10 +534,63 @@ public class VenAdministrador extends JFrame implements ActionListener {
 		Switch++;
 		if(Switch %2== 0) {		
 			contentPane.setBackground(UIManager.getColor("Button.light"));
+			lblId_1.setForeground(Color.BLACK);
+			txtID_Cod.setBackground(Color.WHITE);
+			txtS.setBackground(Color.WHITE);
+			lblId.setForeground(Color.BLACK);
+			lblNewLabel.setForeground(Color.BLACK);
+			lblNombreCompleto.setForeground(Color.BLACK);
+			lblTelfono.setForeground(Color.BLACK);
+			lblCargo.setForeground(Color.BLACK);
+			lblJornada.setForeground(Color.BLACK);
+			lblHorario.setForeground(Color.BLACK);
+			lblPagoPorHora.setForeground(Color.BLACK);
+			lblHorasTrabajadas.setForeground(Color.BLACK);
+			lblDescuento.setForeground(Color.BLACK);
+			lblRegistrarEmpleado.setForeground(Color.BLACK);
+			lblclock.setForeground(Color.BLACK);
+			txtIdEmpleado.setBackground(Color.WHITE);
+			txtDniEmpleado.setBackground(Color.WHITE);
+			txtNombreEmpleado.setBackground(Color.WHITE);
+			txtTelefono.setBackground(Color.WHITE);
+			cboCargo.setBackground(Color.WHITE);
+			cboJornada.setBackground(Color.WHITE);
+			cboHorario.setBackground(Color.WHITE);
+			txtPago.setBackground(Color.WHITE);
+			txtHoras.setBackground(Color.WHITE);
+			txtDescuento.setBackground(Color.WHITE);
+			
+			
 			jlabelmodo.setText("Modo Oscuro");
 		}
 		else {
-			contentPane.setBackground(UIManager.getColor("Button.focus"));
+			contentPane.setBackground(Color.BLACK);
+			lblId_1.setForeground(Color.LIGHT_GRAY);
+			txtID_Cod.setBackground(Color.LIGHT_GRAY);
+			txtS.setBackground(Color.LIGHT_GRAY);
+			lblId.setForeground(Color.LIGHT_GRAY);
+			lblNewLabel.setForeground(Color.LIGHT_GRAY);
+			lblNombreCompleto.setForeground(Color.LIGHT_GRAY);
+			lblTelfono.setForeground(Color.LIGHT_GRAY);
+			lblCargo.setForeground(Color.LIGHT_GRAY);
+			lblJornada.setForeground(Color.LIGHT_GRAY);
+			lblHorario.setForeground(Color.LIGHT_GRAY);
+			lblPagoPorHora.setForeground(Color.LIGHT_GRAY);
+			lblHorasTrabajadas.setForeground(Color.LIGHT_GRAY);
+			lblDescuento.setForeground(Color.LIGHT_GRAY);
+			lblRegistrarEmpleado.setForeground(Color.LIGHT_GRAY);
+			lblclock.setForeground(Color.LIGHT_GRAY);
+			txtIdEmpleado.setBackground(Color.LIGHT_GRAY);
+			txtDniEmpleado.setBackground(Color.LIGHT_GRAY);
+			txtNombreEmpleado.setBackground(Color.LIGHT_GRAY);
+			txtTelefono.setBackground(Color.LIGHT_GRAY);
+			cboCargo.setBackground(Color.LIGHT_GRAY);
+			cboJornada.setBackground(Color.LIGHT_GRAY);
+			cboHorario.setBackground(Color.LIGHT_GRAY);
+			txtPago.setBackground(Color.LIGHT_GRAY);
+			txtHoras.setBackground(Color.LIGHT_GRAY);
+			txtDescuento.setBackground(Color.LIGHT_GRAY);
+			
 			jlabelmodo.setText("Modo Normal");
 		}	
 	}
