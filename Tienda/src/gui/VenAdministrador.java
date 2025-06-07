@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -95,13 +96,51 @@ public class VenAdministrador extends JFrame implements ActionListener {
 				try {
 					for(;;) {
 					Calendar cal= new GregorianCalendar();
-					 day= cal.get(Calendar.DAY_OF_MONTH);
-					month= cal.get(Calendar.MONTH);
+					 int dai= cal.get(Calendar.DAY_OF_MONTH);
+					 String day, month, second,minute,hour;
+					 if(dai<10) {
+						 day="0"+Integer.toString(dai);
+					 }
+					 else {
+						 day=Integer.toString(dai);
+					 }
+					int mont= cal.get(Calendar.MONTH);
+					 if(mont<10) {
+						 month="0"+Integer.toString(mont);
+					 }
+					 else {
+						 month=Integer.toString(mont);
+					 }
+					
+					
 					year= cal.get(Calendar.YEAR);
 					
-					 second= cal.get(Calendar.SECOND);
-					 minute= cal.get(Calendar.MINUTE);
-					 hour= cal.get(Calendar.HOUR);
+					 int secon= cal.get(Calendar.SECOND);
+					 if(secon<10) {
+						 second="0"+Integer.toString(secon);
+					 }
+					 else {
+						 second=Integer.toString(secon);
+					 }
+					 
+					 int minut= cal.get(Calendar.MINUTE);
+					 
+					 if(minut<10) {
+						 minute="0"+Integer.toString(minut);
+					 }
+					 else {
+						 minute=Integer.toString(minut);
+					 }
+					 
+					 int hou= cal.get(Calendar.HOUR);
+					 
+					 if(hou<10) {
+						 hour="0"+Integer.toString(hou);
+					 }
+					 else {
+						 hour=Integer.toString(hou);
+					 }
+					 
 					
 					int ampm= cal.get(Calendar.AM_PM);
 
@@ -531,8 +570,8 @@ public class VenAdministrador extends JFrame implements ActionListener {
 		}
 	}
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
-		Switch++;
-		if(Switch %2== 0) {		
+		String actual = jlabelmodo.getText();
+		if(actual == "Modo Normal") {		
 			contentPane.setBackground(UIManager.getColor("Button.light"));
 			lblId_1.setForeground(Color.BLACK);
 			txtID_Cod.setBackground(Color.WHITE);
@@ -558,12 +597,24 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			cboHorario.setBackground(Color.WHITE);
 			txtPago.setBackground(Color.WHITE);
 			txtHoras.setBackground(Color.WHITE);
-			txtDescuento.setBackground(Color.WHITE);
+			txtDescuento.setBackground(Color.WHITE);		
 			
 			
+			txtID_Cod.setForeground(Color.BLACK);
+			txtS.setForeground(Color.BLACK);
+			txtIdEmpleado.setForeground(Color.BLACK);
+			txtDniEmpleado.setForeground(Color.BLACK);
+			txtNombreEmpleado.setForeground(Color.BLACK);
+			txtTelefono.setForeground(Color.BLACK);
+			txtPago.setForeground(Color.BLACK);
+			txtHoras.setForeground(Color.BLACK);
+			txtDescuento.setForeground(Color.BLACK);
+			cboCargo.setForeground(Color.BLACK);
+			cboJornada.setForeground(Color.BLACK);
+			cboHorario.setForeground(Color.BLACK);
 			jlabelmodo.setText("Modo Oscuro");
 		}
-		else {
+		else if(actual == "Modo Oscuro"){
 			contentPane.setBackground(Color.BLACK);
 			lblId_1.setForeground(Color.LIGHT_GRAY);
 			txtID_Cod.setBackground(Color.LIGHT_GRAY);
@@ -591,7 +642,56 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			txtHoras.setBackground(Color.LIGHT_GRAY);
 			txtDescuento.setBackground(Color.LIGHT_GRAY);
 			
-			jlabelmodo.setText("Modo Normal");
+			
+			
+			jlabelmodo.setText("Modo Frío");
 		}	
+		
+		else if(actual == "Modo Frío") {
+			contentPane.setBackground(new Color(10, 25, 45));
+			lblId_1.setForeground(new Color(150, 220, 255));
+			txtID_Cod.setBackground(new Color(30, 80, 120));
+			txtS.setBackground(new Color(30, 80, 120));
+			lblId.setForeground(new Color(150, 220, 255));
+			lblNewLabel.setForeground(new Color(150, 220, 255));
+			lblNombreCompleto.setForeground(new Color(150, 220, 255));
+			lblTelfono.setForeground(new Color(150, 220, 255));
+			lblCargo.setForeground(new Color(150, 220, 255));
+			lblJornada.setForeground(new Color(150, 220, 255));
+			lblHorario.setForeground(new Color(150, 220, 255));
+			lblPagoPorHora.setForeground(new Color(150, 220, 255));
+			lblHorasTrabajadas.setForeground(new Color(150, 220, 255));
+			lblDescuento.setForeground(new Color(150, 220, 255));
+			lblRegistrarEmpleado.setForeground(new Color(150, 220, 255));
+			lblclock.setForeground(new Color(150, 220, 255));
+			txtIdEmpleado.setBackground(new Color(30, 80, 120));
+			txtDniEmpleado.setBackground(new Color(30, 80, 120));
+			txtNombreEmpleado.setBackground(new Color(30, 80, 120));
+			txtTelefono.setBackground(new Color(30, 80, 120));
+			cboCargo.setBackground(new Color(30, 80, 120));
+			cboJornada.setBackground(new Color(30, 80, 120));
+			cboHorario.setBackground(new Color(30, 80, 120));
+			txtPago.setBackground(new Color(30, 80, 120));
+			txtHoras.setBackground(new Color(30, 80, 120));
+			txtDescuento.setBackground(new Color(30, 80, 120));
+
+			txtID_Cod.setForeground(Color.WHITE);
+			txtS.setForeground(Color.WHITE);
+			txtIdEmpleado.setForeground(Color.WHITE);
+			txtDniEmpleado.setForeground(Color.WHITE);
+			txtNombreEmpleado.setForeground(Color.WHITE);
+			txtTelefono.setForeground(Color.WHITE);
+			txtPago.setForeground(Color.WHITE);
+			txtHoras.setForeground(Color.WHITE);
+			txtDescuento.setForeground(Color.WHITE);
+			cboCargo.setForeground(Color.WHITE);
+			cboJornada.setForeground(Color.WHITE);
+			cboHorario.setForeground(Color.WHITE);
+			
+			jlabelmodo.setText("Modo Normal");
+
+
+		}
+		
 	}
 }
