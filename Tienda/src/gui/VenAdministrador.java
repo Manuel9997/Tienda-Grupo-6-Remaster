@@ -71,7 +71,9 @@ public class VenAdministrador extends JFrame implements ActionListener {
 	public int minute;
 	public int hour;
 	public String tmam;
-	public int Switch=0;
+	public String fecha;
+	public String hora;
+
 	
 	
 
@@ -134,7 +136,10 @@ public class VenAdministrador extends JFrame implements ActionListener {
 					 
 					 int hou= cal.get(Calendar.HOUR);
 					 
-					 if(hou<10) {
+					 if(hou == 0) { 
+						    hour = "12";
+						}
+					 else if(hou<10) {
 						 hour="0"+Integer.toString(hou);
 					 }
 					 else {
@@ -154,6 +159,8 @@ public class VenAdministrador extends JFrame implements ActionListener {
 					
 					
 					lblclock.setText("Fecha: "+ day+"/"+month+"/"+year+" Hora: "+hour+":"+minute+":"+second+tmam);
+					fecha= day+"/"+month+"/"+year;
+					hora= hour+":"+minute+":"+second+tmam;
 					sleep(1000);
 					}
 				}
@@ -523,8 +530,6 @@ public class VenAdministrador extends JFrame implements ActionListener {
 				return;		
 			}
 							
-			String fecha= day+"/"+month+"/"+year;
-			String hora= hour+":"+minute+":"+second+tmam;
 			Empleado nuevoempleado= new Empleado(idempleado, dniempleado, nomempleado, teleempleado, carempleado, jorempleado,fecha, hora,horaempleado, pxhempleado, htempleado, descuento);
 			if( ae.Buscar(idempleado) == null) {
 				ae.Adicionar(nuevoempleado);	

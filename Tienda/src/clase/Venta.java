@@ -9,11 +9,11 @@ private LocalDate fecha;
 private Producto producto;
 private int cantidad;
 private String tipo_pago;
-private String comprobante;
+private String comprobante, horacreada;
 private Empleado vendedor;
 
 public Venta(int codigo_venta, Cliente cliente, LocalDate fecha, Producto producto, int cantidad, String tipo_pago,
-		String comprobante, Empleado vendedor) {
+		String comprobante, Empleado vendedor, String horacreada) {
 
 	this.codigo_venta = codigo_venta; 
 	this.cliente = cliente;
@@ -23,11 +23,21 @@ public Venta(int codigo_venta, Cliente cliente, LocalDate fecha, Producto produc
 	this.tipo_pago = tipo_pago;
 	this.comprobante = comprobante;
 	this.vendedor = vendedor;
+	this.horacreada = horacreada;
 }
 
 public int getCodigo_venta() {
 	return codigo_venta;
 }
+
+public String getHoracreada() {
+	return horacreada;
+}
+
+public void setHoracreada(String horacreada) {
+	this.horacreada = horacreada;
+}
+
 
 public void setCodigo_venta(int codigo_venta) {
 	this.codigo_venta = codigo_venta;
