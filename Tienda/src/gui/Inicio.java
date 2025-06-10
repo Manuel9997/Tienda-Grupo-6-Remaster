@@ -33,6 +33,13 @@ public class Inicio extends JFrame implements ActionListener {
 	private JPanel panel;
 	private JLabel lblclock;
 	private JLabel logofondo;
+	public int day;
+	public int year;
+	public int month;
+	public int second;
+	public int minute;
+	public int hour;
+	public String tmam;
 	
 
 	/**
@@ -57,33 +64,82 @@ public class Inicio extends JFrame implements ActionListener {
 				try {
 					for(;;) {
 					Calendar cal= new GregorianCalendar();
-					int day= cal.get(Calendar.DAY_OF_MONTH);
-					int month= cal.get(Calendar.MONTH);
-					int year= cal.get(Calendar.YEAR);				
-					int second= cal.get(Calendar.SECOND);
-					int minute= cal.get(Calendar.MINUTE);
-					int hour= cal.get(Calendar.HOUR);
+					 int dai= cal.get(Calendar.DAY_OF_MONTH);
+					 String day, month, second,minute,hour;
+					 if(dai<10) {
+						 day="0"+Integer.toString(dai);
+					 }
+					 else {
+						 day=Integer.toString(dai);
+					 }
+					int mont= cal.get(Calendar.MONTH);
+					 if(mont<10) {
+						 month="0"+Integer.toString(mont);
+					 }
+					 else {
+						 month=Integer.toString(mont);
+					 }
+					
+					
+					year= cal.get(Calendar.YEAR);
+					
+					 int secon= cal.get(Calendar.SECOND);
+					 if(secon<10) {
+						 second="0"+Integer.toString(secon);
+					 }
+					 else {
+						 second=Integer.toString(secon);
+					 }
+					 
+					 int minut= cal.get(Calendar.MINUTE);
+					 
+					 if(minut<10) {
+						 minute="0"+Integer.toString(minut);
+					 }
+					 else {
+						 minute=Integer.toString(minut);
+					 }
+					 
+					 int hou= cal.get(Calendar.HOUR);
+					 
+					 
+					 if(hou == 0) { 
+						    hour = "12";
+						}
+					 else if(hou<10) {
+						 hour="0"+Integer.toString(hou);
+					 }
+					 else {
+						 hour=Integer.toString(hou);
+					 }
 					
 					int ampm= cal.get(Calendar.AM_PM);
-					String tmam="a";
+
 				if(ampm == 0) {
 					
 					tmam= "am";
 				}
 				else {
 					tmam= "pm";
-				}				
-					lblclock.setText("Fecha: "+ day+"/"+month+"/"+year+" Hora: "+hour+":"+minute+":"+second+tmam);
+				}
+					
+					
+					lblclock.setText("Fecha: "+ day+"/"+month+"/"+year+"  Hora: "+hour+":"+minute+":"+second+tmam);
 					sleep(1000);
+			
 					}
 				}
 				catch(InterruptedException e) {
 					e.printStackTrace();
-				}		
+				}
+			
+
+				
 			}
 		};
 
 		clock.start();
+		
 	}
 	
 	
@@ -178,9 +234,9 @@ public class Inicio extends JFrame implements ActionListener {
 
 	    
 	    lblclock = new JLabel("");
-	    lblclock.setFont(new Font("Tahoma", Font.PLAIN, 15));
+	    lblclock.setFont(new Font("Verdana", Font.PLAIN, 13));
 	    lblclock.setForeground(new Color(255, 255, 255));
-	    lblclock.setBounds(512, 33, 249, 43);
+	    lblclock.setBounds(488, 0, 289, 43);
 	    panel.add(lblclock);
 	    
 	    clock();
