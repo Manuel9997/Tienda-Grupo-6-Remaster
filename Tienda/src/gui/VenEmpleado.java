@@ -444,7 +444,7 @@ public class VenEmpleado extends JFrame implements ActionListener {
 	    }
 	    
 	    if (LeerDNI().length() != 8) {
-	        JOptionPane.showMessageDialog(this, "El DNI debe tener 8 números. Por favor, verifique.");
+	        JOptionPane.showMessageDialog(this, "El DNI debe contar con 8 números. Por favor, verifique.");
 	        txtDNI.setText("");
 	        txtDNI.requestFocus();
 	        return; 
