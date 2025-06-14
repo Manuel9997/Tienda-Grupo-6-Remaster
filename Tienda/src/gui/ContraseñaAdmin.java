@@ -150,7 +150,7 @@ public class ContraseñaAdmin extends JDialog implements ActionListener {
 			dispose();
 		}
 		else {
-			JOptionPane.showMessageDialog(this, "Contraseña incorrecta");
+			JOptionPane.showMessageDialog(this, "Contraseña incorrecta.");
 		}	 
 	}
 }
