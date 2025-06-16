@@ -1,18 +1,10 @@
 package gui;
-
-
 import java.awt.BorderLayout;
 import java.awt.Component;
-
 import javax.swing.*;
-import java.awt.FlowLayout;
-
 import javax.swing.border.EmptyBorder;
-
 import java.awt.Font;
-import java.awt.Frame;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
@@ -53,12 +45,14 @@ public class ContraseñaAdmin extends JDialog implements ActionListener {
 		setModal(true);
 		setBounds(100, 100, 450, 399);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(Color.BLACK);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
 			lblNewLabel_3 = new JLabel("LOGIN");
-			lblNewLabel_3.setForeground(new Color(255, 255, 255));
+			lblNewLabel_3.setBackground(Color.LIGHT_GRAY);
+			lblNewLabel_3.setForeground(Color.LIGHT_GRAY);
 			lblNewLabel_3.setFont(new Font("Verdana", Font.PLAIN, 26));
 			lblNewLabel_3.setBounds(164, 46, 96, 55);
 			contentPanel.add(lblNewLabel_3);
@@ -102,7 +96,7 @@ public class ContraseñaAdmin extends JDialog implements ActionListener {
 		}
 		{
 			lblNewLabel_2 = new JLabel("");
-			ImageIcon icon= new ImageIcon(ContraseñaAdmin.class.getResource("/recursos/rueda2.gif"));
+			ImageIcon icon= new ImageIcon(ContraseñaAdmin.class.getResource("/recursos/logingft.gif"));
 			ImageIcon gifEscalado = new ImageIcon(icon.getImage()) {
 		
 			    public synchronized void paintIcon(Component c, Graphics g, int x, int y) {

@@ -13,7 +13,6 @@ import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 
 import java.awt.Font;
 import java.awt.Image;
