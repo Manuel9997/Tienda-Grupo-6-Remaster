@@ -27,6 +27,7 @@ import javax.swing.UIManager;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -65,7 +66,6 @@ public class VenEmpleado extends JFrame implements ActionListener {
 	public String fecha;
 	public String hora;
 
-
 	/**
 	 * Launch the application.
 	 */
@@ -81,8 +81,6 @@ public class VenEmpleado extends JFrame implements ActionListener {
 			}
 		});
 	}
-	
-	
 	
 	public void clock() {
 		Thread clock =new Thread() {
@@ -371,12 +369,12 @@ public class VenEmpleado extends JFrame implements ActionListener {
 				scrollPane.setViewportView(txtS);
 			}
 		}
-		{
+	/*	{
 			lblNewLabel_1 = new JLabel("");
 			lblNewLabel_1.setIcon(new ImageIcon(VenEmpleado.class.getResource("/recursos/check.png")));
 			lblNewLabel_1.setBounds(256, 30, 54, 47);
 			contentPane.add(lblNewLabel_1);
-		}
+		} */
 		{
 			lblclock = new JLabel("");
 			lblclock.setFont(new Font("Verdana", Font.PLAIN, 14));
@@ -421,15 +419,7 @@ public class VenEmpleado extends JFrame implements ActionListener {
 	private JLabel lblNewLabel_1;
 	private JLabel lblclock;
 	
-	
-	
-	
-	
-	//metodo para agregar empleados vendedores 
-	//		String[] empleados = {"Manuel", "Pedro"};
-	// cboVendedor.setModel(new DefaultComboBoxModel(empleados));
-	protected void do_btnRegistrar_actionPerformed(ActionEvent e) {	
-		
+	protected void do_btnRegistrar_actionPerformed(ActionEvent e) {		
 		try {	
 			Producto p = ap.Buscar(LeerIdProducto());
 		
@@ -452,7 +442,7 @@ public class VenEmpleado extends JFrame implements ActionListener {
 		
 		Cliente c = new Cliente(LeerDNI(), LeerNombre(), LeerTelefono());
 		Empleado vendedor = new Empleado(LeerVendedor());
-		Venta v = new Venta(LeerCodigo(), c, LocalDate.now(), p, LeerCantidad(), LeerTipoPago(), LeerComprobante(), vendedor,hora);
+		Venta v = new Venta(LeerCodigo(), c, LocalDate.now(), LocalTime.now(), p, LeerCantidad(), LeerTipoPago(), LeerComprobante(), vendedor);
 		
 		p.reducirStock(LeerCantidad());
 		av.Adicionar(v); 
@@ -461,21 +451,15 @@ public class VenEmpleado extends JFrame implements ActionListener {
 		} catch (Exception e2) {
 			JOptionPane.showMessageDialog(this, "Uno o más de los valores ingresados no es válido. Intente de nuevo.");	
 		}
-		
-	
-
-
 	}
 	
 	void Imprimir(String s) {
 		txtS.append(s+"\n");
 	}
 	
-   
-	
 	void ListadoVentas() {
 		txtS.setText("");
-		Imprimir("Código\tDNI\tNombres y apellidos\tTeléfono\tFecha\tHora\tID Producto\tProducto\tNombre del modelo\tGarantia\tPrecio unitario\tCantidad\tTipo de pago\tVendedor\tSub Total");
+		Imprimir("Código\tDNI\tNombres y apellidos\tTeléfono\tFecha\tHora\tID Producto\tProducto\tNombre del modelo\tGarantia\tPrecio unitario\tCantidad\tTipo de pago\tVendedor\t\tSub Total");
 
 		for (int i = 0; i < av.Tamaño(); i++) {
 			Venta v = av.Obtener(i);
@@ -486,7 +470,7 @@ public class VenEmpleado extends JFrame implements ActionListener {
 			v.getCliente().getNombre_apellido() + "\t" +
 			v.getCliente().getTelefono() + "\t" +
 			v.getFecha() + "\t" +
-			v.getHoracreada() + "\t" +
+			v.getHora().withNano(0) + "\t" +
 			prod.getId_producto() + "\t" +
 			prod.getCat_producto() + "\t" +
 			prod.getNombre() + "\t" +
@@ -544,9 +528,6 @@ public class VenEmpleado extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(this, "Primero debe ingresar valores para usar esta función");
 			
 		}
-	
-	        
-	    
 
 	}
 	protected void do_btnMostrarProductos_actionPerformed(ActionEvent e) {
@@ -706,8 +687,6 @@ public class VenEmpleado extends JFrame implements ActionListener {
 		    cboVendedor.setForeground(Color.WHITE);
 		    jlabelmodo.setText("Modo Normal");
 		}
-		
-		
 	}
 }
 

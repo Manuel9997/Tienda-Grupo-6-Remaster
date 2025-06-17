@@ -1,41 +1,28 @@
 package clase;
 
+import java.time.LocalDate;
+
 public class Empleado {
 private int id_empleado;	
-private String dni, nombre_apellido, telefono, cargo, jornada, horario, horacreada, fechacreada;
+private String dni, nombre_apellido, telefono;
+private LocalDate fecha;
+private String cargo, jornada, horario;
 private double pago_hora, horas_trabajadas, descuento;
 
-public Empleado(int id_empleado, String dni, String nombre_apellido, String telefono, String cargo, String jornada, String fechacreada,String horacreada,
-		String horario, double pago_hora, double horas_trabajadas, double descuento) {
+public Empleado(int id_empleado, String dni, String nombre_apellido, String telefono, LocalDate fecha, String cargo,
+		String jornada, String horario, double pago_hora, double horas_trabajadas, double descuento) {
 
 	this.id_empleado = id_empleado;
 	this.dni = dni;
 	this.nombre_apellido = nombre_apellido;
 	this.telefono = telefono;
+	this.fecha = fecha;
 	this.cargo = cargo;
 	this.jornada = jornada;
 	this.horario = horario;
 	this.pago_hora = pago_hora;
 	this.horas_trabajadas = horas_trabajadas;
 	this.descuento = descuento;
-	this.horacreada= horacreada;
-	this.fechacreada= fechacreada;
-}
-
-public String getHoracreada() {
-	return horacreada;
-}
-
-public void setHoracreada(String horacreada) {
-	this.horacreada = horacreada;
-}
-
-public String getFechacreada() {
-	return fechacreada;
-}
-
-public void setFechacreada(String fechacreada) {
-	this.fechacreada = fechacreada;
 }
 
 public Empleado(String nombre_apellido) {
@@ -73,6 +60,14 @@ public String getTelefono() {
 
 public void setTelefono(String telefono) {
 	this.telefono = telefono;
+}
+
+public LocalDate getFecha() {
+	return fecha;
+}
+
+public void setFecha(LocalDate fecha) {
+	this.fecha = fecha;
 }
 
 public String getCargo() {
@@ -122,6 +117,7 @@ public double getDescuento() {
 public void setDescuento(double descuento) {
 	this.descuento = descuento;
 }
+
 //SOBRECARGA DE MÉTODOS
 public double Sueldo() {
 	return pago_hora * horas_trabajadas;

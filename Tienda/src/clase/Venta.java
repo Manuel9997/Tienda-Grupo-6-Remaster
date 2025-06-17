@@ -1,43 +1,35 @@
 package clase;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Venta {
 private int codigo_venta;
 private Cliente cliente;
 private LocalDate fecha;
+private LocalTime hora;
 private Producto producto;
 private int cantidad;
-private String tipo_pago;
-private String comprobante, horacreada;
+private String tipo_pago, comprobante;
 private Empleado vendedor;
 
-public Venta(int codigo_venta, Cliente cliente, LocalDate fecha, Producto producto, int cantidad, String tipo_pago,
-		String comprobante, Empleado vendedor, String horacreada) {
+public Venta(int codigo_venta, Cliente cliente, LocalDate fecha, LocalTime hora, Producto producto, int cantidad,
+		String tipo_pago, String comprobante, Empleado vendedor) {
 
-	this.codigo_venta = codigo_venta; 
+	this.codigo_venta = codigo_venta;
 	this.cliente = cliente;
 	this.fecha = fecha;
+	this.hora = hora;
 	this.producto = producto;
 	this.cantidad = cantidad;
 	this.tipo_pago = tipo_pago;
 	this.comprobante = comprobante;
 	this.vendedor = vendedor;
-	this.horacreada = horacreada;
 }
 
 public int getCodigo_venta() {
 	return codigo_venta;
 }
-
-public String getHoracreada() {
-	return horacreada;
-}
-
-public void setHoracreada(String horacreada) {
-	this.horacreada = horacreada;
-}
-
 
 public void setCodigo_venta(int codigo_venta) {
 	this.codigo_venta = codigo_venta;
@@ -57,6 +49,14 @@ public LocalDate getFecha() {
 
 public void setFecha(LocalDate fecha) {
 	this.fecha = fecha;
+}
+
+public LocalTime getHora() {
+	return hora;
+}
+
+public void setHora(LocalTime hora) {
+	this.hora = hora;
 }
 
 public Producto getProducto() {

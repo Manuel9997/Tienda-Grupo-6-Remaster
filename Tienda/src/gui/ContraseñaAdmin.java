@@ -22,11 +22,6 @@ public class ContraseñaAdmin extends JDialog implements ActionListener {
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
 
-	
-	
-
-	
-	
 	public static void main(String[] args) {
 		try {
 			ContraseñaAdmin dialog = new ContraseñaAdmin();
@@ -94,7 +89,7 @@ public class ContraseñaAdmin extends JDialog implements ActionListener {
 			btnIngresar.setBounds(145, 234, 115, 35);
 			contentPanel.add(btnIngresar);
 		}
-		{
+	/*	{
 			lblNewLabel_2 = new JLabel("");
 			ImageIcon icon= new ImageIcon(ContraseñaAdmin.class.getResource("/recursos/logingft.gif"));
 			ImageIcon gifEscalado = new ImageIcon(icon.getImage()) {
@@ -127,7 +122,7 @@ public class ContraseñaAdmin extends JDialog implements ActionListener {
 			lblNewLabel_2.setBounds(0, 0, 434, 360);
 			contentPanel.add(lblNewLabel_2);
 
-		}
+		} */
 	}
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnIngresar) {

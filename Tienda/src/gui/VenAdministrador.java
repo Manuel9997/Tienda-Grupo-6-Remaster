@@ -26,6 +26,7 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.awt.event.ActionEvent;
@@ -73,9 +74,6 @@ public class VenAdministrador extends JFrame implements ActionListener {
 	public String tmam;
 	public String fecha;
 	public String hora;
-
-	
-	
 
 	/**
 	 * Launch the application.
@@ -159,8 +157,6 @@ public class VenAdministrador extends JFrame implements ActionListener {
 					
 					
 					lblclock.setText("Fecha: "+ day+"/"+month+"/"+year+" Hora: "+hour+":"+minute+":"+second+tmam);
-					fecha= day+"/"+month+"/"+year;
-					hora= hour+":"+minute+":"+second+tmam;
 					sleep(1000);
 					}
 				}
@@ -429,7 +425,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 	
 	void ListadoHistorialVentas() {
 		txtS.setText("");
-		Imprimir("Código\tDNI\tNombres y apellidos\tTeléfono\tFecha\tID Producto\tProducto\tNombre del modelo\tGarantia\tPrecio unitario\tCantidad\tTipo de pago\tVendedor\tTotal");
+		Imprimir("Código\tDNI\tNombres y apellidos\tTeléfono\tFecha\tHora\tID Producto\tProducto\tNombre del modelo\tGarantia\tPrecio unitario\tCantidad\tTipo de pago\tVendedor\t\tTotal");
 		for(int i = 0; i < ahv.Tamaño(); i++) {
 			Venta v = ahv.Obtener(i);
 			Imprimir("" + v.getCodigo_venta() + "\t" +
@@ -437,6 +433,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			"" + v.getCliente().getNombre_apellido() + "\t" +
 			"" + v.getCliente().getTelefono() + "\t" +
 			"" + v.getFecha() + "\t" +
+			"" + v.getHora() + "\t" +
 			"" + v.getProducto().getId_producto() + "\t" +
 			"" + v.getProducto().getCat_producto() + "\t" +
 			"" + v.getProducto().getNombre() + "\t"+
@@ -454,17 +451,16 @@ public class VenAdministrador extends JFrame implements ActionListener {
 	}
 	void ListadoEmpleados() {
 		txtS.setText("");
-		Imprimir("ID\tDNI\tNombre completo\tTeléfono\tCargo\tJornada laboral\t\tFecha\tHora\tHorario laboral\t\tPago por hora\tHoras trab.\tDescuento\tSueldo");
+		Imprimir("ID\tDNI\tNombre completo\tTeléfono\tFecha de ingreso\tCargo\tJornada laboral\t\tHorario laboral\t\tPago por hora\tHoras trab.\tDescuento\tSueldo");
 		for(int i = 0; i < ae.Tamaño(); i++) {
 			Empleado e = ae.Obtener(i);
 			Imprimir("" + e.getId_empleado() + "\t" +
 			"" + e.getDni() + "\t" + "" +
 			"" + e.getNombre_apellido() + "\t" +
 			"" + e.getTelefono() + "\t" +
+			"" + e.getFecha() + "\t\t" +
 			"" + e.getCargo() + "\t" +
-			"" + e.getJornada() + "\t" + 
-			"" + e.getFechacreada() + "\t" + 
-			"" + e.getHoracreada() + "\t" + 
+			"" + e.getJornada() + "\t" +  
 			"" + e.getHorario() + "\t" + 
 			"" + e.getPago_hora() + "\t" + 
 			"" + e.getHoras_trabajadas() + "\t" + 
@@ -472,7 +468,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			"" + e.Sueldo());
 	}
 }
-
+	
 	protected void do_btnBuscar_actionPerformed(ActionEvent e) {
 		try {
 			int codigo= Integer.parseInt(txtID_Cod.getText());
@@ -484,15 +480,14 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			}
 			else{
 				 txtS.setText(""); 
-				 Imprimir("ID\tDNI\tNombre completo\tTeléfono\tCargo\tJornada laboral\tFecha de creación\tHora de creación\tHorario laboral\t\tPago por hora\tHoras trab.\tDescuento\tSueldo");
+				 Imprimir("ID\tDNI\tNombre completo\tTeléfono\tFecha de ingreso\tCargo\tJornada laboral\t\tHorario laboral\t\tPago por hora\tHoras trab.\tDescuento\tSueldo");
 				    Imprimir("" + empleadoEncontrado.getId_empleado() + "\t" +
 							"" + empleadoEncontrado.getDni() + "\t" + "" +
 							"" + empleadoEncontrado.getNombre_apellido() + "\t" +
 							"" + empleadoEncontrado.getTelefono() + "\t" +
+							"" + empleadoEncontrado.getFecha() + "\t\t" + 
 							"" + empleadoEncontrado.getCargo() + "\t" +
 							"" + empleadoEncontrado.getJornada() + "\t" + 
-							"" + empleadoEncontrado.getFechacreada() + "\t" + 
-							"" + empleadoEncontrado.getHoracreada() + "\t" +
 							"" + empleadoEncontrado.getHorario() + "\t" + 
 							"" + empleadoEncontrado.getPago_hora() + "\t" + 
 							"" + empleadoEncontrado.getHoras_trabajadas() + "\t" + 
@@ -530,7 +525,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 				return;		
 			}
 							
-			Empleado nuevoempleado= new Empleado(idempleado, dniempleado, nomempleado, teleempleado, carempleado, jorempleado,fecha, hora,horaempleado, pxhempleado, htempleado, descuento);
+			Empleado nuevoempleado= new Empleado(idempleado, dniempleado, nomempleado, teleempleado, LocalDate.now(), carempleado, jorempleado,horaempleado, pxhempleado, htempleado, descuento);
 			if( ae.Buscar(idempleado) == null) {
 				ae.Adicionar(nuevoempleado);	
 				JOptionPane.showMessageDialog(this, "Nuevo empleado registrado éxitosamente");
@@ -561,7 +556,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 				empleadoEncontrado.setNombre_apellido(txtNombreEmpleado.getText());
 				empleadoEncontrado.setTelefono(txtTelefono.getText());
 				empleadoEncontrado.setCargo(cboCargo.getSelectedItem().toString());
-				empleadoEncontrado.setJornada(cboJornada.getSelectedItem().toString() + "\t");
+				empleadoEncontrado.setJornada(cboJornada.getSelectedItem().toString() );
 				empleadoEncontrado.setHorario(cboHorario.getSelectedItem().toString());
 				empleadoEncontrado.setPago_hora( Double.parseDouble(txtPago.getText()));
 				empleadoEncontrado.setHoras_trabajadas(Double.parseDouble(txtHoras.getText()));
@@ -646,9 +641,6 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			txtPago.setBackground(Color.LIGHT_GRAY);
 			txtHoras.setBackground(Color.LIGHT_GRAY);
 			txtDescuento.setBackground(Color.LIGHT_GRAY);
-			
-			
-			
 			jlabelmodo.setText("Modo Frío");
 		}	
 		
@@ -691,12 +683,8 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			txtDescuento.setForeground(Color.WHITE);
 			cboCargo.setForeground(Color.WHITE);
 			cboJornada.setForeground(Color.WHITE);
-			cboHorario.setForeground(Color.WHITE);
-			
+			cboHorario.setForeground(Color.WHITE);		
 			jlabelmodo.setText("Modo Normal");
-
-
-		}
-		
+		}	
 	}
 }

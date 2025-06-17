@@ -152,7 +152,6 @@ public class Inicio extends JFrame implements ActionListener {
 	    menuBar = new JMenuBar();
 	    setJMenuBar(menuBar);
 	    
-
 	    mnNewMenu = new JMenu("Menú");
 	    mnNewMenu.setFont(new Font("Verdana", Font.PLAIN, 20));
 	    mnNewMenu.setBackground(new Color(0, 255, 255));
@@ -172,15 +171,12 @@ public class Inicio extends JFrame implements ActionListener {
             e.printStackTrace();
         }
 	    
-	    
-	    
 	    mnAdministrador = new JMenuItem("Administrador");
 	    mnAdministrador.setFont(new Font("Verdana", Font.PLAIN, 17));
 	    mnAdministrador.setBackground(new Color(192, 192, 192));
 	    mnAdministrador.addActionListener(this);
 	    mnNewMenu.add(mnAdministrador);
-	    
-	    
+	        
 	    try {
             ImageIcon iconoadmin = new ImageIcon(getClass().getResource("/recursos/adminicon.png"));
             int anchoDeseado = 32; 
@@ -195,13 +191,11 @@ public class Inicio extends JFrame implements ActionListener {
             e.printStackTrace();
         }
  
-	    
 	    mnEmpleado = new JMenuItem("Empleado");
 	    mnEmpleado.setFont(new Font("Verdana", Font.PLAIN, 17));
 	    mnEmpleado.addActionListener(this);
 	    mnNewMenu.add(mnEmpleado);
-	    
-	    
+	      
 	    try {
             ImageIcon iconoempleado = new ImageIcon(getClass().getResource("/recursos/empleadoicon.png"));
             int anchoDeseado = 32; 
@@ -216,8 +210,6 @@ public class Inicio extends JFrame implements ActionListener {
             e.printStackTrace();
         }
 	    
-
-
 	    contentPane = new JPanel();
 	    contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 	    contentPane.setBackground(new Color(240, 240, 245));
@@ -230,8 +222,7 @@ public class Inicio extends JFrame implements ActionListener {
 	    panel.setLayout(null);
 	    panel.setBackground(new Color(0x2f4f4f));
 	    panel.setOpaque(true);
-
-	    
+    
 	    lblclock = new JLabel("");
 	    lblclock.setFont(new Font("Verdana", Font.PLAIN, 13));
 	    lblclock.setForeground(new Color(255, 255, 255));
@@ -248,8 +239,6 @@ public class Inicio extends JFrame implements ActionListener {
         
         logofondo.setHorizontalAlignment(SwingConstants.CENTER);
         logofondo.setVerticalAlignment(SwingConstants.CENTER);
-
-
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -269,8 +258,4 @@ public class Inicio extends JFrame implements ActionListener {
 		VenEmpleado vEmple = new VenEmpleado();
 		vEmple.setVisible(true);
 	}
-	
-	
-
-	
 }
