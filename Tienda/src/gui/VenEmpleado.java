@@ -369,12 +369,12 @@ public class VenEmpleado extends JFrame implements ActionListener {
 				scrollPane.setViewportView(txtS);
 			}
 		}
-	/*	{
+		{
 			lblNewLabel_1 = new JLabel("");
 			lblNewLabel_1.setIcon(new ImageIcon(VenEmpleado.class.getResource("/recursos/check.png")));
 			lblNewLabel_1.setBounds(256, 30, 54, 47);
 			contentPane.add(lblNewLabel_1);
-		} */
+		} 
 		{
 			lblclock = new JLabel("");
 			lblclock.setFont(new Font("Verdana", Font.PLAIN, 14));

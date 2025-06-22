@@ -70,11 +70,13 @@ public int Tamaño() {
 public Venta Obtener(int x) {
 	return histoVen.get(x);
 }
-public Venta Buscar(int cod) {
-	for(int i = 0; i < Tamaño(); i++) {
-		if(Obtener(i).getCodigo_venta() == cod)
-			return Obtener(i);
-	}
-	return null;
+public Venta Buscar(int cod, String dni) {
+    for (int i = 0; i < Tamaño(); i++) {
+        Venta venta = Obtener(i);
+        if (venta.getCodigo_venta() == cod || venta.getCliente().getDni().equals(dni)) {
+            return venta;
+        }
+    }
+    return null;
 }
 }
