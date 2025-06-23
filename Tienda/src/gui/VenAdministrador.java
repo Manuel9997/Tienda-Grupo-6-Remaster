@@ -64,7 +64,6 @@ public class VenAdministrador extends JFrame implements ActionListener {
 	private JButton btnMostrarEmpleado;
 	private JLabel lblIdBuscarE;
 	private JTextField txtIdEmpleBuscar;
-	private JButton btnBuscarE;
 	public int day;
 	public int year;
 	public int month;
@@ -179,7 +178,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 859, 770);
 		contentPane = new JPanel();
-		contentPane.setBackground(UIManager.getColor("Button.light"));
+		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 
@@ -206,13 +205,6 @@ public class VenAdministrador extends JFrame implements ActionListener {
 				panelEmpleado.add(txtIdEmpleBuscar);
 				txtIdEmpleBuscar.setBackground(Color.WHITE);
 				txtIdEmpleBuscar.setColumns(10);
-			}
-			{
-				btnBuscarE = new JButton("Buscar");
-				btnBuscarE.setBounds(593, 10, 116, 25);
-				panelEmpleado.add(btnBuscarE);
-				btnBuscarE.addActionListener(this);
-				btnBuscarE.setFont(new Font("Verdana", Font.PLAIN, 13));
 			}
 			{
 				lblRegistrarEmpleado = new JLabel("REGISTRAR EMPLEADO");
@@ -345,21 +337,21 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			}
 			{
 				btnMostrarEmpleado = new JButton("Mostrar");
-				btnMostrarEmpleado.setBounds(215, 353, 116, 25);
+				btnMostrarEmpleado.setBounds(147, 353, 116, 25);
 				panelEmpleado.add(btnMostrarEmpleado);
 				btnMostrarEmpleado.addActionListener(this);
 				btnMostrarEmpleado.setFont(new Font("Verdana", Font.PLAIN, 13));
 			}
 			{
 				btnRegistrarEmpleado = new JButton("Registrar");
-				btnRegistrarEmpleado.setBounds(349, 353, 116, 25);
+				btnRegistrarEmpleado.setBounds(281, 353, 116, 25);
 				panelEmpleado.add(btnRegistrarEmpleado);
 				btnRegistrarEmpleado.addActionListener(this);
 				btnRegistrarEmpleado.setFont(new Font("Verdana", Font.PLAIN, 13));
 			}
 			{
 				btnModificarEmpleado = new JButton("Modificar");
-				btnModificarEmpleado.setBounds(482, 353, 116, 25);
+				btnModificarEmpleado.setBounds(414, 353, 116, 25);
 				panelEmpleado.add(btnModificarEmpleado);
 				btnModificarEmpleado.addActionListener(this);
 				btnModificarEmpleado.setFont(new Font("Verdana", Font.PLAIN, 13));
@@ -379,6 +371,19 @@ public class VenAdministrador extends JFrame implements ActionListener {
 						scrollPane.setViewportView(txtS);
 					}
 				}
+				{
+					btnEliminarEmpleado = new JButton("Eliminar");
+					btnEliminarEmpleado.setFont(new Font("Verdana", Font.PLAIN, 13));
+					btnEliminarEmpleado.setBounds(547, 353, 116, 25);
+					panelEmpleado.add(btnEliminarEmpleado);
+				}
+				{
+					btnBuscarEmpleado = new JButton("Buscar");
+					btnBuscarEmpleado.addActionListener(this);
+					btnBuscarEmpleado.setFont(new Font("Verdana", Font.PLAIN, 13));
+					btnBuscarEmpleado.setBounds(585, 11, 116, 25);
+					panelEmpleado.add(btnBuscarEmpleado);
+				}
 				jlabelmodo.addActionListener(this);
 			}
 			
@@ -397,13 +402,6 @@ public class VenAdministrador extends JFrame implements ActionListener {
 				txtIdProdBuscar.setBackground(Color.WHITE);
 				txtIdProdBuscar.setBounds(126, 10, 447, 25);
 				panelProducto.add(txtIdProdBuscar);
-			}
-			{
-				btnBuscarP = new JButton("Buscar");
-				btnBuscarP.addActionListener(this);
-				btnBuscarP.setFont(new Font("Verdana", Font.PLAIN, 13));
-				btnBuscarP.setBounds(591, 10, 116, 25);
-				panelProducto.add(btnBuscarP);
 			}
 			{
 				lblRegistrarProducto = new JLabel("REGISTRAR PRODUCTO");
@@ -488,7 +486,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 				btnModificarProducto = new JButton("Modificar");
 				btnModificarProducto.addActionListener(this);
 				btnModificarProducto.setFont(new Font("Verdana", Font.PLAIN, 13));
-				btnModificarProducto.setBounds(435, 255, 116, 25);
+				btnModificarProducto.setBounds(374, 257, 116, 25);
 				panelProducto.add(btnModificarProducto);
 			}
 			{
@@ -541,7 +539,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 				btnRegistrarProducto = new JButton("Registrar");
 				btnRegistrarProducto.addActionListener(this);
 				btnRegistrarProducto.setFont(new Font("Verdana", Font.PLAIN, 13));
-				btnRegistrarProducto.setBounds(288, 255, 116, 25);
+				btnRegistrarProducto.setBounds(227, 257, 116, 25);
 				panelProducto.add(btnRegistrarProducto);
 			}
 			{
@@ -550,6 +548,19 @@ public class VenAdministrador extends JFrame implements ActionListener {
 				cboGarantia.setModel(new DefaultComboBoxModel(new String[] {"1 semana", "3 meses", "6 meses", "1 año"}));
 				cboGarantia.setBounds(296, 176, 117, 21);
 				panelProducto.add(cboGarantia);
+			}
+			{
+				btnBuscarProducto = new JButton("Buscar");
+				btnBuscarProducto.addActionListener(this);
+				btnBuscarProducto.setFont(new Font("Verdana", Font.PLAIN, 13));
+				btnBuscarProducto.setBounds(583, 11, 116, 25);
+				panelProducto.add(btnBuscarProducto);
+			}
+			{
+				btnEliminarProducto = new JButton("Eliminar");
+				btnEliminarProducto.setFont(new Font("Verdana", Font.PLAIN, 13));
+				btnEliminarProducto.setBounds(522, 257, 116, 25);
+				panelProducto.add(btnEliminarProducto);
 			}
 			{
 				panelVenta = new JPanel();
@@ -584,11 +595,11 @@ public class VenAdministrador extends JFrame implements ActionListener {
 					panelVenta.add(txtCodDni);
 				}
 				{
-					btnBuscarCodDni = new JButton("Buscar");
-					btnBuscarCodDni.addActionListener(this);
-					btnBuscarCodDni.setFont(new Font("Verdana", Font.PLAIN, 13));
-					btnBuscarCodDni.setBounds(631, 47, 116, 25);
-					panelVenta.add(btnBuscarCodDni);
+					btnBuscarHistorialVenta = new JButton("Buscar");
+					btnBuscarHistorialVenta.addActionListener(this);
+					btnBuscarHistorialVenta.setFont(new Font("Verdana", Font.PLAIN, 13));
+					btnBuscarHistorialVenta.setBounds(623, 47, 116, 25);
+					panelVenta.add(btnBuscarHistorialVenta);
 				}
 			}
 			lblclock = new JLabel("");
@@ -600,8 +611,14 @@ public class VenAdministrador extends JFrame implements ActionListener {
 		}
 	}
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnBuscarCodDni) {
-			do_btnBuscarCodDni_actionPerformed(e);
+		if (e.getSource() == btnBuscarHistorialVenta) {
+			do_btnBuscarHistorialVenta_actionPerformed(e);
+		}
+		if (e.getSource() == btnBuscarProducto) {
+			do_btnBuscarProducto_actionPerformed(e);
+		}
+		if (e.getSource() == btnBuscarEmpleado) {
+			do_btnBuscarEmpleado_actionPerformed(e);
 		}
 		if (e.getSource() == btnRegistrarStock) {
 			do_btnRegistrarStock_actionPerformed(e);
@@ -611,9 +628,6 @@ public class VenAdministrador extends JFrame implements ActionListener {
 		}
 		if (e.getSource() == btnRegistrarProducto) {
 			do_btnRegistrarProducto_actionPerformed(e);
-		}
-		if (e.getSource() == btnBuscarP) {
-			do_btnBuscarP_actionPerformed(e);
 		}
 		if (e.getSource() == btnMostrarProducto) {
 			do_btnMostrarProducto_actionPerformed(e);
@@ -629,9 +643,6 @@ public class VenAdministrador extends JFrame implements ActionListener {
 		}
 		if (e.getSource() == btnRegistrarEmpleado) {
 			do_btnRegistrarEmpleado_actionPerformed(e);
-		}
-		if (e.getSource() == btnBuscarE) {
-			do_btnBuscar_actionPerformed(e);
 		}
 		if (e.getSource() == btnMostrarEmpleado) {
 			do_btnMostrarEmpleado_actionPerformed(e);
@@ -649,7 +660,6 @@ public class VenAdministrador extends JFrame implements ActionListener {
 	private JButton btnHistorialVentas;
 	private JLabel lblIdBuscarP;
 	private JTextField txtIdProdBuscar;
-	private JButton btnBuscarP;
 	private JLabel lblRegistrarProducto;
 	private JLabel lblIdP;
 	private JTextField txtIdProducto;
@@ -674,13 +684,18 @@ public class VenAdministrador extends JFrame implements ActionListener {
 	private JTextArea txtS2;
 	private JLabel lblCodDni;
 	private JTextField txtCodDni;
-	private JButton btnBuscarCodDni;
+	
+	private JButton btnRegistrarProducto;
+	private JComboBox cboGarantia;
+	private JButton btnEliminarEmpleado;
+	private JButton btnBuscarEmpleado;
+	private JButton btnBuscarProducto;
+	private JButton btnBuscarHistorialVenta;
+	private JButton btnEliminarProducto;
 	
 	ArregloHistorialVentas ahv = new ArregloHistorialVentas();
 	ArregloEmpleado ae = new ArregloEmpleado();
 	ArregloProducto ap = new ArregloProducto();
-	private JButton btnRegistrarProducto;
-	private JComboBox cboGarantia;
 
 	protected void do_btnMostrarEmpleado_actionPerformed(ActionEvent e) {
 		ListadoEmpleados();
@@ -695,6 +710,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 		ImprimirEmple("ID\tDNI\tNombre completo\tTeléfono\tFecha de ingreso\tCargo\tJornada laboral\t\tHorario laboral\t\tPago por hora\tHoras trab.\tDescuento\tSueldo");
 		for(int i = 0; i < ae.Tamaño(); i++) {
 			Empleado e = ae.Obtener(i);
+			double descuento = e.getDescuento();
 			ImprimirEmple("" + e.getId_empleado() + "\t" +
 			"" + e.getDni() + "\t" + "" +
 			"" + e.getNombre_apellido() + "\t" +
@@ -706,17 +722,17 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			"" + e.getPago_hora() + "\t" + 
 			"" + e.getHoras_trabajadas() + "\t" + 
 			"" + e.getDescuento() + "\t" +
-			"" + e.Sueldo());
+			"" + e.Sueldo(descuento));
 	}
 }
-	protected void do_btnBuscar_actionPerformed(ActionEvent e) {
+	protected void do_btnBuscarEmpleado_actionPerformed(ActionEvent e) {
 		try {
 			int codigo = Integer.parseInt(txtIdEmpleBuscar.getText());
 			Empleado empleadoEncontrado = ae.Buscar(codigo);
-			if(empleadoEncontrado== null) {
+			double descuento = empleadoEncontrado.getDescuento(); 
+			if(empleadoEncontrado == null) {
 				txtS.setText("");
-				JOptionPane.showMessageDialog(this, "EL código no se encuentra en el sistema");
-				
+				JOptionPane.showMessageDialog(this, "EL código no se encuentra en el sistema");		
 			}
 			else{
 				 txtS.setText(""); 
@@ -732,11 +748,11 @@ public class VenAdministrador extends JFrame implements ActionListener {
 							"" + empleadoEncontrado.getPago_hora() + "\t" + 
 							"" + empleadoEncontrado.getHoras_trabajadas() + "\t" + 
 							"" + empleadoEncontrado.getDescuento() + "\t" +
-							"" + empleadoEncontrado.Sueldo());
+							"" + empleadoEncontrado.Sueldo(descuento));
 			}
 		} catch (Exception e2) {
 			JOptionPane.showMessageDialog(this, "El valor ingresado no es válido. Intente de nuevo.");	
-		}			
+		}	
 	}
 	
 	protected void do_btnRegistrarEmpleado_actionPerformed(ActionEvent e) {
@@ -809,124 +825,6 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(this, "Verifique el ID ingresado. Intente de nuevo.");
 		}
 	}
-	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
-		String actual = jlabelmodo.getText();
-		if(actual == "Modo Normal") {		
-			contentPane.setBackground(UIManager.getColor("Button.light"));
-			lblIdBuscarE.setForeground(Color.BLACK);
-			txtIdEmpleBuscar.setBackground(Color.WHITE);
-			txtS.setBackground(Color.WHITE);
-			lblIdE.setForeground(Color.BLACK);
-			lblDniE.setForeground(Color.BLACK);
-			lblNombreCompletoE.setForeground(Color.BLACK);
-			lblTelefono.setForeground(Color.BLACK);
-			lblCargo.setForeground(Color.BLACK);
-			lblJornada.setForeground(Color.BLACK);
-			lblHorario.setForeground(Color.BLACK);
-			lblPagoPorHora.setForeground(Color.BLACK);
-			lblHorasTrabajadas.setForeground(Color.BLACK);
-			lblDescuento.setForeground(Color.BLACK);
-			lblRegistrarEmpleado.setForeground(Color.BLACK);
-			lblclock.setForeground(Color.BLACK);
-			txtIdEmpleado.setBackground(Color.WHITE);
-			txtDniEmpleado.setBackground(Color.WHITE);
-			txtNombreEmpleado.setBackground(Color.WHITE);
-			txtTelefono.setBackground(Color.WHITE);
-			cboCargo.setBackground(Color.WHITE);
-			cboJornada.setBackground(Color.WHITE);
-			cboHorario.setBackground(Color.WHITE);
-			txtPago.setBackground(Color.WHITE);
-			txtHoras.setBackground(Color.WHITE);
-			txtDescuento.setBackground(Color.WHITE);		
-			
-			
-			txtIdEmpleBuscar.setForeground(Color.BLACK);
-			txtS.setForeground(Color.BLACK);
-			txtIdEmpleado.setForeground(Color.BLACK);
-			txtDniEmpleado.setForeground(Color.BLACK);
-			txtNombreEmpleado.setForeground(Color.BLACK);
-			txtTelefono.setForeground(Color.BLACK);
-			txtPago.setForeground(Color.BLACK);
-			txtHoras.setForeground(Color.BLACK);
-			txtDescuento.setForeground(Color.BLACK);
-			cboCargo.setForeground(Color.BLACK);
-			cboJornada.setForeground(Color.BLACK);
-			cboHorario.setForeground(Color.BLACK);
-			jlabelmodo.setText("Modo Oscuro");
-		}
-		else if(actual == "Modo Oscuro"){
-			contentPane.setBackground(Color.BLACK);
-			lblIdBuscarE.setForeground(Color.LIGHT_GRAY);
-			txtIdEmpleBuscar.setBackground(Color.LIGHT_GRAY);
-			txtS.setBackground(Color.LIGHT_GRAY);
-			lblIdE.setForeground(Color.LIGHT_GRAY);
-			lblDniE.setForeground(Color.LIGHT_GRAY);
-			lblNombreCompletoE.setForeground(Color.LIGHT_GRAY);
-			lblTelefono.setForeground(Color.LIGHT_GRAY);
-			lblCargo.setForeground(Color.LIGHT_GRAY);
-			lblJornada.setForeground(Color.LIGHT_GRAY);
-			lblHorario.setForeground(Color.LIGHT_GRAY);
-			lblPagoPorHora.setForeground(Color.LIGHT_GRAY);
-			lblHorasTrabajadas.setForeground(Color.LIGHT_GRAY);
-			lblDescuento.setForeground(Color.LIGHT_GRAY);
-			lblRegistrarEmpleado.setForeground(Color.LIGHT_GRAY);
-			lblclock.setForeground(Color.LIGHT_GRAY);
-			txtIdEmpleado.setBackground(Color.LIGHT_GRAY);
-			txtDniEmpleado.setBackground(Color.LIGHT_GRAY);
-			txtNombreEmpleado.setBackground(Color.LIGHT_GRAY);
-			txtTelefono.setBackground(Color.LIGHT_GRAY);
-			cboCargo.setBackground(Color.LIGHT_GRAY);
-			cboJornada.setBackground(Color.LIGHT_GRAY);
-			cboHorario.setBackground(Color.LIGHT_GRAY);
-			txtPago.setBackground(Color.LIGHT_GRAY);
-			txtHoras.setBackground(Color.LIGHT_GRAY);
-			txtDescuento.setBackground(Color.LIGHT_GRAY);
-			jlabelmodo.setText("Modo Frío");
-		}	
-		
-		else if(actual == "Modo Frío") {
-			contentPane.setBackground(new Color(10, 25, 45));
-			lblIdBuscarE.setForeground(new Color(150, 220, 255));
-			txtIdEmpleBuscar.setBackground(new Color(30, 80, 120));
-			txtS.setBackground(new Color(30, 80, 120));
-			lblIdE.setForeground(new Color(150, 220, 255));
-			lblDniE.setForeground(new Color(150, 220, 255));
-			lblNombreCompletoE.setForeground(new Color(150, 220, 255));
-			lblTelefono.setForeground(new Color(150, 220, 255));
-			lblCargo.setForeground(new Color(150, 220, 255));
-			lblJornada.setForeground(new Color(150, 220, 255));
-			lblHorario.setForeground(new Color(150, 220, 255));
-			lblPagoPorHora.setForeground(new Color(150, 220, 255));
-			lblHorasTrabajadas.setForeground(new Color(150, 220, 255));
-			lblDescuento.setForeground(new Color(150, 220, 255));
-			lblRegistrarEmpleado.setForeground(new Color(150, 220, 255));
-			lblclock.setForeground(new Color(150, 220, 255));
-			txtIdEmpleado.setBackground(new Color(30, 80, 120));
-			txtDniEmpleado.setBackground(new Color(30, 80, 120));
-			txtNombreEmpleado.setBackground(new Color(30, 80, 120));
-			txtTelefono.setBackground(new Color(30, 80, 120));
-			cboCargo.setBackground(new Color(30, 80, 120));
-			cboJornada.setBackground(new Color(30, 80, 120));
-			cboHorario.setBackground(new Color(30, 80, 120));
-			txtPago.setBackground(new Color(30, 80, 120));
-			txtHoras.setBackground(new Color(30, 80, 120));
-			txtDescuento.setBackground(new Color(30, 80, 120));
-
-			txtIdEmpleBuscar.setForeground(Color.WHITE);
-			txtS.setForeground(Color.WHITE);
-			txtIdEmpleado.setForeground(Color.WHITE);
-			txtDniEmpleado.setForeground(Color.WHITE);
-			txtNombreEmpleado.setForeground(Color.WHITE);
-			txtTelefono.setForeground(Color.WHITE);
-			txtPago.setForeground(Color.WHITE);
-			txtHoras.setForeground(Color.WHITE);
-			txtDescuento.setForeground(Color.WHITE);
-			cboCargo.setForeground(Color.WHITE);
-			cboJornada.setForeground(Color.WHITE);
-			cboHorario.setForeground(Color.WHITE);		
-			jlabelmodo.setText("Modo Normal");
-		}	
-	}
 	protected void do_btnMostrarProducto_actionPerformed(ActionEvent e) {
 		ListadoProductos();
 	}
@@ -946,7 +844,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			"" + p.getStock());
 		}
 	}
-	protected void do_btnBuscarP_actionPerformed(ActionEvent e) {
+	protected void do_btnBuscarProducto_actionPerformed(ActionEvent e) {
 		try {
 			int id = Integer.parseInt(txtIdProdBuscar.getText());
 			Producto p = ap.Buscar(id);
@@ -1066,7 +964,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			"" + v.SubTotal());
 		}
 	}
-	protected void do_btnBuscarCodDni_actionPerformed(ActionEvent e) {
+	protected void do_btnBuscarHistorialVenta_actionPerformed(ActionEvent e) {
 		try {
 			int codigo = Integer.parseInt(txtCodDni.getText());
 			String dni = txtCodDni.getText();
@@ -1101,4 +999,123 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(this, "El valor ingresado no es válido. Intente de nuevo.");	
 		}
 	}
+	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
+		String actual = jlabelmodo.getText();
+		if(actual == "Modo Normal") {		
+			contentPane.setBackground(UIManager.getColor("Button.light"));
+			lblIdBuscarE.setForeground(Color.BLACK);
+			txtIdEmpleBuscar.setBackground(Color.WHITE);
+			txtS.setBackground(Color.WHITE);
+			lblIdE.setForeground(Color.BLACK);
+			lblDniE.setForeground(Color.BLACK);
+			lblNombreCompletoE.setForeground(Color.BLACK);
+			lblTelefono.setForeground(Color.BLACK);
+			lblCargo.setForeground(Color.BLACK);
+			lblJornada.setForeground(Color.BLACK);
+			lblHorario.setForeground(Color.BLACK);
+			lblPagoPorHora.setForeground(Color.BLACK);
+			lblHorasTrabajadas.setForeground(Color.BLACK);
+			lblDescuento.setForeground(Color.BLACK);
+			lblRegistrarEmpleado.setForeground(Color.BLACK);
+			lblclock.setForeground(Color.BLACK);
+			txtIdEmpleado.setBackground(Color.WHITE);
+			txtDniEmpleado.setBackground(Color.WHITE);
+			txtNombreEmpleado.setBackground(Color.WHITE);
+			txtTelefono.setBackground(Color.WHITE);
+			cboCargo.setBackground(Color.WHITE);
+			cboJornada.setBackground(Color.WHITE);
+			cboHorario.setBackground(Color.WHITE);
+			txtPago.setBackground(Color.WHITE);
+			txtHoras.setBackground(Color.WHITE);
+			txtDescuento.setBackground(Color.WHITE);		
+			
+			
+			txtIdEmpleBuscar.setForeground(Color.BLACK);
+			txtS.setForeground(Color.BLACK);
+			txtIdEmpleado.setForeground(Color.BLACK);
+			txtDniEmpleado.setForeground(Color.BLACK);
+			txtNombreEmpleado.setForeground(Color.BLACK);
+			txtTelefono.setForeground(Color.BLACK);
+			txtPago.setForeground(Color.BLACK);
+			txtHoras.setForeground(Color.BLACK);
+			txtDescuento.setForeground(Color.BLACK);
+			cboCargo.setForeground(Color.BLACK);
+			cboJornada.setForeground(Color.BLACK);
+			cboHorario.setForeground(Color.BLACK);
+			jlabelmodo.setText("Modo Oscuro");
+		}
+		else if(actual == "Modo Oscuro"){
+			contentPane.setBackground(Color.BLACK);
+			
+			lblIdBuscarE.setForeground(Color.LIGHT_GRAY);
+			txtIdEmpleBuscar.setBackground(Color.LIGHT_GRAY);
+			txtS.setBackground(Color.LIGHT_GRAY);
+			lblIdE.setForeground(Color.LIGHT_GRAY);
+			lblDniE.setForeground(Color.LIGHT_GRAY);
+			lblNombreCompletoE.setForeground(Color.LIGHT_GRAY);
+			lblTelefono.setForeground(Color.LIGHT_GRAY);
+			lblCargo.setForeground(Color.LIGHT_GRAY);
+			lblJornada.setForeground(Color.LIGHT_GRAY);
+			lblHorario.setForeground(Color.LIGHT_GRAY);
+			lblPagoPorHora.setForeground(Color.LIGHT_GRAY);
+			lblHorasTrabajadas.setForeground(Color.LIGHT_GRAY);
+			lblDescuento.setForeground(Color.LIGHT_GRAY);
+			lblRegistrarEmpleado.setForeground(Color.LIGHT_GRAY);
+			lblclock.setForeground(Color.LIGHT_GRAY);
+			txtIdEmpleado.setBackground(Color.LIGHT_GRAY);
+			txtDniEmpleado.setBackground(Color.LIGHT_GRAY);
+			txtNombreEmpleado.setBackground(Color.LIGHT_GRAY);
+			txtTelefono.setBackground(Color.LIGHT_GRAY);
+			cboCargo.setBackground(Color.LIGHT_GRAY);
+			cboJornada.setBackground(Color.LIGHT_GRAY);
+			cboHorario.setBackground(Color.LIGHT_GRAY);
+			txtPago.setBackground(Color.LIGHT_GRAY);
+			txtHoras.setBackground(Color.LIGHT_GRAY);
+			txtDescuento.setBackground(Color.LIGHT_GRAY);
+			jlabelmodo.setText("Modo Frío");
+		}	
+		
+		else if(actual == "Modo Frío") {
+			contentPane.setBackground(new Color(10, 25, 45));
+			lblIdBuscarE.setForeground(new Color(150, 220, 255));
+			txtIdEmpleBuscar.setBackground(new Color(30, 80, 120));
+			txtS.setBackground(new Color(30, 80, 120));
+			lblIdE.setForeground(new Color(150, 220, 255));
+			lblDniE.setForeground(new Color(150, 220, 255));
+			lblNombreCompletoE.setForeground(new Color(150, 220, 255));
+			lblTelefono.setForeground(new Color(150, 220, 255));
+			lblCargo.setForeground(new Color(150, 220, 255));
+			lblJornada.setForeground(new Color(150, 220, 255));
+			lblHorario.setForeground(new Color(150, 220, 255));
+			lblPagoPorHora.setForeground(new Color(150, 220, 255));
+			lblHorasTrabajadas.setForeground(new Color(150, 220, 255));
+			lblDescuento.setForeground(new Color(150, 220, 255));
+			lblRegistrarEmpleado.setForeground(new Color(150, 220, 255));
+			lblclock.setForeground(new Color(150, 220, 255));
+			txtIdEmpleado.setBackground(new Color(30, 80, 120));
+			txtDniEmpleado.setBackground(new Color(30, 80, 120));
+			txtNombreEmpleado.setBackground(new Color(30, 80, 120));
+			txtTelefono.setBackground(new Color(30, 80, 120));
+			cboCargo.setBackground(new Color(30, 80, 120));
+			cboJornada.setBackground(new Color(30, 80, 120));
+			cboHorario.setBackground(new Color(30, 80, 120));
+			txtPago.setBackground(new Color(30, 80, 120));
+			txtHoras.setBackground(new Color(30, 80, 120));
+			txtDescuento.setBackground(new Color(30, 80, 120));
+
+			txtIdEmpleBuscar.setForeground(Color.WHITE);
+			txtS.setForeground(Color.WHITE);
+			txtIdEmpleado.setForeground(Color.WHITE);
+			txtDniEmpleado.setForeground(Color.WHITE);
+			txtNombreEmpleado.setForeground(Color.WHITE);
+			txtTelefono.setForeground(Color.WHITE);
+			txtPago.setForeground(Color.WHITE);
+			txtHoras.setForeground(Color.WHITE);
+			txtDescuento.setForeground(Color.WHITE);
+			cboCargo.setForeground(Color.WHITE);
+			cboJornada.setForeground(Color.WHITE);
+			cboHorario.setForeground(Color.WHITE);		
+			jlabelmodo.setText("Modo Normal");
+		}	
+	}	
 }
