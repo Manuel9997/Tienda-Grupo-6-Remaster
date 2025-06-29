@@ -8,10 +8,12 @@ precio_acce real not null,
 stock_acce int not null);
 
 select * from Accesorio;
-insert into Accesorio values('A01', 'MOUSE', 'GENIUS', 50, 20);
-insert into Accesorio values('A02', 'TECLADO', 'LENOVO', 40, 15);
-insert into Accesorio values('A03', 'IMPRESORA', 'HP', 300, 5);
-insert into Accesorio values('A04', 'PARLANTE', 'SONY', 350, 10);
+IdAccesorio char(3) primary key,
+Producto varchar(20) not null,
+NombreModelo varchar(40) not null,
+precio_acce real not null,
+tiempoGarantía int not null,
+stock_acce int not null);
 
 create procedure sp_Listar()
 select * from Accesorio;
