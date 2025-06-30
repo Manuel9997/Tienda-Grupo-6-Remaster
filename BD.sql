@@ -52,7 +52,7 @@ stock int
 update Accesorio set Producto=nom, NombreDelModelo=marca, Precio=precio, Stock=stock, tiempoGarantía=garantía;
 where codi_acce=codi;
 
-call sp_Editar('A04', 'PARLANTE', 'ROBERTO', 350, 10);
+call sp_Editar('A04', 'PARLANTE', 'ROBERTO', 350, 10,20);
 
 create procedure sp_ConsultarCod(
 codi char(3))
