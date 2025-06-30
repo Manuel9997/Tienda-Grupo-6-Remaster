@@ -46,9 +46,10 @@ codi char(3),
 nom varchar(20),
 marca varchar(40),
 precio real,
+garantía int,
 stock int
 )
-update Accesorio set nom_acce=nom, marca_acce=marca, precio_acce=precio, stock_acce=stock
+update Accesorio set Producto=nom, NombreDelModelo=marca, Precio=precio, Stock=stock, tiempoGarantía=garantía;
 where codi_acce=codi;
 
 call sp_Editar('A04', 'PARLANTE', 'ROBERTO', 350, 10);
