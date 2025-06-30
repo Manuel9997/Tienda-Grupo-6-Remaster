@@ -1,19 +1,20 @@
 create database BD_VENTA_ACCESORIOS_2025;
 use BD_VENTA_ACCESORIOS_2025;
 create table Accesorio(
-codi_acce char(3) primary key,
-nom_acce varchar(20) not null,
-marca_acce varchar(40) not null,
-precio_acce real not null,
-stock_acce int not null);
+IDchar(3) primary key,
+Producto varchar(20) not null,
+NombreDelModelo varchar(40) not null,
+Precio real not null,
+tiempoGarantía int not null,
+Stock int not null);
 
 select * from Accesorio;
-IdAccesorio char(3) primary key,
+IDchar(3) primary key,
 Producto varchar(20) not null,
 NombreModelo varchar(40) not null,
-precio_acce real not null,
+Precio real not null,
 tiempoGarantía int not null,
-stock_acce int not null);
+Stock int not null);
 
 create procedure sp_Listar()
 select * from Accesorio;
@@ -21,13 +22,14 @@ select * from Accesorio;
 call sp_Listar();
 
 create procedure sp_Insertar(
-codi char(3),
-nom varchar(20),
-marca varchar(40),
-precio real,
+IDchar char(3),
+Producto varchar(20),
+NombreDelModelo varchar(40),
+Precio real,
+tiempoGaracntía int,
 stock int
 )
-insert into Accesorio values(codi, nom, marca, precio, stock);
+insert into Accesorio values(IDchar, Producto, NombreModelo, Precio,tiempoGarantía, stock);
 
 call sp_Insertar('A05', 'MONITOR', 'LG', 600, 13);
 call sp_Listar();
