@@ -1,38 +1,45 @@
 package clase;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.sql.Date;
+import java.sql.Time;
 
 public class Venta {
-private int codigo_venta;
+private int codigoVenta;
 private Cliente cliente;
-private LocalDate fecha;
-private LocalTime hora;
-private Producto producto;
-private int cantidad;
-private String tipo_pago, comprobante;
-private Empleado vendedor;
+private Date fechaVenta;
+private Time horaVenta;
+private String tipopagoVenta, comprobanteVenta;
+private Empleado empleado;
+private double totalVenta;
 
-public Venta(int codigo_venta, Cliente cliente, LocalDate fecha, LocalTime hora, Producto producto, int cantidad,
-		String tipo_pago, String comprobante, Empleado vendedor) {
+public Venta(int codigoVenta, Cliente cliente, Date fechaVenta, Time horaVenta, String tipopagoVenta,
+		String comprobanteVenta, Empleado empleado, double totalVenta) {
 
-	this.codigo_venta = codigo_venta;
+	this.codigoVenta = codigoVenta;
 	this.cliente = cliente;
-	this.fecha = fecha;
-	this.hora = hora;
-	this.producto = producto;
-	this.cantidad = cantidad;
-	this.tipo_pago = tipo_pago;
-	this.comprobante = comprobante;
-	this.vendedor = vendedor;
+	this.fechaVenta = fechaVenta;
+	this.horaVenta = horaVenta;
+	this.tipopagoVenta = tipopagoVenta;
+	this.comprobanteVenta = comprobanteVenta;
+	this.empleado = empleado;
+	this.totalVenta = totalVenta;
 }
 
-public int getCodigo_venta() {
-	return codigo_venta;
+public Venta(int codigoVenta) {
+
+	this.codigoVenta = codigoVenta;
 }
 
-public void setCodigo_venta(int codigo_venta) {
-	this.codigo_venta = codigo_venta;
+public Venta() {
+
+}
+
+public int getCodigoVenta() {
+	return codigoVenta;
+}
+
+public void setCodigoVenta(int codigoVenta) {
+	this.codigoVenta = codigoVenta;
 }
 
 public Cliente getCliente() {
@@ -43,64 +50,52 @@ public void setCliente(Cliente cliente) {
 	this.cliente = cliente;
 }
 
-public LocalDate getFecha() {
-	return fecha;
+public Date getFechaVenta() {
+	return fechaVenta;
 }
 
-public void setFecha(LocalDate fecha) {
-	this.fecha = fecha;
+public void setFechaVenta(Date fechaVenta) {
+	this.fechaVenta = fechaVenta;
 }
 
-public LocalTime getHora() {
-	return hora;
+public Time getHoraVenta() {
+	return horaVenta;
 }
 
-public void setHora(LocalTime hora) {
-	this.hora = hora;
+public void setHoraVenta(Time horaVenta) {
+	this.horaVenta = horaVenta;
 }
 
-public Producto getProducto() {
-	return producto;
+public String getTipopagoVenta() {
+	return tipopagoVenta;
 }
 
-public void setProducto(Producto producto) {
-	this.producto = producto;
+public void setTipopagoVenta(String tipopagoVenta) {
+	this.tipopagoVenta = tipopagoVenta;
 }
 
-public int getCantidad() {
-	return cantidad;
+public String getComprobanteVenta() {
+	return comprobanteVenta;
 }
 
-public void setCantidad(int cantidad) {
-	this.cantidad = cantidad;
+public void setComprobanteVenta(String comprobanteVenta) {
+	this.comprobanteVenta = comprobanteVenta;
 }
 
-public String getTipo_pago() {
-	return tipo_pago;
+public Empleado getEmpleado() {
+	return empleado;
 }
 
-public void setTipo_pago(String tipo_pago) {
-	this.tipo_pago = tipo_pago;
+public void setEmpleado(Empleado empleado) {
+	this.empleado = empleado;
 }
 
-public String getComprobante() {
-	return comprobante;
+public double getTotalVenta() {
+	return totalVenta;
 }
 
-public void setComprobante(String comprobante) {
-	this.comprobante = comprobante;
-}
-
-public Empleado getVendedor() {
-	return vendedor;
-}
-
-public void setVendedor(Empleado vendedor) {
-	this.vendedor = vendedor;
-}
-
-public double SubTotal() {
-	return cantidad * producto.getPrecio();
+public void setTotalVenta(double totalVenta) {
+	this.totalVenta = totalVenta;
 }
 
 }

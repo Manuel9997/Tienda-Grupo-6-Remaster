@@ -3,6 +3,10 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import clase.LoginAdmi;
+import mantenimiento.MantLoginAdmi;
+
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionListener;
@@ -10,21 +14,21 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.SystemColor;
 
-public class ContraseñaAdmin extends JDialog implements ActionListener {
+public class VenLoginAdmi extends JDialog implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
-	private JTextField txtID;
-	private JTextField txtContraseña;
+	private JTextField txtUsuario;
 	private JButton btnIngresar;
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
+	private JPasswordField pswContraseña;
 
 	public static void main(String[] args) {
 		try {
-			ContraseñaAdmin dialog = new ContraseñaAdmin();
+			VenLoginAdmi dialog = new VenLoginAdmi();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -35,7 +39,7 @@ public class ContraseñaAdmin extends JDialog implements ActionListener {
 	/**
 	 * Create the dialog.
 	 */
-	public ContraseñaAdmin() {
+	public VenLoginAdmi() {
 		setAlwaysOnTop(true);
 		setModal(true);
 		setBounds(100, 100, 450, 399);
@@ -53,7 +57,7 @@ public class ContraseñaAdmin extends JDialog implements ActionListener {
 			contentPanel.add(lblNewLabel_3);
 		}
 		{
-			lblNewLabel = new JLabel("ID ADMIN:");
+			lblNewLabel = new JLabel("USUARIO:");
 			lblNewLabel.setForeground(SystemColor.controlShadow);
 			lblNewLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
 			lblNewLabel.setBounds(55, 140, 115, 13);
@@ -67,16 +71,10 @@ public class ContraseñaAdmin extends JDialog implements ActionListener {
 			contentPanel.add(lblNewLabel_1);
 		}
 		{
-			txtID = new JTextField();
-			txtID.setBounds(210, 134, 121, 29);
-			contentPanel.add(txtID);
-			txtID.setColumns(10);
-		}
-		{
-			txtContraseña = new JTextField();
-			txtContraseña.setBounds(210, 183, 121, 29);
-			contentPanel.add(txtContraseña);
-			txtContraseña.setColumns(10);
+			txtUsuario = new JTextField();
+			txtUsuario.setBounds(210, 134, 121, 29);
+			contentPanel.add(txtUsuario);
+			txtUsuario.setColumns(10);
 		}
 		{
 			btnIngresar = new JButton("INGRESAR");
@@ -91,7 +89,7 @@ public class ContraseñaAdmin extends JDialog implements ActionListener {
 		}
 		{
 			lblNewLabel_2 = new JLabel("");
-			ImageIcon icon= new ImageIcon(ContraseñaAdmin.class.getResource("/recursos/logingft.gif"));
+			ImageIcon icon= new ImageIcon(VenLoginAdmi.class.getResource("/recursos/logingft.gif"));
 			ImageIcon gifEscalado = new ImageIcon(icon.getImage()) {
 		
 			    public synchronized void paintIcon(Component c, Graphics g, int x, int y) {
@@ -116,30 +114,45 @@ public class ContraseñaAdmin extends JDialog implements ActionListener {
 			};
 		
 			lblNewLabel_2.setIcon(gifEscalado);
-			
-			
-
 			lblNewLabel_2.setBounds(0, 0, 434, 360);
 			contentPanel.add(lblNewLabel_2);
-
 		} 
-	}
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnIngresar) {
-			do_btnIngresar_actionPerformed(e);
+		{
+			pswContraseña = new JPasswordField();
+			pswContraseña.setBounds(210, 183, 121, 29);
+			contentPanel.add(pswContraseña);
 		}
 	}
-	protected void do_btnIngresar_actionPerformed(ActionEvent e) {
-		int id = Integer.parseInt(txtID.getText());
-		int contraseña = Integer.parseInt(txtContraseña.getText());
+
+	public void actionPerformed(ActionEvent e) {
+		Ingresar();
+	}
+
+	private void Ingresar() {
+		String usuario = txtUsuario.getText();
+		String contraseña = String.valueOf(pswContraseña.getPassword());
 		
-		if(id == 001 && contraseña == 12345) {
+		if (usuario.isEmpty() || contraseña.isEmpty()) {
+	        JOptionPane.showMessageDialog(this, "Debe ingresar usuario y contraseña");
+	        return;
+	    } 
+		
+		MantLoginAdmi mla = new MantLoginAdmi();
+		
+		LoginAdmi logadmi = new LoginAdmi();
+		logadmi.setUsuario(usuario);
+		logadmi.setContraseña(contraseña);
+		
+		
+		LoginAdmi usu = mla.ObtenerUsuario(logadmi);
+		
+		if(usu != null) {
 			VenAdministrador vAdmi = new VenAdministrador();
 			vAdmi.setVisible(true);
 			dispose();
 		}
 		else {
-			JOptionPane.showMessageDialog(this, "Contraseña incorrecta");
-		}	 
+			JOptionPane.showMessageDialog(this, "El usuario o contraseña es incorrecto");
+		}
 	}
 }

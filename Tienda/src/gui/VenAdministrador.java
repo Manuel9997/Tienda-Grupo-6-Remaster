@@ -6,13 +6,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
-import arreglo.ArregloEmpleado;
-import arreglo.ArregloHistorialVentas;
-import arreglo.ArregloProducto;
 import clase.Empleado;
+import clase.HistorialVentas;
 import clase.Producto;
+import clase.Proveedor;
 import clase.Venta;
+import mantenimiento.MantEmpleado;
+import mantenimiento.MantHistorialVentas;
+import mantenimiento.MantProducto;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -27,14 +30,22 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.JTabbedPane;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseListener;
+import java.sql.Date;
+import java.awt.event.MouseEvent;
+import javax.swing.JSeparator;
 
-public class VenAdministrador extends JFrame implements ActionListener {
+public class VenAdministrador extends JFrame implements ActionListener, KeyListener, MouseListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -52,18 +63,11 @@ public class VenAdministrador extends JFrame implements ActionListener {
 	private JComboBox cboJornada;
 	private JLabel lblHorario;
 	private JComboBox cboHorario;
-	private JLabel lblPagoPorHora;
-	private JTextField txtPago;
-	private JLabel lblHorasTrabajadas;
-	private JTextField txtHoras;
-	private JLabel lblDescuento;
-	private JTextField txtDescuento;
 	private JButton btnRegistrarEmpleado;
 	private JButton btnModificarEmpleado;
 	private JLabel lblRegistrarEmpleado;
-	private JButton btnMostrarEmpleado;
 	private JLabel lblIdBuscarE;
-	private JTextField txtIdEmpleBuscar;
+	private JTextField txtBuscarEmple;
 	public int day;
 	public int year;
 	public int month;
@@ -194,17 +198,18 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			tabbedPane.addTab("Empleado", null, panelEmpleado, null);
 			panelEmpleado.setLayout(null);
 			{
-				lblIdBuscarE = new JLabel("ID:");
-				lblIdBuscarE.setBounds(96, 11, 45, 19);
+				lblIdBuscarE = new JLabel("Buscar:");
+				lblIdBuscarE.setBounds(141, 11, 67, 19);
 				panelEmpleado.add(lblIdBuscarE);
 				lblIdBuscarE.setFont(new Font("Verdana", Font.PLAIN, 15));
 			}
 			{
-				txtIdEmpleBuscar = new JTextField();
-				txtIdEmpleBuscar.setBounds(128, 10, 447, 25);
-				panelEmpleado.add(txtIdEmpleBuscar);
-				txtIdEmpleBuscar.setBackground(Color.WHITE);
-				txtIdEmpleBuscar.setColumns(10);
+				txtBuscarEmple = new JTextField();
+				txtBuscarEmple.addKeyListener(this);
+				txtBuscarEmple.setBounds(216, 10, 447, 25);
+				panelEmpleado.add(txtBuscarEmple);
+				txtBuscarEmple.setBackground(Color.WHITE);
+				txtBuscarEmple.setColumns(10);
 			}
 			{
 				lblRegistrarEmpleado = new JLabel("REGISTRAR EMPLEADO");
@@ -220,6 +225,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			}
 			{
 				txtIdEmpleado = new JTextField();
+				txtIdEmpleado.addKeyListener(this);
 				txtIdEmpleado.setBounds(215, 99, 96, 25);
 				panelEmpleado.add(txtIdEmpleado);
 				txtIdEmpleado.setColumns(10);
@@ -232,6 +238,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			}
 			{
 				txtDniEmpleado = new JTextField();
+				txtDniEmpleado.addKeyListener(this);
 				txtDniEmpleado.setBounds(379, 99, 117, 25);
 				panelEmpleado.add(txtDniEmpleado);
 				txtDniEmpleado.setColumns(10);
@@ -244,6 +251,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			}
 			{
 				txtNombreEmpleado = new JTextField();
+				txtNombreEmpleado.addKeyListener(this);
 				txtNombreEmpleado.setBounds(331, 138, 349, 25);
 				panelEmpleado.add(txtNombreEmpleado);
 				txtNombreEmpleado.setColumns(10);
@@ -256,6 +264,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			}
 			{
 				txtTelefono = new JTextField();
+				txtTelefono.addKeyListener(this);
 				txtTelefono.setBounds(269, 176, 117, 25);
 				panelEmpleado.add(txtTelefono);
 				txtTelefono.setColumns(10);
@@ -296,51 +305,8 @@ public class VenAdministrador extends JFrame implements ActionListener {
 				cboHorario = new JComboBox();
 				cboHorario.setBounds(490, 215, 173, 25);
 				panelEmpleado.add(cboHorario);
-				cboHorario.setModel(new DefaultComboBoxModel(new String[] {"8:00 a.m. - 5:00 p.m.", "8:00 a.m. - 12:00 a.m.", "12:00 a.m. - 4:00 p.m."}));
+				cboHorario.setModel(new DefaultComboBoxModel(new String[] {"7:00 a.m. - 4:00 p.m.", "8:00 a.m. - 5:00 p.m.", "8:00 a.m. - 12:00 a.m.", "9:00 a.m. - 6:00 p.m.", "10:00 a.m. - 7:00 p.m.", "12:00 a.m. - 4:00 p.m.", "1:00 p.m. - 5:00 p.m.", "2:00 p.m. - 6:00 p.m."}));
 				cboHorario.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			}
-			{
-				lblPagoPorHora = new JLabel("Pago/hora:");
-				lblPagoPorHora.setBounds(183, 256, 87, 19);
-				panelEmpleado.add(lblPagoPorHora);
-				lblPagoPorHora.setFont(new Font("Verdana", Font.PLAIN, 15));
-			}
-			{
-				txtPago = new JTextField();
-				txtPago.setBounds(281, 255, 117, 25);
-				panelEmpleado.add(txtPago);
-				txtPago.setColumns(10);
-			}
-			{
-				lblHorasTrabajadas = new JLabel("Horas trabajadas:");
-				lblHorasTrabajadas.setBounds(429, 256, 144, 19);
-				panelEmpleado.add(lblHorasTrabajadas);
-				lblHorasTrabajadas.setFont(new Font("Verdana", Font.PLAIN, 15));
-			}
-			{
-				txtHoras = new JTextField();
-				txtHoras.setBounds(577, 255, 117, 25);
-				panelEmpleado.add(txtHoras);
-				txtHoras.setColumns(10);
-			}
-			{
-				lblDescuento = new JLabel("Descuento:");
-				lblDescuento.setBounds(183, 297, 87, 19);
-				panelEmpleado.add(lblDescuento);
-				lblDescuento.setFont(new Font("Verdana", Font.PLAIN, 15));
-			}
-			{
-				txtDescuento = new JTextField();
-				txtDescuento.setBounds(281, 296, 117, 25);
-				panelEmpleado.add(txtDescuento);
-				txtDescuento.setColumns(10);
-			}
-			{
-				btnMostrarEmpleado = new JButton("Mostrar");
-				btnMostrarEmpleado.setBounds(147, 353, 116, 25);
-				panelEmpleado.add(btnMostrarEmpleado);
-				btnMostrarEmpleado.addActionListener(this);
-				btnMostrarEmpleado.setFont(new Font("Verdana", Font.PLAIN, 13));
 			}
 			{
 				btnRegistrarEmpleado = new JButton("Registrar");
@@ -366,23 +332,31 @@ public class VenAdministrador extends JFrame implements ActionListener {
 					scrollPane.setBounds(10, 400, 801, 275);
 					panelEmpleado.add(scrollPane);
 					{
-						txtS = new JTextArea();
-						txtS.setBackground(Color.WHITE);
-						scrollPane.setViewportView(txtS);
+						tablaEmpleado = new JTable();
+						tablaEmpleado.addMouseListener(this);
+						tablaEmpleado.setFillsViewportHeight(true);
+						scrollPane.setViewportView(tablaEmpleado);
 					}
 				}
 				{
 					btnEliminarEmpleado = new JButton("Eliminar");
+					btnEliminarEmpleado.addActionListener(this);
 					btnEliminarEmpleado.setFont(new Font("Verdana", Font.PLAIN, 13));
 					btnEliminarEmpleado.setBounds(547, 353, 116, 25);
 					panelEmpleado.add(btnEliminarEmpleado);
 				}
 				{
-					btnBuscarEmpleado = new JButton("Buscar");
-					btnBuscarEmpleado.addActionListener(this);
-					btnBuscarEmpleado.setFont(new Font("Verdana", Font.PLAIN, 13));
-					btnBuscarEmpleado.setBounds(585, 11, 116, 25);
-					panelEmpleado.add(btnBuscarEmpleado);
+					lblSueldo = new JLabel("Sueldo:");
+					lblSueldo.setFont(new Font("Verdana", Font.PLAIN, 15));
+					lblSueldo.setBounds(183, 260, 69, 19);
+					panelEmpleado.add(lblSueldo);
+				}
+				{
+					txtSueldo = new JTextField();
+					txtSueldo.addKeyListener(this);
+					txtSueldo.setColumns(10);
+					txtSueldo.setBounds(269, 259, 117, 25);
+					panelEmpleado.add(txtSueldo);
 				}
 				jlabelmodo.addActionListener(this);
 			}
@@ -391,16 +365,17 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			tabbedPane.addTab("Producto", null, panelProducto, null);
 			panelProducto.setLayout(null);
 			{
-				lblIdBuscarP = new JLabel("ID:");
+				lblIdBuscarP = new JLabel("Buscar:");
 				lblIdBuscarP.setFont(new Font("Verdana", Font.PLAIN, 15));
-				lblIdBuscarP.setBounds(94, 11, 45, 19);
+				lblIdBuscarP.setBounds(119, 11, 69, 19);
 				panelProducto.add(lblIdBuscarP);
 			}
 			{
 				txtIdProdBuscar = new JTextField();
+				txtIdProdBuscar.addKeyListener(this);
 				txtIdProdBuscar.setColumns(10);
 				txtIdProdBuscar.setBackground(Color.WHITE);
-				txtIdProdBuscar.setBounds(126, 10, 447, 25);
+				txtIdProdBuscar.setBounds(198, 10, 447, 25);
 				panelProducto.add(txtIdProdBuscar);
 			}
 			{
@@ -417,6 +392,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			}
 			{
 				txtIdProducto = new JTextField();
+				txtIdProducto.addKeyListener(this);
 				txtIdProducto.setColumns(10);
 				txtIdProducto.setBounds(249, 97, 96, 25);
 				panelProducto.add(txtIdProducto);
@@ -429,6 +405,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			}
 			{
 				txtCategoria = new JTextField();
+				txtCategoria.addKeyListener(this);
 				txtCategoria.setColumns(10);
 				txtCategoria.setBounds(464, 97, 117, 25);
 				panelProducto.add(txtCategoria);
@@ -454,33 +431,28 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			{
 				lblPrecio = new JLabel("Precio:");
 				lblPrecio.setFont(new Font("Verdana", Font.PLAIN, 15));
-				lblPrecio.setBounds(430, 177, 69, 19);
+				lblPrecio.setBounds(217, 214, 69, 19);
 				panelProducto.add(lblPrecio);
 			}
 			{
 				lblCantProducto = new JLabel("Cantidad:");
 				lblCantProducto.setFont(new Font("Verdana", Font.PLAIN, 15));
-				lblCantProducto.setBounds(217, 216, 87, 19);
+				lblCantProducto.setBounds(423, 215, 87, 19);
 				panelProducto.add(lblCantProducto);
 			}
 			{
 				txtCantProducto = new JTextField();
+				txtCantProducto.addKeyListener(this);
 				txtCantProducto.setColumns(10);
-				txtCantProducto.setBounds(296, 215, 117, 25);
+				txtCantProducto.setBounds(528, 213, 117, 25);
 				panelProducto.add(txtCantProducto);
 			}
 			{
 				txtPrecio = new JTextField();
+				txtPrecio.addKeyListener(this);
 				txtPrecio.setColumns(10);
-				txtPrecio.setBounds(490, 174, 117, 25);
+				txtPrecio.setBounds(296, 213, 117, 25);
 				panelProducto.add(txtPrecio);
-			}
-			{
-				btnMostrarProducto = new JButton("Mostrar");
-				btnMostrarProducto.addActionListener(this);
-				btnMostrarProducto.setFont(new Font("Verdana", Font.PLAIN, 13));
-				btnMostrarProducto.setBounds(10, 422, 116, 25);
-				panelProducto.add(btnMostrarProducto);
 			}
 			{
 				btnModificarProducto = new JButton("Modificar");
@@ -503,6 +475,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			}
 			{
 				txtIdProdStock = new JTextField();
+				txtIdProdStock.addKeyListener(this);
 				txtIdProdStock.setColumns(10);
 				txtIdProdStock.setBounds(249, 347, 96, 25);
 				panelProducto.add(txtIdProdStock);
@@ -515,6 +488,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			}
 			{
 				txtCantStock = new JTextField();
+				txtCantStock.addKeyListener(this);
 				txtCantStock.setColumns(10);
 				txtCantStock.setBounds(464, 347, 117, 25);
 				panelProducto.add(txtCantStock);
@@ -528,11 +502,13 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			}
 			{
 				scrollPane_2 = new JScrollPane();
-				scrollPane_2.setBounds(10, 457, 801, 218);
+				scrollPane_2.setBounds(10, 427, 801, 248);
 				panelProducto.add(scrollPane_2);
 				{
-					txtS2 = new JTextArea();
-					scrollPane_2.setViewportView(txtS2);
+					tablaProducto = new JTable();
+					tablaProducto.addMouseListener(this);
+					tablaProducto.setFillsViewportHeight(true);
+					scrollPane_2.setViewportView(tablaProducto);
 				}
 			}
 			{
@@ -543,24 +519,30 @@ public class VenAdministrador extends JFrame implements ActionListener {
 				panelProducto.add(btnRegistrarProducto);
 			}
 			{
-				cboGarantia = new JComboBox();
-				cboGarantia.setFont(new Font("Verdana", Font.PLAIN, 15));
-				cboGarantia.setModel(new DefaultComboBoxModel(new String[] {"1 semana", "3 meses", "6 meses", "1 año"}));
-				cboGarantia.setBounds(296, 176, 117, 21);
-				panelProducto.add(cboGarantia);
-			}
-			{
-				btnBuscarProducto = new JButton("Buscar");
-				btnBuscarProducto.addActionListener(this);
-				btnBuscarProducto.setFont(new Font("Verdana", Font.PLAIN, 13));
-				btnBuscarProducto.setBounds(583, 11, 116, 25);
-				panelProducto.add(btnBuscarProducto);
-			}
-			{
 				btnEliminarProducto = new JButton("Eliminar");
+				btnEliminarProducto.addActionListener(this);
 				btnEliminarProducto.setFont(new Font("Verdana", Font.PLAIN, 13));
 				btnEliminarProducto.setBounds(522, 257, 116, 25);
 				panelProducto.add(btnEliminarProducto);
+			}
+			{
+				txtGarantia = new JTextField();
+				txtGarantia.setColumns(10);
+				txtGarantia.setBounds(295, 174, 118, 25);
+				panelProducto.add(txtGarantia);
+			}
+			{
+				lblIdProveedor = new JLabel("ID Proveedor:");
+				lblIdProveedor.setFont(new Font("Verdana", Font.PLAIN, 15));
+				lblIdProveedor.setBounds(420, 175, 118, 19);
+				panelProducto.add(lblIdProveedor);
+			}
+			{
+				txtIdProveedor = new JTextField();
+				txtIdProveedor.addKeyListener(this);
+				txtIdProveedor.setColumns(10);
+				txtIdProveedor.setBounds(528, 174, 117, 25);
+				panelProducto.add(txtIdProveedor);
 			}
 			{
 				panelVenta = new JPanel();
@@ -568,38 +550,66 @@ public class VenAdministrador extends JFrame implements ActionListener {
 				panelVenta.setLayout(null);
 				{
 					scrollPane_1 = new JScrollPane();
-					scrollPane_1.setBounds(10, 226, 801, 449);
+					scrollPane_1.setBounds(10, 182, 801, 493);
 					panelVenta.add(scrollPane_1);
 					{
-						txtS3 = new JTextArea();
-						scrollPane_1.setViewportView(txtS3);
+						tablaHistorialVentas = new JTable();
+						tablaHistorialVentas.setFillsViewportHeight(true);
+						scrollPane_1.setViewportView(tablaHistorialVentas);
 					}
 				}
-				
-				btnHistorialVentas = new JButton("Historial de ventas");
-				btnHistorialVentas.addActionListener(this);
-				btnHistorialVentas.setFont(new Font("Verdana", Font.PLAIN, 13));
-				btnHistorialVentas.setBounds(10, 191, 173, 25);
-				panelVenta.add(btnHistorialVentas);
 				{
-					lblCodDni = new JLabel("Cód./DNI:");
-					lblCodDni.setFont(new Font("Verdana", Font.PLAIN, 15));
-					lblCodDni.setBounds(73, 48, 106, 19);
-					panelVenta.add(lblCodDni);
+					lblBuscarHistorial = new JLabel("Buscar:");
+					lblBuscarHistorial.setFont(new Font("Verdana", Font.PLAIN, 15));
+					lblBuscarHistorial.setBounds(121, 106, 82, 19);
+					panelVenta.add(lblBuscarHistorial);
 				}
 				{
-					txtCodDni = new JTextField();
-					txtCodDni.setColumns(10);
-					txtCodDni.setBackground(Color.WHITE);
-					txtCodDni.setBounds(166, 47, 447, 25);
-					panelVenta.add(txtCodDni);
+					txtBuscarHistorialVentas = new JTextField();
+					txtBuscarHistorialVentas.setColumns(10);
+					txtBuscarHistorialVentas.setBackground(Color.WHITE);
+					txtBuscarHistorialVentas.setBounds(202, 105, 447, 25);
+					panelVenta.add(txtBuscarHistorialVentas);
 				}
 				{
-					btnBuscarHistorialVenta = new JButton("Buscar");
-					btnBuscarHistorialVenta.addActionListener(this);
-					btnBuscarHistorialVenta.setFont(new Font("Verdana", Font.PLAIN, 13));
-					btnBuscarHistorialVenta.setBounds(623, 47, 116, 25);
-					panelVenta.add(btnBuscarHistorialVenta);
+					lblHistorialVentas = new JLabel("HISTORIAL DE VENTAS");
+					lblHistorialVentas.setFont(new Font("Verdana", Font.PLAIN, 25));
+					lblHistorialVentas.setBounds(279, 28, 297, 46);
+					panelVenta.add(lblHistorialVentas);
+				}
+			}
+			{
+				panelProveedor = new JPanel();
+				tabbedPane.addTab("Proveedor", null, panelProveedor, null);
+				panelProveedor.setLayout(null);
+				{
+					scrollPane_3 = new JScrollPane();
+					scrollPane_3.setBounds(10, 297, 801, 378);
+					panelProveedor.add(scrollPane_3);
+					{
+						tablaProveedor = new JTable();
+						tablaProveedor.setFillsViewportHeight(true);
+						scrollPane_3.setViewportView(tablaProveedor);
+					}
+				}
+				{
+					btnRegistrarProveedor = new JButton("Registrar");
+					btnRegistrarProveedor.setFont(new Font("Verdana", Font.PLAIN, 13));
+					btnRegistrarProveedor.setBounds(294, 248, 116, 25);
+					panelProveedor.add(btnRegistrarProveedor);
+				}
+				{
+					btnModificarProveedor = new JButton("Modificar");
+					btnModificarProveedor.setFont(new Font("Verdana", Font.PLAIN, 13));
+					btnModificarProveedor.setBounds(441, 248, 116, 25);
+					panelProveedor.add(btnModificarProveedor);
+				}
+				{
+					txtBuscarProveedor = new JTextField();
+					txtBuscarProveedor.setColumns(10);
+					txtBuscarProveedor.setBackground(Color.WHITE);
+					txtBuscarProveedor.setBounds(195, 36, 447, 25);
+					panelProveedor.add(txtBuscarProveedor);
 				}
 			}
 			lblclock = new JLabel("");
@@ -609,16 +619,16 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			
 		    clock();
 		}
+		ListarProducto("");
+		ListarEmpleado("");
+		ListarHistorialVenta();
 	}
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnBuscarHistorialVenta) {
-			do_btnBuscarHistorialVenta_actionPerformed(e);
+		if (e.getSource() == btnEliminarProducto) {
+			do_btnEliminarProducto_actionPerformed(e);
 		}
-		if (e.getSource() == btnBuscarProducto) {
-			do_btnBuscarProducto_actionPerformed(e);
-		}
-		if (e.getSource() == btnBuscarEmpleado) {
-			do_btnBuscarEmpleado_actionPerformed(e);
+		if (e.getSource() == btnEliminarEmpleado) {
+			do_btnEliminarEmpleado_actionPerformed(e);
 		}
 		if (e.getSource() == btnRegistrarStock) {
 			do_btnRegistrarStock_actionPerformed(e);
@@ -629,12 +639,6 @@ public class VenAdministrador extends JFrame implements ActionListener {
 		if (e.getSource() == btnRegistrarProducto) {
 			do_btnRegistrarProducto_actionPerformed(e);
 		}
-		if (e.getSource() == btnMostrarProducto) {
-			do_btnMostrarProducto_actionPerformed(e);
-		}
-		if (e.getSource() == btnHistorialVentas) {
-			do_btnHistorialVentas_actionPerformed(e);
-		}
 		if (e.getSource() == jlabelmodo) {
 			do_btnNewButton_actionPerformed(e);
 		}
@@ -644,20 +648,14 @@ public class VenAdministrador extends JFrame implements ActionListener {
 		if (e.getSource() == btnRegistrarEmpleado) {
 			do_btnRegistrarEmpleado_actionPerformed(e);
 		}
-		if (e.getSource() == btnMostrarEmpleado) {
-			do_btnMostrarEmpleado_actionPerformed(e);
-		}
 	}
 	
 
 	private JLabel lblclock;
 	private JScrollPane scrollPane;
-	private JTextArea txtS;
 	private JButton jlabelmodo;
 	private JPanel panelVenta;
 	private JScrollPane scrollPane_1;
-	private JTextArea txtS3;
-	private JButton btnHistorialVentas;
 	private JLabel lblIdBuscarP;
 	private JTextField txtIdProdBuscar;
 	private JLabel lblRegistrarProducto;
@@ -672,7 +670,6 @@ public class VenAdministrador extends JFrame implements ActionListener {
 	private JLabel lblCantProducto;
 	private JTextField txtCantProducto;
 	private JTextField txtPrecio;
-	private JButton btnMostrarProducto;
 	private JButton btnModificarProducto;
 	private JLabel lblRegistrarStock;
 	private JLabel lblIdStock;
@@ -681,331 +678,33 @@ public class VenAdministrador extends JFrame implements ActionListener {
 	private JTextField txtCantStock;
 	private JButton btnRegistrarStock;
 	private JScrollPane scrollPane_2;
-	private JTextArea txtS2;
-	private JLabel lblCodDni;
-	private JTextField txtCodDni;
+	private JLabel lblBuscarHistorial;
+	private JTextField txtBuscarHistorialVentas;
 	
 	private JButton btnRegistrarProducto;
-	private JComboBox cboGarantia;
 	private JButton btnEliminarEmpleado;
-	private JButton btnBuscarEmpleado;
-	private JButton btnBuscarProducto;
-	private JButton btnBuscarHistorialVenta;
 	private JButton btnEliminarProducto;
-	
-	ArregloHistorialVentas ahv = new ArregloHistorialVentas();
-	ArregloEmpleado ae = new ArregloEmpleado();
-	ArregloProducto ap = new ArregloProducto();
-
-	protected void do_btnMostrarEmpleado_actionPerformed(ActionEvent e) {
-		ListadoEmpleados();
-	}
-	
-	void ImprimirEmple(String s) {
-		txtS.append(s+"\n");
-	}
-	
-	void ListadoEmpleados() {
-		txtS.setText("");
-		ImprimirEmple("ID\tDNI\tNombre completo\tTeléfono\tFecha de ingreso\tCargo\tJornada laboral\t\tHorario laboral\t\tPago por hora\tHoras trab.\tDescuento\tSueldo");
-		for(int i = 0; i < ae.Tamaño(); i++) {
-			Empleado e = ae.Obtener(i);
-			double descuento = e.getDescuento();
-			ImprimirEmple("" + e.getId_empleado() + "\t" +
-			"" + e.getDni() + "\t" + "" +
-			"" + e.getNombre_apellido() + "\t" +
-			"" + e.getTelefono() + "\t" +
-			"" + e.getFecha() + "\t\t" +
-			"" + e.getCargo() + "\t" +
-			"" + e.getJornada() + "\t" +  
-			"" + e.getHorario() + "\t" + 
-			"" + e.getPago_hora() + "\t" + 
-			"" + e.getHoras_trabajadas() + "\t" + 
-			"" + e.getDescuento() + "\t" +
-			"" + e.Sueldo(descuento));
-	}
-}
-	protected void do_btnBuscarEmpleado_actionPerformed(ActionEvent e) {
-		try {
-			int codigo = Integer.parseInt(txtIdEmpleBuscar.getText());
-			Empleado empleadoEncontrado = ae.Buscar(codigo);
-			double descuento = empleadoEncontrado.getDescuento(); 
-			if(empleadoEncontrado == null) {
-				txtS.setText("");
-				JOptionPane.showMessageDialog(this, "EL código no se encuentra en el sistema");		
-			}
-			else{
-				 txtS.setText(""); 
-				 ImprimirEmple("ID\tDNI\tNombre completo\tTeléfono\tFecha de ingreso\tCargo\tJornada laboral\t\tHorario laboral\t\tPago por hora\tHoras trab.\tDescuento\tSueldo");
-				    ImprimirEmple("" + empleadoEncontrado.getId_empleado() + "\t" +
-							"" + empleadoEncontrado.getDni() + "\t" + "" +
-							"" + empleadoEncontrado.getNombre_apellido() + "\t" +
-							"" + empleadoEncontrado.getTelefono() + "\t" +
-							"" + empleadoEncontrado.getFecha() + "\t\t" + 
-							"" + empleadoEncontrado.getCargo() + "\t" +
-							"" + empleadoEncontrado.getJornada() + "\t" + 
-							"" + empleadoEncontrado.getHorario() + "\t" + 
-							"" + empleadoEncontrado.getPago_hora() + "\t" + 
-							"" + empleadoEncontrado.getHoras_trabajadas() + "\t" + 
-							"" + empleadoEncontrado.getDescuento() + "\t" +
-							"" + empleadoEncontrado.Sueldo(descuento));
-			}
-		} catch (Exception e2) {
-			JOptionPane.showMessageDialog(this, "El valor ingresado no es válido. Intente de nuevo.");	
-		}	
-	}
-	
-	protected void do_btnRegistrarEmpleado_actionPerformed(ActionEvent e) {
-		try {		
-			int idempleado= Integer.parseInt(txtIdEmpleado.getText());
-			String dniempleado= txtDniEmpleado.getText();
-			  if (dniempleado.length() != 8) {
-			        JOptionPane.showMessageDialog(this, "El DNI debe tener 8 números. Por favor, verifique.");
-			        txtDniEmpleado.setText("");
-			        txtDniEmpleado.requestFocus();
-			        return; 
-			    }
-			String nomempleado= txtNombreEmpleado.getText();
-			String teleempleado = txtTelefono.getText();
-			String carempleado= cboCargo.getSelectedItem().toString();
-			String jorempleado= cboJornada.getSelectedItem().toString();
-			String horaempleado= cboHorario.getSelectedItem().toString();
-			double pxhempleado= Double.parseDouble(txtPago.getText());
-			double htempleado= Double.parseDouble(txtHoras.getText());;
-			double descuento=  Double.parseDouble(txtDescuento.getText());;		
-			
-			if(nomempleado.isEmpty() || teleempleado.isEmpty() || carempleado.isEmpty() ||
-					jorempleado.isEmpty() || horaempleado.isEmpty() ) {
-				
-				JOptionPane.showMessageDialog(this, "Porfavor coloque datos");
-				return;		
-			}
-							
-			Empleado nuevoempleado= new Empleado(idempleado, dniempleado, nomempleado, teleempleado, LocalDate.now(), carempleado, jorempleado,horaempleado, pxhempleado, htempleado, descuento);
-			if( ae.Buscar(idempleado) == null) {
-				ae.Adicionar(nuevoempleado);	
-				JOptionPane.showMessageDialog(this, "Nuevo empleado registrado éxitosamente");
-			}
-			else {
-				JOptionPane.showMessageDialog(this, "Empleado ya registrado en el sistema");
-				return;		
-			}
-
-		} catch (Exception e2) {
-			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
-		}	
-	}
-	
-	protected void do_btnModificarEmpleado_actionPerformed(ActionEvent e) {
-		try {
-			txtS.setText("");
-			int codigo= Integer.parseInt(txtIdEmpleado.getText());
-			Empleado empleadoEncontrado = ae.Buscar(codigo);
-			if(empleadoEncontrado== null) {
-				txtS.setText("");
-				JOptionPane.showMessageDialog(this, "EL código no se encuentra en el sistema");
-				return;
-			}
-			else {
-				txtS.setText("");
-				empleadoEncontrado.setDni(txtDniEmpleado.getText());
-				empleadoEncontrado.setNombre_apellido(txtNombreEmpleado.getText());
-				empleadoEncontrado.setTelefono(txtTelefono.getText());
-				empleadoEncontrado.setCargo(cboCargo.getSelectedItem().toString());
-				empleadoEncontrado.setJornada(cboJornada.getSelectedItem().toString() );
-				empleadoEncontrado.setHorario(cboHorario.getSelectedItem().toString());
-				empleadoEncontrado.setPago_hora( Double.parseDouble(txtPago.getText()));
-				empleadoEncontrado.setHoras_trabajadas(Double.parseDouble(txtHoras.getText()));
-				empleadoEncontrado.setDescuento(Double.parseDouble(txtDescuento.getText()));
-				ListadoEmpleados();
-			}
-	
-		}
-		catch(Exception e2){
-			JOptionPane.showMessageDialog(this, "Verifique el ID ingresado. Intente de nuevo.");
-		}
-	}
-	protected void do_btnMostrarProducto_actionPerformed(ActionEvent e) {
-		ListadoProductos();
-	}
-	void ImprimirProducto(String s) {
-		txtS2.append(s+"\n");
-	}
-	void ListadoProductos() {
-		txtS2.setText("");
-		ImprimirProducto("ID\tProducto\tNombre del modelo\tGarantía\tPrecio\tStock");
-		for(int i = 0; i < ap.Tamaño(); i++) {
-			Producto p = ap.Obtener(i);
-			ImprimirProducto("" + p.getId_producto() + "\t" +
-			"" + p.getCat_producto() + "\t" + 
-			"" + p.getNombre() + "\t" +
-			"" + p.getGarantia() + "\t" +
-			"" + p.getPrecio() + "\t" +
-			"" + p.getStock());
-		}
-	}
-	protected void do_btnBuscarProducto_actionPerformed(ActionEvent e) {
-		try {
-			int id = Integer.parseInt(txtIdProdBuscar.getText());
-			Producto p = ap.Buscar(id);
-			if(p == null) {
-				txtS2.setText("");
-				JOptionPane.showMessageDialog(this, "EL ID no se encuentra en el sistema");
-				
-			}
-			else{
-				 txtS2.setText(""); 
-				 ImprimirProducto("ID\tProducto\tNombre del modelo\tGarantía\tPrecio\tStock");
-				    ImprimirProducto(p.getId_producto()+ "\t"
-				            + "" + p.getCat_producto()+ "\t"
-				        	+ "" + p.getNombre()+ "\t" 
-				        	+ "" + p.getGarantia() + "\t" 
-				        	+ "" + p.getPrecio()+ "\t" 
-				            + "" + p.getStock());
-			}
-		} catch (Exception e2) {
-			JOptionPane.showMessageDialog(this, "El valor ingresado no es válido. Intente de nuevo.");	
-		}	
-	}
-	protected void do_btnRegistrarProducto_actionPerformed(ActionEvent e) {
-		try {		
-			int id = Integer.parseInt(txtIdProducto.getText());
-			String categoria = txtCategoria.getText();
-			String nombre = txtNombreProducto.getText();
-			String garantia = cboGarantia.getSelectedItem().toString();
-			double precio = Double.parseDouble(txtPrecio.getText());
-			int cantidad = Integer.parseInt(txtCantProducto.getText());
-							
-			Producto nuevoproducto= new Producto(id, categoria, nombre, garantia, precio);
-			if( ap.Buscar(id) == null) {
-				ap.Adicionar(nuevoproducto);	
-				JOptionPane.showMessageDialog(this, "Nuevo producto registrado éxitosamente");
-			}
-			else {
-				JOptionPane.showMessageDialog(this, "Producto ya registrado en el sistema");
-				return;		
-			}
-
-		} catch (Exception e2) {
-			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
-		}
-	} 
-	 protected void do_btnModificarProducto_actionPerformed(ActionEvent e) {
-			try {
-				txtS2.setText("");
-				int id = Integer.parseInt(txtIdProducto.getText());
-				Producto productoEncontrado = ap.Buscar(id);
-				if(productoEncontrado == null) {
-					txtS2.setText("");
-					JOptionPane.showMessageDialog(this, "EL ID no se encuentra en el sistema");
-					return;
-				}
-				else {
-					txtS.setText("");
-					productoEncontrado.setId_producto(Integer.parseInt(txtIdProducto.getText()));
-					productoEncontrado.setCat_producto(txtCategoria.getText());
-					productoEncontrado.setNombre(txtNombreProducto.getText());
-					productoEncontrado.setGarantia(cboGarantia.getSelectedItem().toString());
-					productoEncontrado.setPrecio(Double.parseDouble(txtPrecio.getText()));
-					productoEncontrado.setStock(Integer.parseInt(txtCantProducto.getText()));		
-				}		
-			}
-			catch(Exception e2){
-				JOptionPane.showMessageDialog(this, "Verifique el ID ingresado. Intente de nuevo.");
-			}
-	}
-	protected void do_btnRegistrarStock_actionPerformed(ActionEvent e) {	
-		try {
-			int id = Integer.parseInt(txtIdProdStock.getText());
-			int cantidad = Integer.parseInt(txtCantStock.getText());
-			
-			Producto productoEncontrado = ap.Buscar(id);
-			if(productoEncontrado == null) {
-				JOptionPane.showMessageDialog(this, "EL ID no se encuentra en el sistema");
-				return;
-			}
-			else {
-				productoEncontrado.aumentarStock(cantidad);
-			}
-		}
-		catch (Exception e2) {
-			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
-		}
-		ListadoProductos();
-	}
-	
-	protected void do_btnHistorialVentas_actionPerformed(ActionEvent e) {
-		ListadoHistorialVentas();
-	}
-	
-	void ImprimirVenta(String s) {
-		txtS3.append(s+"\n");
-	}
-	
-	void ListadoHistorialVentas() {
-		txtS3.setText("");
-		ImprimirVenta("Código\tDNI\tNombres y apellidos\tTeléfono\tFecha\tHora\tID Producto\tProducto\tNombre del modelo\tGarantia\tPrecio unitario\tCantidad\tTipo de pago\tVendedor\t\tTotal");
-		for(int i = 0; i < ahv.Tamaño(); i++) {
-			Venta v = ahv.Obtener(i);
-			ImprimirVenta("" + v.getCodigo_venta() + "\t" +
-			"" + v.getCliente().getDni() + "\t" + 
-			"" + v.getCliente().getNombre_apellido() + "\t" +
-			"" + v.getCliente().getTelefono() + "\t" +
-			"" + v.getFecha() + "\t" +
-			"" + v.getHora() + "\t" +
-			"" + v.getProducto().getId_producto() + "\t" +
-			"" + v.getProducto().getCat_producto() + "\t" +
-			"" + v.getProducto().getNombre() + "\t"+
-			"" + v.getProducto().getGarantia() + "\t" +
-			"" + v.getProducto().getPrecio() + "\t" +
-			"" + v.getCantidad() + "\t" + 
-			"" + v.getTipo_pago() + "\t" +
-			"" + v.getVendedor().getNombre_apellido() + "\t" + 
-			"" + v.SubTotal());
-		}
-	}
-	protected void do_btnBuscarHistorialVenta_actionPerformed(ActionEvent e) {
-		try {
-			int codigo = Integer.parseInt(txtCodDni.getText());
-			String dni = txtCodDni.getText();
-			
-			Venta ventaencontrada = ahv.Buscar(codigo, dni);
-			
-			if(ventaencontrada == null) {
-				txtS3.setText("");
-				JOptionPane.showMessageDialog(this, "EL código no se encuentra en el sistema");
-				
-			}
-			else{
-				 txtS3.setText(""); 
-				 ImprimirVenta("Código\tDNI\tNombres y apellidos\tTeléfono\tFecha\tHora\tID Producto\tProducto\tNombre del modelo\tGarantia\tPrecio unitario\tCantidad\tTipo de pago\tVendedor\t\tTotal");
-				    ImprimirVenta("" + ventaencontrada.getCodigo_venta() + "\t" +
-							"" + ventaencontrada.getCliente().getDni() + "\t" + "" +
-							"" + ventaencontrada.getCliente().getNombre_apellido() + "\t" +
-							"" + ventaencontrada.getCliente().getTelefono() + "\t" +
-							"" + ventaencontrada.getFecha() + "\t" + 
-							"" + ventaencontrada.getHora() + "\t" +
-							"" + ventaencontrada.getProducto().getId_producto() + "\t" + 
-							"" + ventaencontrada.getProducto().getCat_producto() + "\t" + 
-							"" + ventaencontrada.getProducto().getNombre() + "\t" + 
-							"" + ventaencontrada.getProducto().getGarantia() + "\t" + 
-							"" + ventaencontrada.getProducto().getPrecio() + "\t" +
-							"" + ventaencontrada.getCantidad() + "\t" +
-					        "" + ventaencontrada.getTipo_pago() + "\t" +
-							"" + ventaencontrada.getVendedor().getNombre_apellido() + "\t" +
-					        "" + ventaencontrada.SubTotal());    
-			}
-		} catch (Exception e2) {
-			JOptionPane.showMessageDialog(this, "El valor ingresado no es válido. Intente de nuevo.");	
-		}
-	}
+	private JTable tablaProducto;
+	private JTextField txtGarantia;
+	private JLabel lblSueldo;
+	private JTextField txtSueldo;
+	private JTable tablaEmpleado;
+	private JTable tablaHistorialVentas;
+	private JLabel lblHistorialVentas;
+	private JLabel lblIdProveedor;
+	private JTextField txtIdProveedor;
+	private JPanel panelProveedor;
+	private JScrollPane scrollPane_3;
+	private JTable tablaProveedor;
+	private JButton btnRegistrarProveedor;
+	private JButton btnModificarProveedor;
+	private JTextField txtBuscarProveedor;
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
 		String actual = jlabelmodo.getText();
 		if(actual == "Modo Normal") {		
 			contentPane.setBackground(UIManager.getColor("Button.light"));
 			lblIdBuscarE.setForeground(Color.BLACK);
-			txtIdEmpleBuscar.setBackground(Color.WHITE);
-			txtS.setBackground(Color.WHITE);
+			txtBuscarEmple.setBackground(Color.WHITE);
 			lblIdE.setForeground(Color.BLACK);
 			lblDniE.setForeground(Color.BLACK);
 			lblNombreCompletoE.setForeground(Color.BLACK);
@@ -1013,9 +712,6 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			lblCargo.setForeground(Color.BLACK);
 			lblJornada.setForeground(Color.BLACK);
 			lblHorario.setForeground(Color.BLACK);
-			lblPagoPorHora.setForeground(Color.BLACK);
-			lblHorasTrabajadas.setForeground(Color.BLACK);
-			lblDescuento.setForeground(Color.BLACK);
 			lblRegistrarEmpleado.setForeground(Color.BLACK);
 			lblclock.setForeground(Color.BLACK);
 			txtIdEmpleado.setBackground(Color.WHITE);
@@ -1025,20 +721,12 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			cboCargo.setBackground(Color.WHITE);
 			cboJornada.setBackground(Color.WHITE);
 			cboHorario.setBackground(Color.WHITE);
-			txtPago.setBackground(Color.WHITE);
-			txtHoras.setBackground(Color.WHITE);
-			txtDescuento.setBackground(Color.WHITE);		
-			
-			
-			txtIdEmpleBuscar.setForeground(Color.BLACK);
-			txtS.setForeground(Color.BLACK);
+		
+			txtBuscarEmple.setForeground(Color.BLACK);
 			txtIdEmpleado.setForeground(Color.BLACK);
 			txtDniEmpleado.setForeground(Color.BLACK);
 			txtNombreEmpleado.setForeground(Color.BLACK);
 			txtTelefono.setForeground(Color.BLACK);
-			txtPago.setForeground(Color.BLACK);
-			txtHoras.setForeground(Color.BLACK);
-			txtDescuento.setForeground(Color.BLACK);
 			cboCargo.setForeground(Color.BLACK);
 			cboJornada.setForeground(Color.BLACK);
 			cboHorario.setForeground(Color.BLACK);
@@ -1048,8 +736,7 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			contentPane.setBackground(Color.BLACK);
 			
 			lblIdBuscarE.setForeground(Color.LIGHT_GRAY);
-			txtIdEmpleBuscar.setBackground(Color.LIGHT_GRAY);
-			txtS.setBackground(Color.LIGHT_GRAY);
+			txtBuscarEmple.setBackground(Color.LIGHT_GRAY);
 			lblIdE.setForeground(Color.LIGHT_GRAY);
 			lblDniE.setForeground(Color.LIGHT_GRAY);
 			lblNombreCompletoE.setForeground(Color.LIGHT_GRAY);
@@ -1057,9 +744,6 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			lblCargo.setForeground(Color.LIGHT_GRAY);
 			lblJornada.setForeground(Color.LIGHT_GRAY);
 			lblHorario.setForeground(Color.LIGHT_GRAY);
-			lblPagoPorHora.setForeground(Color.LIGHT_GRAY);
-			lblHorasTrabajadas.setForeground(Color.LIGHT_GRAY);
-			lblDescuento.setForeground(Color.LIGHT_GRAY);
 			lblRegistrarEmpleado.setForeground(Color.LIGHT_GRAY);
 			lblclock.setForeground(Color.LIGHT_GRAY);
 			txtIdEmpleado.setBackground(Color.LIGHT_GRAY);
@@ -1069,17 +753,13 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			cboCargo.setBackground(Color.LIGHT_GRAY);
 			cboJornada.setBackground(Color.LIGHT_GRAY);
 			cboHorario.setBackground(Color.LIGHT_GRAY);
-			txtPago.setBackground(Color.LIGHT_GRAY);
-			txtHoras.setBackground(Color.LIGHT_GRAY);
-			txtDescuento.setBackground(Color.LIGHT_GRAY);
 			jlabelmodo.setText("Modo Frío");
 		}	
 		
 		else if(actual == "Modo Frío") {
 			contentPane.setBackground(new Color(10, 25, 45));
 			lblIdBuscarE.setForeground(new Color(150, 220, 255));
-			txtIdEmpleBuscar.setBackground(new Color(30, 80, 120));
-			txtS.setBackground(new Color(30, 80, 120));
+			txtBuscarEmple.setBackground(new Color(30, 80, 120));
 			lblIdE.setForeground(new Color(150, 220, 255));
 			lblDniE.setForeground(new Color(150, 220, 255));
 			lblNombreCompletoE.setForeground(new Color(150, 220, 255));
@@ -1087,9 +767,6 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			lblCargo.setForeground(new Color(150, 220, 255));
 			lblJornada.setForeground(new Color(150, 220, 255));
 			lblHorario.setForeground(new Color(150, 220, 255));
-			lblPagoPorHora.setForeground(new Color(150, 220, 255));
-			lblHorasTrabajadas.setForeground(new Color(150, 220, 255));
-			lblDescuento.setForeground(new Color(150, 220, 255));
 			lblRegistrarEmpleado.setForeground(new Color(150, 220, 255));
 			lblclock.setForeground(new Color(150, 220, 255));
 			txtIdEmpleado.setBackground(new Color(30, 80, 120));
@@ -1099,23 +776,450 @@ public class VenAdministrador extends JFrame implements ActionListener {
 			cboCargo.setBackground(new Color(30, 80, 120));
 			cboJornada.setBackground(new Color(30, 80, 120));
 			cboHorario.setBackground(new Color(30, 80, 120));
-			txtPago.setBackground(new Color(30, 80, 120));
-			txtHoras.setBackground(new Color(30, 80, 120));
-			txtDescuento.setBackground(new Color(30, 80, 120));
 
-			txtIdEmpleBuscar.setForeground(Color.WHITE);
-			txtS.setForeground(Color.WHITE);
+			txtBuscarEmple.setForeground(Color.WHITE);
 			txtIdEmpleado.setForeground(Color.WHITE);
 			txtDniEmpleado.setForeground(Color.WHITE);
 			txtNombreEmpleado.setForeground(Color.WHITE);
 			txtTelefono.setForeground(Color.WHITE);
-			txtPago.setForeground(Color.WHITE);
-			txtHoras.setForeground(Color.WHITE);
-			txtDescuento.setForeground(Color.WHITE);
 			cboCargo.setForeground(Color.WHITE);
 			cboJornada.setForeground(Color.WHITE);
 			cboHorario.setForeground(Color.WHITE);		
 			jlabelmodo.setText("Modo Normal");
 		}	
 	}	
+	public void keyPressed(KeyEvent e) {
+	}
+	public void keyReleased(KeyEvent e) {
+		if (e.getSource() == txtBuscarEmple) {
+			do_txtIdEmpleBuscar_keyReleased(e);
+		}
+		if (e.getSource() == txtIdProdBuscar) {
+			do_txtIdProdBuscar_keyReleased(e);
+		}
+	}
+	public void keyTyped(KeyEvent e) {
+		if (e.getSource() == txtIdProveedor) {
+			do_txtIdProveedor_keyTyped(e);
+		}
+		if (e.getSource() == txtSueldo) {
+			do_txtSueldo_keyTyped(e);
+		}
+		if (e.getSource() == txtTelefono) {
+			do_txtTelefono_keyTyped(e);
+		}
+		if (e.getSource() == txtNombreEmpleado) {
+			do_txtNombreEmpleado_keyTyped(e);
+		}
+		if (e.getSource() == txtDniEmpleado) {
+			do_txtDniEmpleado_keyTyped(e);
+		}
+		if (e.getSource() == txtIdEmpleado) {
+			do_txtIdEmpleado_keyTyped(e);
+		}
+		if (e.getSource() == txtCantStock) {
+			do_txtCantStock_keyTyped(e);
+		}
+		if (e.getSource() == txtIdProdStock) {
+			do_txtIdProdStock_keyTyped(e);
+		}
+		if (e.getSource() == txtCantProducto) {
+			do_txtCantProducto_keyTyped(e);
+		}
+		if (e.getSource() == txtPrecio) {
+			do_txtPrecio_keyTyped(e);
+		}
+		if (e.getSource() == txtCategoria) {
+			do_txtCategoria_keyTyped(e);
+		}
+		if (e.getSource() == txtIdProducto) {
+			do_txtIdProducto_keyTyped(e);
+		}
+	}
+	protected void do_txtIdProducto_keyTyped(KeyEvent e) {
+		//para que solamente acepte ingresar números
+		char validarNumeros = e.getKeyChar();
+		if(Character.isLetter(validarNumeros)) {
+			e.consume();
+			JOptionPane.showMessageDialog(this, "No permite letras");
+		}
+	}
+	protected void do_txtCategoria_keyTyped(KeyEvent e) {
+		//para que solamente acepte ingresar letras
+		char validarLetras = e.getKeyChar();
+		if(Character.isDigit(validarLetras)) {
+			e.consume();
+			JOptionPane.showMessageDialog(this, "No permite números");
+		}
+	}
+	protected void do_txtIdProveedor_keyTyped(KeyEvent e) {
+		//para que solamente acepte ingresar números
+		char validarNumeros = e.getKeyChar();
+		if(Character.isLetter(validarNumeros)) {
+			e.consume();
+			JOptionPane.showMessageDialog(this, "No permite letras");
+		}
+	}
+	protected void do_txtPrecio_keyTyped(KeyEvent e) {
+		//para que solamente acepte ingresar números
+		char validarNumeros = e.getKeyChar();
+		if(Character.isLetter(validarNumeros)) {
+			e.consume();
+			JOptionPane.showMessageDialog(this, "No permite letras");
+		}
+	}
+	protected void do_txtCantProducto_keyTyped(KeyEvent e) {
+		//para que solamente acepte ingresar números
+		char validarNumeros = e.getKeyChar();
+		if(Character.isLetter(validarNumeros)) {
+			e.consume();
+			JOptionPane.showMessageDialog(this, "No permite letras");
+		}
+	}
+	protected void do_txtIdProdStock_keyTyped(KeyEvent e) {
+		//para que solamente acepte ingresar números
+		char validarNumeros = e.getKeyChar();
+		if(Character.isLetter(validarNumeros)) {
+			e.consume();
+			JOptionPane.showMessageDialog(this, "No permite letras");
+		}
+	}
+	protected void do_txtCantStock_keyTyped(KeyEvent e) {
+		//para que solamente acepte ingresar números
+		char validarNumeros = e.getKeyChar();
+		if(Character.isLetter(validarNumeros)) {
+			e.consume();
+			JOptionPane.showMessageDialog(this, "No permite letras");
+		}
+	}
+	
+	public void ListarProducto(String filtro) {
+		DefaultTableModel modelo = new DefaultTableModel();
+		MantProducto mp = new MantProducto();
+		ArrayList<Producto> lista = new ArrayList<Producto>();
+		if(filtro.length() == 0) lista = mp.MostrarProducto();
+		else lista = mp.ConsultarProducto(filtro);
+		
+		modelo.setRowCount(lista.size());
+		Iterator<Producto> it = lista.iterator();
+		modelo.addColumn("ID");
+		modelo.addColumn("Categoría");
+		modelo.addColumn("Nombre");
+		modelo.addColumn("Garantía");
+		modelo.addColumn("Proveedor");
+		modelo.addColumn("Precio");
+		modelo.addColumn("Stock");
+		int i = 0;
+		
+		while (it.hasNext()) {
+			Object obj = it.next();
+			Producto p = (Producto)obj;
+			modelo.setValueAt(p.getIdProducto(), i, 0);
+			modelo.setValueAt(p.getCategoriaProducto(), i, 1);
+			modelo.setValueAt(p.getNombreProducto(), i, 2);
+			modelo.setValueAt(p.getGarantiaProducto(), i, 3);
+			modelo.setValueAt(p.getProveedor().getNombreProveedor(), i, 4);
+			modelo.setValueAt(p.getPrecioProducto(), i, 5);
+			modelo.setValueAt(p.getStockProducto(), i, 6);
+			i++;
+		}
+		tablaProducto.setModel(modelo);
+	}
+	
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == tablaEmpleado) {
+			do_tablaEmpleado_mouseClicked(e);
+		}
+		if (e.getSource() == tablaProducto) {
+			do_tablaProducto_mouseClicked(e);
+		}
+	}
+	public void mouseEntered(MouseEvent e) {
+	}
+	public void mouseExited(MouseEvent e) {
+	}
+	public void mousePressed(MouseEvent e) {
+	}
+	public void mouseReleased(MouseEvent e) {
+	}
+	protected void do_tablaProducto_mouseClicked(MouseEvent e) {
+		int fila = tablaProducto.getSelectedRow();
+		txtIdProducto.setText(String.valueOf(tablaProducto.getValueAt(fila, 0)));
+		txtCategoria.setText(String.valueOf(tablaProducto.getValueAt(fila, 1)));
+		txtNombreProducto.setText(String.valueOf(tablaProducto.getValueAt(fila, 2)));
+		txtGarantia.setText(String.valueOf(tablaProducto.getValueAt(fila, 3)));
+		txtIdProveedor.setText(String.valueOf(tablaProducto.getValueAt(fila, 4)));
+		txtPrecio.setText(String.valueOf(tablaProducto.getValueAt(fila, 5)));
+		txtCantProducto.setText(String.valueOf(tablaProducto.getValueAt(fila, 6)));
+	}
+	protected void do_btnRegistrarProducto_actionPerformed(ActionEvent e) {
+		try {
+			int idProveedor = Integer.parseInt(txtIdProveedor.getText());
+			Proveedor proveedor = new Proveedor(idProveedor);
+			Producto p = new Producto(Integer.parseInt(txtIdProducto.getText()), 
+					txtCategoria.getText(), txtNombreProducto.getText(), 
+					txtGarantia.getText(), proveedor , Double.parseDouble(txtPrecio.getText()), 
+					Integer.parseInt(txtCantProducto.getText()));
+			
+			MantProducto mp = new MantProducto();
+			mp.AgregarProducto(p);
+			ListarProducto("");
+			LimpiarProducto();
+							
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
+		}
+	}
+	protected void do_btnModificarProducto_actionPerformed(ActionEvent e) {
+		try {
+			int idProveedor = Integer.parseInt(txtIdProveedor.getText());
+			Proveedor proveedor = new Proveedor(idProveedor);
+			 Producto p = new Producto(Integer.parseInt(txtIdProducto.getText()), 
+					 txtCategoria.getText(), txtNombreProducto.getText(), 
+					 txtGarantia.getText(), proveedor, Double.parseDouble(txtPrecio.getText()), 
+					 Integer.parseInt(txtCantProducto.getText()));
+				
+			 MantProducto mp = new MantProducto();
+			 mp.ModificarProducto(p);
+			 ListarProducto("");
+			 LimpiarProducto();
+			 
+		 } catch(Exception e2){
+			 JOptionPane.showMessageDialog(this, "Verifique el ID ingresado. Intente de nuevo.");	 
+		 }	 
+	}
+	protected void do_btnEliminarProducto_actionPerformed(ActionEvent e) {
+		try {
+			MantProducto mp = new MantProducto();
+			mp.EliminarProducto(Integer.parseInt(txtIdProducto.getText()));
+			ListarProducto("");
+			LimpiarProducto();
+			
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
+		}
+	}
+	void LimpiarProducto() {
+		txtIdProducto.setText("");
+		txtCategoria.setText("");
+		txtNombreProducto.setText("");
+		txtGarantia.setText("");
+		txtPrecio.setText("");
+		txtCantProducto.setText("");
+	}
+	protected void do_btnRegistrarStock_actionPerformed(ActionEvent e) {	
+		try {
+			Producto p = new Producto(Integer.parseInt(txtIdProdStock.getText()), Integer.parseInt(txtCantStock.getText()));
+			MantProducto mp = new MantProducto();
+			mp.AumentarStock(p);
+			ListarProducto("");
+			LimpiarProductoStock();
+			
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
+		}
+
+	}
+	void LimpiarProductoStock() {
+		txtIdProdStock.setText("");
+		txtCantStock.setText("");
+	}
+	protected void do_txtIdProdBuscar_keyReleased(KeyEvent e) {
+		String filtro = txtIdProdBuscar.getText();
+		ListarProducto(filtro);
+	}
+	//PANEL EMPLEADO
+	protected void do_txtIdEmpleado_keyTyped(KeyEvent e) {
+		//para que solamente acepte ingresar números
+		char validarNumeros = e.getKeyChar();
+		if(Character.isLetter(validarNumeros)) {
+			e.consume();
+			JOptionPane.showMessageDialog(this, "No permite letras");
+		}
+	}
+	protected void do_txtDniEmpleado_keyTyped(KeyEvent e) {
+		//para que solamente acepte ingresar números
+		char validarNumeros = e.getKeyChar();
+		if(Character.isLetter(validarNumeros)) {
+			e.consume();
+			JOptionPane.showMessageDialog(this, "No permite letras");
+		}
+	}
+	protected void do_txtNombreEmpleado_keyTyped(KeyEvent e) {
+		//para que solamente acepte ingresar letras
+		char validarLetras = e.getKeyChar();
+		if(Character.isDigit(validarLetras)) {
+			e.consume();
+			JOptionPane.showMessageDialog(this, "No permite números");
+		}
+	}
+	protected void do_txtTelefono_keyTyped(KeyEvent e) {
+		//para que solamente acepte ingresar números
+		char validarNumeros = e.getKeyChar();
+		if(Character.isLetter(validarNumeros)) {
+			e.consume();
+			JOptionPane.showMessageDialog(this, "No permite letras");
+		}
+	}
+	protected void do_txtSueldo_keyTyped(KeyEvent e) {
+		//para que solamente acepte ingresar números
+		char validarNumeros = e.getKeyChar();
+		if(Character.isLetter(validarNumeros)) {
+			e.consume();
+			JOptionPane.showMessageDialog(this, "No permite letras");
+		}
+	}
+	public void ListarEmpleado(String filtro) {
+		DefaultTableModel modelo = new DefaultTableModel();
+		MantEmpleado me = new MantEmpleado();
+		ArrayList<Empleado> lista = new ArrayList<Empleado>();
+		if(filtro.length() == 0) lista = me.MostrarEmpleado();
+		else lista = me.ConsultarEmpleado(filtro);
+		
+		modelo.setRowCount(lista.size());
+		Iterator<Empleado> it = lista.iterator();
+	    modelo.addColumn("ID");
+	    modelo.addColumn("DNI");
+	    modelo.addColumn("Nombre");
+	    modelo.addColumn("Teléfono");
+	    modelo.addColumn("Fecha");
+	    modelo.addColumn("Cargo");
+	    modelo.addColumn("Jornada");
+	    modelo.addColumn("Horario");
+	    modelo.addColumn("Sueldo");
+		int i = 0;
+		
+		while (it.hasNext()) {
+			Object obj = it.next();
+			Empleado e = (Empleado)obj;
+	        modelo.setValueAt(e.getIdEmpleado(), i, 0);
+	        modelo.setValueAt(e.getDniEmpleado(), i, 1);
+	        modelo.setValueAt(e.getNombreEmpleado(), i, 2);
+	        modelo.setValueAt(e.getTelefonoEmpleado(), i, 3);
+	        modelo.setValueAt(e.getFechaEmpleado(), i, 4);
+	        modelo.setValueAt(e.getCargoEmpleado(), i, 5);
+	        modelo.setValueAt(e.getJornadaEmpleado(), i, 6);
+	        modelo.setValueAt(e.getHorarioEmpleado(), i, 7);
+	        modelo.setValueAt(e.getSueldoEmpleado(), i, 8);
+	        i++;
+		}
+		tablaEmpleado.setModel(modelo);
+	}
+	protected void do_tablaEmpleado_mouseClicked(MouseEvent e) {
+		int fila = tablaEmpleado.getSelectedRow();
+		txtIdEmpleado.setText(String.valueOf(tablaEmpleado.getValueAt(fila, 0)));
+		txtDniEmpleado.setText(String.valueOf(tablaEmpleado.getValueAt(fila, 1)));
+		txtNombreEmpleado.setText(String.valueOf(tablaEmpleado.getValueAt(fila, 2)));
+		txtTelefono.setText(String.valueOf(tablaEmpleado.getValueAt(fila, 3)));
+		cboCargo.setSelectedItem(String.valueOf(tablaEmpleado.getValueAt(fila, 5)));
+		cboJornada.setSelectedItem(String.valueOf(tablaEmpleado.getValueAt(fila, 6)));
+		cboHorario.setSelectedItem(String.valueOf(tablaEmpleado.getValueAt(fila, 7)));
+		txtSueldo.setText(String.valueOf(tablaEmpleado.getValueAt(fila, 8)));
+	}
+	protected void do_btnRegistrarEmpleado_actionPerformed(ActionEvent e) {
+		try {
+			Date fecha = java.sql.Date.valueOf(LocalDate.now());
+			Empleado emple = new Empleado(Integer.parseInt(txtIdEmpleado.getText()), 
+					txtDniEmpleado.getText(), txtNombreEmpleado.getText(), 
+					txtTelefono.getText(), fecha, cboCargo.getSelectedItem().toString(), 
+					cboJornada.getSelectedItem().toString(), cboHorario.getSelectedItem().toString(), 
+					Double.parseDouble(txtSueldo.getText()));
+			
+			MantEmpleado me = new MantEmpleado();
+			me.AgregarEmpleado(emple);
+			ListarEmpleado("");
+			LimpiarEmpleado();
+
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
+		}	
+	}
+	protected void do_btnModificarEmpleado_actionPerformed(ActionEvent e) {
+		try {
+			Date fecha = java.sql.Date.valueOf(LocalDate.now());
+			Empleado emple = new Empleado(Integer.parseInt(txtIdEmpleado.getText()), 
+					txtDniEmpleado.getText(), txtNombreEmpleado.getText(), 
+					txtTelefono.getText(), fecha, cboCargo.getSelectedItem().toString(), 
+					cboJornada.getSelectedItem().toString(), cboHorario.getSelectedItem().toString(), 
+					Double.parseDouble(txtSueldo.getText()));
+				
+			 MantEmpleado me = new MantEmpleado();
+			 me.ModificarEmpleado(emple);
+			 ListarEmpleado("");
+			 LimpiarEmpleado();
+		}
+		catch(Exception e2){
+			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
+		}
+	}
+	protected void do_btnEliminarEmpleado_actionPerformed(ActionEvent e) {
+		try {
+			MantEmpleado me = new MantEmpleado();
+			me.EliminarEmpleado(Integer.parseInt(txtIdEmpleado.getText()));
+			ListarEmpleado("");
+			LimpiarEmpleado();
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
+		}
+	}
+	void LimpiarEmpleado() {
+		txtIdEmpleado.setText("");
+		txtDniEmpleado.setText("");
+		txtNombreEmpleado.setText("");
+		txtTelefono.setText("");
+		txtSueldo.setText("");
+	}
+	protected void do_txtIdEmpleBuscar_keyReleased(KeyEvent e) {
+		String filtro = txtBuscarEmple.getText();
+		ListarEmpleado(filtro);
+	}
+	public void ListarHistorialVenta() {
+	    DefaultTableModel modelo = new DefaultTableModel();
+	    MantHistorialVentas mhv = new MantHistorialVentas();
+	    ArrayList<HistorialVentas> lista = mhv.MostrarHistorialVentas();
+
+	    modelo.addColumn("Código Venta");
+	    modelo.addColumn("DNI Cliente");
+	    modelo.addColumn("Nombre Cliente");
+	    modelo.addColumn("Teléfono Cliente");
+	    modelo.addColumn("Fecha");
+	    modelo.addColumn("Hora");
+	    modelo.addColumn("ID Producto");
+	    modelo.addColumn("Categoría Producto");
+	    modelo.addColumn("Nombre Producto");
+	    modelo.addColumn("Garantía");
+	    modelo.addColumn("Precio");
+	    modelo.addColumn("Cantidad");
+	    modelo.addColumn("Tipo Pago");
+	    modelo.addColumn("Comprobante");
+	    modelo.addColumn("Vendedor");
+	    modelo.addColumn("Subtotal");
+	    modelo.addColumn("Total");
+
+	    modelo.setRowCount(lista.size());
+	    int i = 0;
+
+	    for (HistorialVentas hv : lista) {
+	        modelo.setValueAt(hv.getVenta().getCodigoVenta(), i, 0);
+	        modelo.setValueAt(hv.getVenta().getCliente().getDniCliente(), i, 1);
+	        modelo.setValueAt(hv.getVenta().getCliente().getNombreCliente(), i, 2);
+	        modelo.setValueAt(hv.getVenta().getCliente().getTelefonoCliente(), i, 3);
+	        modelo.setValueAt(hv.getVenta().getFechaVenta(), i, 4);
+	        modelo.setValueAt(hv.getVenta().getHoraVenta(), i, 5);
+	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getIdProducto(), i, 6);
+	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getCategoriaProducto(), i, 7);
+	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getNombreProducto(), i, 8);
+	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getGarantiaProducto(), i, 9);
+	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getPrecioProducto(), i, 10);
+	        modelo.setValueAt(hv.getDetalleVenta().getCantidadDetalleVenta(), i, 11);
+	        modelo.setValueAt(hv.getVenta().getTipopagoVenta(), i, 12);
+	        modelo.setValueAt(hv.getVenta().getComprobanteVenta(), i, 13);
+	        modelo.setValueAt(hv.getVenta().getEmpleado().getNombreEmpleado(), i, 14);
+	        modelo.setValueAt(hv.getDetalleVenta().getSubtotalDetalleVenta(), i, 15);
+	        modelo.setValueAt(hv.getVenta().getTotalVenta(), i, 16);
+	        i++;
+	    }
+
+	    tablaHistorialVentas.setModel(modelo);
+	}
 }

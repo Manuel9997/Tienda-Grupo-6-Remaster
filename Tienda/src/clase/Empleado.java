@@ -1,129 +1,107 @@
 package clase;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class Empleado {
-private int id_empleado;	
-private String dni, nombre_apellido, telefono;
-private LocalDate fecha;
-private String cargo, jornada, horario;
-private double pago_hora, horas_trabajadas, descuento;
+private int idEmpleado;
+private String dniEmpleado, nombreEmpleado, telefonoEmpleado;
+private Date fechaEmpleado;
+private String cargoEmpleado, jornadaEmpleado, horarioEmpleado;
+private double sueldoEmpleado;
 
-public Empleado(int id_empleado, String dni, String nombre_apellido, String telefono, LocalDate fecha, String cargo,
-		String jornada, String horario, double pago_hora, double horas_trabajadas, double descuento) {
+public Empleado(int idEmpleado, String dniEmpleado, String nombreEmpleado, String telefonoEmpleado, Date fechaEmpleado,
+		String cargoEmpleado, String jornadaEmpleado, String horarioEmpleado, double sueldoEmpleado) {
 
-	this.id_empleado = id_empleado;
-	this.dni = dni;
-	this.nombre_apellido = nombre_apellido;
-	this.telefono = telefono;
-	this.fecha = fecha;
-	this.cargo = cargo;
-	this.jornada = jornada;
-	this.horario = horario;
-	this.pago_hora = pago_hora;
-	this.horas_trabajadas = horas_trabajadas;
-	this.descuento = descuento;
+	this.idEmpleado = idEmpleado;
+	this.dniEmpleado = dniEmpleado;
+	this.nombreEmpleado = nombreEmpleado;
+	this.telefonoEmpleado = telefonoEmpleado;
+	this.fechaEmpleado = fechaEmpleado;
+	this.cargoEmpleado = cargoEmpleado;
+	this.jornadaEmpleado = jornadaEmpleado;
+	this.horarioEmpleado = horarioEmpleado;
+	this.sueldoEmpleado = sueldoEmpleado;
 }
 
-public Empleado(String nombre_apellido) {
+public Empleado(String nombreEmpleado) {
 
-	this.nombre_apellido = nombre_apellido;
+	this.nombreEmpleado = nombreEmpleado;
 }
 
-public int getId_empleado() {
-	return id_empleado;
+public Empleado() {
+
 }
 
-public void setId_empleado(int id_empleado) {
-	this.id_empleado = id_empleado;
+public int getIdEmpleado() {
+	return idEmpleado;
 }
 
-public String getDni() {
-	return dni;
+public void setIdEmpleado(int idEmpleado) {
+	this.idEmpleado = idEmpleado;
 }
 
-public void setDni(String dni) {
-	this.dni = dni;
+public String getDniEmpleado() {
+	return dniEmpleado;
 }
 
-public String getNombre_apellido() {
-	return nombre_apellido;
+public void setDniEmpleado(String dniEmpleado) {
+	this.dniEmpleado = dniEmpleado;
 }
 
-public void setNombre_apellido(String nombre_apellido) {
-	this.nombre_apellido = nombre_apellido;
+public String getNombreEmpleado() {
+	return nombreEmpleado;
 }
 
-public String getTelefono() {
-	return telefono;
+public void setNombreEmpleado(String nombreEmpleado) {
+	this.nombreEmpleado = nombreEmpleado;
 }
 
-public void setTelefono(String telefono) {
-	this.telefono = telefono;
+public String getTelefonoEmpleado() {
+	return telefonoEmpleado;
 }
 
-public LocalDate getFecha() {
-	return fecha;
+public void setTelefonoEmpleado(String telefonoEmpleado) {
+	this.telefonoEmpleado = telefonoEmpleado;
 }
 
-public void setFecha(LocalDate fecha) {
-	this.fecha = fecha;
+public Date getFechaEmpleado() {
+	return fechaEmpleado;
 }
 
-public String getCargo() {
-	return cargo;
+public void setFechaEmpleado(Date fechaEmpleado) {
+	this.fechaEmpleado = fechaEmpleado;
 }
 
-public void setCargo(String cargo) {
-	this.cargo = cargo;
+public String getCargoEmpleado() {
+	return cargoEmpleado;
 }
 
-public String getJornada() {
-	return jornada;
+public void setCargoEmpleado(String cargoEmpleado) {
+	this.cargoEmpleado = cargoEmpleado;
 }
 
-public void setJornada(String jornada) {
-	this.jornada = jornada;
+public String getJornadaEmpleado() {
+	return jornadaEmpleado;
 }
 
-public String getHorario() {
-	return horario;
+public void setJornadaEmpleado(String jornadaEmpleado) {
+	this.jornadaEmpleado = jornadaEmpleado;
 }
 
-public void setHorario(String horario) {
-	this.horario = horario;
+public String getHorarioEmpleado() {
+	return horarioEmpleado;
 }
 
-public double getPago_hora() {
-	return pago_hora;
+public void setHorarioEmpleado(String horarioEmpleado) {
+	this.horarioEmpleado = horarioEmpleado;
 }
 
-public void setPago_hora(double pago_hora) {
-	this.pago_hora = pago_hora;
+public double getSueldoEmpleado() {
+	return sueldoEmpleado;
 }
 
-public double getHoras_trabajadas() {
-	return horas_trabajadas;
-}
-
-public void setHoras_trabajadas(double horas_trabajadas) {
-	this.horas_trabajadas = horas_trabajadas;
-}
-
-public double getDescuento() {
-	return descuento;
-}
-
-public void setDescuento(double descuento) {
-	this.descuento = descuento;
-}
-
-//SOBRECARGA DE MÉTODOS
-public double Sueldo() {
-	return pago_hora * horas_trabajadas;
-}
-public double Sueldo(double descuento) {
-	return Sueldo() - descuento;
+public void setSueldoEmpleado(double sueldoEmpleado) {
+	this.sueldoEmpleado = sueldoEmpleado;
 }
 
 }

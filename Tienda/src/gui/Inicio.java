@@ -250,7 +250,7 @@ public class Inicio extends JFrame implements ActionListener {
 		}
 	}
 	protected void do_mnAdministrador_actionPerformed(ActionEvent e) {
-		ContraseñaAdmin contraseña = new ContraseñaAdmin();
+		VenLoginAdmi contraseña = new VenLoginAdmi();
 		contraseña.setVisible(true);
 	}
 	

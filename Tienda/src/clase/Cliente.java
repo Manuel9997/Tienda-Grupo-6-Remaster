@@ -2,37 +2,41 @@ package clase;
 
 public class Cliente {
 
-private String dni, nombre_apellido, telefono;
+private String dniCliente, nombreCliente, telefonoCliente;
 
-public Cliente(String dni, String nombre_apellido, String telefono) {
+public Cliente(String dniCliente, String nombreCliente, String telefonoCliente) {
 
-	this.dni = dni;
-	this.nombre_apellido = nombre_apellido;
-	this.telefono = telefono;
+	this.dniCliente = dniCliente;
+	this.nombreCliente = nombreCliente;
+	this.telefonoCliente = telefonoCliente;
 }
 
-public String getDni() {
-	return dni;
+public Cliente() {
+
 }
 
-public void setDni(String dni) {
-	this.dni = dni;
+public String getDniCliente() {
+	return dniCliente;
 }
 
-public String getNombre_apellido() {
-	return nombre_apellido;
+public void setDniCliente(String dniCliente) {
+	this.dniCliente = dniCliente;
 }
 
-public void setNombre_apellido(String nombre_apellido) {
-	this.nombre_apellido = nombre_apellido;
+public String getNombreCliente() {
+	return nombreCliente;
 }
 
-public String getTelefono() {
-	return telefono;
+public void setNombreCliente(String nombreCliente) {
+	this.nombreCliente = nombreCliente;
 }
 
-public void setTelefono(String telefono) {
-	this.telefono = telefono;
+public String getTelefonoCliente() {
+	return telefonoCliente;
+}
+
+public void setTelefonoCliente(String telefonoCliente) {
+	this.telefonoCliente = telefonoCliente;
 }
 
 }

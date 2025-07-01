@@ -1,89 +1,94 @@
 package clase;
 
 public class Producto {
-private int id_producto;
-private String cat_producto, nombre, garantia;
-private double precio;
-private int stock;
+private int idProducto;
+private String categoriaProducto, nombreProducto, garantiaProducto;
+private Proveedor proveedor;
+private double precioProducto;
+private int stockProducto;
 
-public Producto(int id_producto, String cat_producto, String nombre, String garantia, double precio, int stock) {
+public Producto(int idProducto, String categoriaProducto, String nombreProducto, String garantiaProducto,
+		Proveedor proveedor, double precioProducto, int stockProducto) {
 
-	this.id_producto = id_producto;
-	this.cat_producto = cat_producto;
-	this.nombre = nombre; 
-	this.garantia = garantia;
-	this.precio = precio;
-	this.stock = stock;
+	this.idProducto = idProducto;
+	this.categoriaProducto = categoriaProducto;
+	this.nombreProducto = nombreProducto;
+	this.garantiaProducto = garantiaProducto;
+	this.proveedor = proveedor;
+	this.precioProducto = precioProducto;
+	this.stockProducto = stockProducto;
 }
 
-public Producto(int id_producto, String cat_producto, String nombre, String garantia, double precio) {
+public Producto(int idProducto, String categoriaProducto, String nombreProducto, String garantiaProducto,
+		double precioProducto) {
 
-	this.id_producto = id_producto;
-	this.cat_producto = cat_producto;
-	this.nombre = nombre;
-	this.garantia = garantia;
-	this.precio = precio;
+	this.idProducto = idProducto;
+	this.categoriaProducto = categoriaProducto;
+	this.nombreProducto = nombreProducto;
+	this.garantiaProducto = garantiaProducto;
+	this.precioProducto = precioProducto;
 }
 
-public Producto(int id_producto) {
+public Producto(int idProducto, int stockProducto) {
 
-	this.id_producto = id_producto;
+	this.idProducto = idProducto;
+	this.stockProducto = stockProducto;
 }
 
-public int getId_producto() {
-	return id_producto;
+public int getIdProducto() {
+	return idProducto;
 }
 
-public void setId_producto(int id_producto) {
-	this.id_producto = id_producto;
+public void setIdProducto(int idProducto) {
+	this.idProducto = idProducto;
 }
 
-public String getCat_producto() {
-	return cat_producto;
+public String getCategoriaProducto() {
+	return categoriaProducto;
 }
 
-public void setCat_producto(String cat_producto) {
-	this.cat_producto = cat_producto;
+public void setCategoriaProducto(String categoriaProducto) {
+	this.categoriaProducto = categoriaProducto;
 }
 
-public String getNombre() {
-	return nombre;
+public String getNombreProducto() {
+	return nombreProducto;
 }
 
-public void setNombre(String nombre) {
-	this.nombre = nombre;
+public void setNombreProducto(String nombreProducto) {
+	this.nombreProducto = nombreProducto;
 }
 
-public String getGarantia() {
-	return garantia;
+public String getGarantiaProducto() {
+	return garantiaProducto;
 }
 
-public void setGarantia(String garantia) {
-	this.garantia = garantia;
+public void setGarantiaProducto(String garantiaProducto) {
+	this.garantiaProducto = garantiaProducto;
 }
 
-public double getPrecio() {
-	return precio;
+public Proveedor getProveedor() {
+	return proveedor;
 }
 
-public void setPrecio(double precio) {
-	this.precio = precio;
+public void setProveedor(Proveedor proveedor) {
+	this.proveedor = proveedor;
 }
 
-public int getStock() {
-	return stock;
+public double getPrecioProducto() {
+	return precioProducto;
 }
 
-public void setStock(int stock) {
-	this.stock = stock;
+public void setPrecioProducto(double precioProducto) {
+	this.precioProducto = precioProducto;
 }
 
-public void reducirStock(int cantidad) {
-    this.stock -= cantidad;
+public int getStockProducto() {
+	return stockProducto;
 }
 
-public void aumentarStock(int cantidad) {
-    this.stock += cantidad;
+public void setStockProducto(int stockProducto) {
+	this.stockProducto = stockProducto;
 }
 
 }
