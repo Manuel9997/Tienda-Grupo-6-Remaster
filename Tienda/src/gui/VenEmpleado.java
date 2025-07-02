@@ -232,7 +232,7 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 				{
 					txtCodNoEditable = new JTextField();
 					txtCodNoEditable.setEnabled(false);
-					txtCodNoEditable.setBounds(103, 63, 96, 25);
+					txtCodNoEditable.setBounds(162, 63, 96, 25);
 					panelVenta.add(txtCodNoEditable);
 					txtCodNoEditable.setColumns(10);
 				}
@@ -250,8 +250,8 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 					txtCantidadVenta.setColumns(10);
 				}
 				{
-					btnRegistrarVenta = new JButton("Registrar");
-					btnRegistrarVenta.setBounds(290, 95, 116, 25);
+					btnRegistrarVenta = new JButton("Finalizar Venta");
+					btnRegistrarVenta.setBounds(290, 132, 131, 25);
 					panelVenta.add(btnRegistrarVenta);
 					btnRegistrarVenta.addActionListener(this);
 					btnRegistrarVenta.setFont(new Font("Verdana", Font.PLAIN, 13));
@@ -277,7 +277,7 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 				}
 				{
 					jlabelmodo = new JButton("Modo Oscuro");
-					jlabelmodo.setBounds(10, 287, 147, 38);
+					jlabelmodo.setBounds(10, 307, 147, 38);
 					panelVenta.add(jlabelmodo);
 					jlabelmodo.addActionListener(this);
 					jlabelmodo.setFont(new Font("Verdana", Font.PLAIN, 14));
@@ -297,13 +297,6 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 					lblNewLabel_1.setBounds(258, 10, 54, 47);
 					panelVenta.add(lblNewLabel_1);
 					lblNewLabel_1.setIcon(new ImageIcon(VenEmpleado.class.getResource("/recursos/check.png")));
-				} 
-				{
-					btnModificarVenta = new JButton("Modificar");
-					btnModificarVenta.addActionListener(this);
-					btnModificarVenta.setFont(new Font("Verdana", Font.PLAIN, 13));
-					btnModificarVenta.setBounds(290, 130, 116, 25);
-					panelVenta.add(btnModificarVenta);
 				}
 				{
 					btnEliminarVenta = new JButton("Eliminar");
@@ -313,9 +306,9 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 					panelVenta.add(btnEliminarVenta);
 				}
 				{
-					btnCod = new JButton("Cód:");
+					btnCod = new JButton("Nueva venta:");
 					btnCod.setFont(new Font("Verdana", Font.PLAIN, 13));
-					btnCod.setBounds(10, 61, 73, 25);
+					btnCod.setBounds(10, 61, 142, 25);
 					panelVenta.add(btnCod);
 				}
 				{
@@ -511,9 +504,6 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 		if (e.getSource() == btnRegistrarCliente) {
 			do_btnRegistrarCliente_actionPerformed(e);
 		}
-		if (e.getSource() == btnModificarVenta) {
-			do_btnModificar_actionPerformed(e);
-		}
 		if (e.getSource() == btnEliminarVenta) {
 			do_btnEliminarEmpleado_actionPerformed(e);
 		}
@@ -543,7 +533,6 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 	private JTextField txtIdBuscarProducto;
 	private JLabel lblIdProducto;
 	private JScrollPane scrollPane_1;
-	private JButton btnModificarVenta;
 	private JButton btnEliminarVenta;
 	private JPanel panelCliente;
 	private JLabel lblDniCliente;
@@ -653,8 +642,6 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 		}
 	}
 	protected void do_btnEliminarEmpleado_actionPerformed(ActionEvent e) {
-	}
-	protected void do_btnModificar_actionPerformed(ActionEvent e) {
 	}
 	public void ListarProducto(String filtro) {
 		DefaultTableModel modelo = new DefaultTableModel();

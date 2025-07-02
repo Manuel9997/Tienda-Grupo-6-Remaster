@@ -16,6 +16,7 @@ import clase.Venta;
 import mantenimiento.MantEmpleado;
 import mantenimiento.MantHistorialVentas;
 import mantenimiento.MantProducto;
+import mantenimiento.MantProveedor;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -588,12 +589,14 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 					panelProveedor.add(scrollPane_3);
 					{
 						tablaProveedor = new JTable();
+						tablaProveedor.addMouseListener(this);
 						tablaProveedor.setFillsViewportHeight(true);
 						scrollPane_3.setViewportView(tablaProveedor);
 					}
 				}
 				{
 					btnRegistrarProveedor = new JButton("Registrar");
+					btnRegistrarProveedor.addActionListener(this);
 					btnRegistrarProveedor.setFont(new Font("Verdana", Font.PLAIN, 13));
 					btnRegistrarProveedor.setBounds(294, 248, 116, 25);
 					panelProveedor.add(btnRegistrarProveedor);
@@ -611,6 +614,103 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 					txtBuscarProveedor.setBounds(195, 36, 447, 25);
 					panelProveedor.add(txtBuscarProveedor);
 				}
+				{
+					lblId = new JLabel("ID:");
+					lblId.setFont(new Font("Verdana", Font.PLAIN, 15));
+					lblId.setBounds(77, 81, 31, 14);
+					panelProveedor.add(lblId);
+				}
+				{
+					txtIDProveedor = new JTextField();
+					txtIDProveedor.setColumns(10);
+					txtIDProveedor.setBackground(Color.WHITE);
+					txtIDProveedor.setBounds(106, 78, 78, 25);
+					panelProveedor.add(txtIDProveedor);
+				}
+				{
+					lblRuc = new JLabel("RUC:");
+					lblRuc.setFont(new Font("Verdana", Font.PLAIN, 15));
+					lblRuc.setBounds(229, 81, 44, 14);
+					panelProveedor.add(lblRuc);
+				}
+				{
+					txtRucProveedor = new JTextField();
+					txtRucProveedor.setColumns(10);
+					txtRucProveedor.setBackground(Color.WHITE);
+					txtRucProveedor.setBounds(283, 78, 164, 25);
+					panelProveedor.add(txtRucProveedor);
+				}
+				{
+					lblNombre = new JLabel("NOMBRE:");
+					lblNombre.setFont(new Font("Verdana", Font.PLAIN, 15));
+					lblNombre.setBounds(478, 81, 84, 14);
+					panelProveedor.add(lblNombre);
+				}
+				{
+					txtNombreProveedor = new JTextField();
+					txtNombreProveedor.setColumns(10);
+					txtNombreProveedor.setBackground(Color.WHITE);
+					txtNombreProveedor.setBounds(555, 78, 219, 25);
+					panelProveedor.add(txtNombreProveedor);
+				}
+				{
+					lblTelfono = new JLabel("TELÉFONO:");
+					lblTelfono.setFont(new Font("Verdana", Font.PLAIN, 15));
+					lblTelfono.setBounds(77, 122, 107, 14);
+					panelProveedor.add(lblTelfono);
+				}
+				{
+					txtTelefonoProveedor = new JTextField();
+					txtTelefonoProveedor.setColumns(10);
+					txtTelefonoProveedor.setBackground(Color.WHITE);
+					txtTelefonoProveedor.setBounds(171, 119, 134, 25);
+					panelProveedor.add(txtTelefonoProveedor);
+				}
+				{
+					lblCorreo = new JLabel("CORREO:");
+					lblCorreo.setFont(new Font("Verdana", Font.PLAIN, 15));
+					lblCorreo.setBounds(331, 122, 78, 14);
+					panelProveedor.add(lblCorreo);
+				}
+				{
+					txtCorreoProveedor = new JTextField();
+					txtCorreoProveedor.setColumns(10);
+					txtCorreoProveedor.setBackground(Color.WHITE);
+					txtCorreoProveedor.setBounds(411, 119, 201, 25);
+					panelProveedor.add(txtCorreoProveedor);
+				}
+				{
+					lblDireccin = new JLabel("DIRECCIÓN:");
+					lblDireccin.setFont(new Font("Verdana", Font.PLAIN, 15));
+					lblDireccin.setBounds(77, 169, 107, 14);
+					panelProveedor.add(lblDireccin);
+				}
+				{
+					txtDireccionProveedor = new JTextField();
+					txtDireccionProveedor.setColumns(10);
+					txtDireccionProveedor.setBackground(Color.WHITE);
+					txtDireccionProveedor.setBounds(185, 166, 178, 25);
+					panelProveedor.add(txtDireccionProveedor);
+				}
+				{
+					lblCorreo_2 = new JLabel("ESTADO:");
+					lblCorreo_2.setFont(new Font("Verdana", Font.PLAIN, 15));
+					lblCorreo_2.setBounds(373, 172, 78, 14);
+					panelProveedor.add(lblCorreo_2);
+				}
+				{
+					txtEstadoProveedor = new JTextField();
+					txtEstadoProveedor.setColumns(10);
+					txtEstadoProveedor.setBackground(Color.WHITE);
+					txtEstadoProveedor.setBounds(465, 169, 134, 25);
+					panelProveedor.add(txtEstadoProveedor);
+				}
+				{
+					lblNewLabel = new JLabel("BUSCAR:");
+					lblNewLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
+					lblNewLabel.setBounds(106, 42, 84, 14);
+					panelProveedor.add(lblNewLabel);
+				}
 			}
 			lblclock = new JLabel("");
 			lblclock.setBounds(579, 10, 256, 19);
@@ -622,8 +722,12 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		ListarProducto("");
 		ListarEmpleado("");
 		ListarHistorialVenta();
+		ListarProveedor("");
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnRegistrarProveedor) {
+			do_btnRegistrarProveedor_actionPerformed(e);
+		}
 		if (e.getSource() == btnEliminarProducto) {
 			do_btnEliminarProducto_actionPerformed(e);
 		}
@@ -699,6 +803,21 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	private JButton btnRegistrarProveedor;
 	private JButton btnModificarProveedor;
 	private JTextField txtBuscarProveedor;
+	private JLabel lblId;
+	private JTextField txtIDProveedor;
+	private JLabel lblRuc;
+	private JTextField txtRucProveedor;
+	private JLabel lblNombre;
+	private JTextField txtNombreProveedor;
+	private JLabel lblTelfono;
+	private JTextField txtTelefonoProveedor;
+	private JLabel lblCorreo;
+	private JTextField txtCorreoProveedor;
+	private JLabel lblDireccin;
+	private JTextField txtDireccionProveedor;
+	private JLabel lblCorreo_2;
+	private JTextField txtEstadoProveedor;
+	private JLabel lblNewLabel;
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
 		String actual = jlabelmodo.getText();
 		if(actual == "Modo Normal") {		
@@ -927,6 +1046,9 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	}
 	
 	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == tablaProveedor) {
+			do_tablaProveedor_mouseClicked(e);
+		}
 		if (e.getSource() == tablaEmpleado) {
 			do_tablaEmpleado_mouseClicked(e);
 		}
@@ -1221,5 +1343,75 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	    }
 
 	    tablaHistorialVentas.setModel(modelo);
+	}
+	public void ListarProveedor(String filtro) {
+		DefaultTableModel modelo = new DefaultTableModel();
+		MantProveedor mprov = new MantProveedor();
+		ArrayList<Proveedor> lista = new ArrayList<Proveedor>();
+		if(filtro.length() == 0) lista = mprov.MostrarProveedor();
+		else lista = mprov.ConsultarProveedor(filtro);
+
+		modelo.addColumn("Id Proveedor");
+		modelo.addColumn("RUC");
+		modelo.addColumn("Nombre Proveedor");
+		modelo.addColumn("Teléfono Proveedor");
+		modelo.addColumn("Correo Proveedor");
+		modelo.addColumn("Dirección Proveedor");
+		modelo.addColumn("Estado Proveedor");
+		modelo.addColumn("Fecha Proveedor");
+
+		modelo.setRowCount(lista.size());
+		int i = 0;
+
+		for (Proveedor pro : lista) {
+			modelo.setValueAt(pro.getIdProveedor(), i, 0);
+			modelo.setValueAt(pro.getRucProveedor(), i, 1);
+			modelo.setValueAt(pro.getNombreProveedor(), i, 2);
+			modelo.setValueAt(pro.getTelefonoProveedor(), i, 3);
+			modelo.setValueAt(pro.getCorreoProveedor(), i, 4);
+			modelo.setValueAt(pro.getDireccionProveedor(), i, 5);
+			modelo.setValueAt(pro.getEstadoProveedor(), i, 6);
+			modelo.setValueAt(pro.getFechaProveedor(), i, 7);
+			i++;
+			
+		}
+
+	  tablaProveedor.setModel(modelo);
+	}
+	protected void do_tablaProveedor_mouseClicked(MouseEvent e) {
+		int fila = tablaProveedor.getSelectedRow();
+		txtIDProveedor.setText(String.valueOf(tablaProveedor.getValueAt(fila, 0)));
+		txtRucProveedor.setText(String.valueOf(tablaProveedor.getValueAt(fila, 1)));
+		txtNombreProveedor.setText(String.valueOf(tablaProveedor.getValueAt(fila, 2)));
+		txtTelefonoProveedor.setText(String.valueOf(tablaProveedor.getValueAt(fila, 3)));
+		txtCorreoProveedor.setText(String.valueOf(tablaProveedor.getValueAt(fila, 4)));
+		txtDireccionProveedor.setText(String.valueOf(tablaProveedor.getValueAt(fila, 5)));
+		txtEstadoProveedor.setText(String.valueOf(tablaProveedor.getValueAt(fila, 6)));
+	}
+	protected void do_btnRegistrarProveedor_actionPerformed(ActionEvent e) {
+		try {
+			Date fecha = java.sql.Date.valueOf(LocalDate.now());
+			Proveedor prov = new Proveedor(Integer.parseInt(txtIdProveedor.getText()), 
+					txtRucProveedor.getText(), txtNombreProveedor.getText(), 
+					txtTelefonoProveedor.getText(), txtCorreoProveedor.getText(), 
+					txtDireccionProveedor.getText(), txtEstadoProveedor.getText(), fecha);
+			
+			MantProveedor mprov = new MantProveedor();
+			mprov.AgregarProveedor(prov);
+			ListarProveedor("");
+			LimpiarProveedor();
+							
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
+		}
+	}
+	void LimpiarProveedor() {
+		txtIDProveedor.setText("");
+		txtRucProveedor.setText("");
+		txtNombreProveedor.setText("");
+		txtTelefonoProveedor.setText("");
+		txtCorreoProveedor.setText("");
+		txtDireccionProveedor.setText("");
+		txtEstadoProveedor.setText("");
 	}
 }
