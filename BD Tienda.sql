@@ -3,10 +3,10 @@ use BD_TIENDA_TECNOBOX;
 #------------------------------------------------------- LOGIN ADMINISTRADOR -------------------------------------------------------------
 create table LoginAdmi(
 usuario char(4) primary key,
-contraseña int
+contraseña char(5)
 );
-insert into LoginAdmi values('A001', 12345);
-select * from LoginAdmi where usuario = '' and contraseña = '';
+insert into LoginAdmi values('A001', '12345');
+select * from LoginAdmi where usuario = "" and contraseña = '';
 
 #------------------------------------------------------------- CLIENTE -------------------------------------------------------------------
 create table Cliente(      
@@ -135,43 +135,120 @@ select * from Empleado where id_empleado = id;
 
 call sp_BuscarEmpleado(601);
 
+#------------------------------------------------------------- PROVEEDOR ------------------------------------------------------------------
+create table Proveedor (
+id_proveedor int primary key,
+ruc_proveedor char(11) not null unique,
+nombre_proveedor varchar(50) not null,
+telefono_proveedor char(9) not null,
+correo_proveedor varchar(50) not null,
+direccion_proveedor varchar(50) not null,
+estado_proveedor varchar(10) not null,
+fecha_proveedor date default (current_date) not null
+);
+select * from Proveedor;
+insert into Proveedor values(1, '20678901234', 'Electrónica y Cía SAC', '922334455', 'contactoelectronica@gmail.com', 'Calle Los Laureles 321, Chiclayo', 'Activo', '2025-04-10');
+insert into Proveedor values(2, '20789012345', 'Andes Tech Distribuciones S.R.L.', '933221100', 'infoandestech@gmail.com', 'Av. Cusco 123, Cusco', 'Activo', '2025-04-10');
+insert into Proveedor values(3, '20890123456', 'Componentes del Sur SAC', '988776655', 'ventascompsur@gmail.com', 'Carretera Panamericana Km 45, Tacna', 'Inactivo', '2025-04-10');
+insert into Proveedor values(4, '20901234567', 'Lima Electrónica Import S.A.C', '955663322', 'ventasleimport@gmail.com', 'Av. Javier Prado Este 998, Lima', 'Activo', '2025-04-25');
+insert into Proveedor values(5, '21012345678', 'Perú Tecnología Global EIRL', '911223344', 'adminperutecglobal@gmail.com', 'Av. Grau 321, Piura', 'Activo', '2025-04-30');
+insert into Proveedor values(6, '21123456789', 'Mega Hardware y Accesorios SAC', '944556677', 'contactomegahardware@gmail.com', 'Calle Comercio 456, Iquitos', 'Activo', '2025-05-15');
+insert into Proveedor values(7, '21234567890', 'Zona Digital Proveedores SAC', '900112233', 'zonadigitalproveedores@gmail.com', 'Calle 28 de Julio 202, Huancayo', 'Activo', '2025-05-15');
+
+create procedure sp_MostrarProveedor()
+select * from Proveedor;
+
+call sp_MostrarProveedor();
+
+create procedure sp_AgregarProveedor(
+id int,
+ruc char(11),
+nombre varchar(50),
+telefono char(9),
+correo varchar(50),
+direccion varchar(50),
+estado varchar(10)
+)
+insert into Proveedor (id_proveedor, ruc_proveedor, nombre_proveedor, telefono_proveedor, correo_proveedor, direccion_proveedor, estado_proveedor) 
+values (id, ruc, nombre, telefono, correo, direccion, estado);
+
+call sp_AgregarProveedor(8, '21345678901', 'TechNova Distribuciones E.I.R.L.', '923456789', 'ventastechnova@gmail.com', 'Av. El Sol 789, Cajamarca', 'Activo');
+call sp_MostrarProveedor();
+
+create procedure sp_ModificarProveedor( 
+id int,
+ruc char(11),
+nombre varchar(50),
+telefono char(9),
+correo varchar(50), 
+direccion varchar(50),
+estado varchar(10),
+fecha date
+)
+update Proveedor set ruc_proveedor = ruc, nombre_proveedor = nombre, telefono_proveedor = telefono, correo_proveedor = correo, direccion_proveedor = direccion, estado_proveedor = estado
+where id_proveedor = id;
+
+call sp_ModificarProveedor(7, '21234567886', 'Zona Digital Proveedores SAC', '900112233', 'zonadigitalproveedores@gmail.com', 'Calle 28 de Julio 202, Huancayo', 'Activo', '2025-05-15');
+call sp_MostrarProveedor();
+
+create procedure sp_BuscarProveedor(
+id int
+)
+select * from Proveedor where id_proveedor = id;
+
+call sp_BuscarProveedor(6);
+
 #------------------------------------------------------------- PRODUCTO -----------------------------------------------------------------
 create table Producto(
 id_producto int primary key,
 categoria_producto varchar(15) not null,
 nombre_producto varchar(30) not null,
 garantia_producto varchar(10) not null,
+id_proveedor int not null,
 precio_producto real not null,
-stock_producto int not null
+stock_producto int not null,
+
+foreign key (id_proveedor) references Proveedor(id_proveedor)
 );
 select * from Producto;
-insert into Producto values(189, 'Laptop', 'Asus TUF Gaming F15', '1 año', 3500.00, 5);
-insert into Producto values(145, 'Laptop', 'HP Pavilion x360', '1 año', 2800.00, 3);
-insert into Producto values(378, 'Mouse', 'Logitech G502 Hero', '6 meses', 180.00, 15);
-insert into Producto values(873, 'Teclado', 'Redragon Kumara K552', '6 meses', 150.00, 10);
-insert into Producto values(489, 'Celular', 'Samsung Galaxy S23', '1 año', 3600.00, 4);
-insert into Producto values(151, 'Tablet', 'iPad 9na Generación', '6 meses', 2200.00, 6);
-insert into Producto values(512, 'Impresora', 'HP Ink Tank 415', '1 año', 600.00, 2);
-insert into Producto values(458, 'Cámara Web', 'Logitech C920 HD', '6 meses', 250.00, 8);
-insert into Producto values(155, 'Router', 'TP-Link Archer AX10 Wi-Fi 6', '1 año', 450.00, 9);
-insert into Producto values(156, 'Laptop', 'Dell Inspiron 15 3000', '1 año', 2900.00, 4);
-insert into Producto values(158, 'Teclado', 'Logitech K380 Inalámbrico', '6 meses', 130.00, 10);
-insert into Producto values(163, 'Consola', 'PlayStation 5', '3 meses', 3600.00, 2);
-insert into Producto values(164, 'Impresora', 'Epson EcoTank L3250', '1 año', 850.00, 3);
-insert into Producto values(165, 'Laptop', 'Lenovo IdeaPad 3 Ryzen 5', '1 año', 3100.00, 6);
-insert into Producto values(166, 'Celular', 'iPhone 13', '1 año', 4200.00, 3);
-insert into Producto values(167, 'Mouse', 'Razer DeathAdder Essential', '6 meses', 160.00, 12);
-insert into Producto values(168, 'Tablet', 'Samsung Galaxy Tab A8', '6 meses', 1700.00, 5);
-insert into Producto values(169, 'Audífonos', 'JBL Tune 510BT', '6 meses', 240.00, 9);
-insert into Producto values(170, 'Teclado', 'Corsair K55 RGB', '6 meses', 200.00, 7);
-insert into Producto values(173, 'Cámara Web', 'Microsoft LifeCam HD-3000', '6 meses', 220.00, 6);
-insert into Producto values(174, 'Impresora', 'Canon PIXMA G2160', '1 año', 750.00, 2);
-insert into Producto values(190, 'Cargador', 'Samsung C-C 25w', '6 meses', 89.00, 5);
-insert into Producto values(215, 'Cargador', 'Samsung C-C 15w', '6 meses', 69.00, 7);
-insert into Producto values(230, 'Cargador', 'Samsung USB-C 25w', '6 meses', 89.00, 5);
+insert into Producto values(189, 'Laptop', 'Asus TUF Gaming F15', '1 año', 1, 3500.00, 5);
+insert into Producto values(145, 'Laptop', 'HP Pavilion x360', '1 año', 1, 2800.00, 3);
+insert into Producto values(378, 'Mouse', 'Logitech G502 Hero', '6 meses', 6, 180.00, 15);
+insert into Producto values(873, 'Teclado', 'Redragon Kumara K552', '6 meses', 6, 150.00, 10);
+insert into Producto values(489, 'Celular', 'Samsung Galaxy S23', '1 año', 3, 3600.00, 4);
+insert into Producto values(151, 'Tablet', 'iPad 9na Generación', '6 meses', 2, 2200.00, 6);
+insert into Producto values(512, 'Impresora', 'HP Ink Tank 415', '1 año', 4, 600.00, 2);
+insert into Producto values(458, 'Cámara Web', 'Logitech C920 HD', '6 meses', 5, 250.00, 8);
+insert into Producto values(155, 'Router', 'TP-Link Archer AX10 Wi-Fi 6', '1 año', 5, 450.00, 9);
+insert into Producto values(156, 'Laptop', 'Dell Inspiron 15 3000', '1 año', 1, 2900.00, 4);
+insert into Producto values(158, 'Teclado', 'Logitech K380 Inalámbrico', '6 meses', 6, 130.00, 10);
+insert into Producto values(163, 'Consola', 'PlayStation 5', '3 meses', 6, 3600.00, 2);
+insert into Producto values(164, 'Impresora', 'Epson EcoTank L3250', '1 año', 4, 850.00, 3);
+insert into Producto values(165, 'Laptop', 'Lenovo IdeaPad 3 Ryzen 5', '1 año', 1, 3100.00, 6);
+insert into Producto values(166, 'Celular', 'iPhone 13', '1 año', 3, 4200.00, 3);
+insert into Producto values(167, 'Mouse', 'Razer DeathAdder Essential', '6 meses', 6, 160.00, 12);
+insert into Producto values(168, 'Tablet', 'Samsung Galaxy Tab A8', '6 meses', 2, 1700.00, 5);
+insert into Producto values(169, 'Audífonos', 'JBL Tune 510BT', '6 meses', 2, 240.00, 9);
+insert into Producto values(170, 'Teclado', 'Corsair K55 RGB', '6 meses', 6, 200.00, 7);
+insert into Producto values(173, 'Cámara Web', 'Microsoft LifeCam HD-3000', '6 meses', 5, 220.00, 6);
+insert into Producto values(174, 'Impresora', 'Canon PIXMA G2160', '1 año', 4, 750.00, 2);
+insert into Producto values(190, 'Cargador', 'Samsung C-C 25w', '6 meses', 7, 89.00, 5);
+insert into Producto values(215, 'Cargador', 'Samsung C-C 15w', '6 meses', 7, 69.00, 7);
+insert into Producto values(230, 'Cargador', 'Samsung USB-C 25w', '6 meses', 7, 89.00, 5);
 
 create procedure sp_MostrarProducto()
-select * from Producto;
+select
+p.id_producto,
+p.categoria_producto,
+p.nombre_producto,
+p.garantia_producto,
+prov.nombre_proveedor,
+p.precio_producto,
+p.stock_producto
+
+from Producto as p
+join Proveedor as prov on p.id_proveedor = prov.id_proveedor
+order by p.id_producto ASC;
 
 call sp_MostrarProducto();
 
@@ -180,12 +257,13 @@ id int,
 categoria varchar(15),
 nombre varchar(30),
 garantia varchar(10),
+idProveedor int,
 precio real,
 stock int
 )
-insert into Producto values(id, categoria, nombre, garantia, precio, stock);
+insert into Producto values(id, categoria, nombre, garantia, idProveedor, precio, stock);
 
-call sp_AgregarProducto(245, 'Tablet', 'Samsung Galaxy Tab S9 FE', '6 meses', 1500, 10);
+call sp_AgregarProducto(245, 'Tablet', 'Samsung Galaxy Tab S9 FE', '6 meses', 8, 1500, 10);
 call sp_MostrarProducto();
 
 create procedure sp_ModificarProducto(  
@@ -193,12 +271,13 @@ id int,
 categoria varchar(15),
 nombre varchar(30),
 garantia varchar(10),
+idProveedor int,
 precio real
 )
-update Producto set id_producto = id, categoria_producto = categoria, nombre_producto = nombre, garantia_producto = garantia, precio_producto = precio
+update Producto set categoria_producto = categoria, nombre_producto = nombre, garantia_producto = garantia, id_proveedor =idProveedor, precio_producto = precio
 where id_producto = id;
 
-call sp_ModificarProducto(174, 'Impresora', 'Canon PIXMA G2160', '6 meses', 750.00);
+call sp_ModificarProducto(174, 'Impresora', 'Canon PIXMA G2160', '6 meses', 4, 750.00);
 call sp_MostrarProducto();
 
 create procedure sp_EliminarProducto(
@@ -230,18 +309,18 @@ end $$
 DELIMITER ;
 
 call sp_AumentarStock(215, 3);
-call sp_MostrarProducto(); 
+call sp_MostrarProducto();
 
 #-------------------------------------------------------------- VENTA --------------------------------------------------------------------
 create table Venta(
-codigo_venta int primary key auto_increment,
+codigo_venta int primary key,
 dni_cliente char(8) not null,
 fecha_venta date default (current_date) not null, 
 hora_venta time default (current_time) not null,
 tipopago_venta varchar(15) not null,
 comprobante_venta varchar(10) not null,
-id_empleado int not null,
-total_venta real not null,
+id_empleado int null,
+total_venta real null,
 
 foreign key (dni_cliente) references Cliente(dni_cliente),
 foreign key (id_empleado) references Empleado(id_empleado)
@@ -355,16 +434,17 @@ order by v.codigo_venta ASC;
 call sp_MostrarHistorialVenta();
 
 create procedure sp_AgregarVenta(
+codigoVenta int,
 dniCliente char(8),
 tipopago varchar(15),
 comprobante varchar(10),
 idEmpleado int
 )
 
-insert into Venta (dni_cliente, tipopago_venta, comprobante_venta, id_empleado, total_venta)
-values (dniCliente, tipopago, comprobante, idEmpleado, 0);
+insert into Venta (codigo_venta, dni_cliente, tipopago_venta, comprobante_venta, id_empleado, total_venta)
+values (codigoVenta, dniCliente, tipopago, comprobante, idEmpleado, 0);
 
-call sp_AgregarVenta('74539012', 'Débito', 'Boleta', 412);
+call sp_AgregarVenta(11, '74539012', 'Débito', 'Boleta', 412);
 call sp_MostrarVenta(); 
 
 DELIMITER $$
@@ -421,6 +501,7 @@ end $$
 DELIMITER ;
 
 call sp_CalcularTotalVenta(11);
+call sp_MostrarHIstorialVenta();
 
 DELIMITER $$
 create procedure sp_BuscarHistorialVenta(IN codVenta INT)
