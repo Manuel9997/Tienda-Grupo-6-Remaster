@@ -189,6 +189,7 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 			contentPane.add(tabbedPane);
 			{
 				panelVenta = new JPanel();
+				panelVenta.setBackground(UIManager.getColor("Button.light"));
 				tabbedPane.addTab("Venta", null, panelVenta, null);
 				panelVenta.setLayout(null);
 				{
@@ -378,6 +379,7 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 			}
 			{
 				panelProducto = new JPanel();
+				panelProducto.setBackground(UIManager.getColor("Button.light"));
 				tabbedPane.addTab("Producto", null, panelProducto, null);
 				panelProducto.setLayout(null);
 				{
@@ -406,6 +408,7 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 			}
 			{
 				panelCliente = new JPanel();
+				panelCliente.setBackground(UIManager.getColor("Button.light"));
 				tabbedPane.addTab("Cliente", null, panelCliente, null);
 				panelCliente.setLayout(null);
 				{
@@ -575,70 +578,6 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
  
 		} catch (Exception e2) {
 			JOptionPane.showMessageDialog(this, "Primero debe ingresar valores para usar esta función");
-		}
-	}
-	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
-		String actual = jlabelmodo.getText();
-		if(actual == "Modo Normal") {        
-		    contentPane.setBackground(UIManager.getColor("Button.light"));
-		    lblRegistroDeVentas.setForeground(Color.BLACK);
-		    lblDni.setForeground(Color.BLACK);
-		    lblclock.setForeground(Color.BLACK);
-		    lblId.setForeground(Color.BLACK);
-		    lblCantidad.setForeground(Color.BLACK);
-		    lblNewLabel.setForeground(Color.BLACK);
-		    lblComprobante.setForeground(Color.BLACK);
-		    lblVendedor.setForeground(Color.BLACK);
-		    txtCodNoEditable.setBackground(Color.WHITE);
-		    cboTipoPago.setBackground(Color.WHITE);
-		    cboComprobante.setBackground(Color.WHITE);
-		    txtCantidadVenta.setBackground(Color.WHITE);
-		    
-		    txtCodNoEditable.setForeground(Color.BLACK);
-		    txtCantidadVenta.setForeground(Color.BLACK);
-		    cboTipoPago.setForeground(Color.BLACK);
-		    cboComprobante.setForeground(Color.BLACK);
-		    jlabelmodo.setText("Modo Oscuro");
-		}
-		else if(actual == "Modo Oscuro"){
-		    contentPane.setBackground(Color.BLACK);
-		    lblRegistroDeVentas.setForeground(Color.LIGHT_GRAY);
-		    lblDni.setForeground(Color.LIGHT_GRAY);
-		    lblId.setForeground(Color.LIGHT_GRAY);
-		    lblCantidad.setForeground(Color.LIGHT_GRAY);
-		    lblclock.setForeground(Color.LIGHT_GRAY);
-		    lblNewLabel.setForeground(Color.LIGHT_GRAY);
-		    lblComprobante.setForeground(Color.LIGHT_GRAY);
-		    lblVendedor.setForeground(Color.LIGHT_GRAY);
-		    txtCodNoEditable.setBackground(Color.DARK_GRAY);
-		    cboTipoPago.setBackground(Color.DARK_GRAY);
-		    txtCantidadVenta.setBackground(Color.DARK_GRAY);
-		    
-		    txtCodNoEditable.setForeground(Color.WHITE);
-		    txtCantidadVenta.setForeground(Color.WHITE);
-		    cboTipoPago.setForeground(Color.WHITE);
-		    cboComprobante.setForeground(Color.WHITE);
-		    jlabelmodo.setText("Modo Frío");
-		}   
-		else if(actual == "Modo Frío") {
-		    contentPane.setBackground(new Color(10, 25, 45));
-		    lblRegistroDeVentas.setForeground(new Color(150, 220, 255));
-		    lblDni.setForeground(new Color(150, 220, 255));
-		    lblId.setForeground(new Color(150, 220, 255));
-		    lblCantidad.setForeground(new Color(150, 220, 255));
-		    lblclock.setForeground(new Color(150, 220, 255));
-		    lblNewLabel.setForeground(new Color(150, 220, 255));
-		    lblComprobante.setForeground(new Color(150, 220, 255));
-		    lblVendedor.setForeground(new Color(150, 220, 255));
-		    txtCodNoEditable.setBackground(new Color(30, 80, 120));
-		    cboTipoPago.setBackground(new Color(30, 80, 120));
-		    cboComprobante.setBackground(new Color(30, 80, 120));
-		    txtCantidadVenta.setBackground(new Color(30, 80, 120));    
-		    txtCodNoEditable.setForeground(Color.WHITE);
-		    txtCantidadVenta.setForeground(Color.WHITE);
-		    cboTipoPago.setForeground(Color.WHITE);
-		    cboComprobante.setForeground(Color.WHITE);
-		    jlabelmodo.setText("Modo Normal");
 		}
 	}
 	protected void do_btnEliminarEmpleado_actionPerformed(ActionEvent e) {
@@ -843,5 +782,201 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 			JOptionPane.showMessageDialog(this, "No permite letras");
 		}
 	}
+	
+	//AGREGAR ESTILOS DE VISUALIZACION
+	
+
+	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
+		String actual = jlabelmodo.getText();
+		if(actual == "Modo Normal") {        
+		    contentPane.setBackground(UIManager.getColor("Button.light"));
+		    panelCliente.setBackground(UIManager.getColor("Button.light"));
+		    panelProducto.setBackground(UIManager.getColor("Button.light"));
+		    panelVenta.setBackground(UIManager.getColor("Button.light"));
+		    tablaVenta.setBackground(UIManager.getColor("Button.light"));
+		    tablaCliente.setBackground(UIManager.getColor("Button.light"));
+		    tablaProducto.setBackground(UIManager.getColor("Button.light"));
+		    tablaVenta.setForeground(Color.BLACK);
+		    tablaCliente.setForeground(Color.BLACK);
+		    tablaProducto.setForeground(Color.BLACK);
+		    lblIdVendedor.setForeground(Color.BLACK);
+		    lblCod.setForeground(Color.BLACK);
+		    lblIdProducto.setForeground(Color.BLACK);
+		    lblIdProducto_1.setForeground(Color.BLACK);
+		    lblDniCliente.setForeground(Color.BLACK);
+		    lblTeleCliente.setForeground(Color.BLACK);
+		    lblIdNombreCliente.setForeground(Color.BLACK);
+		    lblRegistroDeVentas.setForeground(Color.BLACK);
+		    lblDni.setForeground(Color.BLACK);
+		    lblclock.setForeground(Color.BLACK);
+		    lblId.setForeground(Color.BLACK);
+		    lblCantidad.setForeground(Color.BLACK);
+		    lblNewLabel.setForeground(Color.BLACK);
+		    lblComprobante.setForeground(Color.BLACK);
+		    lblVendedor.setForeground(Color.BLACK);
+		    txtCodNoEditable.setBackground(Color.WHITE);
+		    txtCodNoEditable.setBackground(Color.WHITE);
+		    txtDniClienteVenta.setBackground(Color.WHITE);
+		    txtNombreVendedor.setBackground(Color.WHITE);
+		    txtCodEditable.setBackground(Color.WHITE);
+		    txtIdProductoVenta.setBackground(Color.WHITE);
+		    txtCantidadVenta.setBackground(Color.WHITE);
+		    txtIdBuscarProducto.setBackground(Color.WHITE);
+		    txtBuscarCliente.setBackground(Color.WHITE);
+		    txtDniCliente.setBackground(Color.WHITE);
+		    txtNombreCliente.setBackground(Color.WHITE);
+		    txtTelefonoCliente.setBackground(Color.WHITE);
+		    txtCodNoEditable.setForeground(Color.WHITE);
+		    txtDniClienteVenta.setForeground(Color.WHITE);
+		    txtNombreVendedor.setForeground(Color.WHITE);
+		    txtCodEditable.setForeground(Color.WHITE);
+		    txtIdProductoVenta.setForeground(Color.WHITE);
+		    txtIdBuscarProducto.setForeground(Color.WHITE);
+		    txtBuscarCliente.setForeground(Color.WHITE);
+		    txtDniCliente.setForeground(Color.WHITE);
+		    txtNombreCliente.setForeground(Color.WHITE);
+		    txtTelefonoCliente.setForeground(Color.WHITE);
+		    cboComprobante.setBackground(Color.WHITE);
+		    cboComprobante.setForeground(Color.BLACK);
+		    cboIdVendedor.setBackground(Color.WHITE);
+		    cboIdVendedor.setForeground(Color.BLACK);
+		    
+		    
+		    
+		    
+		    
+		    
+		    cboTipoPago.setBackground(Color.WHITE);
+		    cboComprobante.setBackground(Color.WHITE);
+		    txtCantidadVenta.setBackground(Color.WHITE); 
+		    txtCodNoEditable.setForeground(Color.BLACK);
+		    txtCantidadVenta.setForeground(Color.BLACK);
+		    cboTipoPago.setForeground(Color.BLACK);
+		    jlabelmodo.setText("Modo Oscuro");
+		}
+		else if(actual == "Modo Oscuro"){
+		    contentPane.setBackground(Color.BLACK);
+		    panelCliente.setBackground(Color.BLACK);
+		    panelProducto.setBackground(Color.BLACK);
+		    panelVenta.setBackground(Color.BLACK);
+		    tablaVenta.setBackground(Color.BLACK);
+		    tablaCliente.setBackground(Color.BLACK);
+		    tablaProducto.setBackground(Color.BLACK);
+		    tablaVenta.setForeground(Color.LIGHT_GRAY);    
+		    tablaCliente.setForeground(Color.LIGHT_GRAY);  
+		    tablaProducto.setForeground(Color.LIGHT_GRAY); 
+		    lblIdVendedor.setForeground(Color.LIGHT_GRAY);
+		    lblCod.setForeground(Color.LIGHT_GRAY);
+		    lblIdProducto.setForeground(Color.LIGHT_GRAY);
+		    lblIdProducto_1.setForeground(Color.LIGHT_GRAY);
+		    lblDniCliente.setForeground(Color.LIGHT_GRAY);
+		    lblTeleCliente.setForeground(Color.LIGHT_GRAY);
+		    lblIdNombreCliente.setForeground(Color.LIGHT_GRAY);
+		    lblRegistroDeVentas.setForeground(Color.LIGHT_GRAY);
+		    lblDni.setForeground(Color.LIGHT_GRAY);
+		    lblId.setForeground(Color.LIGHT_GRAY);
+		    lblCantidad.setForeground(Color.LIGHT_GRAY);
+		    lblclock.setForeground(Color.LIGHT_GRAY);
+		    lblNewLabel.setForeground(Color.LIGHT_GRAY);
+		    lblComprobante.setForeground(Color.LIGHT_GRAY);
+		    lblVendedor.setForeground(Color.LIGHT_GRAY);
+		    txtCodNoEditable.setBackground(Color.DARK_GRAY);
+		    txtCodNoEditable.setBackground(Color.DARK_GRAY);
+		    txtDniClienteVenta.setBackground(Color.DARK_GRAY);
+		    txtNombreVendedor.setBackground(Color.DARK_GRAY);
+		    txtCodEditable.setBackground(Color.DARK_GRAY);
+		    txtIdProductoVenta.setBackground(Color.DARK_GRAY);
+		    txtCantidadVenta.setBackground(Color.DARK_GRAY);
+		    txtIdBuscarProducto.setBackground(Color.DARK_GRAY);
+		    txtBuscarCliente.setBackground(Color.DARK_GRAY);
+		    txtDniCliente.setBackground(Color.DARK_GRAY);
+		    txtNombreCliente.setBackground(Color.DARK_GRAY);
+		    txtTelefonoCliente.setBackground(Color.DARK_GRAY);
+		    txtCodNoEditable.setForeground(Color.WHITE);
+		    txtDniClienteVenta.setForeground(Color.WHITE);
+		    txtNombreVendedor.setForeground(Color.WHITE);
+		    txtCodEditable.setForeground(Color.WHITE);
+		    txtIdProductoVenta.setForeground(Color.WHITE);
+		    txtIdBuscarProducto.setForeground(Color.WHITE);
+		    txtBuscarCliente.setForeground(Color.WHITE);
+		    txtDniCliente.setForeground(Color.WHITE);
+		    txtNombreCliente.setForeground(Color.WHITE);
+		    txtTelefonoCliente.setForeground(Color.WHITE);
+		    cboComprobante.setForeground(Color.WHITE);
+		    cboComprobante.setBackground(Color.DARK_GRAY);
+		    cboIdVendedor.setForeground(Color.WHITE);
+		    cboIdVendedor.setBackground(Color.DARK_GRAY);
+		    cboTipoPago.setBackground(Color.DARK_GRAY);
+		    txtCantidadVenta.setBackground(Color.DARK_GRAY);		    
+		    txtCodNoEditable.setForeground(Color.WHITE);
+		    txtCantidadVenta.setForeground(Color.WHITE);
+		    cboTipoPago.setForeground(Color.WHITE);
+		    jlabelmodo.setText("Modo Frío");
+		}   
+		else if(actual == "Modo Frío") {
+		    contentPane.setBackground(new Color(10, 25, 45));
+		    panelCliente.setBackground(new Color(10, 25, 45));
+		    panelProducto.setBackground(new Color(10, 25, 45));
+		    panelVenta.setBackground(new Color(10, 25, 45));
+		    tablaVenta.setBackground(new Color(10, 25, 45));
+		    tablaCliente.setBackground(new Color(10, 25, 45));
+		    tablaProducto.setBackground(new Color(10, 25, 45));
+		    tablaVenta.setForeground(new Color(150, 220, 255));
+		    tablaCliente.setForeground(new Color(150, 220, 255));
+		    tablaProducto.setForeground(new Color(150, 220, 255));
+		    lblIdVendedor.setForeground(new Color(150, 220, 255));
+		    lblCod.setForeground(new Color(150, 220, 255));
+		    lblIdProducto.setForeground(new Color(150, 220, 255));
+		    lblIdProducto_1.setForeground(new Color(150, 220, 255));
+		    lblDniCliente.setForeground(new Color(150, 220, 255));
+		    lblTeleCliente.setForeground(new Color(150, 220, 255));
+		    lblIdNombreCliente.setForeground(new Color(150, 220, 255)); 
+		    lblRegistroDeVentas.setForeground(new Color(150, 220, 255));
+		    lblDni.setForeground(new Color(150, 220, 255));
+		    lblId.setForeground(new Color(150, 220, 255));
+		    lblCantidad.setForeground(new Color(150, 220, 255));
+		    lblclock.setForeground(new Color(150, 220, 255));
+		    lblNewLabel.setForeground(new Color(150, 220, 255));
+		    lblComprobante.setForeground(new Color(150, 220, 255));
+		    lblVendedor.setForeground(new Color(150, 220, 255));
+		    txtCodNoEditable.setBackground(new Color(30, 80, 120));
+		    txtDniClienteVenta.setBackground(new Color(30, 80, 120));
+		    txtNombreVendedor.setBackground(new Color(30, 80, 120));
+		    txtCodEditable.setBackground(new Color(30, 80, 120));
+		    txtIdProductoVenta.setBackground(new Color(30, 80, 120));
+		    txtCantidadVenta.setBackground(new Color(30, 80, 120));
+		    txtIdBuscarProducto.setBackground(new Color(30, 80, 120));
+		    txtBuscarCliente.setBackground(new Color(30, 80, 120));
+		    txtDniCliente.setBackground(new Color(30, 80, 120));
+		    txtNombreCliente.setBackground(new Color(30, 80, 120));
+		    txtTelefonoCliente.setBackground(new Color(30, 80, 120));
+		    txtCodNoEditable.setForeground(Color.WHITE);
+		    txtDniClienteVenta.setForeground(Color.WHITE);
+		    txtNombreVendedor.setForeground(Color.WHITE);
+		    txtCodEditable.setForeground(Color.WHITE);
+		    txtIdProductoVenta.setForeground(Color.WHITE);
+		    txtIdBuscarProducto.setForeground(Color.WHITE);
+		    txtBuscarCliente.setForeground(Color.WHITE);
+		    txtDniCliente.setForeground(Color.WHITE);
+		    txtNombreCliente.setForeground(Color.WHITE);
+		    txtTelefonoCliente.setForeground(Color.WHITE);
+		    cboComprobante.setBackground(new Color(30, 80, 120)); 
+		    cboComprobante.setForeground(Color.WHITE);            
+		    cboIdVendedor.setBackground(new Color(30, 80, 120));  
+		    cboIdVendedor.setForeground(Color.WHITE);    
+		    
+		    
+		    
+		    txtCodNoEditable.setBackground(new Color(30, 80, 120));
+		    cboTipoPago.setBackground(new Color(30, 80, 120));
+		    txtCantidadVenta.setBackground(new Color(30, 80, 120));    
+		    txtCodNoEditable.setForeground(Color.WHITE);
+		    txtCantidadVenta.setForeground(Color.WHITE);
+		    cboTipoPago.setForeground(Color.WHITE);
+		    jlabelmodo.setText("Modo Normal");
+		}
+	}
+	
+	
 }
 

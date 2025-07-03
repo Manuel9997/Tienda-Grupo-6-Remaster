@@ -38,13 +38,15 @@ public ArrayList<Proveedor> MostrarProveedor() {
 public void AgregarProveedor(Proveedor p) {
 	try {
 		Connection cnx = ConexionMySQL.getConexion();
-		CallableStatement csta = cnx.prepareCall("{call sp_AgregarProveedor(?, ?, ?, ?, ?, ?)}");
-		csta.setString(1, p.getRucProveedor());
-		csta.setString(2, p.getNombreProveedor());
-		csta.setString(3, p.getTelefonoProveedor());
-		csta.setString(4, p.getCorreoProveedor());
-		csta.setString(5, p.getDireccionProveedor());
-		csta.setString(6, p.getEstadoProveedor());
+		CallableStatement csta = cnx.prepareCall("{call sp_AgregarProveedor(?, ?, ?, ?, ?, ?, ?,?)}");
+		csta.setInt(1, p.getIdProveedor());
+		csta.setString(2, p.getRucProveedor());
+		csta.setString(3, p.getNombreProveedor());
+		csta.setString(4, p.getTelefonoProveedor());
+		csta.setString(5, p.getCorreoProveedor());
+		csta.setString(6, p.getDireccionProveedor());
+		csta.setString(7, p.getEstadoProveedor());
+		csta.setDate(8, new java.sql.Date(p.getFechaProveedor().getTime()));
 		csta.executeUpdate();
 		
 	} catch (Exception e) {
@@ -69,6 +71,20 @@ public void ModificarProveedor(Proveedor p) {
 		System.out.println("ERROR al modificar proveedor: " + e);		
 	}    
 }
+
+public void EliminarProveedor(int idproveedor) {
+    try {
+        Connection cnx = ConexionMySQL.getConexion();
+        CallableStatement csta = cnx.prepareCall("{call sp_EliminarProveedor(?)}");
+        csta.setInt(1, idproveedor);
+        csta.executeUpdate();
+    } catch (Exception e) {
+        System.out.println("ERROR al eliminar proveedor: " + e);
+    }
+}
+
+
+
 public Proveedor BuscarProveedor(int idProveedor) {
 	Proveedor proveedor = null;
 	try {

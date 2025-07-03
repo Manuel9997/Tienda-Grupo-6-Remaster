@@ -146,6 +146,8 @@ direccion_proveedor varchar(50) not null,
 estado_proveedor varchar(10) not null,
 fecha_proveedor date default (current_date) not null
 );
+
+
 select * from Proveedor;
 insert into Proveedor values(1, '20678901234', 'Electrónica y Cía SAC', '922334455', 'contactoelectronica@gmail.com', 'Calle Los Laureles 321, Chiclayo', 'Activo', '2025-04-10');
 insert into Proveedor values(2, '20789012345', 'Andes Tech Distribuciones S.R.L.', '933221100', 'infoandestech@gmail.com', 'Av. Cusco 123, Cusco', 'Activo', '2025-04-10');
@@ -160,6 +162,9 @@ select * from Proveedor;
 
 call sp_MostrarProveedor();
 
+DROP PROCEDURE IF EXISTS sp_AgregarProveedor;
+
+
 create procedure sp_AgregarProveedor(
 id int,
 ruc char(11),
@@ -167,12 +172,13 @@ nombre varchar(50),
 telefono char(9),
 correo varchar(50),
 direccion varchar(50),
-estado varchar(10)
+estado varchar(10),
+fecha date
 )
-insert into Proveedor (id_proveedor, ruc_proveedor, nombre_proveedor, telefono_proveedor, correo_proveedor, direccion_proveedor, estado_proveedor) 
-values (id, ruc, nombre, telefono, correo, direccion, estado);
+insert into Proveedor (id_proveedor, ruc_proveedor, nombre_proveedor, telefono_proveedor, correo_proveedor, direccion_proveedor, estado_proveedor,fecha_proveedor) 
+values (id, ruc, nombre, telefono, correo, direccion, estado,fecha);
 
-call sp_AgregarProveedor(8, '21345678901', 'TechNova Distribuciones E.I.R.L.', '923456789', 'ventastechnova@gmail.com', 'Av. El Sol 789, Cajamarca', 'Activo');
+call sp_AgregarProveedor(10, '21335678867', 'Whitrec.SA.C', '917471964', 'tecnoso@gmail.com', 'Mz l4 lt12, Bellavista', 'Activo','2025-05-15');
 call sp_MostrarProveedor();
 
 create procedure sp_ModificarProveedor( 
@@ -490,7 +496,7 @@ declare total real;
 select sum(subtotal_detalleVenta)
 into total
 from DetalleVenta
-where codigo_venta = codVenta;
+where codigo_venta = codVenta;loginadmiusuario
 
 -- Actualizar el total en la tabla Venta
 update Venta

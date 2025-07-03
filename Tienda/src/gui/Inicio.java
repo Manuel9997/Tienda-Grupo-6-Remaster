@@ -2,15 +2,27 @@
 
 import java.awt.EventQueue;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URL;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
@@ -20,6 +32,9 @@ import java.awt.Color;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import javax.swing.JSlider;
+import javax.swing.UIManager;
+import java.awt.SystemColor;
 
 public class Inicio extends JFrame implements ActionListener {
 
@@ -39,7 +54,9 @@ public class Inicio extends JFrame implements ActionListener {
 	public int minute;
 	public int hour;
 	public String tmam;
-	
+	private static Clip clipreproduciendo;
+	private JSlider controlvol;
+	private static FloatControl volumeControl;
 
 	/**
 	 * Launch the application.
@@ -138,14 +155,17 @@ public class Inicio extends JFrame implements ActionListener {
 		};
 
 		clock.start();
-		
+
 	}
 	
 	
 	/**
 	 * Create the frame.
+	 * @throws LineUnavailableException 
+	 * @throws IOException 
+	 * @throws UnsupportedAudioFileException 
 	 */
-	public Inicio() {
+	public Inicio() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 	    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	    setBounds(100, 100, 803, 683);
 	    
@@ -222,14 +242,30 @@ public class Inicio extends JFrame implements ActionListener {
 	    panel.setLayout(null);
 	    panel.setBackground(new Color(0x2f4f4f));
 	    panel.setOpaque(true);
+	    {
+	    	controlvol = new JSlider();
+	    	controlvol.setValue(80);
+	    	controlvol.setMajorTickSpacing(25);
+	    	controlvol.setBackground(SystemColor.activeCaptionBorder);
+	    	controlvol.setBounds(10, 11, 164, 16);
+	    	panel.add(controlvol);
+	    	 controlvol.addChangeListener(e -> {
+	    	        if (!controlvol.getValueIsAdjusting()) {
+	    	            setVolume(controlvol.getValue());
+	    	        }
+	    	    });
+	    	 controlvol.addChangeListener(e -> setVolume(controlvol.getValue()));
+	    	 
+	    }
     
 	    lblclock = new JLabel("");
 	    lblclock.setFont(new Font("Verdana", Font.PLAIN, 13));
 	    lblclock.setForeground(new Color(255, 255, 255));
 	    lblclock.setBounds(488, 0, 289, 43);
 	    panel.add(lblclock);
-	    
 	    clock();
+	    music();
+	    
         
         logofondo = new JLabel("New label");
         logofondo.setFont(new Font("Verdana", Font.PLAIN, 11));
@@ -258,4 +294,29 @@ public class Inicio extends JFrame implements ActionListener {
 		VenEmpleado vEmple = new VenEmpleado();
 		vEmple.setVisible(true);
 	}
+	
+	public static void music() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+		URL url = Inicio.class.getResource("/recursos/portugal.wav");
+		if(url == null) {
+			JOptionPane.showMessageDialog(null,"No se encontró");
+		}
+		AudioInputStream audiostream= AudioSystem.getAudioInputStream(url);
+		clipreproduciendo = AudioSystem.getClip();
+		clipreproduciendo.open(audiostream);
+		 volumeControl = (FloatControl) clipreproduciendo.getControl(FloatControl.Type.MASTER_GAIN);
+		 setVolume(80);  
+		 clipreproduciendo.start();
+	}
+	
+
+	private static void setVolume(int volume) {
+	    if (volumeControl != null) {
+	        float min = volumeControl.getMinimum();
+	        float max = volumeControl.getMaximum();
+	        float dB = (float) (min + (max - min) * (volume / 100.0));
+	        volumeControl.setValue(dB);
+	    }
+	}
+	
+
 }
