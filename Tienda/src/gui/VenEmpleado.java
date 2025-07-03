@@ -750,36 +750,93 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 		String filtro = txtBuscarCliente.getText();
 		ListarCliente(filtro);
 	}
+	//KeyTyped DNICLiente
 	protected void do_txtDniClienteVenta_keyTyped(KeyEvent e) {
-		//para que solamente acepte ingresar números
 		char validarNumeros = e.getKeyChar();
-		if(Character.isLetter(validarNumeros)) {
+		if(!(Character.isDigit(validarNumeros) || validarNumeros =='\b')) {
 			e.consume();
-			JOptionPane.showMessageDialog(this, "No permite letras");
+			if(Character.isLetter(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permite letras.");
+			}
+			else if(Character.isEmoji(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permiten símbolos extraños.");
+			}
+			else if(Character.isWhitespace(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco.");
+			}
+			else {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "Solo se admiten números.");
+			}
 		}
 	}
 	protected void do_txtCodEditable_keyTyped(KeyEvent e) {
-		//para que solamente acepte ingresar números
 		char validarNumeros = e.getKeyChar();
-		if(Character.isLetter(validarNumeros)) {
+		if(!(Character.isDigit(validarNumeros) || validarNumeros =='\b')) {
 			e.consume();
-			JOptionPane.showMessageDialog(this, "No permite letras");
+			if(Character.isLetter(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permite letras.");
+			}
+			else if(Character.isEmoji(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permiten símbolos extraños.");
+			}
+			else if(Character.isWhitespace(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco.");
+			}
+			else {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "Solo se admiten números.");
+			}
 		}
 	}
 	protected void do_txtIdProductoVenta_keyTyped(KeyEvent e) {
-		//para que solamente acepte ingresar números
 		char validarNumeros = e.getKeyChar();
-		if(Character.isLetter(validarNumeros)) {
+		if(!(Character.isDigit(validarNumeros) || validarNumeros =='\b')) {
 			e.consume();
-			JOptionPane.showMessageDialog(this, "No permite letras");
+			if(Character.isLetter(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permite letras.");
+			}
+			else if(Character.isEmoji(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permiten símbolos extraños.");
+			}
+			else if(Character.isWhitespace(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco.");
+			}
+			else {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "Solo se admiten números.");
+			}
 		}
 	}
 	protected void do_txtCantidadVenta_keyTyped(KeyEvent e) {
-		//para que solamente acepte ingresar números
 		char validarNumeros = e.getKeyChar();
-		if(Character.isLetter(validarNumeros)) {
+		if(!(Character.isDigit(validarNumeros) || validarNumeros =='\b')) {
 			e.consume();
-			JOptionPane.showMessageDialog(this, "No permite letras");
+			if(Character.isLetter(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permite letras.");
+			}
+			else if(Character.isEmoji(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permiten símbolos extraños.");
+			}
+			else if(Character.isWhitespace(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco.");
+			}
+			else {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "Solo se admiten números.");
+			}
 		}
 	}
 	

@@ -22,8 +22,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.awt.Panel;
-
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.BorderFactory;
@@ -198,7 +196,6 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 			contentPane.add(tabbedPane);
 			
 			JPanel panelEmpleado = new JPanel();
-			panelEmpleado.setBackground(UIManager.getColor("Button.light"));
 			tabbedPane.addTab("Empleado", null, panelEmpleado, null);
 			panelEmpleado.setLayout(null);
 			{
@@ -587,132 +584,8 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 				tabbedPane.addTab("Proveedor", null, panelProveedor, null);
 				panelProveedor.setLayout(null);
 				{
-					btnRegistrarProveedor = new JButton("Registrar");
-					btnRegistrarProveedor.addActionListener(this);
-					btnRegistrarProveedor.setFont(new Font("Verdana", Font.PLAIN, 13));
-					btnRegistrarProveedor.setBounds(164, 291, 116, 25);
-					panelProveedor.add(btnRegistrarProveedor);
-				}
-				{
-					btnModificarProveedor = new JButton("Modificar");
-					btnModificarProveedor.addActionListener(this);
-					btnModificarProveedor.setFont(new Font("Verdana", Font.PLAIN, 13));
-					btnModificarProveedor.setBounds(345, 291, 116, 25);
-					panelProveedor.add(btnModificarProveedor);
-				}
-				{
-					lblId = new JLabel("ID:");
-					lblId.setFont(new Font("Verdana", Font.PLAIN, 15));
-					lblId.setBounds(172, 117, 31, 14);
-					panelProveedor.add(lblId);
-				}
-				{
-					lblRuc = new JLabel("Ruc:");
-					lblRuc.setFont(new Font("Verdana", Font.PLAIN, 15));
-					lblRuc.setBounds(332, 117, 44, 14);
-					panelProveedor.add(lblRuc);
-				}
-				{
-					lblNombre = new JLabel("Nombre:");
-					lblNombre.setFont(new Font("Verdana", Font.PLAIN, 15));
-					lblNombre.setBounds(173, 157, 84, 14);
-					panelProveedor.add(lblNombre);
-				}
-				{
-					lblTelfono = new JLabel("Teléfono:");
-					lblTelfono.setFont(new Font("Verdana", Font.PLAIN, 15));
-					lblTelfono.setBounds(472, 157, 107, 14);
-					panelProveedor.add(lblTelfono);
-				}
-				{
-					lblCorreo = new JLabel("Correo:");
-					lblCorreo.setFont(new Font("Verdana", Font.PLAIN, 15));
-					lblCorreo.setBounds(472, 198, 78, 14);
-					panelProveedor.add(lblCorreo);
-				}
-				{
-					lblDireccin = new JLabel("Dirección:");
-					lblDireccin.setFont(new Font("Verdana", Font.PLAIN, 15));
-					lblDireccin.setBounds(172, 198, 107, 14);
-					panelProveedor.add(lblDireccin);
-				}
-				{
-					lblCorreo_2 = new JLabel("Estado:");
-					lblCorreo_2.setFont(new Font("Verdana", Font.PLAIN, 15));
-					lblCorreo_2.setBounds(172, 244, 78, 14);
-					panelProveedor.add(lblCorreo_2);
-				}
-				{
-					lblNewLabel = new JLabel("Buscar:");
-					lblNewLabel.setFont(new Font("Verdana", Font.PLAIN, 14));
-					lblNewLabel.setBounds(148, 14, 84, 14);
-					panelProveedor.add(lblNewLabel);
-				}
-				{
-					btnEliminar = new JButton("Eliminar");
-					btnEliminar.addActionListener(this);
-					btnEliminar.setFont(new Font("Verdana", Font.PLAIN, 13));
-					btnEliminar.setBounds(526, 291, 116, 25);
-					panelProveedor.add(btnEliminar);
-				}
-				{
-					txtRucProveedor = new JTextField();
-					txtRucProveedor.setColumns(10);
-					txtRucProveedor.setBackground(Color.WHITE);
-					txtRucProveedor.setBounds(383, 114, 179, 25);
-					panelProveedor.add(txtRucProveedor);
-				}
-				{
-					txtTelefonoProveedor = new JTextField();
-					txtTelefonoProveedor.setColumns(10);
-					txtTelefonoProveedor.setBackground(Color.WHITE);
-					txtTelefonoProveedor.setBounds(551, 154, 131, 25);
-					panelProveedor.add(txtTelefonoProveedor);
-				}
-				{
-					txtDireccionProveedor = new JTextField();
-					txtDireccionProveedor.setColumns(10);
-					txtDireccionProveedor.setBackground(Color.WHITE);
-					txtDireccionProveedor.setBounds(276, 195, 179, 25);
-					panelProveedor.add(txtDireccionProveedor);
-				}
-				{
-					txtCorreoProveedor = new JTextField();
-					txtCorreoProveedor.setColumns(10);
-					txtCorreoProveedor.setBackground(Color.WHITE);
-					txtCorreoProveedor.setBounds(538, 195, 223, 25);
-					panelProveedor.add(txtCorreoProveedor);
-				}
-				{
-					txtNombreProveedor = new JTextField();
-					txtNombreProveedor.setColumns(10);
-					txtNombreProveedor.setBackground(Color.WHITE);
-					txtNombreProveedor.setBounds(249, 154, 203, 25);
-					panelProveedor.add(txtNombreProveedor);
-				}
-				{
-					txtIdproveedor1 = new JTextField();
-					txtIdproveedor1.setBounds(207, 114, 96, 25);
-					panelProveedor.add(txtIdproveedor1);
-					txtIdproveedor1.setColumns(10);
-				}
-				{
-					txtBuscarproveedor = new JTextField();
-					txtBuscarproveedor.addKeyListener(this);
-					txtBuscarproveedor.setColumns(10);
-					txtBuscarproveedor.setBackground(Color.WHITE);
-					txtBuscarproveedor.setBounds(224, 11, 401, 25);
-					panelProveedor.add(txtBuscarproveedor);
-				}
-				{
-					lblRegistrarProveedor = new JLabel("REGISTRAR PROVEEDOR");
-					lblRegistrarProveedor.setFont(new Font("Tahoma", Font.PLAIN, 19));
-					lblRegistrarProveedor.setBounds(173, 68, 256, 19);
-					panelProveedor.add(lblRegistrarProveedor);
-				}
-				{
 					scrollPane_3 = new JScrollPane();
-					scrollPane_3.setBounds(10, 351, 790, 322);
+					scrollPane_3.setBounds(10, 297, 801, 378);
 					panelProveedor.add(scrollPane_3);
 					{
 						tablaProveedor = new JTable();
@@ -722,11 +595,128 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 					}
 				}
 				{
-					cboEstado = new JComboBox();
-					cboEstado.setFont(new Font("Tahoma", Font.PLAIN, 15));
-					cboEstado.setModel(new DefaultComboBoxModel(new String[] {"Activo", "Inactivo"}));
-					cboEstado.setBounds(260, 242, 101, 22);
-					panelProveedor.add(cboEstado);
+					btnRegistrarProveedor = new JButton("Registrar");
+					btnRegistrarProveedor.addActionListener(this);
+					btnRegistrarProveedor.setFont(new Font("Verdana", Font.PLAIN, 13));
+					btnRegistrarProveedor.setBounds(294, 248, 116, 25);
+					panelProveedor.add(btnRegistrarProveedor);
+				}
+				{
+					btnModificarProveedor = new JButton("Modificar");
+					btnModificarProveedor.setFont(new Font("Verdana", Font.PLAIN, 13));
+					btnModificarProveedor.setBounds(441, 248, 116, 25);
+					panelProveedor.add(btnModificarProveedor);
+				}
+				{
+					txtBuscarProveedor = new JTextField();
+					txtBuscarProveedor.setColumns(10);
+					txtBuscarProveedor.setBackground(Color.WHITE);
+					txtBuscarProveedor.setBounds(195, 36, 447, 25);
+					panelProveedor.add(txtBuscarProveedor);
+				}
+				{
+					lblId = new JLabel("ID:");
+					lblId.setFont(new Font("Verdana", Font.PLAIN, 15));
+					lblId.setBounds(77, 81, 31, 14);
+					panelProveedor.add(lblId);
+				}
+				{
+					txtIDProveedor = new JTextField();
+					txtIDProveedor.addKeyListener(this);
+					txtIDProveedor.setColumns(10);
+					txtIDProveedor.setBackground(Color.WHITE);
+					txtIDProveedor.setBounds(106, 78, 78, 25);
+					panelProveedor.add(txtIDProveedor);
+				}
+				{
+					lblRuc = new JLabel("RUC:");
+					lblRuc.setFont(new Font("Verdana", Font.PLAIN, 15));
+					lblRuc.setBounds(229, 81, 44, 14);
+					panelProveedor.add(lblRuc);
+				}
+				{
+					txtRucProveedor = new JTextField();
+					txtRucProveedor.addKeyListener(this);
+					txtRucProveedor.setColumns(10);
+					txtRucProveedor.setBackground(Color.WHITE);
+					txtRucProveedor.setBounds(283, 78, 164, 25);
+					panelProveedor.add(txtRucProveedor);
+				}
+				{
+					lblNombre = new JLabel("NOMBRE:");
+					lblNombre.setFont(new Font("Verdana", Font.PLAIN, 15));
+					lblNombre.setBounds(478, 81, 84, 14);
+					panelProveedor.add(lblNombre);
+				}
+				{
+					txtNombreProveedor = new JTextField();
+					txtNombreProveedor.addKeyListener(this);
+					txtNombreProveedor.setColumns(10);
+					txtNombreProveedor.setBackground(Color.WHITE);
+					txtNombreProveedor.setBounds(555, 78, 219, 25);
+					panelProveedor.add(txtNombreProveedor);
+				}
+				{
+					lblTelfono = new JLabel("TELÉFONO:");
+					lblTelfono.setFont(new Font("Verdana", Font.PLAIN, 15));
+					lblTelfono.setBounds(77, 122, 107, 14);
+					panelProveedor.add(lblTelfono);
+				}
+				{
+					txtTelefonoProveedor = new JTextField();
+					txtTelefonoProveedor.addKeyListener(this);
+					txtTelefonoProveedor.setColumns(10);
+					txtTelefonoProveedor.setBackground(Color.WHITE);
+					txtTelefonoProveedor.setBounds(171, 119, 134, 25);
+					panelProveedor.add(txtTelefonoProveedor);
+				}
+				{
+					lblCorreo = new JLabel("CORREO:");
+					lblCorreo.setFont(new Font("Verdana", Font.PLAIN, 15));
+					lblCorreo.setBounds(331, 122, 78, 14);
+					panelProveedor.add(lblCorreo);
+				}
+				{
+					txtCorreoProveedor = new JTextField();
+					txtCorreoProveedor.addKeyListener(this);
+					txtCorreoProveedor.setColumns(10);
+					txtCorreoProveedor.setBackground(Color.WHITE);
+					txtCorreoProveedor.setBounds(411, 119, 201, 25);
+					panelProveedor.add(txtCorreoProveedor);
+				}
+				{
+					lblDireccin = new JLabel("DIRECCIÓN:");
+					lblDireccin.setFont(new Font("Verdana", Font.PLAIN, 15));
+					lblDireccin.setBounds(77, 169, 107, 14);
+					panelProveedor.add(lblDireccin);
+				}
+				{
+					txtDireccionProveedor = new JTextField();
+					txtDireccionProveedor.addKeyListener(this);
+					txtDireccionProveedor.setColumns(10);
+					txtDireccionProveedor.setBackground(Color.WHITE);
+					txtDireccionProveedor.setBounds(185, 166, 178, 25);
+					panelProveedor.add(txtDireccionProveedor);
+				}
+				{
+					lblCorreo_2 = new JLabel("ESTADO:");
+					lblCorreo_2.setFont(new Font("Verdana", Font.PLAIN, 15));
+					lblCorreo_2.setBounds(373, 172, 78, 14);
+					panelProveedor.add(lblCorreo_2);
+				}
+				{
+					txtEstadoProveedor = new JTextField();
+					txtEstadoProveedor.addKeyListener(this);
+					txtEstadoProveedor.setColumns(10);
+					txtEstadoProveedor.setBackground(Color.WHITE);
+					txtEstadoProveedor.setBounds(465, 169, 134, 25);
+					panelProveedor.add(txtEstadoProveedor);
+				}
+				{
+					lblNewLabel = new JLabel("BUSCAR:");
+					lblNewLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
+					lblNewLabel.setBounds(106, 42, 84, 14);
+					panelProveedor.add(lblNewLabel);
 				}
 			}
 			lblclock = new JLabel("");
@@ -741,26 +731,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		ListarHistorialVenta();
 		ListarProveedor("");
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnEliminar) {
-			do_btnEliminar_actionPerformed(e);
-		}
-		if (e.getSource() == btnModificarProveedor) {
-			do_btnModificarProveedor_actionPerformed(e);
-		}
 		if (e.getSource() == btnRegistrarProveedor) {
 			do_btnRegistrarProveedor_actionPerformed(e);
 		}
@@ -834,35 +805,118 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	private JLabel lblIdProveedor;
 	private JTextField txtIdProveedor;
 	private JPanel panelProveedor;
-	private JButton btnRegistrarProveedor;
-	private JButton btnModificarProveedor;
-	private JLabel lblId;
-	private JLabel lblRuc;
-	private JLabel lblNombre;
-	private JLabel lblTelfono;
-	private JLabel lblCorreo;
-	private JLabel lblDireccin;
-	private JLabel lblCorreo_2;
-	private JLabel lblNewLabel;
-	private JButton btnEliminar;
-	private JTextField txtRucProveedor;
-	private JTextField txtTelefonoProveedor;
-	private JTextField txtDireccionProveedor;
-	private JTextField txtCorreoProveedor;
-	private JTextField txtNombreProveedor;
-	private JTextField txtIdproveedor1;
-	private JTextField txtBuscarproveedor;
-	private JLabel lblRegistrarProveedor;
 	private JScrollPane scrollPane_3;
 	private JTable tablaProveedor;
-	private JComboBox cboEstado;
+	private JButton btnRegistrarProveedor;
+	private JButton btnModificarProveedor;
+	private JTextField txtBuscarProveedor;
+	private JLabel lblId;
+	private JTextField txtIDProveedor;
+	private JLabel lblRuc;
+	private JTextField txtRucProveedor;
+	private JLabel lblNombre;
+	private JTextField txtNombreProveedor;
+	private JLabel lblTelfono;
+	private JTextField txtTelefonoProveedor;
+	private JLabel lblCorreo;
+	private JTextField txtCorreoProveedor;
+	private JLabel lblDireccin;
+	private JTextField txtDireccionProveedor;
+	private JLabel lblCorreo_2;
+	private JTextField txtEstadoProveedor;
+	private JLabel lblNewLabel;
+	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
+		String actual = jlabelmodo.getText();
+		if(actual == "Modo Normal") {		
+			contentPane.setBackground(UIManager.getColor("Button.light"));
+			lblIdBuscarE.setForeground(Color.BLACK);
+			txtBuscarEmple.setBackground(Color.WHITE);
+			lblIdE.setForeground(Color.BLACK);
+			lblDniE.setForeground(Color.BLACK);
+			lblNombreCompletoE.setForeground(Color.BLACK);
+			lblTelefono.setForeground(Color.BLACK);
+			lblCargo.setForeground(Color.BLACK);
+			lblJornada.setForeground(Color.BLACK);
+			lblHorario.setForeground(Color.BLACK);
+			lblRegistrarEmpleado.setForeground(Color.BLACK);
+			lblclock.setForeground(Color.BLACK);
+			txtIdEmpleado.setBackground(Color.WHITE);
+			txtDniEmpleado.setBackground(Color.WHITE);
+			txtNombreEmpleado.setBackground(Color.WHITE);
+			txtTelefono.setBackground(Color.WHITE);
+			cboCargo.setBackground(Color.WHITE);
+			cboJornada.setBackground(Color.WHITE);
+			cboHorario.setBackground(Color.WHITE);
+		
+			txtBuscarEmple.setForeground(Color.BLACK);
+			txtIdEmpleado.setForeground(Color.BLACK);
+			txtDniEmpleado.setForeground(Color.BLACK);
+			txtNombreEmpleado.setForeground(Color.BLACK);
+			txtTelefono.setForeground(Color.BLACK);
+			cboCargo.setForeground(Color.BLACK);
+			cboJornada.setForeground(Color.BLACK);
+			cboHorario.setForeground(Color.BLACK);
+			jlabelmodo.setText("Modo Oscuro");
+		}
+		else if(actual == "Modo Oscuro"){
+			contentPane.setBackground(Color.BLACK);
+			
+			lblIdBuscarE.setForeground(Color.LIGHT_GRAY);
+			txtBuscarEmple.setBackground(Color.LIGHT_GRAY);
+			lblIdE.setForeground(Color.LIGHT_GRAY);
+			lblDniE.setForeground(Color.LIGHT_GRAY);
+			lblNombreCompletoE.setForeground(Color.LIGHT_GRAY);
+			lblTelefono.setForeground(Color.LIGHT_GRAY);
+			lblCargo.setForeground(Color.LIGHT_GRAY);
+			lblJornada.setForeground(Color.LIGHT_GRAY);
+			lblHorario.setForeground(Color.LIGHT_GRAY);
+			lblRegistrarEmpleado.setForeground(Color.LIGHT_GRAY);
+			lblclock.setForeground(Color.LIGHT_GRAY);
+			txtIdEmpleado.setBackground(Color.LIGHT_GRAY);
+			txtDniEmpleado.setBackground(Color.LIGHT_GRAY);
+			txtNombreEmpleado.setBackground(Color.LIGHT_GRAY);
+			txtTelefono.setBackground(Color.LIGHT_GRAY);
+			cboCargo.setBackground(Color.LIGHT_GRAY);
+			cboJornada.setBackground(Color.LIGHT_GRAY);
+			cboHorario.setBackground(Color.LIGHT_GRAY);
+			jlabelmodo.setText("Modo Frío");
+		}	
+		
+		else if(actual == "Modo Frío") {
+			contentPane.setBackground(new Color(10, 25, 45));
+			lblIdBuscarE.setForeground(new Color(150, 220, 255));
+			txtBuscarEmple.setBackground(new Color(30, 80, 120));
+			lblIdE.setForeground(new Color(150, 220, 255));
+			lblDniE.setForeground(new Color(150, 220, 255));
+			lblNombreCompletoE.setForeground(new Color(150, 220, 255));
+			lblTelefono.setForeground(new Color(150, 220, 255));
+			lblCargo.setForeground(new Color(150, 220, 255));
+			lblJornada.setForeground(new Color(150, 220, 255));
+			lblHorario.setForeground(new Color(150, 220, 255));
+			lblRegistrarEmpleado.setForeground(new Color(150, 220, 255));
+			lblclock.setForeground(new Color(150, 220, 255));
+			txtIdEmpleado.setBackground(new Color(30, 80, 120));
+			txtDniEmpleado.setBackground(new Color(30, 80, 120));
+			txtNombreEmpleado.setBackground(new Color(30, 80, 120));
+			txtTelefono.setBackground(new Color(30, 80, 120));
+			cboCargo.setBackground(new Color(30, 80, 120));
+			cboJornada.setBackground(new Color(30, 80, 120));
+			cboHorario.setBackground(new Color(30, 80, 120));
+
+			txtBuscarEmple.setForeground(Color.WHITE);
+			txtIdEmpleado.setForeground(Color.WHITE);
+			txtDniEmpleado.setForeground(Color.WHITE);
+			txtNombreEmpleado.setForeground(Color.WHITE);
+			txtTelefono.setForeground(Color.WHITE);
+			cboCargo.setForeground(Color.WHITE);
+			cboJornada.setForeground(Color.WHITE);
+			cboHorario.setForeground(Color.WHITE);		
+			jlabelmodo.setText("Modo Normal");
+		}	
+	}	
 	public void keyPressed(KeyEvent e) {
 	}
-	
 	public void keyReleased(KeyEvent e) {
-		if (e.getSource() == txtBuscarproveedor) {
-			do_txtBuscarproveedor_keyReleased(e);
-		}
 		if (e.getSource() == txtBuscarEmple) {
 			do_txtIdEmpleBuscar_keyReleased(e);
 		}
@@ -871,6 +925,27 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		}
 	}
 	public void keyTyped(KeyEvent e) {
+		if (e.getSource() == txtDireccionProveedor) {
+			do_txtDireccionProveedor_keyTyped(e);
+		}
+		if (e.getSource() == txtEstadoProveedor) {
+			do_txtEstadoProveedor_keyTyped(e);
+		}
+		if (e.getSource() == txtCorreoProveedor) {
+			do_txtCorreoProveedor_keyTyped(e);
+		}
+		if (e.getSource() == txtNombreProveedor) {
+			do_txtNombreProveedor_keyTyped(e);
+		}
+		if (e.getSource() == txtTelefonoProveedor) {
+			do_txtTelefonoProveedor_keyTyped(e);
+		}
+		if (e.getSource() == txtRucProveedor) {
+			do_txtRucProveedor_keyTyped(e);
+		}
+		if (e.getSource() == txtIDProveedor) {
+			do_txtIDProveedor_keyTyped(e);
+		}
 		if (e.getSource() == txtIdProveedor) {
 			do_txtIdProveedor_keyTyped(e);
 		}
@@ -920,25 +995,39 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 			}
 			else if(Character.isEmoji(validarNumeros)) {
 				e.consume();
-				JOptionPane.showMessageDialog(this, "No permite simbolos extraños.");
+				JOptionPane.showMessageDialog(this, "No permite símbolos extraños.");
 			}
 			else if(Character.isWhitespace(validarNumeros)) {
 				e.consume();
 				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco");
 			}
 			else {
-				e.consume();
-				JOptionPane.showMessageDialog(this, "Solo se admiten números");
+				if(validarNumeros == '\b') {
+				//ERROR NUM	
+				}else {
+					e.consume();
+					JOptionPane.showMessageDialog(this, "Solo se admiten números.");
+				}
 			}
 		}
+		
 	}
 	protected void do_txtCategoria_keyTyped(KeyEvent e) {
 		//para que solamente acepte ingresar letras
-		char validarLetras = e.getKeyChar();
-		if(Character.isDigit(validarLetras)) {
-			e.consume();
-			JOptionPane.showMessageDialog(this, "No permite números");
-		}
+				char c = e.getKeyChar();
+
+			    // Letras válidas del alfabeto español + espacio
+			    String letrasValidas = "áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ '\b'";
+
+			    if (letrasValidas.indexOf(c) == -1) {
+			        e.consume();
+
+			        if (Character.isDigit(c)) {
+			            JOptionPane.showMessageDialog(this, "No se permiten números.");
+			        } else {
+			            JOptionPane.showMessageDialog(this, "Solo se permiten letras del alfabeto español y espacios.");
+			        }
+			    }
 	}
 	protected void do_txtIdProveedor_keyTyped(KeyEvent e) {
 		char validarNumeros = e.getKeyChar();
@@ -951,17 +1040,22 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 			}
 			else if(Character.isEmoji(validarNumeros)) {
 				e.consume();
-				JOptionPane.showMessageDialog(this, "No permite simbolos extraños.");
+				JOptionPane.showMessageDialog(this, "No permite símbolos extraños.");
 			}
 			else if(Character.isWhitespace(validarNumeros)) {
 				e.consume();
 				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco");
 			}
 			else {
-				e.consume();
-				JOptionPane.showMessageDialog(this, "Solo se admiten números");
-			}}
+				if(validarNumeros == '\b') {
+					
+				}else {
+					e.consume();
+					JOptionPane.showMessageDialog(this, "Solo se admiten números.");
+				}
+			}
 		}
+	}
 	protected void do_txtPrecio_keyTyped(KeyEvent e) {
 		//Para que solamente acepte ingresar números y puntos.
 		
@@ -976,15 +1070,19 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 			}
 			else if(Character.isEmoji(validarNumeros)) {
 				e.consume();
-				JOptionPane.showMessageDialog(this, "No permite simbolos extraños.");
+				JOptionPane.showMessageDialog(this, "No permite símbolos extraños.");
 			}
 			else if(Character.isWhitespace(validarNumeros)) {
 				e.consume();
 				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco");
 			}
 			else {
-				e.consume();
-				JOptionPane.showMessageDialog(this, "Solo se admiten números");
+				if(validarNumeros != '\b') {
+					
+				}else {
+					e.consume();
+					JOptionPane.showMessageDialog(this, "Solo se admiten números");
+				}
 			}
 		}
 	}
@@ -998,15 +1096,19 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 			}
 			else if(Character.isEmoji(validarNumeros)) {
 				e.consume();
-				JOptionPane.showMessageDialog(this, "No permite simbolos extraños.");
+				JOptionPane.showMessageDialog(this, "No permite símbolos extraños.");
 			}
 			else if(Character.isWhitespace(validarNumeros)) {
 				e.consume();
 				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco");
 			}
 			else {
-				e.consume();
-				JOptionPane.showMessageDialog(this, "Solo se admiten números");
+				if(validarNumeros == '\b') {
+					
+				}else {
+					e.consume();
+					JOptionPane.showMessageDialog(this, "Solo se admiten números");
+				}
 			}
 		}
 	}
@@ -1021,15 +1123,19 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 			}
 			else if(Character.isEmoji(validarNumeros)) {
 				e.consume();
-				JOptionPane.showMessageDialog(this, "No permite simbolos extraños.");
+				JOptionPane.showMessageDialog(this, "No permite símbolos extraños.");
 			}
 			else if(Character.isWhitespace(validarNumeros)) {
 				e.consume();
-				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco");
+				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco.");
 			}
 			else {
-				e.consume();
-				JOptionPane.showMessageDialog(this, "Solo se admiten números");
+				if(validarNumeros == '\b') {
+					
+				}else {
+					e.consume();
+					JOptionPane.showMessageDialog(this, "Solo se admiten números.");
+				}
 			}
 		}
 	}
@@ -1044,15 +1150,20 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 			}
 			else if(Character.isEmoji(validarNumeros)) {
 				e.consume();
-				JOptionPane.showMessageDialog(this, "No permite simbolos extraños.");
+				JOptionPane.showMessageDialog(this, "No permite símbolos extraños.");
 			}
 			else if(Character.isWhitespace(validarNumeros)) {
 				e.consume();
 				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco");
 			}
 			else {
-				e.consume();
-				JOptionPane.showMessageDialog(this, "Solo se admiten números");
+				if(validarNumeros == '\b') {
+					
+				}else {
+					e.consume();
+					JOptionPane.showMessageDialog(this, "Solo se admiten números");
+				}
+				
 			}
 		}
 	}
@@ -1199,42 +1310,116 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	protected void do_txtIdEmpleado_keyTyped(KeyEvent e) {
 		//para que solamente acepte ingresar números
 		char validarNumeros = e.getKeyChar();
-		if(Character.isLetter(validarNumeros)) {
+		if(!(Character.isDigit(validarNumeros) || validarNumeros =='\b')) {
 			e.consume();
-			JOptionPane.showMessageDialog(this, "No permite letras");
+			if(Character.isLetter(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permite letras.");
+			}
+			else if(Character.isEmoji(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permite símbolos extraños.");
+			}
+			else if(Character.isWhitespace(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco.");
+			}
+			else {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "Solo se admiten números.");
+			}
 		}
 	}
 	protected void do_txtDniEmpleado_keyTyped(KeyEvent e) {
-		//para que solamente acepte ingresar números
 		char validarNumeros = e.getKeyChar();
-		if(Character.isLetter(validarNumeros)) {
+		
+		if(!(Character.isDigit(validarNumeros) || validarNumeros =='\b')) {
 			e.consume();
-			JOptionPane.showMessageDialog(this, "No permite letras");
+			if(Character.isLetter(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No permite letras.");
+			}
+			else if(Character.isEmoji(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No permite símbolos extraños.");
+			}
+			else if(Character.isWhitespace(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco.");
+			}
+			else {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "Solo se admiten números.");
+			}
 		}
 	}
 	protected void do_txtNombreEmpleado_keyTyped(KeyEvent e) {
 		//para que solamente acepte ingresar letras
-		char validarLetras = e.getKeyChar();
-		if(Character.isDigit(validarLetras)) {
-			e.consume();
-			JOptionPane.showMessageDialog(this, "No permite números");
-		}
+		char c = e.getKeyChar();
+
+	    // Letras válidas del alfabeto español + espacio
+	    String letrasValidas = "áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ '\b'";
+
+	    if (letrasValidas.indexOf(c) == -1) {
+	        e.consume();
+
+	        if (Character.isDigit(c)) {
+	            JOptionPane.showMessageDialog(this, "No se permiten números.");
+	        } else {
+	            JOptionPane.showMessageDialog(this, "Solo se permiten letras del alfabeto español y espacios.");
+	        }
+	    }
 	}
 	protected void do_txtTelefono_keyTyped(KeyEvent e) {
-		//para que solamente acepte ingresar números
-		char validarNumeros = e.getKeyChar();
-		if(Character.isLetter(validarNumeros)) {
-			e.consume();
-			JOptionPane.showMessageDialog(this, "No permite letras");
-		}
+				//Para que solamente acepte ingresar números y puntos.
+				//La intención de esto es que solo permita ingresar número decimales
+				char validarNumeros = e.getKeyChar();
+				
+				if(!(Character.isDigit(validarNumeros) || validarNumeros =='\b')) {
+					e.consume();
+					if(Character.isLetter(validarNumeros)) {
+						e.consume();
+						JOptionPane.showMessageDialog(this, "No se permite letras.");
+					}
+					else if(Character.isEmoji(validarNumeros)) {
+						e.consume();
+						JOptionPane.showMessageDialog(this, "No se permite símbolos extraños.");
+					}
+					else if(Character.isWhitespace(validarNumeros)) {
+						e.consume();
+						JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco.");
+					}
+					else {
+						e.consume();
+						JOptionPane.showMessageDialog(this, "Solo se admiten números.");
+					}
+				}
 	}
 	protected void do_txtSueldo_keyTyped(KeyEvent e) {
-		//para que solamente acepte ingresar números
-		char validarNumeros = e.getKeyChar();
-		if(Character.isLetter(validarNumeros)) {
-			e.consume();
-			JOptionPane.showMessageDialog(this, "No permite letras");
-		}
+		//Para que solamente acepte ingresar números y puntos.
+		
+				//La intención de esto es que solo permita ingresar número decimales
+				char validarNumeros = e.getKeyChar();
+				
+				if(!(Character.isDigit(validarNumeros) || validarNumeros == '.'|| validarNumeros =='\b')) {
+					e.consume();
+					if(Character.isLetter(validarNumeros)) {
+						e.consume();
+						JOptionPane.showMessageDialog(this, "No se permiten letras.");
+					}
+					else if(Character.isEmoji(validarNumeros)) {
+						e.consume();
+						JOptionPane.showMessageDialog(this, "No permite símbolos extraños.");
+					}
+					else if(Character.isWhitespace(validarNumeros)) {
+						e.consume();
+						JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco.");
+					}
+					else {
+						e.consume();
+						JOptionPane.showMessageDialog(this, "Solo se admiten números.");
+					}
+				}
 	}
 	public void ListarEmpleado(String filtro) {
 		DefaultTableModel modelo = new DefaultTableModel();
@@ -1420,16 +1605,26 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 			i++;
 			
 		}
-		tablaProveedor.setModel(modelo);
+
+	  tablaProveedor.setModel(modelo);
+	}
+	protected void do_tablaProveedor_mouseClicked(MouseEvent e) {
+		int fila = tablaProveedor.getSelectedRow();
+		txtIDProveedor.setText(String.valueOf(tablaProveedor.getValueAt(fila, 0)));
+		txtRucProveedor.setText(String.valueOf(tablaProveedor.getValueAt(fila, 1)));
+		txtNombreProveedor.setText(String.valueOf(tablaProveedor.getValueAt(fila, 2)));
+		txtTelefonoProveedor.setText(String.valueOf(tablaProveedor.getValueAt(fila, 3)));
+		txtCorreoProveedor.setText(String.valueOf(tablaProveedor.getValueAt(fila, 4)));
+		txtDireccionProveedor.setText(String.valueOf(tablaProveedor.getValueAt(fila, 5)));
+		txtEstadoProveedor.setText(String.valueOf(tablaProveedor.getValueAt(fila, 6)));
 	}
 	protected void do_btnRegistrarProveedor_actionPerformed(ActionEvent e) {
 		try {
 			Date fecha = java.sql.Date.valueOf(LocalDate.now());
-			Proveedor prov = new Proveedor(Integer.parseInt(txtIdproveedor1.getText()), 
+			Proveedor prov = new Proveedor(Integer.parseInt(txtIdProveedor.getText()), 
 					txtRucProveedor.getText(), txtNombreProveedor.getText(), 
 					txtTelefonoProveedor.getText(), txtCorreoProveedor.getText(), 
-					txtDireccionProveedor.getText(), cboEstado.getSelectedItem().toString(),
-					fecha);
+					txtDireccionProveedor.getText(), txtEstadoProveedor.getText(), fecha);
 			
 			MantProveedor mprov = new MantProveedor();
 			mprov.AgregarProveedor(prov);
@@ -1441,133 +1636,151 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		}
 	}
 	void LimpiarProveedor() {
-		txtIdproveedor1.setText("");
+		txtIDProveedor.setText("");
 		txtRucProveedor.setText("");
 		txtNombreProveedor.setText("");
 		txtTelefonoProveedor.setText("");
 		txtCorreoProveedor.setText("");
 		txtDireccionProveedor.setText("");
-
+		txtEstadoProveedor.setText("");
 	}
-	protected void do_btnModificarProveedor_actionPerformed(ActionEvent e) {
-		
-		try {
-			Date fecha = java.sql.Date.valueOf(LocalDate.now());
-			Proveedor prov = new Proveedor(Integer.parseInt(txtIdproveedor1.getText()), 
-					txtRucProveedor.getText(), txtNombreProveedor.getText(), 
-					txtTelefonoProveedor.getText(), txtCorreoProveedor.getText(), 
-					txtDireccionProveedor.getText(), cboEstado.getSelectedItem().toString(),
-					fecha);
-				
-			 MantProveedor mp = new MantProveedor();
-			 mp.ModificarProveedor(prov);
-			 ListarProveedor("");
-		     LimpiarProveedor();
-			 
-		 } catch(Exception e2){
-			 JOptionPane.showMessageDialog(this, "Verifique el ID ingresado. Intente de nuevo.");	 
-		 }	 
+	//TYPED IdProveedor
+	protected void do_txtIDProveedor_keyTyped(KeyEvent e) {
+		//para que solamente acepte ingresar números
+				char validarNumeros = e.getKeyChar();
+				if(!(Character.isDigit(validarNumeros) || validarNumeros =='\b')) {
+					e.consume();
+					if(Character.isLetter(validarNumeros)) {
+						e.consume();
+						JOptionPane.showMessageDialog(this, "No se permite letras.");
+					}
+					else if(Character.isEmoji(validarNumeros)) {
+						e.consume();
+						JOptionPane.showMessageDialog(this, "No se permite símbolos extraños.");
+					}
+					else if(Character.isWhitespace(validarNumeros)) {
+						e.consume();
+						JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco.");
+					}
+					else {
+						e.consume();
+						JOptionPane.showMessageDialog(this, "Solo se admiten números.");
+					}
+				}
 	}
-	protected void do_btnEliminar_actionPerformed(ActionEvent e) {
-		
-		try {
-			MantProveedor mpr = new MantProveedor();
-			mpr.EliminarProveedor(Integer.parseInt(txtIdproveedor1.getText()));
-			ListarProveedor("");
-			LimpiarProveedor();
-			
-		} catch (Exception e2) {
-			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
+	protected void do_txtRucProveedor_keyTyped(KeyEvent e) {
+		char validarNumeros = e.getKeyChar();
+		if(!(Character.isDigit(validarNumeros) || validarNumeros =='\b')) {
+			e.consume();
+			if(Character.isLetter(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permite letras.");
+			}
+			else if(Character.isEmoji(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permite símbolos extraños.");
+			}
+			else if(Character.isWhitespace(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco.");
+			}
+			else {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "Solo se admiten números.");
+			}
 		}
 	}
-	protected void do_txtBuscarproveedor_keyReleased(KeyEvent e) {
-		String filtro = txtBuscarproveedor.getText();
-		ListarProveedor(filtro);
-		
-	}
-	protected void do_tablaProveedor_mouseClicked(MouseEvent e) {
-		int fila = tablaProveedor.getSelectedRow();
-		txtIdproveedor1.setText(String.valueOf(tablaProveedor.getValueAt(fila, 0)));
-		txtRucProveedor.setText(String.valueOf(tablaProveedor.getValueAt(fila, 1)));
-		txtNombreProveedor.setText(String.valueOf(tablaProveedor.getValueAt(fila, 2)));
-		txtTelefonoProveedor.setText(String.valueOf(tablaProveedor.getValueAt(fila, 3)));
-		txtCorreoProveedor.setText(String.valueOf(tablaProveedor.getValueAt(fila, 4)));
-		txtDireccionProveedor.setText(String.valueOf(tablaProveedor.getValueAt(fila, 5)));
-		cboEstado.setSelectedItem(String.valueOf(tablaProveedor.getValueAt(fila, 6)));
-
-	}
-	
-	
-
-	//MODOS DE VISUALIZACIÓN 
-
-	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
-		String actual = jlabelmodo.getText();
-		if(actual == "Modo Normal") {				
-			contentPane.setBackground(UIManager.getColor("Button.light"));
-			panelProveedor.setBackground(UIManager.getColor("Button.light"));
-			panelVenta.setBackground(UIManager.getColor("Button.light"));
-			
-			jlabelmodo.setText("Modo Oscuro");
+	protected void do_txtTelefonoProveedor_keyTyped(KeyEvent e) {
+		char validarNumeros = e.getKeyChar();
+		if(!(Character.isDigit(validarNumeros) || validarNumeros =='\b')) {
+			e.consume();
+			if(Character.isLetter(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permite letras.");
+			}
+			else if(Character.isEmoji(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permite símbolos extraños.");
+			}
+			else if(Character.isWhitespace(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco.");
+			}
+			else {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "Solo se admiten números.");
+			}
 		}
-		else if(actual == "Modo Oscuro"){
-			contentPane.setBackground(Color.BLACK);
-			panelProveedor.setBackground(Color.BLACK);
-			panelVenta.setBackground(Color.BLACK);	
-			lblIdBuscarE.setForeground(Color.LIGHT_GRAY);
-			txtBuscarEmple.setBackground(Color.LIGHT_GRAY);
-			lblIdE.setForeground(Color.LIGHT_GRAY);
-			lblDniE.setForeground(Color.LIGHT_GRAY);
-			lblNombreCompletoE.setForeground(Color.LIGHT_GRAY);
-			lblTelefono.setForeground(Color.LIGHT_GRAY);
-			lblCargo.setForeground(Color.LIGHT_GRAY);
-			lblJornada.setForeground(Color.LIGHT_GRAY);
-			lblHorario.setForeground(Color.LIGHT_GRAY);
-			lblRegistrarEmpleado.setForeground(Color.LIGHT_GRAY);
-			lblclock.setForeground(Color.LIGHT_GRAY);
-			txtIdEmpleado.setBackground(Color.LIGHT_GRAY);
-			txtDniEmpleado.setBackground(Color.LIGHT_GRAY);
-			txtNombreEmpleado.setBackground(Color.LIGHT_GRAY);
-			txtTelefono.setBackground(Color.LIGHT_GRAY);
-			cboCargo.setBackground(Color.LIGHT_GRAY);
-			cboJornada.setBackground(Color.LIGHT_GRAY);
-			cboHorario.setBackground(Color.LIGHT_GRAY);
-			jlabelmodo.setText("Modo Frío");
-		}	
-		
-		else if(actual == "Modo Frío") {
-			panelProveedor.setBackground(new Color(10, 25, 45));
-			panelVenta.setBackground(new Color(10, 25, 45));	
-			contentPane.setBackground(new Color(10, 25, 45));
-			lblIdBuscarE.setForeground(new Color(150, 220, 255));
-			txtBuscarEmple.setBackground(new Color(30, 80, 120));
-			lblIdE.setForeground(new Color(150, 220, 255));
-			lblDniE.setForeground(new Color(150, 220, 255));
-			lblNombreCompletoE.setForeground(new Color(150, 220, 255));
-			lblTelefono.setForeground(new Color(150, 220, 255));
-			lblCargo.setForeground(new Color(150, 220, 255));
-			lblJornada.setForeground(new Color(150, 220, 255));
-			lblHorario.setForeground(new Color(150, 220, 255));
-			lblRegistrarEmpleado.setForeground(new Color(150, 220, 255));
-			lblclock.setForeground(new Color(150, 220, 255));
-			txtIdEmpleado.setBackground(new Color(30, 80, 120));
-			txtDniEmpleado.setBackground(new Color(30, 80, 120));
-			txtNombreEmpleado.setBackground(new Color(30, 80, 120));
-			txtTelefono.setBackground(new Color(30, 80, 120));
-			cboCargo.setBackground(new Color(30, 80, 120));
-			cboJornada.setBackground(new Color(30, 80, 120));
-			cboHorario.setBackground(new Color(30, 80, 120));
+	}
+	//KEYTYPED NombreProvedor
+	protected void do_txtNombreProveedor_keyTyped(KeyEvent e) {
+		//para que solamente acepte ingresar letras
+				char c = e.getKeyChar();
 
-			txtBuscarEmple.setForeground(Color.WHITE);
-			txtIdEmpleado.setForeground(Color.WHITE);
-			txtDniEmpleado.setForeground(Color.WHITE);
-			txtNombreEmpleado.setForeground(Color.WHITE);
-			txtTelefono.setForeground(Color.WHITE);
-			cboCargo.setForeground(Color.WHITE);
-			cboJornada.setForeground(Color.WHITE);
-			cboHorario.setForeground(Color.WHITE);		
-			jlabelmodo.setText("Modo Normal");
-		}	
-	}	
-	
+			    // Letras válidas del alfabeto español + espacio
+			    String letrasValidas = "áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ '\b'";
+
+			    if (letrasValidas.indexOf(c) == -1) {
+			        e.consume();
+
+			        if (Character.isDigit(c)) {
+			            JOptionPane.showMessageDialog(this, "No se permiten números.");
+			        } else {
+			            JOptionPane.showMessageDialog(this, "Solo se permiten letras del alfabeto español y espacios.");
+			        }
+			    }
+	}
+	//KEYTYPED Correo
+	protected void do_txtCorreoProveedor_keyTyped(KeyEvent e) {
+		//para que solamente acepte ingresar letras
+				char c = e.getKeyChar();
+
+			    // Letras válidas del alfabeto español + espacio
+			    String letrasValidas = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@-_.'\b'";
+
+			    if (letrasValidas.indexOf(c) == -1) {
+			        e.consume();
+
+			        if (Character.isEmoji(c)) {
+			            JOptionPane.showMessageDialog(this, "No se permiten símbolos extraños.");
+			        } else {
+			            JOptionPane.showMessageDialog(this, "Solo se permiten números,letras del alfabeto inglés; y los símbolos '@', '.', '-' y '_'.");
+			        }
+			    }
+			    
+	}
+	//KEYTYPED Estado (Solo poner letras y borrar)
+	protected void do_txtEstadoProveedor_keyTyped(KeyEvent e) {
+		//para que solamente acepte ingresar letras
+				char c = e.getKeyChar();
+
+			    // Letras válidas del alfabeto español + espacio
+			    String letrasValidas = "áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ '\b'";
+
+			    if (letrasValidas.indexOf(c) == -1) {
+			        e.consume();
+
+			        if (Character.isDigit(c)) {
+			            JOptionPane.showMessageDialog(this, "No se permiten números.");
+			        } else {
+			            JOptionPane.showMessageDialog(this, "Solo se permiten letras del alfabeto español y espacios.");
+			        }
+			    }
+	}
+	protected void do_txtDireccionProveedor_keyTyped(KeyEvent e) {
+		char c = e.getKeyChar();
+
+	    // Letras válidas del alfabeto español + espacio
+	    String letrasValidas = "0123456789áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ.-,'#_ '\b'";
+
+	    if (letrasValidas.indexOf(c) == -1) {
+	        e.consume();
+
+	        if (Character.isEmoji(c)) {
+	            JOptionPane.showMessageDialog(this, "No se permiten dígitos extraños.");
+	        } else {
+	            JOptionPane.showMessageDialog(this, "Solo se permiten letras del alfabeto español, signos de escritura y espacios.");
+	        }
+	    }
+	}
 }
