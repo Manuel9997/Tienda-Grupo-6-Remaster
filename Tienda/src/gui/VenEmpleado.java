@@ -758,7 +758,6 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 		ListarProducto(filtro);
 	}
 	protected void do_txtDniCliente_keyTyped(KeyEvent e) {
-		//para que solamente acepte ingresar números
 		char validarNumeros = e.getKeyChar();
 		if(Character.isLetter(validarNumeros)) {
 			e.consume();
@@ -766,7 +765,6 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 		}
 	}
 	protected void do_txtNombreCliente_keyTyped(KeyEvent e) {
-		//para que solamente acepte ingresar letras
 		char validarLetras = e.getKeyChar();
 		if(Character.isDigit(validarLetras)) {
 			e.consume();
@@ -774,7 +772,6 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 		}
 	}
 	protected void do_txtTelefonoCliente_keyTyped(KeyEvent e) {
-		//para que solamente acepte ingresar números
 		char validarNumeros = e.getKeyChar();
 		if(Character.isLetter(validarNumeros)) {
 			e.consume();

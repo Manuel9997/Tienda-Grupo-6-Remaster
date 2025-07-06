@@ -90,10 +90,10 @@ public class Inicio extends JFrame implements ActionListener {
 					 }
 					int mont= cal.get(Calendar.MONTH);
 					 if(mont<10) {
-						 month="0"+Integer.toString(mont);
+						 month="0"+Integer.toString(mont+1);
 					 }
 					 else {
-						 month=Integer.toString(mont);
+						 month=Integer.toString(mont+1);
 					 }
 					
 					
@@ -304,7 +304,7 @@ public class Inicio extends JFrame implements ActionListener {
 		clipreproduciendo = AudioSystem.getClip();
 		clipreproduciendo.open(audiostream);
 		 volumeControl = (FloatControl) clipreproduciendo.getControl(FloatControl.Type.MASTER_GAIN);
-		 setVolume(80);  
+		 setVolume(60);  
 		 clipreproduciendo.start();
 	}
 	

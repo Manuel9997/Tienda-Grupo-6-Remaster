@@ -24,6 +24,12 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -42,9 +48,12 @@ import javax.swing.JTabbedPane;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
+import java.net.URL;
 import java.sql.Date;
 import java.awt.event.MouseEvent;
 import javax.swing.JSeparator;
+import javax.swing.JSlider;
 
 public class VenAdministrador extends JFrame implements ActionListener, KeyListener, MouseListener {
 
@@ -78,7 +87,9 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	public String tmam;
 	public String fecha;
 	public String hora;
-
+	private static Clip clipreproduciendo;
+	private JSlider controlvol;
+	private static FloatControl volumeControl;
 	/**
 	 * Launch the application.
 	 */
@@ -178,6 +189,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	 * Create the frame.
 	 */
 	public VenAdministrador() {
+		addMouseListener(this);
 		setAlwaysOnTop(true);
 		setTitle("Administrador");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -191,11 +203,13 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		contentPane.setLayout(null);
 		{
 			
-			JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+			tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+			tabbedPane.addMouseListener(this);
 			tabbedPane.setBounds(10, 11, 1336, 712);
 			contentPane.add(tabbedPane);
 			
-			JPanel panelEmpleado = new JPanel();
+			panelEmpleado = new JPanel();
+			panelEmpleado.addMouseListener(this);
 			tabbedPane.addTab("Empleado", null, panelEmpleado, null);
 			panelEmpleado.setLayout(null);
 			{
@@ -362,7 +376,8 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 				jlabelmodo.addActionListener(this);
 			}
 			
-			JPanel panelProducto = new JPanel();
+			panelProducto = new JPanel();
+			panelProducto.addMouseListener(this);
 			tabbedPane.addTab("Producto", null, panelProducto, null);
 			panelProducto.setLayout(null);
 			{
@@ -547,6 +562,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 			}
 			{
 				panelVenta = new JPanel();
+				panelVenta.addMouseListener(this);
 				tabbedPane.addTab("Venta", null, panelVenta, null);
 				panelVenta.setLayout(null);
 				{
@@ -609,6 +625,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 			}
 			{
 				panelProveedor = new JPanel();
+				panelProveedor.addMouseListener(this);
 				tabbedPane.addTab("Proveedor", null, panelProveedor, null);
 				panelProveedor.setLayout(null);
 				{
@@ -860,6 +877,9 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	private JLabel lblEliminar;
 	private JTextField txtideliminarhistorial;
 	private JButton btEliminar;
+	private JTabbedPane tabbedPane;
+	private JPanel panelEmpleado;
+	private JPanel panelProducto;
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
 		String actual = jlabelmodo.getText();
 		if(actual == "Modo Normal") {		
@@ -1021,7 +1041,6 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		}
 	}
 	protected void do_txtIdProducto_keyTyped(KeyEvent e) {
-		//para que solamente acepte ingresar números
 		char validarNumeros = e.getKeyChar();
 		
 		if(!Character.isDigit(validarNumeros)) {
@@ -1050,10 +1069,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		
 	}
 	protected void do_txtCategoria_keyTyped(KeyEvent e) {
-		//para que solamente acepte ingresar letras
 				char c = e.getKeyChar();
-
-			    // Letras válidas del alfabeto español + espacio
 			    String letrasValidas = "áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ '\b'";
 
 			    if (letrasValidas.indexOf(c) == -1) {
@@ -1094,9 +1110,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		}
 	}
 	protected void do_txtPrecio_keyTyped(KeyEvent e) {
-		//Para que solamente acepte ingresar números y puntos.
-		
-		//La intención de esto es que solo permita ingresar número decimales
+
 		char validarNumeros = e.getKeyChar();
 		
 		if(!(Character.isDigit(validarNumeros) || validarNumeros == '.'|| validarNumeros =='\b')) {
@@ -1239,6 +1253,49 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	}
 	
 	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == panelProveedor) {
+			try {
+				do_panelProveedor_mouseClicked(e);
+			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		if (e.getSource() == panelVenta) {
+			try {
+				do_panelVenta_mouseClicked(e);
+			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		if (e.getSource() == panelProducto) {
+			try {
+				do_panelProducto_mouseClicked(e);
+			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		if (e.getSource() == panelEmpleado) {
+			try {
+				do_panelEmpleado_mouseClicked(e);
+			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		if (e.getSource() == this) {
+			do_this_mouseClicked(e);
+		}
+		if (e.getSource() == tabbedPane) {
+			try {
+				do_tabbedPane_mouseClicked(e);
+			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
 		if (e.getSource() == tablaHistorialVentas) {
 			do_tablaHistorialVentas_mouseClicked(e);
 		}
@@ -1346,9 +1403,8 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		String filtro = txtIdProdBuscar.getText();
 		ListarProducto(filtro);
 	}
-	//PANEL EMPLEADO
+
 	protected void do_txtIdEmpleado_keyTyped(KeyEvent e) {
-		//para que solamente acepte ingresar números
 		char validarNumeros = e.getKeyChar();
 		if(!(Character.isDigit(validarNumeros) || validarNumeros =='\b')) {
 			e.consume();
@@ -1394,10 +1450,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		}
 	}
 	protected void do_txtNombreEmpleado_keyTyped(KeyEvent e) {
-		//para que solamente acepte ingresar letras
 		char c = e.getKeyChar();
-
-	    // Letras válidas del alfabeto español + espacio
 	    String letrasValidas = "áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ '\b'";
 
 	    if (letrasValidas.indexOf(c) == -1) {
@@ -1411,8 +1464,6 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	    }
 	}
 	protected void do_txtTelefono_keyTyped(KeyEvent e) {
-				//Para que solamente acepte ingresar números y puntos.
-				//La intención de esto es que solo permita ingresar número decimales
 				char validarNumeros = e.getKeyChar();
 				
 				if(!(Character.isDigit(validarNumeros) || validarNumeros =='\b')) {
@@ -1436,9 +1487,6 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 				}
 	}
 	protected void do_txtSueldo_keyTyped(KeyEvent e) {
-		//Para que solamente acepte ingresar números y puntos.
-		
-				//La intención de esto es que solo permita ingresar número decimales
 				char validarNumeros = e.getKeyChar();
 				
 				if(!(Character.isDigit(validarNumeros) || validarNumeros == '.'|| validarNumeros =='\b')) {
@@ -1690,9 +1738,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		txtDireccionProveedor.setText("");
 		txtEstadoProveedor.setText("");
 	}
-	//TYPED IdProveedor
 	protected void do_txtIDProveedor_keyTyped(KeyEvent e) {
-		//para que solamente acepte ingresar números
 				char validarNumeros = e.getKeyChar();
 				if(!(Character.isDigit(validarNumeros) || validarNumeros =='\b')) {
 					e.consume();
@@ -1758,12 +1804,10 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 			}
 		}
 	}
-	//KEYTYPED NombreProvedor
+
 	protected void do_txtNombreProveedor_keyTyped(KeyEvent e) {
-		//para que solamente acepte ingresar letras
 				char c = e.getKeyChar();
 
-			    // Letras válidas del alfabeto español + espacio
 			    String letrasValidas = "áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ '\b'";
 
 			    if (letrasValidas.indexOf(c) == -1) {
@@ -1776,12 +1820,10 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 			        }
 			    }
 	}
-	//KEYTYPED Correo
+
 	protected void do_txtCorreoProveedor_keyTyped(KeyEvent e) {
-		//para que solamente acepte ingresar letras
 				char c = e.getKeyChar();
 
-			    // Letras válidas del alfabeto español + espacio
 			    String letrasValidas = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@-_.'\b'";
 
 			    if (letrasValidas.indexOf(c) == -1) {
@@ -1795,12 +1837,11 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 			    }
 			    
 	}
-	//KEYTYPED Estado (Solo poner letras y borrar)
+
 	protected void do_txtEstadoProveedor_keyTyped(KeyEvent e) {
-		//para que solamente acepte ingresar letras
+
 				char c = e.getKeyChar();
 
-			    // Letras válidas del alfabeto español + espacio
 			    String letrasValidas = "áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ '\b'";
 
 			    if (letrasValidas.indexOf(c) == -1) {
@@ -1847,5 +1888,75 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		} catch (Exception e2) {
 			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
 		}
+	}
+	protected void do_tabbedPane_mouseClicked(MouseEvent e) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+		URL url = Inicio.class.getResource("/recursos/Error.wav");
+		if(url == null) {
+			JOptionPane.showMessageDialog(null,"No se encontró");
+		}
+		AudioInputStream audiostream= AudioSystem.getAudioInputStream(url);
+		clipreproduciendo = AudioSystem.getClip();
+		clipreproduciendo.open(audiostream);
+		 volumeControl = (FloatControl) clipreproduciendo.getControl(FloatControl.Type.MASTER_GAIN);
+		 setVolume(0);  
+		 clipreproduciendo.start();
+	}
+	private static void setVolume(int volume) {
+	    if (volumeControl != null) {
+	        float min = volumeControl.getMinimum();
+	        float max = volumeControl.getMaximum();
+	        float dB = (float) (min + (max - min) * (volume / 100.0));
+	        volumeControl.setValue(dB);
+	    }
+	}
+	protected void do_this_mouseClicked(MouseEvent e) {
+	}
+	protected void do_panelEmpleado_mouseClicked(MouseEvent e) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+		URL url = Inicio.class.getResource("/recursos/Error.wav");
+		if(url == null) {
+			JOptionPane.showMessageDialog(null,"No se encontró");
+		}
+		AudioInputStream audiostream= AudioSystem.getAudioInputStream(url);
+		clipreproduciendo = AudioSystem.getClip();
+		clipreproduciendo.open(audiostream);
+		 volumeControl = (FloatControl) clipreproduciendo.getControl(FloatControl.Type.MASTER_GAIN);
+		 setVolume(50);  
+		 clipreproduciendo.start();
+	}
+	protected void do_panelProducto_mouseClicked(MouseEvent e) throws UnsupportedAudioFileException, IOException, LineUnavailableException  {
+		URL url = Inicio.class.getResource("/recursos/Error.wav");
+		if(url == null) {
+			JOptionPane.showMessageDialog(null,"No se encontró");
+		}
+		AudioInputStream audiostream= AudioSystem.getAudioInputStream(url);
+		clipreproduciendo = AudioSystem.getClip();
+		clipreproduciendo.open(audiostream);
+		 volumeControl = (FloatControl) clipreproduciendo.getControl(FloatControl.Type.MASTER_GAIN);
+		 setVolume(50);  
+		 clipreproduciendo.start();
+	}
+	protected void do_panelVenta_mouseClicked(MouseEvent e) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
+		URL url = Inicio.class.getResource("/recursos/Error.wav");
+		if(url == null) {
+			JOptionPane.showMessageDialog(null,"No se encontró");
+		}
+		AudioInputStream audiostream= AudioSystem.getAudioInputStream(url);
+		clipreproduciendo = AudioSystem.getClip();
+		clipreproduciendo.open(audiostream);
+		 volumeControl = (FloatControl) clipreproduciendo.getControl(FloatControl.Type.MASTER_GAIN);
+		 setVolume(50);  
+		 clipreproduciendo.start();
+	}
+	protected void do_panelProveedor_mouseClicked(MouseEvent e) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
+		URL url = Inicio.class.getResource("/recursos/Error.wav");
+		if(url == null) {
+			JOptionPane.showMessageDialog(null,"No se encontró");
+		}
+		AudioInputStream audiostream= AudioSystem.getAudioInputStream(url);
+		clipreproduciendo = AudioSystem.getClip();
+		clipreproduciendo.open(audiostream);
+		 volumeControl = (FloatControl) clipreproduciendo.getControl(FloatControl.Type.MASTER_GAIN);
+		 setVolume(50);  
+		 clipreproduciendo.start();
 	}
 }
