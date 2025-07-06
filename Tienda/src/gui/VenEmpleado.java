@@ -1292,6 +1292,10 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 	protected void do_btnRegistrarDetalleVentas_actionPerformed(ActionEvent e) {
 		Venta v = new Venta(Integer.parseInt(txtCodEditable.getText()));
 		Producto p = new Producto(Integer.parseInt(txtIdProductoVenta.getText()));
+		if(p.getStockProducto() < Integer.parseInt(txtCantidadVenta.getText())) {
+			JOptionPane.showMessageDialog(this, "Stock Insuficiente");
+			return;
+		}
 		
 		DetalleVenta dv = new DetalleVenta(v, p, Integer.parseInt(txtCantidadVenta.getText()));
 		
@@ -1304,6 +1308,8 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 		JOptionPane.showMessageDialog(this, "Detalle de Venta registrada correctamente");
 		ListarVentasDelDia();
 		LimpiarVentaCompleta();
+		
+		
 	}
 	protected void do_btnModificarVenta_actionPerformed(ActionEvent e) {
 		try {

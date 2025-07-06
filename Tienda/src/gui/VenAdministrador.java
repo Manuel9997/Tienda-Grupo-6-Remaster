@@ -555,6 +555,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 					panelVenta.add(scrollPane_1);
 					{
 						tablaHistorialVentas = new JTable();
+						tablaHistorialVentas.addMouseListener(this);
 						tablaHistorialVentas.setFillsViewportHeight(true);
 						scrollPane_1.setViewportView(tablaHistorialVentas);
 					}
@@ -567,6 +568,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 				}
 				{
 					txtBuscarHistorialVentas = new JTextField();
+					txtBuscarHistorialVentas.addKeyListener(this);
 					txtBuscarHistorialVentas.setColumns(10);
 					txtBuscarHistorialVentas.setBackground(Color.WHITE);
 					txtBuscarHistorialVentas.setBounds(202, 105, 447, 25);
@@ -575,8 +577,34 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 				{
 					lblHistorialVentas = new JLabel("HISTORIAL DE VENTAS");
 					lblHistorialVentas.setFont(new Font("Verdana", Font.PLAIN, 25));
-					lblHistorialVentas.setBounds(279, 28, 297, 46);
+					lblHistorialVentas.setBounds(121, 27, 297, 46);
 					panelVenta.add(lblHistorialVentas);
+				}
+				{
+					lblEliminarVenta = new JLabel("ELIMINAR  VENTA:");
+					lblEliminarVenta.setFont(new Font("Verdana", Font.PLAIN, 25));
+					lblEliminarVenta.setBounds(749, 27, 297, 46);
+					panelVenta.add(lblEliminarVenta);
+				}
+				{
+					lblEliminar = new JLabel("ID:");
+					lblEliminar.setFont(new Font("Verdana", Font.PLAIN, 15));
+					lblEliminar.setBounds(749, 86, 29, 19);
+					panelVenta.add(lblEliminar);
+				}
+				{
+					txtideliminarhistorial = new JTextField();
+					txtideliminarhistorial.setColumns(10);
+					txtideliminarhistorial.setBackground(Color.WHITE);
+					txtideliminarhistorial.setBounds(788, 84, 50, 25);
+					panelVenta.add(txtideliminarhistorial);
+				}
+				{
+					btEliminar = new JButton("Eliminar");
+					btEliminar.setFont(new Font("Verdana", Font.PLAIN, 14));
+					btEliminar.addActionListener(this);
+					btEliminar.setBounds(861, 84, 109, 25);
+					panelVenta.add(btEliminar);
 				}
 			}
 			{
@@ -728,10 +756,13 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		}
 		ListarProducto("");
 		ListarEmpleado("");
-		ListarHistorialVenta();
+		ListarHistorialVenta("");
 		ListarProveedor("");
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btEliminar) {
+			do_btEliminar_actionPerformed(e);
+		}
 		if (e.getSource() == btnRegistrarProveedor) {
 			do_btnRegistrarProveedor_actionPerformed(e);
 		}
@@ -825,6 +856,10 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	private JLabel lblCorreo_2;
 	private JTextField txtEstadoProveedor;
 	private JLabel lblNewLabel;
+	private JLabel lblEliminarVenta;
+	private JLabel lblEliminar;
+	private JTextField txtideliminarhistorial;
+	private JButton btEliminar;
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
 		String actual = jlabelmodo.getText();
 		if(actual == "Modo Normal") {		
@@ -847,7 +882,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 			cboCargo.setBackground(Color.WHITE);
 			cboJornada.setBackground(Color.WHITE);
 			cboHorario.setBackground(Color.WHITE);
-		
+					
 			txtBuscarEmple.setForeground(Color.BLACK);
 			txtIdEmpleado.setForeground(Color.BLACK);
 			txtDniEmpleado.setForeground(Color.BLACK);
@@ -860,7 +895,6 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		}
 		else if(actual == "Modo Oscuro"){
 			contentPane.setBackground(Color.BLACK);
-			
 			lblIdBuscarE.setForeground(Color.LIGHT_GRAY);
 			txtBuscarEmple.setBackground(Color.LIGHT_GRAY);
 			lblIdE.setForeground(Color.LIGHT_GRAY);
@@ -915,6 +949,9 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		}	
 	}	
 	public void keyPressed(KeyEvent e) {
+		if (e.getSource() == txtBuscarHistorialVentas) {
+			do_txtBuscarHistorialVentas_keyPressed(e);
+		}
 	}
 	public void keyReleased(KeyEvent e) {
 		if (e.getSource() == txtBuscarEmple) {
@@ -1202,6 +1239,9 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	}
 	
 	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == tablaHistorialVentas) {
+			do_tablaHistorialVentas_mouseClicked(e);
+		}
 		if (e.getSource() == tablaProveedor) {
 			do_tablaProveedor_mouseClicked(e);
 		}
@@ -1525,13 +1565,15 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		String filtro = txtBuscarEmple.getText();
 		ListarEmpleado(filtro);
 	}
-	public void ListarHistorialVenta() {
+	public void ListarHistorialVenta(String filtro) {
 	    DefaultTableModel modelo = new DefaultTableModel();
 	    MantHistorialVentas mhv = new MantHistorialVentas();
-	    ArrayList<HistorialVentas> lista = mhv.MostrarHistorialVentas();
+	    ArrayList<HistorialVentas> lista = mhv.ConsultarHistorialVentasFiltrado("");
+		if(filtro.length() == 0) lista = mhv.ConsultarHistorialVentasFiltrado("");
+		else lista = mhv.ConsultarHistorialVentasFiltrado(filtro);
 
-	    modelo.addColumn("Código Venta");
-	    modelo.addColumn("Detalle");
+	    modelo.addColumn("ID Venta");
+	    modelo.addColumn("ID Detalle");
 	    modelo.addColumn("DNI Cliente");
 	    modelo.addColumn("Nombre Cliente");
 	    modelo.addColumn("Teléfono Cliente");
@@ -1774,7 +1816,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	protected void do_txtDireccionProveedor_keyTyped(KeyEvent e) {
 		char c = e.getKeyChar();
 
-	    // Letras válidas del alfabeto español + espacio
+
 	    String letrasValidas = "0123456789áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ.-,'#_ '\b'";
 
 	    if (letrasValidas.indexOf(c) == -1) {
@@ -1786,5 +1828,24 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	            JOptionPane.showMessageDialog(this, "Solo se permiten letras del alfabeto español, signos de escritura y espacios.");
 	        }
 	    }
+	}
+	protected void do_txtBuscarHistorialVentas_keyPressed(KeyEvent e) {
+		String filtro = txtBuscarHistorialVentas.getText();
+		ListarHistorialVenta(filtro);
+	}
+	protected void do_tablaHistorialVentas_mouseClicked(MouseEvent e) {
+		int fila = tablaHistorialVentas.getSelectedRow();
+		txtideliminarhistorial.setText(String.valueOf(tablaHistorialVentas.getValueAt(fila, 0)));
+
+	}
+	protected void do_btEliminar_actionPerformed(ActionEvent e) {
+		
+		try {
+			MantHistorialVentas mv = new MantHistorialVentas();
+			mv.EliminarHistorial(Integer.parseInt(txtideliminarhistorial.getText()));
+		ListarHistorialVenta("");
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
+		}
 	}
 }

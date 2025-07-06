@@ -353,19 +353,18 @@ foreign key (id_producto) references Producto(id_producto)
 );
 select * from DetalleVenta;
 insert into DetalleVenta values(1, 1, 145, 1, 2800);
-insert into DetalleVenta values(2, 1, 378, 2, 360);
-insert into DetalleVenta values(3, 2, 189, 1, 3500);
-insert into DetalleVenta values(4, 3, 489, 1, 3600);
-insert into DetalleVenta values(5, 4, 378, 1, 180);
-insert into DetalleVenta values(6, 5, 166, 1, 4200);
-insert into DetalleVenta values(7, 6, 378, 3, 540);
-insert into DetalleVenta values(8, 6, 158, 1, 130);
-insert into DetalleVenta values(9, 6, 173, 1, 220);
-insert into DetalleVenta values(10, 7, 230, 3, 267);
-insert into DetalleVenta values(11, 8, 378, 2, 360);
-insert into DetalleVenta values(12, 9, 174, 1, 750);
-insert into DetalleVenta values(13, 9, 151, 1, 2200);
-insert into DetalleVenta values(14, 10, 169, 2, 480); 
+insert into DetalleVenta values(2, 2, 378, 2, 360);
+insert into DetalleVenta values(3, 3, 189, 1, 3500);
+insert into DetalleVenta values(4, 4, 489, 1, 3600);
+insert into DetalleVenta values(5, 5, 378, 1, 180);
+insert into DetalleVenta values(6, 6, 166, 1, 4200);
+insert into DetalleVenta values(7, 7, 378, 3, 540);
+insert into DetalleVenta values(8, 8, 158, 1, 130);
+insert into DetalleVenta values(9, 9, 173, 1, 220);
+insert into DetalleVenta values(10, 10, 230, 3, 267);
+
+
+
 
 #------------------------------------------------- PROCEDURES DE VENTA Y DETALLE VENTA -----------------------------------------------------
 create procedure sp_MostrarVenta()
@@ -479,7 +478,7 @@ end $$
 DELIMITER ;
 
 call sp_AgregarDetalleVenta(11, 151, 2);
-call sp_AgregarDetalleVenta(11, 489, 2);
+call sp_AgregarDetalleVenta(12, 489, 2);
 call sp_MostrarDetalleVenta();
 DELIMITER $$
 
@@ -569,6 +568,7 @@ call sp_ModificarDetalleVenta(5, 245, 2);
 call sp_MostrarDetalleVenta();
 call sp_MostrarHIstorialVentas();
 
+
 DELIMITER $$
 create procedure sp_BuscarHistorialVentas(IN codVenta INT)
 begin
@@ -637,3 +637,75 @@ end $$
 DELIMITER ;
 
 call sp_MostrarVentasDelDia();
+
+
+DELIMITER $$
+CREATE PROCEDURE sp_MostrarHistorialVentasconfiltro(
+    IN p_filtro VARCHAR(50) 
+)
+BEGIN
+    SELECT
+        v.codigo_venta,
+        dv.id_detalleVenta,
+        c.dni_cliente,
+        c.nombre_cliente,
+        c.telefono_cliente,
+        v.fecha_venta,
+        v.hora_venta,
+        p.id_producto,
+        p.categoria_producto,
+        p.nombre_producto,
+        p.garantia_producto,
+        p.precio_producto,
+        dv.cantidad_detalleVenta,
+        v.tipopago_venta,
+        v.comprobante_venta,
+        e.id_empleado,
+        e.nombre_empleado,
+        dv.subtotal_detalleVenta,
+        v.total_venta
+    FROM
+        DetalleVenta dv
+    JOIN
+        Venta v ON dv.codigo_venta = v.codigo_venta
+    JOIN
+        Cliente c ON v.dni_cliente = c.dni_cliente 
+    JOIN
+        Empleado e ON v.id_empleado = e.id_empleado
+    JOIN
+        Producto p ON dv.id_producto = p.id_producto
+    WHERE
+        CAST(v.codigo_venta AS CHAR) LIKE CONCAT('%', p_filtro, '%') OR
+        p.categoria_producto LIKE CONCAT('%', p_filtro, '%') OR
+        c.nombre_cliente LIKE CONCAT('%', p_filtro, '%') OR
+        c.dni_cliente LIKE CONCAT('%', p_filtro, '%') OR
+        CAST(e.id_empleado AS CHAR) LIKE CONCAT('%', p_filtro, '%') OR
+        e.nombre_empleado LIKE CONCAT('%', p_filtro, '%');
+END $$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE PROCEDURE sp_EliminarHistorialVentas(
+    IN p_id INT
+)
+BEGIN
+    DELETE FROM DetalleVenta WHERE id_detalleVenta = p_id;
+    DELETE FROM Venta WHERE codigo_venta = p_id;
+END $$
+DELIMITER ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
