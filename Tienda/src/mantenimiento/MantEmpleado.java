@@ -106,14 +106,14 @@ public Empleado BuscarEmpleado(int idEmpleado) {
     }
     return e;
 }
-public ArrayList<Empleado> ConsultarEmpleado(String filtro) {
+public ArrayList<Empleado> ConsultarEmpleado(String texto) {
     ArrayList<Empleado> lista = new ArrayList<>();
     try {
         java.sql.Statement sta = ConexionMySQL.getConexion().createStatement();
         ResultSet rs = sta.executeQuery("select * from Empleado " +
-            "where cast(id_empleado as char) like '%" + filtro + "%' " +
-            "or dni_empleado like '%" + filtro + "%' " +
-            "or nombre_empleado like '%" + filtro + "%'");
+            "where cast(id_empleado as char) like '%" + texto + "%' " +
+            "or dni_empleado like '%" + texto + "%' " +
+            "or nombre_empleado like '%" + texto + "%'");
 
         Empleado e;
         while (rs.next()) {

@@ -20,7 +20,7 @@ public class MantHistorialVentas {
 
         try {
             Connection cnx = ConexionMySQL.getConexion();
-            CallableStatement csta = cnx.prepareCall("{call sp_MostrarHistorialVenta()}");
+            CallableStatement csta = cnx.prepareCall("{call sp_MostrarHistorialVentas()}");
             ResultSet rs = csta.executeQuery();
 
             while (rs.next()) {
@@ -30,7 +30,9 @@ public class MantHistorialVentas {
                     rs.getString("telefono_cliente")
                 );
 
-                Empleado empleado = new Empleado(rs.getString("nombre_empleado"));
+                Empleado empleado = new Empleado(
+                		rs.getInt("id_empleado"),
+                		rs.getString("nombre_empleado"));
 
                 Producto producto = new Producto(
                     rs.getInt("id_producto"),
@@ -52,6 +54,7 @@ public class MantHistorialVentas {
                 );
 
                 DetalleVenta detalleVenta = new DetalleVenta(
+                	rs.getInt("id_detalleVenta"),
                 	venta,
                 	producto,
                 	rs.getInt("cantidad_detalleVenta"),
@@ -69,54 +72,61 @@ public class MantHistorialVentas {
 
         return lista;
     }
-	public HistorialVentas MostrarVentaActual() {
-	    HistorialVentas ventaActual = null;
+	public ArrayList<HistorialVentas> MostrarVentasDelDia() {
+	    ArrayList<HistorialVentas> lista = new ArrayList<>();
+
 	    try {
-	        CallableStatement csta = ConexionMySQL.getConexion().prepareCall("{call sp_MostrarVentaActual()}");
+	        CallableStatement csta = ConexionMySQL.getConexion().prepareCall("{call sp_MostrarVentasDelDia()}");
 	        ResultSet rs = csta.executeQuery();
 
-	        if (rs.next()) {
-	        	Cliente cliente = new Cliente(
-	                    rs.getString("dni_cliente"),
-	                    rs.getString("nombre_cliente"),
-	                    rs.getString("telefono_cliente")
-	                );
+	        while (rs.next()) {
+	            Cliente cliente = new Cliente(
+	                rs.getString("dni_cliente"),
+	                rs.getString("nombre_cliente"),
+	                rs.getString("telefono_cliente")
+	            );
 
-	        	Empleado empleado = new Empleado(rs.getString("nombre_empleado"));
+	            Empleado empleado = new Empleado(
+	            	rs.getInt("id_empleado"),
+	                rs.getString("nombre_empleado")
+	            );
 
-	        	Producto producto = new Producto(
-	                     rs.getInt("id_producto"),
-	                     rs.getString("categoria_producto"),
-	                     rs.getString("nombre_producto"),
-	                     rs.getString("garantia_producto"),
-	                     rs.getDouble("precio_producto")
-	                 );
+	            Producto producto = new Producto(
+	                rs.getInt("id_producto"),
+	                rs.getString("categoria_producto"),
+	                rs.getString("nombre_producto"),
+	                rs.getString("garantia_producto"),
+	                rs.getDouble("precio_producto")
+	            );
 
-	        	 Venta venta = new Venta(
-	                     rs.getInt("codigo_venta"),
-	                     cliente,
-	                     rs.getDate("fecha_venta"),
-	                     rs.getTime("hora_venta"),
-	                     rs.getString("tipopago_venta"),
-	                     rs.getString("comprobante_venta"),
-	                     empleado,
-	                     rs.getDouble("total_venta")
-	                 );
+	            Venta venta = new Venta(
+	                rs.getInt("codigo_venta"),
+	                cliente,
+	                rs.getDate("fecha_venta"),
+	                rs.getTime("hora_venta"),
+	                rs.getString("tipopago_venta"),
+	                rs.getString("comprobante_venta"),
+	                empleado,
+	                rs.getDouble("total_venta")
+	            );
 
-	        	 DetalleVenta detalleVenta = new DetalleVenta(
-	                 	venta,
-	                 	producto,
-	                 	rs.getInt("cantidad_detalleVenta"),
-	                 	rs.getDouble("subtotal_detalleVenta")	
-	                 );
+	            DetalleVenta detalleVenta = new DetalleVenta(
+	            	rs.getInt("id_detalleVenta"),
+	                venta,
+	                producto,
+	                rs.getInt("cantidad_detalleVenta"),
+	                rs.getDouble("subtotal_detalleVenta")
+	            );
 
-	        	 ventaActual = new HistorialVentas(venta, detalleVenta);
+	            HistorialVentas historial = new HistorialVentas(venta, detalleVenta);
+
+	            lista.add(historial);
 	        }
 
 	    } catch (Exception e) {
-	        System.out.println("ERROR al mostrar venta actual: " + e);
+	        System.out.println("ERROR al mostrar ventas del día: " + e);
 	    }
 
-	    return ventaActual;
+	    return lista;
 	}
 }

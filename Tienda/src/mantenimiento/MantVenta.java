@@ -24,9 +24,13 @@ public ArrayList<Venta> MostrarVenta() {
 					rs.getString("dni_cliente"),
 					rs.getString("nombre_cliente"),
 					rs.getString("telefono_cliente")
-				    );
-			e = new Empleado(rs.getString("nombre_empleado"));
+			);
 			
+			e = new Empleado(
+					rs.getInt("id_empleado"),
+					rs.getString("nombre_empleado")
+			);
+					
 			v = new Venta(
                     rs.getInt("codigo_venta"),
                     c,
@@ -36,13 +40,13 @@ public ArrayList<Venta> MostrarVenta() {
                     rs.getString("comprobante_venta"),
                     e,
                     rs.getDouble("total_venta")
-                );
-                lista.add(v);
+            );
+                lista.add(v);    
             }
+	
         } catch (Exception e) {}
 	
-        return lista;
-     
+        return lista; 
 }
 public void AgregarVenta(Venta v) {
     try {
@@ -57,7 +61,7 @@ public void AgregarVenta(Venta v) {
         System.out.println("ERROR" + e);
     }
 }
-public void calcularTotalVenta(int codigoVenta) {
+public void CalcularTotalVenta(int codigoVenta) {
     try {
         Connection cnx = ConexionMySQL.getConexion();
         CallableStatement csta = cnx.prepareCall("{call sp_CalcularTotalVenta(?)}");
@@ -65,6 +69,20 @@ public void calcularTotalVenta(int codigoVenta) {
         csta.executeUpdate();
     } catch (Exception e) {
         System.out.println("ERROR" + e);
+    }
+}
+public void ModificarVenta(Venta v) {
+    try {
+        Connection cnx = ConexionMySQL.getConexion();
+        CallableStatement csta = cnx.prepareCall("{call sp_ModificarVenta(?, ?, ?, ?, ?)}");
+        csta.setInt(1, v.getCodigoVenta());
+        csta.setString(2, v.getCliente().getDniCliente());
+        csta.setString(3, v.getTipopagoVenta());
+        csta.setString(4, v.getComprobanteVenta());
+        csta.setInt(5, v.getEmpleado().getIdEmpleado());
+        csta.executeUpdate();
+    } catch (Exception e) {
+        System.out.println("ERROR al modificar venta: " + e);
     }
 }
 }

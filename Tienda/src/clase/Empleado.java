@@ -23,13 +23,14 @@ public Empleado(int idEmpleado, String dniEmpleado, String nombreEmpleado, Strin
 	this.sueldoEmpleado = sueldoEmpleado;
 }
 
-public Empleado(String nombreEmpleado) {
-
-	this.nombreEmpleado = nombreEmpleado;
+public Empleado(int idEmpleado) {
+	this.idEmpleado = idEmpleado;
 }
 
-public Empleado() {
+public Empleado(int idEmpleado, String nombreEmpleado) {
 
+	this.idEmpleado = idEmpleado;
+	this.nombreEmpleado = nombreEmpleado;
 }
 
 public int getIdEmpleado() {

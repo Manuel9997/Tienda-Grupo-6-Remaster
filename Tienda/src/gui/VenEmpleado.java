@@ -9,12 +9,19 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import clase.Cliente;
+import clase.DetalleVenta;
 import clase.Empleado;
+import clase.HistorialVentas;
 import clase.Producto;
+import clase.Proveedor;
 import clase.Venta;
 import mantenimiento.MantCliente;
+import mantenimiento.MantDetalleVenta;
 import mantenimiento.MantEmpleado;
+import mantenimiento.MantHistorialVentas;
 import mantenimiento.MantProducto;
+import mantenimiento.MantProveedor;
+import mantenimiento.MantVenta;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -40,9 +47,15 @@ import javax.swing.JTable;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
+import java.sql.Date;
 import java.awt.event.MouseEvent;
+import java.awt.BorderLayout;
+import javax.swing.BoxLayout;
+import javax.swing.JSplitPane;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
-public class VenEmpleado extends JFrame implements ActionListener, KeyListener, MouseListener {
+public class VenEmpleado extends JFrame implements ActionListener, KeyListener, MouseListener, ItemListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -52,10 +65,8 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 	private JLabel lblComprobante;
 	private JLabel lblId;
 	private JLabel lblDni;
-	private JTextField txtCodNoEditable;
 	private JLabel lblCantidad;
 	private JTextField txtCantidadVenta;
-	private JButton btnRegistrarVenta;
 	public int day;
 	public int year;
 	public int month;
@@ -175,7 +186,7 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 		setAlwaysOnTop(true);
 		setTitle("Empleado");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 859, 770);
+		setBounds(100, 100, 1370, 770);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -185,7 +196,7 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 
 		{
 			tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-			tabbedPane.setBounds(10, 13, 826, 712);
+			tabbedPane.setBounds(10, 13, 1336, 712);
 			contentPane.add(tabbedPane);
 			{
 				panelVenta = new JPanel();
@@ -194,85 +205,64 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 				panelVenta.setLayout(null);
 				{
 					cboTipoPago = new JComboBox();
-					cboTipoPago.setBounds(142, 132, 116, 25);
+					cboTipoPago.setBounds(387, 132, 116, 25);
 					panelVenta.add(cboTipoPago);
 					cboTipoPago.setFont(new Font("Verdana", Font.PLAIN, 15));
 					cboTipoPago.setModel(new DefaultComboBoxModel(new String[] {"Efectivo", "Débito", "Crédito", "Yape/Plin"}));
 				}
 				{
 					cboComprobante = new JComboBox();
-					cboComprobante.setBounds(142, 167, 116, 25);
+					cboComprobante.setBounds(387, 167, 116, 25);
 					panelVenta.add(cboComprobante);
 					cboComprobante.setFont(new Font("Verdana", Font.PLAIN, 15));
 					cboComprobante.setModel(new DefaultComboBoxModel(new String[] {"Boleta", "Factura"}));
 				}
 				{
 					lblNewLabel = new JLabel("Tipo de pago:");
-					lblNewLabel.setBounds(20, 132, 116, 25);
+					lblNewLabel.setBounds(265, 132, 116, 25);
 					panelVenta.add(lblNewLabel);
 					lblNewLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
 				}
 				{
 					lblComprobante = new JLabel("Comprobante:");
-					lblComprobante.setBounds(20, 167, 116, 25);
+					lblComprobante.setBounds(265, 167, 116, 25);
 					panelVenta.add(lblComprobante);
 					lblComprobante.setFont(new Font("Verdana", Font.PLAIN, 15));
 				}
 				{
 					lblId = new JLabel("ID Producto:");
-					lblId.setBounds(467, 148, 99, 25);
+					lblId.setBounds(697, 137, 99, 25);
 					panelVenta.add(lblId);
 					lblId.setFont(new Font("Verdana", Font.PLAIN, 15));
 				}
 				{
 					lblDni = new JLabel("DNI:");
-					lblDni.setBounds(20, 99, 44, 25);
+					lblDni.setBounds(265, 99, 44, 25);
 					panelVenta.add(lblDni);
 					lblDni.setFont(new Font("Verdana", Font.PLAIN, 15));
 				}
 				{
-					txtCodNoEditable = new JTextField();
-					txtCodNoEditable.setEnabled(false);
-					txtCodNoEditable.setBounds(162, 63, 96, 25);
-					panelVenta.add(txtCodNoEditable);
-					txtCodNoEditable.setColumns(10);
-				}
-				{
 					lblCantidad = new JLabel("Cantidad:");
-					lblCantidad.setBounds(467, 181, 99, 25);
+					lblCantidad.setBounds(697, 170, 99, 25);
 					panelVenta.add(lblCantidad);
 					lblCantidad.setFont(new Font("Verdana", Font.PLAIN, 15));
 				}
 				{
 					txtCantidadVenta = new JTextField();
 					txtCantidadVenta.addKeyListener(this);
-					txtCantidadVenta.setBounds(576, 183, 96, 25);
+					txtCantidadVenta.setBounds(806, 172, 96, 25);
 					panelVenta.add(txtCantidadVenta);
 					txtCantidadVenta.setColumns(10);
 				}
 				{
-					btnRegistrarVenta = new JButton("Finalizar Venta");
-					btnRegistrarVenta.setBounds(290, 132, 131, 25);
-					panelVenta.add(btnRegistrarVenta);
-					btnRegistrarVenta.addActionListener(this);
-					btnRegistrarVenta.setFont(new Font("Verdana", Font.PLAIN, 13));
-				}
-				{
-					btnTotalVenta = new JButton("Total");
-					btnTotalVenta.setBounds(290, 202, 116, 25);
-					panelVenta.add(btnTotalVenta);
-					btnTotalVenta.addActionListener(this);
-					btnTotalVenta.setFont(new Font("Tahoma", Font.PLAIN, 13));
-				}
-				{
 					lblVendedor = new JLabel("Vendedor:");
-					lblVendedor.setBounds(20, 237, 84, 25);
+					lblVendedor.setBounds(265, 237, 84, 25);
 					panelVenta.add(lblVendedor);
 					lblVendedor.setFont(new Font("Verdana", Font.PLAIN, 15));
 				}
 				{
 					lblRegistroDeVentas = new JLabel("REGISTRO DE VENTAS");
-					lblRegistroDeVentas.setBounds(309, 13, 284, 38);
+					lblRegistroDeVentas.setBounds(436, 13, 284, 38);
 					panelVenta.add(lblRegistroDeVentas);
 					lblRegistroDeVentas.setFont(new Font("Verdana", Font.PLAIN, 23));
 				}
@@ -285,96 +275,196 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 				}
 				{
 					scrollPane = new JScrollPane();
-					scrollPane.setBounds(10, 355, 801, 320);
+					scrollPane.setBounds(10, 355, 1311, 320);
 					panelVenta.add(scrollPane);
 					{
 						tablaVenta = new JTable();
+						tablaVenta.addMouseListener(this);
 						tablaVenta.setFillsViewportHeight(true);
 						scrollPane.setViewportView(tablaVenta);
 					}
 				}
 				{
 					lblNewLabel_1 = new JLabel("");
-					lblNewLabel_1.setBounds(258, 10, 54, 47);
+					lblNewLabel_1.setBounds(385, 10, 54, 47);
 					panelVenta.add(lblNewLabel_1);
 					lblNewLabel_1.setIcon(new ImageIcon(VenEmpleado.class.getResource("/recursos/check.png")));
 				}
 				{
-					btnEliminarVenta = new JButton("Eliminar");
-					btnEliminarVenta.addActionListener(this);
-					btnEliminarVenta.setFont(new Font("Verdana", Font.PLAIN, 13));
-					btnEliminarVenta.setBounds(290, 168, 116, 25);
-					panelVenta.add(btnEliminarVenta);
-				}
-				{
-					btnCod = new JButton("Nueva venta:");
-					btnCod.setFont(new Font("Verdana", Font.PLAIN, 13));
-					btnCod.setBounds(10, 61, 142, 25);
-					panelVenta.add(btnCod);
-				}
-				{
 					lblCod = new JLabel("Cód:");
 					lblCod.setFont(new Font("Verdana", Font.PLAIN, 15));
-					lblCod.setBounds(467, 110, 44, 25);
+					lblCod.setBounds(697, 99, 44, 25);
 					panelVenta.add(lblCod);
 				}
 				{
 					txtCodEditable = new JTextField();
 					txtCodEditable.addKeyListener(this);
 					txtCodEditable.setColumns(10);
-					txtCodEditable.setBounds(510, 110, 96, 25);
+					txtCodEditable.setBounds(751, 102, 96, 25);
 					panelVenta.add(txtCodEditable);
 				}
 				{
 					lblIdVendedor = new JLabel("ID Vendedor:");
 					lblIdVendedor.setFont(new Font("Verdana", Font.PLAIN, 15));
-					lblIdVendedor.setBounds(20, 202, 116, 25);
+					lblIdVendedor.setBounds(265, 202, 116, 25);
 					panelVenta.add(lblIdVendedor);
 				}
 				{
 					cboIdVendedor = new JComboBox();
+					cboIdVendedor.addItemListener(this);
 					cboIdVendedor.setFont(new Font("Verdana", Font.PLAIN, 15));
-					cboIdVendedor.setBounds(141, 202, 117, 25);
+					cboIdVendedor.setBounds(386, 202, 117, 25);
 					panelVenta.add(cboIdVendedor);
 				}
 				{
-					txtNombreVendedor = new JTextField();
+					txtNombreVendedor =  new JTextField();
 					txtNombreVendedor.setEnabled(false);
 					txtNombreVendedor.setColumns(10);
-					txtNombreVendedor.setBounds(103, 239, 155, 25);
+					txtNombreVendedor.setBounds(348, 239, 155, 25);
 					panelVenta.add(txtNombreVendedor);
 				}
 				{
 					txtDniClienteVenta = new JTextField();
 					txtDniClienteVenta.addKeyListener(this);
 					txtDniClienteVenta.setColumns(10);
-					txtDniClienteVenta.setBounds(103, 99, 117, 25);
+					txtDniClienteVenta.setBounds(348, 99, 117, 25);
 					panelVenta.add(txtDniClienteVenta);
 				}
 				{
 					txtIdProductoVenta = new JTextField();
 					txtIdProductoVenta.addKeyListener(this);
 					txtIdProductoVenta.setColumns(10);
-					txtIdProductoVenta.setBounds(576, 148, 96, 25);
+					txtIdProductoVenta.setBounds(806, 137, 96, 25);
 					panelVenta.add(txtIdProductoVenta);
 				}
 				{
 					btnRegistrarDetalleVentas = new JButton("Registrar");
+					btnRegistrarDetalleVentas.addActionListener(this);
 					btnRegistrarDetalleVentas.setFont(new Font("Verdana", Font.PLAIN, 13));
-					btnRegistrarDetalleVentas.setBounds(695, 110, 116, 25);
+					btnRegistrarDetalleVentas.setBounds(925, 99, 116, 25);
 					panelVenta.add(btnRegistrarDetalleVentas);
 				}
 				{
 					btnModificarDetalleVenta = new JButton("Modificar");
+					btnModificarDetalleVenta.addActionListener(this);
 					btnModificarDetalleVenta.setFont(new Font("Verdana", Font.PLAIN, 13));
-					btnModificarDetalleVenta.setBounds(695, 145, 116, 25);
+					btnModificarDetalleVenta.setBounds(925, 134, 116, 25);
 					panelVenta.add(btnModificarDetalleVenta);
 				}
 				{
 					btnEliminarDetalleVenta = new JButton("Eliminar");
 					btnEliminarDetalleVenta.setFont(new Font("Verdana", Font.PLAIN, 13));
-					btnEliminarDetalleVenta.setBounds(695, 183, 116, 25);
+					btnEliminarDetalleVenta.setBounds(925, 172, 116, 25);
 					panelVenta.add(btnEliminarDetalleVenta);
+				}
+				{
+					btnModificarVenta = new JButton("Modificar");
+					btnModificarVenta.addActionListener(this);
+					btnModificarVenta.setFont(new Font("Verdana", Font.PLAIN, 13));
+					btnModificarVenta.setBounds(535, 167, 116, 25);
+					panelVenta.add(btnModificarVenta);
+				}
+				{
+					panel = new JPanel();
+					panel.setBounds(10, 13, 217, 245);
+					panelVenta.add(panel);
+					panel.setLayout(null);
+					{
+						txtPrecioVenta = new JTextField();
+						txtPrecioVenta.setBounds(66, 30, 96, 19);
+						panel.add(txtPrecioVenta);
+						txtPrecioVenta.setColumns(10);
+					}
+					{
+						txtCantVenta = new JTextField();
+						txtCantVenta.setColumns(10);
+						txtCantVenta.setBounds(66, 59, 96, 19);
+						panel.add(txtCantVenta);
+					}
+					{
+						btnTotal = new JButton("Total");
+						btnTotal.addActionListener(this);
+						btnTotal.setBounds(20, 88, 85, 21);
+						panel.add(btnTotal);
+					}
+					{
+						lblPrecio = new JLabel("Precio:");
+						lblPrecio.setBounds(10, 33, 45, 13);
+						panel.add(lblPrecio);
+					}
+					{
+						lblCantidadVenta = new JLabel("Cantidad:");
+						lblCantidadVenta.setBounds(10, 62, 66, 13);
+						panel.add(lblCantidadVenta);
+					}
+					{
+						scrollPane_3 = new JScrollPane();
+						scrollPane_3.setBounds(10, 131, 197, 104);
+						panel.add(scrollPane_3);
+						{
+							txtS = new JTextArea();
+							scrollPane_3.setViewportView(txtS);
+						}
+					}
+					{
+						btnSuma = new JButton("+");
+						btnSuma.setBounds(164, 45, 43, 25);
+						panel.add(btnSuma);
+						btnSuma.setFont(new Font("Tahoma", Font.PLAIN, 10));
+						{
+							btnBorrar = new JButton("Borrar");
+							btnBorrar.addActionListener(this);
+							btnBorrar.setBounds(110, 88, 85, 21);
+							panel.add(btnBorrar);
+						}
+						{
+							btnRegistrarVenta = new JButton("Registrar");
+							btnRegistrarVenta.addActionListener(this);
+							btnRegistrarVenta.setFont(new Font("Verdana", Font.PLAIN, 13));
+							btnRegistrarVenta.setBounds(535, 132, 116, 25);
+							panelVenta.add(btnRegistrarVenta);
+						}
+						{
+							btnEliminarVenta = new JButton("Eliminar");
+							btnEliminarVenta.setFont(new Font("Verdana", Font.PLAIN, 13));
+							btnEliminarVenta.setBounds(535, 203, 116, 25);
+							panelVenta.add(btnEliminarVenta);
+						}
+						{
+							lblCodNoEditable = new JLabel("Cód:");
+							lblCodNoEditable.setFont(new Font("Verdana", Font.PLAIN, 15));
+							lblCodNoEditable.setBounds(265, 64, 44, 25);
+							panelVenta.add(lblCodNoEditable);
+						}
+						{
+							txtCodNoEditable = new JTextField();
+							txtCodNoEditable.setEnabled(false);
+							txtCodNoEditable.setColumns(10);
+							txtCodNoEditable.setBounds(348, 64, 96, 25);
+							panelVenta.add(txtCodNoEditable);
+						}
+						{
+							lblIdDetalle = new JLabel("ID Detalle:");
+							lblIdDetalle.setFont(new Font("Verdana", Font.PLAIN, 15));
+							lblIdDetalle.setBounds(697, 67, 90, 25);
+							panelVenta.add(lblIdDetalle);
+						}
+						{
+							txtIdDetalle = new JTextField();
+							txtIdDetalle.setEnabled(false);
+							txtIdDetalle.setColumns(10);
+							txtIdDetalle.setBounds(806, 67, 96, 25);
+							panelVenta.add(txtIdDetalle);
+						}
+						{
+							btnBorrarVenta = new JButton("Borrar");
+							btnBorrarVenta.addActionListener(this);
+							btnBorrarVenta.setFont(new Font("Verdana", Font.PLAIN, 13));
+							btnBorrarVenta.setBounds(1205, 320, 116, 25);
+							panelVenta.add(btnBorrarVenta);
+						}
+						btnSuma.addActionListener(this);
+					}
 				}
 			}
 			{
@@ -397,7 +487,7 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 				}
 				{
 					scrollPane_1 = new JScrollPane();
-					scrollPane_1.setBounds(10, 150, 801, 525);
+					scrollPane_1.setBounds(10, 150, 1311, 525);
 					panelProducto.add(scrollPane_1);
 					{
 						tablaProducto = new JTable();
@@ -452,7 +542,7 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 				}
 				{
 					scrollPane_2 = new JScrollPane();
-					scrollPane_2.setBounds(10, 227, 801, 448);
+					scrollPane_2.setBounds(10, 227, 1311, 448);
 					panelCliente.add(scrollPane_2);
 					{
 						tablaCliente = new JTable();
@@ -488,6 +578,20 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 					lblIdProducto_1.setBounds(158, 23, 81, 25);
 					panelCliente.add(lblIdProducto_1);
 				}
+				{
+					btnBorrarCliente = new JButton("Borrar");
+					btnBorrarCliente.addActionListener(this);
+					btnBorrarCliente.setFont(new Font("Verdana", Font.PLAIN, 13));
+					btnBorrarCliente.setBounds(1205, 192, 116, 25);
+					panelCliente.add(btnBorrarCliente);
+				}
+				{
+					btnMostrarCliente = new JButton("Mostrar");
+					btnMostrarCliente.addActionListener(this);
+					btnMostrarCliente.setFont(new Font("Verdana", Font.PLAIN, 13));
+					btnMostrarCliente.setBounds(1079, 192, 116, 25);
+					panelCliente.add(btnMostrarCliente);
+				}
 			}
 		}
 		{
@@ -499,30 +603,47 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 		 clock();
 		 ListarProducto("");
 		 ListarCliente("");
+		 ListarVentasDelDia();
+		 LlenarCombo();
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnBorrarCliente) {
+			do_btnBorrarCliente_actionPerformed(e);
+		}
+		if (e.getSource() == btnMostrarCliente) {
+			do_btnMostrarCliente_actionPerformed(e);
+		}
+		if (e.getSource() == btnBorrarVenta) {
+			do_btnBorrarVenta_actionPerformed(e);
+		}
+		if (e.getSource() == btnModificarDetalleVenta) {
+			do_btnModificarDetalleVenta_actionPerformed(e);
+		}
+		if (e.getSource() == btnRegistrarDetalleVentas) {
+			do_btnRegistrarDetalleVentas_actionPerformed(e);
+		}
+		if (e.getSource() == btnRegistrarVenta) {
+			do_btnRegistrarVenta_actionPerformed(e);
+		}
+		if (e.getSource() == btnModificarVenta) {
+			do_btnModificarVenta_actionPerformed(e);
+		}
+		if (e.getSource() == btnBorrar) {
+			do_btnBorrar_actionPerformed(e);
+		}
+		if (e.getSource() == btnSuma) {
+			do_btnSuma_actionPerformed(e);
+		}
 		if (e.getSource() == btnModificarCliente) {
 			do_btnModificarCliente_actionPerformed(e);
 		}
 		if (e.getSource() == btnRegistrarCliente) {
 			do_btnRegistrarCliente_actionPerformed(e);
 		}
-		if (e.getSource() == btnEliminarVenta) {
-			do_btnEliminarEmpleado_actionPerformed(e);
-		}
 		if (e.getSource() == jlabelmodo) {
 			do_btnNewButton_actionPerformed(e);
 		}
-		if (e.getSource() == btnTotalVenta) {
-			do_btnTotal_actionPerformed(e);
-		}
-		if (e.getSource() == btnRegistrarVenta) {
-			do_btnRegistrar_actionPerformed(e);
-		}
 	}
-	
-	
-	private JButton btnTotalVenta;
 	private JLabel lblVendedor;
 	
 	private JLabel lblRegistroDeVentas;
@@ -536,7 +657,6 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 	private JTextField txtIdBuscarProducto;
 	private JLabel lblIdProducto;
 	private JScrollPane scrollPane_1;
-	private JButton btnEliminarVenta;
 	private JPanel panelCliente;
 	private JLabel lblDniCliente;
 	private JLabel lblIdNombreCliente;
@@ -551,7 +671,6 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 	private JTable tablaProducto;
 	private JTextField txtBuscarCliente;
 	private JLabel lblIdProducto_1;
-	private JButton btnCod;
 	private JLabel lblCod;
 	private JTextField txtCodEditable;
 	private JLabel lblIdVendedor;
@@ -563,25 +682,14 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 	private JButton btnRegistrarDetalleVentas;
 	private JButton btnModificarDetalleVenta;
 	private JButton btnEliminarDetalleVenta;
-	
-	protected void do_btnRegistrar_actionPerformed(ActionEvent e) {		
-		try {	
-		
-			
-		} catch (Exception e2) {
-			JOptionPane.showMessageDialog(this, "Uno o más de los valores ingresados no es válido. Intente de nuevo.");	
-		}
-	}
-
-	protected void do_btnTotal_actionPerformed(ActionEvent e) {
-		try {
- 
-		} catch (Exception e2) {
-			JOptionPane.showMessageDialog(this, "Primero debe ingresar valores para usar esta función");
-		}
-	}
-	protected void do_btnEliminarEmpleado_actionPerformed(ActionEvent e) {
-	}
+	private JButton btnModificarVenta;
+	private JPanel panel;
+	private JTextField txtPrecioVenta;
+	private JTextField txtCantVenta;
+	private JButton btnTotal;
+	private JLabel lblPrecio;
+	private JLabel lblCantidadVenta;
+	private JButton btnSuma;
 	public void ListarProducto(String filtro) {
 		DefaultTableModel modelo = new DefaultTableModel();
 		MantProducto mp = new MantProducto();
@@ -698,6 +806,9 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 		tablaCliente.setModel(modelo);
 	}
 	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == tablaVenta) {
+			do_tablaVenta_mouseClicked(e);
+		}
 		if (e.getSource() == tablaCliente) {
 			do_tablaCliente_mouseClicked(e);
 		}
@@ -733,8 +844,9 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 			Cliente c = new Cliente(txtDniCliente.getText(), txtNombreCliente.getText(), txtTelefonoCliente.getText());
 			
 			MantCliente mc = new MantCliente();
-			mc.ModificarCliente(c);;
-			ListarCliente("");
+			mc.ModificarCliente(c);
+			ListarCliente(txtDniCliente.getText()); // Solo ese cliente
+			tablaCliente.setRowSelectionInterval(0, 0);
 			LimpiarCliente();
 			
 		} catch (Exception e2) {
@@ -749,6 +861,12 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 	protected void do_txtBuscarCliente_keyReleased(KeyEvent e) {
 		String filtro = txtBuscarCliente.getText();
 		ListarCliente(filtro);
+	}
+	protected void do_btnMostrarCliente_actionPerformed(ActionEvent e) {
+		ListarCliente("");
+	}
+	protected void do_btnBorrarCliente_actionPerformed(ActionEvent e) {
+		LimpiarCliente();
 	}
 	//KeyTyped DNICLiente
 	protected void do_txtDniClienteVenta_keyTyped(KeyEvent e) {
@@ -871,8 +989,6 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 		    lblNewLabel.setForeground(Color.BLACK);
 		    lblComprobante.setForeground(Color.BLACK);
 		    lblVendedor.setForeground(Color.BLACK);
-		    txtCodNoEditable.setBackground(Color.WHITE);
-		    txtCodNoEditable.setBackground(Color.WHITE);
 		    txtDniClienteVenta.setBackground(Color.WHITE);
 		    txtNombreVendedor.setBackground(Color.WHITE);
 		    txtCodEditable.setBackground(Color.WHITE);
@@ -883,7 +999,6 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 		    txtDniCliente.setBackground(Color.WHITE);
 		    txtNombreCliente.setBackground(Color.WHITE);
 		    txtTelefonoCliente.setBackground(Color.WHITE);
-		    txtCodNoEditable.setForeground(Color.WHITE);
 		    txtDniClienteVenta.setForeground(Color.WHITE);
 		    txtNombreVendedor.setForeground(Color.WHITE);
 		    txtCodEditable.setForeground(Color.WHITE);
@@ -899,14 +1014,10 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 		    cboIdVendedor.setForeground(Color.BLACK);
 		    
 		    
-		    
-		    
-		    
-		    
+		      
 		    cboTipoPago.setBackground(Color.WHITE);
 		    cboComprobante.setBackground(Color.WHITE);
 		    txtCantidadVenta.setBackground(Color.WHITE); 
-		    txtCodNoEditable.setForeground(Color.BLACK);
 		    txtCantidadVenta.setForeground(Color.BLACK);
 		    cboTipoPago.setForeground(Color.BLACK);
 		    jlabelmodo.setText("Modo Oscuro");
@@ -937,8 +1048,6 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 		    lblNewLabel.setForeground(Color.LIGHT_GRAY);
 		    lblComprobante.setForeground(Color.LIGHT_GRAY);
 		    lblVendedor.setForeground(Color.LIGHT_GRAY);
-		    txtCodNoEditable.setBackground(Color.DARK_GRAY);
-		    txtCodNoEditable.setBackground(Color.DARK_GRAY);
 		    txtDniClienteVenta.setBackground(Color.DARK_GRAY);
 		    txtNombreVendedor.setBackground(Color.DARK_GRAY);
 		    txtCodEditable.setBackground(Color.DARK_GRAY);
@@ -949,7 +1058,6 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 		    txtDniCliente.setBackground(Color.DARK_GRAY);
 		    txtNombreCliente.setBackground(Color.DARK_GRAY);
 		    txtTelefonoCliente.setBackground(Color.DARK_GRAY);
-		    txtCodNoEditable.setForeground(Color.WHITE);
 		    txtDniClienteVenta.setForeground(Color.WHITE);
 		    txtNombreVendedor.setForeground(Color.WHITE);
 		    txtCodEditable.setForeground(Color.WHITE);
@@ -965,7 +1073,6 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 		    cboIdVendedor.setBackground(Color.DARK_GRAY);
 		    cboTipoPago.setBackground(Color.DARK_GRAY);
 		    txtCantidadVenta.setBackground(Color.DARK_GRAY);		    
-		    txtCodNoEditable.setForeground(Color.WHITE);
 		    txtCantidadVenta.setForeground(Color.WHITE);
 		    cboTipoPago.setForeground(Color.WHITE);
 		    jlabelmodo.setText("Modo Frío");
@@ -996,7 +1103,6 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 		    lblNewLabel.setForeground(new Color(150, 220, 255));
 		    lblComprobante.setForeground(new Color(150, 220, 255));
 		    lblVendedor.setForeground(new Color(150, 220, 255));
-		    txtCodNoEditable.setBackground(new Color(30, 80, 120));
 		    txtDniClienteVenta.setBackground(new Color(30, 80, 120));
 		    txtNombreVendedor.setBackground(new Color(30, 80, 120));
 		    txtCodEditable.setBackground(new Color(30, 80, 120));
@@ -1007,7 +1113,6 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 		    txtDniCliente.setBackground(new Color(30, 80, 120));
 		    txtNombreCliente.setBackground(new Color(30, 80, 120));
 		    txtTelefonoCliente.setBackground(new Color(30, 80, 120));
-		    txtCodNoEditable.setForeground(Color.WHITE);
 		    txtDniClienteVenta.setForeground(Color.WHITE);
 		    txtNombreVendedor.setForeground(Color.WHITE);
 		    txtCodEditable.setForeground(Color.WHITE);
@@ -1024,16 +1129,231 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 		    
 		    
 		    
-		    txtCodNoEditable.setBackground(new Color(30, 80, 120));
 		    cboTipoPago.setBackground(new Color(30, 80, 120));
 		    txtCantidadVenta.setBackground(new Color(30, 80, 120));    
-		    txtCodNoEditable.setForeground(Color.WHITE);
 		    txtCantidadVenta.setForeground(Color.WHITE);
 		    cboTipoPago.setForeground(Color.WHITE);
 		    jlabelmodo.setText("Modo Normal");
 		}
 	}
 	
+	private ArrayList<Double> listaSubtotales = new ArrayList<>();
+	private JScrollPane scrollPane_3;
+	private JTextArea txtS;
+	private JButton btnBorrar;
+	private JButton btnRegistrarVenta;
+	private JButton btnEliminarVenta;
+	private JLabel lblCodNoEditable;
+	private JTextField txtCodNoEditable;
+	private JLabel lblIdDetalle;
+	private JTextField txtIdDetalle;
+	private JButton btnBorrarVenta;
+	private JButton btnBorrarCliente;
+	private JButton btnMostrarCliente;
 	
+	protected void do_btnSuma_actionPerformed(ActionEvent e) {
+		try {
+			double precio = Double.parseDouble(txtPrecioVenta.getText());
+	        int cantidad = Integer.parseInt(txtCantVenta.getText());
+	        
+	        double subtotal = precio * cantidad;
+	        listaSubtotales.add(subtotal);
+	        
+	        txtS.append("Subtotal: S/. " + subtotal + "\n");
+	        
+	        txtPrecioVenta.setText("");
+	        txtCantVenta.setText("");
+	      
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(this, "Ingrese un precio y cantidad válidos.");
+		}	
+	}
+	protected void do_btnBorrar_actionPerformed(ActionEvent e) {
+		txtS.setText("");
+	}
+	public void ListarVentasDelDia() {
+	    DefaultTableModel modelo = new DefaultTableModel();
+	    MantHistorialVentas mhv = new MantHistorialVentas();
+	    ArrayList<HistorialVentas> lista = mhv.MostrarVentasDelDia();
+
+	    modelo.addColumn("Código Venta");
+	    modelo.addColumn("Detalle");
+	    modelo.addColumn("DNI Cliente");
+	    modelo.addColumn("Nombre Cliente");
+	    modelo.addColumn("Teléfono Cliente");
+	    modelo.addColumn("Fecha");
+	    modelo.addColumn("Hora");
+	    modelo.addColumn("ID Producto");
+	    modelo.addColumn("Categoría Producto");
+	    modelo.addColumn("Nombre Producto");
+	    modelo.addColumn("Garantía");
+	    modelo.addColumn("Precio");
+	    modelo.addColumn("Cantidad");
+	    modelo.addColumn("Tipo Pago");
+	    modelo.addColumn("Comprobante");
+	    modelo.addColumn("ID Vendedor");
+	    modelo.addColumn("Vendedor");
+	    modelo.addColumn("Subtotal");
+	    modelo.addColumn("Total");
+
+	    modelo.setRowCount(lista.size());
+	    int i = 0;
+
+	    for (HistorialVentas hv : lista) {
+	        modelo.setValueAt(hv.getVenta().getCodigoVenta(), i, 0);
+	        modelo.setValueAt(hv.getDetalleVenta().getIdDetalleVenta(), i, 1);
+	        modelo.setValueAt(hv.getVenta().getCliente().getDniCliente(), i, 2);
+	        modelo.setValueAt(hv.getVenta().getCliente().getNombreCliente(), i, 3);
+	        modelo.setValueAt(hv.getVenta().getCliente().getTelefonoCliente(), i, 4);
+	        modelo.setValueAt(hv.getVenta().getFechaVenta(), i, 5);
+	        modelo.setValueAt(hv.getVenta().getHoraVenta(), i, 6);
+	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getIdProducto(), i, 7);
+	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getCategoriaProducto(), i, 8);
+	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getNombreProducto(), i, 9);
+	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getGarantiaProducto(), i, 10);
+	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getPrecioProducto(), i, 11);
+	        modelo.setValueAt(hv.getDetalleVenta().getCantidadDetalleVenta(), i, 12);
+	        modelo.setValueAt(hv.getVenta().getTipopagoVenta(), i, 13);
+	        modelo.setValueAt(hv.getVenta().getComprobanteVenta(), i, 14);
+	        modelo.setValueAt(hv.getVenta().getEmpleado().getIdEmpleado(), i, 15);
+	        modelo.setValueAt(hv.getVenta().getEmpleado().getNombreEmpleado(), i, 16);
+	        modelo.setValueAt(hv.getDetalleVenta().getSubtotalDetalleVenta(), i, 17);
+	        modelo.setValueAt(hv.getVenta().getTotalVenta(), i, 18);
+	        i++;
+	    }
+
+	    tablaVenta.setModel(modelo);
+	}
+	protected void do_tablaVenta_mouseClicked(MouseEvent e) {
+		int fila = tablaVenta.getSelectedRow();
+		txtCodNoEditable.setText(String.valueOf(tablaVenta.getValueAt(fila, 0)));
+		txtDniClienteVenta.setText(String.valueOf(tablaVenta.getValueAt(fila, 2)));
+		cboTipoPago.setSelectedItem(String.valueOf(tablaVenta.getValueAt(fila, 13)));
+		cboComprobante.setSelectedItem(String.valueOf(tablaVenta.getValueAt(fila, 14)));
+		int idEmpleado = Integer.parseInt(tablaVenta.getValueAt(fila, 15).toString());
+		cboIdVendedor.setSelectedItem(idEmpleado);
+		txtNombreVendedor.setText(String.valueOf(tablaVenta.getValueAt(fila, 16)));
+		txtIdDetalle.setText(String.valueOf(tablaVenta.getValueAt(fila, 1)));
+		txtCodEditable.setText(String.valueOf(tablaVenta.getValueAt(fila, 0)));
+		txtIdProductoVenta.setText(String.valueOf(tablaVenta.getValueAt(fila, 7)));
+		txtCantidadVenta.setText(String.valueOf(tablaVenta.getValueAt(fila, 12)));
+	}
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getSource() == cboIdVendedor) {
+			do_cboIdVendedor_itemStateChanged(e);
+		}
+	}
+	protected void do_cboIdVendedor_itemStateChanged(ItemEvent e) {
+		String id = cboIdVendedor.getSelectedItem().toString();
+		LlenarTexto(id); //para que se llenen los cuadros de texto del interfaz
+	}
+	public void LlenarTexto(String id) {
+		ArrayList<Empleado>lista = new ArrayList<Empleado>();
+		MantEmpleado me = new MantEmpleado();
+		lista = me.ConsultarEmpleado(id);
+		Iterator it = lista.iterator();
+		int i = 0;
+		while (it.hasNext()) {
+			Object obj = it.next();
+			Empleado e = (Empleado) obj;
+			txtNombreVendedor.setText(e.getNombreEmpleado());
+			i++;
+		}
+	}
+	public void LlenarCombo() {
+		ArrayList<Empleado>lista = new ArrayList<Empleado>();
+		MantEmpleado me = new MantEmpleado();
+		lista = me.MostrarEmpleado();
+		Iterator<Empleado>it = lista.iterator();
+		int i = 0;
+		while (it.hasNext()) {
+			Object obj = it.next();
+			Empleado e = (Empleado) obj;
+			cboIdVendedor.addItem(e.getIdEmpleado());
+		}
+	}
+
+	protected void do_btnRegistrarVenta_actionPerformed(ActionEvent e) {
+		try {
+			Cliente c = new Cliente(txtDniClienteVenta.getText());
+			Empleado emple = new Empleado(Integer.parseInt(cboIdVendedor.getSelectedItem().toString()));
+			
+			Venta v = new Venta(c, cboTipoPago.getSelectedItem().toString(), 
+					cboComprobante.getSelectedItem().toString(), emple);
+			
+			MantVenta mv = new MantVenta();
+			mv.AgregarVenta(v);
+			JOptionPane.showMessageDialog(this, "Venta registrada correctamente");
+							
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
+		}
+	}
+	protected void do_btnRegistrarDetalleVentas_actionPerformed(ActionEvent e) {
+		Venta v = new Venta(Integer.parseInt(txtCodEditable.getText()));
+		Producto p = new Producto(Integer.parseInt(txtIdProductoVenta.getText()));
+		
+		DetalleVenta dv = new DetalleVenta(v, p, Integer.parseInt(txtCantidadVenta.getText()));
+		
+		MantDetalleVenta mdv = new MantDetalleVenta();
+		mdv.AgregarDetalleVenta(dv);
+		
+		MantVenta mv = new MantVenta();
+		mv.CalcularTotalVenta(v.getCodigoVenta());
+		ListarProducto("");
+		JOptionPane.showMessageDialog(this, "Detalle de Venta registrada correctamente");
+		ListarVentasDelDia();
+		LimpiarVentaCompleta();
+	}
+	protected void do_btnModificarVenta_actionPerformed(ActionEvent e) {
+		try {
+			Cliente c = new Cliente(txtDniClienteVenta.getText());
+			Empleado emple = new Empleado(Integer.parseInt(cboIdVendedor.getSelectedItem().toString()));
+			
+			Venta v = new Venta(Integer.parseInt(txtCodNoEditable.getText()), c, 
+					cboTipoPago.getSelectedItem().toString(), 
+					cboComprobante.getSelectedItem().toString(), emple);
+			
+			MantVenta mv = new MantVenta();
+	        mv.ModificarVenta(v);
+	        ListarVentasDelDia();
+	        LimpiarVentaCompleta();
+	        
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
+		}
+	}
+	protected void do_btnModificarDetalleVenta_actionPerformed(ActionEvent e) {
+		try {
+			Venta v = new Venta(Integer.parseInt(txtCodEditable.getText()));
+			Producto p = new Producto(Integer.parseInt(txtIdProductoVenta.getText()));
+			
+			DetalleVenta dv = new DetalleVenta(Integer.parseInt(txtIdDetalle.getText()), v, p, 
+					Integer.parseInt(txtCantidadVenta.getText()));
+			
+			MantDetalleVenta mdv = new MantDetalleVenta();
+			mdv.ModificarDetalleVenta(dv);
+			
+			MantVenta mv = new MantVenta();
+			mv.CalcularTotalVenta(v.getCodigoVenta());
+			ListarProducto("");
+			ListarVentasDelDia();
+			LimpiarVentaCompleta();
+			
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(this, "Verifique los datos del detalle de venta. Intente nuevamente.");
+		}
+	}
+	void LimpiarVentaCompleta() {
+		txtCodNoEditable.setText("");
+		txtDniClienteVenta.setText("");
+		txtIdDetalle.setText("");
+		txtCodEditable.setText("");
+		txtIdProductoVenta.setText("");
+		txtCantidadVenta.setText("");
+	}
+	protected void do_btnBorrarVenta_actionPerformed(ActionEvent e) {
+		LimpiarVentaCompleta();
+	}
 }
 

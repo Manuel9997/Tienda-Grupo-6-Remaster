@@ -181,7 +181,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		setAlwaysOnTop(true);
 		setTitle("Administrador");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 859, 770);
+		setBounds(100, 100, 1370, 770);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -192,7 +192,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		{
 			
 			JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-			tabbedPane.setBounds(10, 11, 826, 712);
+			tabbedPane.setBounds(10, 11, 1336, 712);
 			contentPane.add(tabbedPane);
 			
 			JPanel panelEmpleado = new JPanel();
@@ -330,7 +330,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 				jlabelmodo.setFont(new Font("Verdana", Font.PLAIN, 14));
 				{
 					scrollPane = new JScrollPane();
-					scrollPane.setBounds(10, 400, 801, 275);
+					scrollPane.setBounds(10, 400, 1311, 275);
 					panelEmpleado.add(scrollPane);
 					{
 						tablaEmpleado = new JTable();
@@ -503,7 +503,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 			}
 			{
 				scrollPane_2 = new JScrollPane();
-				scrollPane_2.setBounds(10, 427, 801, 248);
+				scrollPane_2.setBounds(10, 427, 1311, 248);
 				panelProducto.add(scrollPane_2);
 				{
 					tablaProducto = new JTable();
@@ -551,7 +551,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 				panelVenta.setLayout(null);
 				{
 					scrollPane_1 = new JScrollPane();
-					scrollPane_1.setBounds(10, 182, 801, 493);
+					scrollPane_1.setBounds(10, 182, 1311, 493);
 					panelVenta.add(scrollPane_1);
 					{
 						tablaHistorialVentas = new JTable();
@@ -585,7 +585,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 				panelProveedor.setLayout(null);
 				{
 					scrollPane_3 = new JScrollPane();
-					scrollPane_3.setBounds(10, 297, 801, 378);
+					scrollPane_3.setBounds(10, 297, 1311, 378);
 					panelProveedor.add(scrollPane_3);
 					{
 						tablaProveedor = new JTable();
@@ -1531,6 +1531,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	    ArrayList<HistorialVentas> lista = mhv.MostrarHistorialVentas();
 
 	    modelo.addColumn("Código Venta");
+	    modelo.addColumn("Detalle");
 	    modelo.addColumn("DNI Cliente");
 	    modelo.addColumn("Nombre Cliente");
 	    modelo.addColumn("Teléfono Cliente");
@@ -1544,6 +1545,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	    modelo.addColumn("Cantidad");
 	    modelo.addColumn("Tipo Pago");
 	    modelo.addColumn("Comprobante");
+	    modelo.addColumn("ID Vendedor");
 	    modelo.addColumn("Vendedor");
 	    modelo.addColumn("Subtotal");
 	    modelo.addColumn("Total");
@@ -1552,23 +1554,25 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	    int i = 0;
 
 	    for (HistorialVentas hv : lista) {
-	        modelo.setValueAt(hv.getVenta().getCodigoVenta(), i, 0);
-	        modelo.setValueAt(hv.getVenta().getCliente().getDniCliente(), i, 1);
-	        modelo.setValueAt(hv.getVenta().getCliente().getNombreCliente(), i, 2);
-	        modelo.setValueAt(hv.getVenta().getCliente().getTelefonoCliente(), i, 3);
-	        modelo.setValueAt(hv.getVenta().getFechaVenta(), i, 4);
-	        modelo.setValueAt(hv.getVenta().getHoraVenta(), i, 5);
-	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getIdProducto(), i, 6);
-	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getCategoriaProducto(), i, 7);
-	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getNombreProducto(), i, 8);
-	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getGarantiaProducto(), i, 9);
-	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getPrecioProducto(), i, 10);
-	        modelo.setValueAt(hv.getDetalleVenta().getCantidadDetalleVenta(), i, 11);
-	        modelo.setValueAt(hv.getVenta().getTipopagoVenta(), i, 12);
-	        modelo.setValueAt(hv.getVenta().getComprobanteVenta(), i, 13);
-	        modelo.setValueAt(hv.getVenta().getEmpleado().getNombreEmpleado(), i, 14);
-	        modelo.setValueAt(hv.getDetalleVenta().getSubtotalDetalleVenta(), i, 15);
-	        modelo.setValueAt(hv.getVenta().getTotalVenta(), i, 16);
+	    	modelo.setValueAt(hv.getVenta().getCodigoVenta(), i, 0);
+	        modelo.setValueAt(hv.getDetalleVenta().getIdDetalleVenta(), i, 1);
+	        modelo.setValueAt(hv.getVenta().getCliente().getDniCliente(), i, 2);
+	        modelo.setValueAt(hv.getVenta().getCliente().getNombreCliente(), i, 3);
+	        modelo.setValueAt(hv.getVenta().getCliente().getTelefonoCliente(), i, 4);
+	        modelo.setValueAt(hv.getVenta().getFechaVenta(), i, 5);
+	        modelo.setValueAt(hv.getVenta().getHoraVenta(), i, 6);
+	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getIdProducto(), i, 7);
+	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getCategoriaProducto(), i, 8);
+	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getNombreProducto(), i, 9);
+	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getGarantiaProducto(), i, 10);
+	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getPrecioProducto(), i, 11);
+	        modelo.setValueAt(hv.getDetalleVenta().getCantidadDetalleVenta(), i, 12);
+	        modelo.setValueAt(hv.getVenta().getTipopagoVenta(), i, 13);
+	        modelo.setValueAt(hv.getVenta().getComprobanteVenta(), i, 14);
+	        modelo.setValueAt(hv.getVenta().getEmpleado().getIdEmpleado(), i, 15);
+	        modelo.setValueAt(hv.getVenta().getEmpleado().getNombreEmpleado(), i, 16);
+	        modelo.setValueAt(hv.getDetalleVenta().getSubtotalDetalleVenta(), i, 17);
+	        modelo.setValueAt(hv.getVenta().getTotalVenta(), i, 18);
 	        i++;
 	    }
 

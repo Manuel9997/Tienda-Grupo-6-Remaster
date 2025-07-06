@@ -30,8 +30,21 @@ public Venta(int codigoVenta) {
 	this.codigoVenta = codigoVenta;
 }
 
-public Venta() {
+public Venta(Cliente cliente, String tipopagoVenta, String comprobanteVenta, Empleado empleado) {
 
+	this.cliente = cliente;
+	this.tipopagoVenta = tipopagoVenta;
+	this.comprobanteVenta = comprobanteVenta;
+	this.empleado = empleado;
+}
+
+public Venta(int codigoVenta, Cliente cliente, String tipopagoVenta, String comprobanteVenta, Empleado empleado) {
+
+	this.codigoVenta = codigoVenta;
+	this.cliente = cliente;
+	this.tipopagoVenta = tipopagoVenta;
+	this.comprobanteVenta = comprobanteVenta;
+	this.empleado = empleado;
 }
 
 public int getCodigoVenta() {

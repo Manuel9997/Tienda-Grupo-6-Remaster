@@ -11,8 +11,9 @@ public Cliente(String dniCliente, String nombreCliente, String telefonoCliente) 
 	this.telefonoCliente = telefonoCliente;
 }
 
-public Cliente() {
+public Cliente(String dniCliente) {
 
+	this.dniCliente = dniCliente;
 }
 
 public String getDniCliente() {

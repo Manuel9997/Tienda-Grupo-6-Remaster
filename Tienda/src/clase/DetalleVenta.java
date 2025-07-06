@@ -17,12 +17,19 @@ public DetalleVenta(int idDetalleVenta, Venta venta, Producto producto, int cant
 	this.subtotalDetalleVenta = subtotalDetalleVenta;
 }
 
-public DetalleVenta(Venta venta, Producto producto, int cantidadDetalleVenta, double subtotalDetalleVenta) {
+public DetalleVenta(int idDetalleVenta, Venta venta, Producto producto, int cantidadDetalleVenta) {
+
+	this.idDetalleVenta = idDetalleVenta;
+	this.venta = venta;
+	this.producto = producto;
+	this.cantidadDetalleVenta = cantidadDetalleVenta;
+}
+
+public DetalleVenta(Venta venta, Producto producto, int cantidadDetalleVenta) {
 
 	this.venta = venta;
 	this.producto = producto;
 	this.cantidadDetalleVenta = cantidadDetalleVenta;
-	this.subtotalDetalleVenta = subtotalDetalleVenta;
 }
 
 public int getIdDetalleVenta() {

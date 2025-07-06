@@ -44,13 +44,25 @@ public ArrayList<DetalleVenta> MostrarDetalleVenta() {
 public void AgregarDetalleVenta(DetalleVenta dv) {
     try {
     	Connection cnx = ConexionMySQL.getConexion();
-        CallableStatement csta = ConexionMySQL.getConexion().prepareCall("{call sp_AgregarDetalleVenta(?,?,?)}");
+        CallableStatement csta = cnx.prepareCall("{call sp_AgregarDetalleVenta(?,?,?)}");
         csta.setInt(1, dv.getVenta().getCodigoVenta());
         csta.setInt(2, dv.getProducto().getIdProducto());
         csta.setInt(3, dv.getCantidadDetalleVenta());
         csta.executeUpdate();
     } catch (Exception e) {
         System.out.println("ERROR" + e);
+    }
+}
+public void ModificarDetalleVenta(DetalleVenta dv) {
+    try {
+        Connection cnx = ConexionMySQL.getConexion();
+        CallableStatement csta = cnx.prepareCall("{call sp_ModificarDetalleVenta(?, ?, ?)}");
+        csta.setInt(1, dv.getIdDetalleVenta());
+        csta.setInt(2, dv.getProducto().getIdProducto());
+        csta.setInt(3, dv.getCantidadDetalleVenta());
+        csta.executeUpdate();
+    } catch (Exception e) {
+        System.out.println("ERROR al modificar detalle de venta: " + e);
     }
 }
 }

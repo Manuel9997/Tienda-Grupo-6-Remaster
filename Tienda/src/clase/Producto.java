@@ -35,6 +35,11 @@ public Producto(int idProducto, int stockProducto) {
 	this.stockProducto = stockProducto;
 }
 
+public Producto(int idProducto) {
+
+	this.idProducto = idProducto;
+}
+
 public int getIdProducto() {
 	return idProducto;
 }

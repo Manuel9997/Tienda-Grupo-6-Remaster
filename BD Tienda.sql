@@ -162,9 +162,6 @@ select * from Proveedor;
 
 call sp_MostrarProveedor();
 
-DROP PROCEDURE IF EXISTS sp_AgregarProveedor;
-
-
 create procedure sp_AgregarProveedor(
 id int,
 ruc char(11),
@@ -178,7 +175,7 @@ fecha date
 insert into Proveedor (id_proveedor, ruc_proveedor, nombre_proveedor, telefono_proveedor, correo_proveedor, direccion_proveedor, estado_proveedor,fecha_proveedor) 
 values (id, ruc, nombre, telefono, correo, direccion, estado,fecha);
 
-call sp_AgregarProveedor(10, '21335678867', 'Whitrec.SA.C', '917471964', 'tecnoso@gmail.com', 'Mz l4 lt12, Bellavista', 'Activo','2025-05-15');
+call sp_AgregarProveedor(8, '21335678867', 'Whitrec.SA.C', '917471964', 'tecnoso@gmail.com', 'Mz l4 lt12, Bellavista', 'Activo','2025-05-15');
 call sp_MostrarProveedor();
 
 create procedure sp_ModificarProveedor( 
@@ -280,7 +277,7 @@ garantia varchar(10),
 idProveedor int,
 precio real
 )
-update Producto set categoria_producto = categoria, nombre_producto = nombre, garantia_producto = garantia, id_proveedor =idProveedor, precio_producto = precio
+update Producto set categoria_producto = categoria, nombre_producto = nombre, garantia_producto = garantia, id_proveedor = idProveedor, precio_producto = precio
 where id_producto = id;
 
 call sp_ModificarProducto(174, 'Impresora', 'Canon PIXMA G2160', '6 meses', 4, 750.00);
@@ -319,7 +316,7 @@ call sp_MostrarProducto();
 
 #-------------------------------------------------------------- VENTA --------------------------------------------------------------------
 create table Venta(
-codigo_venta int primary key,
+codigo_venta int primary key auto_increment,
 dni_cliente char(8) not null,
 fecha_venta date default (current_date) not null, 
 hora_venta time default (current_time) not null,
@@ -343,7 +340,7 @@ insert into Venta values(8, '77849230', '2025-04-13', '12:00:23', 'Efectivo', 'F
 insert into Venta values(9, '78916325', '2025-04-13', '12:15:41', 'Débito', 'Boleta', 601, 2950);
 insert into Venta values(10, '79384071', '2025-04-13', '12:45:17', 'Efectivo', 'Factura', 533, 480);
 
-#--------------------------------------------------------- DETALLE VENTA -----------------------------------------------------------------
+#---------------------------------------------------------- DETALLE VENTA -----------------------------------------------------------------
 create table DetalleVenta(
 id_detalleVenta int primary key auto_increment,
 codigo_venta int not null,
@@ -370,8 +367,7 @@ insert into DetalleVenta values(12, 9, 174, 1, 750);
 insert into DetalleVenta values(13, 9, 151, 1, 2200);
 insert into DetalleVenta values(14, 10, 169, 2, 480); 
 
--- PROCEDURES DE VENTA Y DETALLE VENTA
-
+#------------------------------------------------- PROCEDURES DE VENTA Y DETALLE VENTA -----------------------------------------------------
 create procedure sp_MostrarVenta()
 select
 v.codigo_venta,
@@ -382,6 +378,7 @@ v.fecha_venta,
 v.hora_venta,
 v.tipopago_venta,
 v.comprobante_venta,
+e.id_empleado,
 e.nombre_empleado,
 v.total_venta
 
@@ -411,9 +408,10 @@ order by v.codigo_venta ASC, dv.id_detalleVenta ASC;
 
 call sp_MostrarDetalleVenta();
 
-create procedure sp_MostrarHIstorialVenta()
+create procedure sp_MostrarHistorialVentas()
 select
 v.codigo_venta,
+dv.id_detalleVenta,
 c.dni_cliente,
 c.nombre_cliente,
 c.telefono_cliente,
@@ -427,6 +425,7 @@ p.precio_producto,
 dv.cantidad_detalleVenta,
 v.tipopago_venta,
 v.comprobante_venta,
+e.id_empleado,
 e.nombre_empleado,
 dv.subtotal_detalleVenta,
 v.total_venta
@@ -437,20 +436,18 @@ join DetalleVenta as dv on v.codigo_venta = dv.codigo_venta
 join Producto as p on dv.id_producto = p.id_producto
 order by v.codigo_venta ASC;
 
-call sp_MostrarHistorialVenta();
+call sp_MostrarHistorialVentas();
 
 create procedure sp_AgregarVenta(
-codigoVenta int,
 dniCliente char(8),
 tipopago varchar(15),
 comprobante varchar(10),
 idEmpleado int
 )
+insert into Venta (dni_cliente, tipopago_venta, comprobante_venta, id_empleado, total_venta)
+values (dniCliente, tipopago, comprobante, idEmpleado, 0);
 
-insert into Venta (codigo_venta, dni_cliente, tipopago_venta, comprobante_venta, id_empleado, total_venta)
-values (codigoVenta, dniCliente, tipopago, comprobante, idEmpleado, 0);
-
-call sp_AgregarVenta(11, '74539012', 'Débito', 'Boleta', 412);
+call sp_AgregarVenta('74539012', 'Débito', 'Boleta', 412);
 call sp_MostrarVenta(); 
 
 DELIMITER $$
@@ -479,13 +476,13 @@ update Producto
 set stock_producto = stock_producto - cantidad
 where id_producto = idProducto;
 end $$
-
 DELIMITER ;
+
 call sp_AgregarDetalleVenta(11, 151, 2);
 call sp_AgregarDetalleVenta(11, 489, 2);
 call sp_MostrarDetalleVenta();
-
 DELIMITER $$
+
 create procedure sp_CalcularTotalVenta(
 in codVenta int
 )
@@ -496,24 +493,88 @@ declare total real;
 select sum(subtotal_detalleVenta)
 into total
 from DetalleVenta
-where codigo_venta = codVenta;loginadmiusuario
+where codigo_venta = codVenta;
 
 -- Actualizar el total en la tabla Venta
 update Venta
 set total_venta = total
 where codigo_venta = codVenta;
 end $$
-
 DELIMITER ;
 
 call sp_CalcularTotalVenta(11);
-call sp_MostrarHIstorialVenta();
+call sp_MostrarHIstorialVentas();
+
+create procedure sp_ModificarVenta(
+codVenta int,
+dniCliente char(8),
+tipopago varchar(15),
+comprobante varchar(10),
+idEmpleado int
+)
+update Venta set dni_cliente = dniCliente, tipopago_venta = tipopago, comprobante_venta = comprobante, id_empleado = idEmpleado
+where codigo_venta = codVenta;
+
+call sp_ModificarVenta(5, '74539012', 'Débito', 'Factura', 533);
+call sp_MostrarVenta();
 
 DELIMITER $$
-create procedure sp_BuscarHistorialVenta(IN codVenta INT)
+create procedure sp_ModificarDetalleVenta(
+iddetalle int,
+nuevoidproducto int,
+nuevacantidad int
+)
+begin
+declare cantidadanterior int;
+declare idproductoanterior int;
+declare nuevoprecio real;
+declare nuevosubtotal real;
+
+-- obtener cantidad y producto anteriores
+select cantidad_detalleVenta, id_producto
+into cantidadanterior, idproductoanterior
+from DetalleVenta
+where id_detalleVenta = iddetalle;
+
+-- restaurar stock del producto anterior
+update Producto
+set stock_producto = stock_producto + cantidadanterior
+where id_producto = idproductoanterior;
+
+-- obtener nuevo precio del producto
+select precio_producto into nuevoprecio
+from Producto
+where id_producto = nuevoidproducto;
+
+-- calcular nuevo subtotal
+set nuevosubtotal = nuevacantidad * nuevoprecio;
+
+-- actualizar el detalle de venta (sin cambiar codigo_venta)
+update DetalleVenta
+set id_producto = nuevoidproducto, cantidad_detalleVenta = nuevacantidad, subtotal_detalleVenta = nuevosubtotal
+where id_detalleventa = iddetalle;
+
+-- reducir stock del nuevo producto
+update Producto
+set stock_producto = stock_producto - nuevacantidad
+where id_producto = nuevoidproducto;
+
+-- recalcular total
+call sp_CalcularTotalVenta(5);
+
+end $$
+DELIMITER ;
+
+call sp_ModificarDetalleVenta(5, 245, 2);
+call sp_MostrarDetalleVenta();
+call sp_MostrarHIstorialVentas();
+
+DELIMITER $$
+create procedure sp_BuscarHistorialVentas(IN codVenta INT)
 begin
 select
 v.codigo_venta,
+dv.id_detalleVenta,
 c.dni_cliente,
 c.nombre_cliente,
 c.telefono_cliente,
@@ -527,6 +588,7 @@ p.precio_producto,
 dv.cantidad_detalleVenta,
 v.tipopago_venta,
 v.comprobante_venta,
+e.id_empleado,
 e.nombre_empleado,
 dv.subtotal_detalleVenta,
 v.total_venta
@@ -537,21 +599,16 @@ join DetalleVenta as dv on v.codigo_venta = dv.codigo_venta
 join Producto as p on dv.id_producto = p.id_producto
 where v.codigo_venta = codVenta;
 end $$
-
 DELIMITER ;
 
-call sp_BuscarHistorialVenta(9);
+call sp_BuscarHistorialVentas(9);
 
 DELIMITER $$
-create procedure sp_MostrarVentaActual()
+create procedure sp_MostrarVentasDelDia()
 begin
-declare ultimoCodigo int;
--- Obtener el último código de venta
-select max(codigo_venta) into ultimoCodigo from Venta;
-
--- Mostrar los datos completos de esa venta
 select
 v.codigo_venta,
+dv.id_detalleVenta,
 c.dni_cliente,
 c.nombre_cliente,
 c.telefono_cliente,
@@ -565,6 +622,7 @@ p.precio_producto,
 dv.cantidad_detalleVenta,
 v.tipopago_venta,
 v.comprobante_venta,
+e.id_empleado,
 e.nombre_empleado,
 dv.subtotal_detalleVenta,
 v.total_venta
@@ -573,9 +631,9 @@ join Cliente as c on v.dni_cliente = c.dni_cliente
 join Empleado as e on v.id_empleado = e.id_empleado
 join DetalleVenta as dv on v.codigo_venta = dv.codigo_venta
 join Producto as p on dv.id_producto = p.id_producto
-where v.codigo_venta = ultimoCodigo;
+where v.fecha_venta = current_date()
+order by v.codigo_venta asc;
 end $$
-
 DELIMITER ;
 
-call sp_MostrarVentaActual();
+call sp_MostrarVentasDelDia();

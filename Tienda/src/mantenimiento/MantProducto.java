@@ -106,13 +106,17 @@ public ArrayList<Producto> ConsultarProducto(String filtro) {
     ArrayList<Producto> lista = new ArrayList<>();
     try {
         java.sql.Statement sta = ConexionMySQL.getConexion().createStatement();
-        ResultSet rs = sta.executeQuery("select * from Producto " +
-                          "where cast(id_producto as char) like '%" + filtro + "%' " +
-                          "or categoria_producto like '%" + filtro + "%' " +
-                          "or nombre_producto like '%" + filtro + "%'");
+        ResultSet rs = sta.executeQuery( "SELECT p.id_producto, p.categoria_producto, p.nombre_producto, " +
+        		"p.garantia_producto, " +
+        	    "prov.nombre_proveedor, p.precio_producto, p.stock_producto " +
+        	    "FROM Producto p " +
+        	    "JOIN Proveedor prov ON p.id_proveedor = prov.id_proveedor " +
+        	    "WHERE CAST(p.id_producto AS CHAR) LIKE '%" + filtro + "%' " +
+        	    "OR p.categoria_producto LIKE '%" + filtro + "%'"
+        	);
     
         while (rs.next()) {
-        	Proveedor proveedor = new Proveedor("nombre_proveedor");
+        	Proveedor proveedor = new Proveedor(rs.getString("nombre_proveedor"));
         	Producto producto = new Producto(
                 rs.getInt("id_producto"),
                 rs.getString("categoria_producto"),
