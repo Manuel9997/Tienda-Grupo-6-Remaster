@@ -35,8 +35,10 @@ import java.util.GregorianCalendar;
 import javax.swing.JSlider;
 import javax.swing.UIManager;
 import java.awt.SystemColor;
+import java.awt.event.WindowListener;
+import java.awt.event.WindowEvent;
 
-public class Inicio extends JFrame implements ActionListener {
+public class Inicio extends JFrame implements ActionListener, WindowListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -57,6 +59,7 @@ public class Inicio extends JFrame implements ActionListener {
 	private static Clip clipreproduciendo;
 	private JSlider controlvol;
 	private static FloatControl volumeControl;
+	private JMenuItem mnSalir;
 
 	/**
 	 * Launch the application.
@@ -166,6 +169,7 @@ public class Inicio extends JFrame implements ActionListener {
 	 * @throws UnsupportedAudioFileException 
 	 */
 	public Inicio() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+		addWindowListener(this);
 	    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	    setBounds(100, 100, 803, 683);
 	    
@@ -224,6 +228,11 @@ public class Inicio extends JFrame implements ActionListener {
             Image imagenEscalada = imagenOriginal.getScaledInstance(anchoDeseado, altoDeseado, Image.SCALE_SMOOTH);
             ImageIcon iconoRedimensionado = new ImageIcon(imagenEscalada);
             mnEmpleado.setIcon(iconoRedimensionado);
+            
+            mnSalir = new JMenuItem("Salir");
+            mnSalir.addActionListener(this);
+            mnSalir.setFont(new Font("Verdana", Font.PLAIN, 17));
+            mnNewMenu.add(mnSalir);
 
         } catch (Exception e) {
             System.err.println("No se pudo cargar o escalar el icono del menú: " + e.getMessage());
@@ -278,6 +287,9 @@ public class Inicio extends JFrame implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == mnSalir) {
+			do_mnSalir_actionPerformed(e);
+		}
 		if (e.getSource() == mnEmpleado) {
 			do_mnEmpleado_actionPerformed(e);
 		}
@@ -306,6 +318,7 @@ public class Inicio extends JFrame implements ActionListener {
 		 volumeControl = (FloatControl) clipreproduciendo.getControl(FloatControl.Type.MASTER_GAIN);
 		 setVolume(60);  
 		 clipreproduciendo.start();
+		 audiostream.close();
 	}
 	
 
@@ -317,6 +330,27 @@ public class Inicio extends JFrame implements ActionListener {
 	        volumeControl.setValue(dB);
 	    }
 	}
-	
-
+	protected void do_mnSalir_actionPerformed(ActionEvent e) {
+		System.exit(0);
+	}
+	public void windowActivated(WindowEvent e) {
+	}
+	public void windowClosed(WindowEvent e) {
+		if (e.getSource() == this) {
+			do_this_windowClosed(e);
+		}
+	}
+	public void windowClosing(WindowEvent e) {
+	}
+	public void windowDeactivated(WindowEvent e) {
+	}
+	public void windowDeiconified(WindowEvent e) {
+	}
+	public void windowIconified(WindowEvent e) {
+	}
+	public void windowOpened(WindowEvent e) {
+	}
+	protected void do_this_windowClosed(WindowEvent e) {
+		System.exit(0);
+	}
 }

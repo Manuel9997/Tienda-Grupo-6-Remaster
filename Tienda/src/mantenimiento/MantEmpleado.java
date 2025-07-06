@@ -49,6 +49,7 @@ public void AgregarEmpleado(Empleado e) {
         csta.setString(7, e.getHorarioEmpleado());
         csta.setDouble(8, e.getSueldoEmpleado());
         csta.executeUpdate();
+        
     } catch (Exception ex) {
         System.out.println("ERROR al agregar empleado: " + ex);
     }

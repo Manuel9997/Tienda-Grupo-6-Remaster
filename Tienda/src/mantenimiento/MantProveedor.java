@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import Conexion.ConexionMySQL;
 import clase.Proveedor;
 
@@ -37,8 +39,9 @@ public ArrayList<Proveedor> MostrarProveedor() {
 }
 public void AgregarProveedor(Proveedor p) {
 	try {
+		JOptionPane.showMessageDialog(null,"222222222222");
 		Connection cnx = ConexionMySQL.getConexion();
-		CallableStatement csta = cnx.prepareCall("{call sp_AgregarProveedor(?, ?, ?, ?, ?, ?, ?,?)}");
+		CallableStatement csta = cnx.prepareCall("{call sp_AgregarProveedor(?, ?, ?, ?, ?, ?, ?, ?)}");
 		csta.setInt(1, p.getIdProveedor());
 		csta.setString(2, p.getRucProveedor());
 		csta.setString(3, p.getNombreProveedor());
@@ -47,8 +50,7 @@ public void AgregarProveedor(Proveedor p) {
 		csta.setString(6, p.getDireccionProveedor());
 		csta.setString(7, p.getEstadoProveedor());
 		csta.setDate(8, new java.sql.Date(p.getFechaProveedor().getTime()));
-		csta.executeUpdate();
-		
+		csta.executeUpdate();	
 	} catch (Exception e) {
 		System.out.println("ERROR al agregar proveedor: " + e);		
 	}    

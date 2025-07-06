@@ -121,10 +121,10 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 					 }
 					int mont= cal.get(Calendar.MONTH);
 					 if(mont<10) {
-						 month="0"+Integer.toString(mont);
+						 month="0"+Integer.toString(mont+1);
 					 }
 					 else {
-						 month=Integer.toString(mont);
+						 month=Integer.toString(mont+1);
 					 }
 					
 					
@@ -1719,7 +1719,6 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 					txtRucProveedor.getText(), txtNombreProveedor.getText(), 
 					txtTelefonoProveedor.getText(), txtCorreoProveedor.getText(), 
 					txtDireccionProveedor.getText(), txtEstadoProveedor.getText(), fecha);
-			
 			MantProveedor mprov = new MantProveedor();
 			mprov.AgregarProveedor(prov);
 			ListarProveedor("");
@@ -1890,7 +1889,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		}
 	}
 	protected void do_tabbedPane_mouseClicked(MouseEvent e) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-		URL url = Inicio.class.getResource("/recursos/Error.wav");
+		URL url = Inicio.class.getResource("/recursos/ErrorW.wav");
 		if(url == null) {
 			JOptionPane.showMessageDialog(null,"No se encontró");
 		}
@@ -1912,7 +1911,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	protected void do_this_mouseClicked(MouseEvent e) {
 	}
 	protected void do_panelEmpleado_mouseClicked(MouseEvent e) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-		URL url = Inicio.class.getResource("/recursos/Error.wav");
+		URL url = Inicio.class.getResource("/recursos/ErrorW.wav");
 		if(url == null) {
 			JOptionPane.showMessageDialog(null,"No se encontró");
 		}
@@ -1924,7 +1923,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		 clipreproduciendo.start();
 	}
 	protected void do_panelProducto_mouseClicked(MouseEvent e) throws UnsupportedAudioFileException, IOException, LineUnavailableException  {
-		URL url = Inicio.class.getResource("/recursos/Error.wav");
+		URL url = Inicio.class.getResource("/recursos/ErrorW.wav");
 		if(url == null) {
 			JOptionPane.showMessageDialog(null,"No se encontró");
 		}
@@ -1936,7 +1935,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		 clipreproduciendo.start();
 	}
 	protected void do_panelVenta_mouseClicked(MouseEvent e) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
-		URL url = Inicio.class.getResource("/recursos/Error.wav");
+		URL url = Inicio.class.getResource("/recursos/ErrorW.wav");
 		if(url == null) {
 			JOptionPane.showMessageDialog(null,"No se encontró");
 		}
@@ -1948,7 +1947,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		 clipreproduciendo.start();
 	}
 	protected void do_panelProveedor_mouseClicked(MouseEvent e) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
-		URL url = Inicio.class.getResource("/recursos/Error.wav");
+		URL url = Inicio.class.getResource("/recursos/ErrorW.wav");
 		if(url == null) {
 			JOptionPane.showMessageDialog(null,"No se encontró");
 		}

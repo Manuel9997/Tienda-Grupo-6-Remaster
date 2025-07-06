@@ -37,6 +37,7 @@ public ArrayList<Producto> MostrarProducto() {
 	
 	return lista;
 }
+
 public void AgregarProducto(Producto p) {
     try {
         Connection cnx = ConexionMySQL.getConexion();
@@ -53,6 +54,7 @@ public void AgregarProducto(Producto p) {
         System.out.println("ERROR al agregar producto: " + e);
     }
 }
+
 public void ModificarProducto(Producto p) {
     try {
         Connection cnx = ConexionMySQL.getConexion();
@@ -78,6 +80,7 @@ public void EliminarProducto(int idProducto) {
         System.out.println("ERROR al eliminar producto: " + e);
     }
 }
+
 public Producto BuscarProducto(int idProducto) {
 	Producto producto = null;
     try {
@@ -102,6 +105,7 @@ public Producto BuscarProducto(int idProducto) {
     }
     return producto;
 }
+
 public ArrayList<Producto> ConsultarProducto(String filtro) {
     ArrayList<Producto> lista = new ArrayList<>();
     try {
@@ -133,6 +137,7 @@ public ArrayList<Producto> ConsultarProducto(String filtro) {
     }
     return lista;
 }
+
 public void AumentarStock(Producto p) {
     try {
         Connection cnx = ConexionMySQL.getConexion();

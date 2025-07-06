@@ -26,6 +26,7 @@ import mantenimiento.MantVenta;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JScrollPane;
+import javax.swing.JSlider;
 import javax.swing.JTextArea;
 import java.awt.Font;
 import javax.swing.JLabel;
@@ -47,9 +48,18 @@ import javax.swing.JTable;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
+import java.net.URL;
 import java.sql.Date;
 import java.awt.event.MouseEvent;
 import java.awt.BorderLayout;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BoxLayout;
 import javax.swing.JSplitPane;
 import java.awt.event.ItemListener;
@@ -76,6 +86,9 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 	public String tmam;
 	public String fecha;
 	public String hora;
+	private static Clip clipreproduciendo;
+	private JSlider controlvol;
+	private static FloatControl volumeControl;
 
 	/**
 	 * Launch the application.
@@ -109,10 +122,10 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 					 }
 					int mont= cal.get(Calendar.MONTH);
 					 if(mont<10) {
-						 month="0"+Integer.toString(mont);
+						 month="0"+Integer.toString(mont+1);
 					 }
 					 else {
-						 month=Integer.toString(mont);
+						 month=Integer.toString(mont+1);
 					 }
 					
 					
@@ -200,6 +213,7 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 			contentPane.add(tabbedPane);
 			{
 				panelVenta = new JPanel();
+				panelVenta.addMouseListener(this);
 				panelVenta.setBackground(UIManager.getColor("Button.light"));
 				tabbedPane.addTab("Venta", null, panelVenta, null);
 				panelVenta.setLayout(null);
@@ -469,6 +483,7 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 			}
 			{
 				panelProducto = new JPanel();
+				panelProducto.addMouseListener(this);
 				panelProducto.setBackground(UIManager.getColor("Button.light"));
 				tabbedPane.addTab("Producto", null, panelProducto, null);
 				panelProducto.setLayout(null);
@@ -498,6 +513,7 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 			}
 			{
 				panelCliente = new JPanel();
+				panelCliente.addMouseListener(this);
 				panelCliente.setBackground(UIManager.getColor("Button.light"));
 				tabbedPane.addTab("Cliente", null, panelCliente, null);
 				panelCliente.setLayout(null);
@@ -803,6 +819,48 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 		tablaCliente.setModel(modelo);
 	}
 	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == panelCliente) {
+			try {
+				do_panelCliente_mouseClicked(e);
+			} catch (UnsupportedAudioFileException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (LineUnavailableException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		if (e.getSource() == panelProducto) {
+			try {
+				do_panelProducto_mouseClicked(e);
+			} catch (UnsupportedAudioFileException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (LineUnavailableException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		if (e.getSource() == panelVenta) {
+			try {
+				do_panelVenta_mouseClicked(e);
+			} catch (UnsupportedAudioFileException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (LineUnavailableException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
 		if (e.getSource() == tablaVenta) {
 			do_tablaVenta_mouseClicked(e);
 		}
@@ -827,11 +885,17 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 	protected void do_btnRegistrarCliente_actionPerformed(ActionEvent e) {
 		try {
 			Cliente c = new Cliente(txtDniCliente.getText(), txtNombreCliente.getText(), txtTelefonoCliente.getText());
-			MantCliente mc = new MantCliente();
-			mc.AgregarCliente(c);
-			ListarCliente("");
-			LimpiarCliente();
-							
+			if(txtDniCliente.getText().length()==0 && txtNombreCliente.getText().length()==0 && txtTelefonoCliente.getText().length()==0) {
+				JOptionPane.showMessageDialog(this, "Rellene los todos los campos.");
+			}
+			else {
+				MantCliente mc = new MantCliente();
+				mc.AgregarCliente(c);
+				ListarCliente("");
+				LimpiarCliente();
+								
+			}
+			
 		} catch (Exception e2) {
 			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
 		}
@@ -1357,6 +1421,49 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 	}
 	protected void do_btnBorrarVenta_actionPerformed(ActionEvent e) {
 		LimpiarVentaCompleta();
+	}
+	protected void do_panelVenta_mouseClicked(MouseEvent e) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+		URL url = Inicio.class.getResource("/recursos/ErrorW.wav");
+		if(url == null) {
+			JOptionPane.showMessageDialog(null,"No se encontró");
+		}
+		AudioInputStream audiostream= AudioSystem.getAudioInputStream(url);
+		clipreproduciendo = AudioSystem.getClip();
+		clipreproduciendo.open(audiostream);
+		 volumeControl = (FloatControl) clipreproduciendo.getControl(FloatControl.Type.MASTER_GAIN);
+		 setVolume(50);  
+		 clipreproduciendo.start();}
+	protected void do_panelProducto_mouseClicked(MouseEvent e) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+		URL url = Inicio.class.getResource("/recursos/ErrorW.wav");
+		if(url == null) {
+			JOptionPane.showMessageDialog(null,"No se encontró");
+		}
+		AudioInputStream audiostream= AudioSystem.getAudioInputStream(url);
+		clipreproduciendo = AudioSystem.getClip();
+		clipreproduciendo.open(audiostream);
+		 volumeControl = (FloatControl) clipreproduciendo.getControl(FloatControl.Type.MASTER_GAIN);
+		 setVolume(50);  
+		 clipreproduciendo.start();
+	}
+	protected void do_panelCliente_mouseClicked(MouseEvent e) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+		URL url = Inicio.class.getResource("/recursos/ErrorW.wav");
+		if(url == null) {
+			JOptionPane.showMessageDialog(null,"No se encontró");
+		}
+		AudioInputStream audiostream= AudioSystem.getAudioInputStream(url);
+		clipreproduciendo = AudioSystem.getClip();
+		clipreproduciendo.open(audiostream);
+		 volumeControl = (FloatControl) clipreproduciendo.getControl(FloatControl.Type.MASTER_GAIN);
+		 setVolume(50);  
+		 clipreproduciendo.start();
+	}
+	private static void setVolume(int volume) {
+	    if (volumeControl != null) {
+	        float min = volumeControl.getMinimum();
+	        float max = volumeControl.getMaximum();
+	        float dB = (float) (min + (max - min) * (volume / 100.0));
+	        volumeControl.setValue(dB);
+	    }
 	}
 }
 
