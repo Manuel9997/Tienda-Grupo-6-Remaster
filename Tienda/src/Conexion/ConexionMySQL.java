@@ -11,7 +11,7 @@ public static Connection getConexion() {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		System.out.println("Driver correcto");
 		
-		cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/BD_TIENDA_TECNOBOX", "root", "mysql");
+		cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/BD_TIENDA_TECNOBOX", "root", "mysql2025");
 		System.out.println("Conexión correcta");
 		
 	} catch (Exception e) {

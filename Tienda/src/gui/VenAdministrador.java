@@ -1335,6 +1335,11 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		try {
 			int idProveedor = Integer.parseInt(txtIdProveedor.getText());
 			Proveedor proveedor = new Proveedor(idProveedor);
+			MantProveedor mpv= new MantProveedor();
+		if(	mpv.BuscarProveedor(idProveedor) == null) {
+			JOptionPane.showMessageDialog(this, "Proveedor no encontrado");
+			return;}
+	
 			Producto p = new Producto(Integer.parseInt(txtIdProducto.getText()), 
 					txtCategoria.getText(), txtNombreProducto.getText(), 
 					txtGarantia.getText(), proveedor , Double.parseDouble(txtPrecio.getText()), 
@@ -1379,6 +1384,8 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	}
 	protected void do_btnRegistrarStock_actionPerformed(ActionEvent e) {	
 		try {
+			
+			
 			Producto p = new Producto(Integer.parseInt(txtIdProdStock.getText()), Integer.parseInt(txtCantStock.getText()));
 			MantProducto mp = new MantProducto();
 			mp.AumentarStock(p);
@@ -1529,7 +1536,8 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		ArrayList<Proveedor> lista = new ArrayList<Proveedor>();
 		if(filtro.length() == 0) lista = mprov.MostrarProveedor();
 		else lista = mprov.ConsultarProveedor(filtro);
-
+		modelo.setRowCount(lista.size());
+		Iterator<Proveedor> it = lista.iterator();
 		modelo.addColumn("ID");
 		modelo.addColumn("RUC");
 		modelo.addColumn("Nombre");
@@ -1538,11 +1546,11 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		modelo.addColumn("Dirección");
 		modelo.addColumn("Estado");
 		modelo.addColumn("Fecha");
-
-		modelo.setRowCount(lista.size());
 		int i = 0;
 
-		for (Proveedor pro : lista) {
+		while (it.hasNext()) {
+			Object obj = it.next();
+			Proveedor pro = (Proveedor)obj;
 			modelo.setValueAt(pro.getIdProveedor(), i, 0);
 			modelo.setValueAt(pro.getRucProveedor(), i, 1);
 			modelo.setValueAt(pro.getNombreProveedor(), i, 2);
@@ -1553,8 +1561,12 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 			modelo.setValueAt(pro.getFechaProveedor(), i, 7);
 			i++;	
 		}
-
-	  tablaProveedor.setModel(modelo);
+		tablaProveedor.setModel(modelo);
+	  
+	  
+	  
+	  
+	  
 	}
 	protected void do_tablaProveedor_mouseClicked(MouseEvent e) {
 		int fila = tablaProveedor.getSelectedRow();
@@ -1578,12 +1590,13 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 			mprov.AgregarProveedor(prov);
 			ListarProveedor("");
 			LimpiarProveedor();
+			JOptionPane.showMessageDialog(this, "Proveedor Añadido");
 							
 		} catch (Exception e2) {
 			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
 		}
 	}
-	protected void do_btnModificarProveedor_actionPerformed(ActionEvent e) {
+protected void do_btnModificarProveedor_actionPerformed(ActionEvent e) {
 		try {
 			Date fecha = java.sql.Date.valueOf(LocalDate.now());
 			Proveedor prov = new Proveedor(Integer.parseInt(txtIDProveedor.getText()), 
@@ -1593,14 +1606,14 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 			
 			MantProveedor mprov = new MantProveedor();
 			mprov.ModificarProveedor(prov);
-			ListarProveedor(txtIDProveedor.getText()); // Solo se mostrará ese proveedor
-			tablaProveedor.setRowSelectionInterval(0, 0);
 			LimpiarProveedor();
+			ListarProveedor("");
 			
 		} catch (Exception e2) {
 			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
 		}
 	}
+	
 	void LimpiarProveedor() {
 		txtIDProveedor.setText("");
 		txtRucProveedor.setText("");

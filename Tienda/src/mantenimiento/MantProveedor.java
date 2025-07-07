@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
 
 import Conexion.ConexionMySQL;
 import clase.Proveedor;
@@ -39,7 +38,6 @@ public ArrayList<Proveedor> MostrarProveedor() {
 }
 public void AgregarProveedor(Proveedor p) {
 	try {
-		JOptionPane.showMessageDialog(null,"222222222222");
 		Connection cnx = ConexionMySQL.getConexion();
 		CallableStatement csta = cnx.prepareCall("{call sp_AgregarProveedor(?, ?, ?, ?, ?, ?, ?, ?)}");
 		csta.setInt(1, p.getIdProveedor());
@@ -118,9 +116,9 @@ public ArrayList<Proveedor> ConsultarProveedor(String filtro) {
             "WHERE CAST(id_proveedor AS CHAR) LIKE '%" + filtro + "%' " +
             "OR ruc_proveedor LIKE '%" + filtro + "%' " +
             "OR nombre_proveedor LIKE '%" + filtro + "%'");
-
+        Proveedor proveedor;
         while (rs.next()) {
-            Proveedor proveedor = new Proveedor(
+            proveedor = new Proveedor(
                 rs.getInt("id_proveedor"),
                 rs.getString("ruc_proveedor"),
                 rs.getString("nombre_proveedor"),

@@ -59,7 +59,7 @@ public void AgregarEmpleado(Empleado e) {
 public void ModificarEmpleado(Empleado e) {
     try {
         Connection cnx = ConexionMySQL.getConexion();
-        CallableStatement csta = cnx.prepareCall("{call sp_ModificarEmpleado(?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+        CallableStatement csta = cnx.prepareCall("{call sp_ModificarEmpleado(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
         csta.setInt(1, e.getIdEmpleado());
         csta.setString(2, e.getDniEmpleado());
         csta.setString(3, e.getNombreEmpleado());
@@ -69,7 +69,7 @@ public void ModificarEmpleado(Empleado e) {
         csta.setString(7, e.getJornadaEmpleado());
         csta.setString(8, e.getHorarioEmpleado());
         csta.setDouble(9, e.getSueldoEmpleado());
-        csta.setString(9, e.getEstadoEmpleado());
+        csta.setString(10, e.getEstadoEmpleado());
         csta.executeUpdate();
     } catch (Exception ex) {
         System.out.println("ERROR al modificar empleado: " + ex);

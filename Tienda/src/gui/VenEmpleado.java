@@ -951,6 +951,10 @@ private JLabel lblVendedor;
 		try {
 			Cliente c = new Cliente(txtDniClienteVenta.getText());
 			Empleado emple = new Empleado(Integer.parseInt(cboIdVendedor.getSelectedItem().toString()));
+			MantCliente mc= new MantCliente();
+			if(	mc.BuscarCliente(txtDniClienteVenta.getText()) == null) {
+				JOptionPane.showMessageDialog(this, "Cliente no encontrado");
+				return;}
 			
 			Venta v = new Venta(c, cboTipoPago.getSelectedItem().toString(), 
 					cboComprobante.getSelectedItem().toString(), emple);
@@ -965,14 +969,12 @@ private JLabel lblVendedor;
 	}
 	protected void do_btnRegistrarDetalleVentas_actionPerformed(ActionEvent e) {
 		Venta v = new Venta(Integer.parseInt(txtCodEditable.getText()));
-		Producto p = new Producto(Integer.parseInt(txtIdProductoVenta.getText()));
-		if(p.getStockProducto() < Integer.parseInt(txtCantidadVenta.getText())) {
-			JOptionPane.showMessageDialog(this, "Stock Insuficiente");
-			return;
-		}
-		
+		Producto p = new Producto(Integer.parseInt(txtIdProductoVenta.getText()));	
 		DetalleVenta dv = new DetalleVenta(v, p, Integer.parseInt(txtCantidadVenta.getText()));
-		
+		MantProducto mp= new MantProducto();
+		if(	mp.BuscarProducto(Integer.parseInt(txtIdProductoVenta.getText())) == null) {
+			JOptionPane.showMessageDialog(this, "Producto no encontrado");
+			return;}
 		MantDetalleVenta mdv = new MantDetalleVenta();
 		mdv.AgregarDetalleVenta(dv);
 		
