@@ -89,7 +89,7 @@ public Producto BuscarProducto(int idProducto) {
         csta.setInt(1, idProducto);
         ResultSet rs = csta.executeQuery();
         if (rs.next()) {
-        	Proveedor proveedor = new Proveedor(rs.getInt("id_proveedor"), rs.getString("nombre_proveedor"));
+        	Proveedor proveedor = new Proveedor(rs.getInt("id_proveedor"));
             producto = new Producto(
                 rs.getInt("id_producto"),
                 rs.getString("categoria_producto"),

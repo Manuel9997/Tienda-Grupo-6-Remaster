@@ -527,6 +527,27 @@ private JLabel lblVendedor;
 							btnBorrarVenta.setBounds(1205, 320, 116, 25);
 							panelVenta.add(btnBorrarVenta);
 						}
+						{
+							btnMostrarVenta = new JButton("Mostrar");
+							btnMostrarVenta.addActionListener(this);
+							btnMostrarVenta.setFont(new Font("Verdana", Font.PLAIN, 13));
+							btnMostrarVenta.setBounds(535, 99, 116, 25);
+							panelVenta.add(btnMostrarVenta);
+						}
+						{
+							btnMostrarDetalleVenta = new JButton("Mostrar");
+							btnMostrarDetalleVenta.addActionListener(this);
+							btnMostrarDetalleVenta.setFont(new Font("Verdana", Font.PLAIN, 13));
+							btnMostrarDetalleVenta.setBounds(925, 68, 116, 25);
+							panelVenta.add(btnMostrarDetalleVenta);
+						}
+						{
+							btnMostrarVentaCompleta = new JButton("Mostrar");
+							btnMostrarVentaCompleta.addActionListener(this);
+							btnMostrarVentaCompleta.setFont(new Font("Verdana", Font.PLAIN, 13));
+							btnMostrarVentaCompleta.setBounds(1079, 318, 116, 25);
+							panelVenta.add(btnMostrarVentaCompleta);
+						}
 						btnSuma.addActionListener(this);
 					}
 				}
@@ -673,6 +694,15 @@ private JLabel lblVendedor;
 		 LlenarCombo();
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnMostrarDetalleVenta) {
+			do_btnMostrarDetalleVenta_actionPerformed(e);
+		}
+		if (e.getSource() == btnMostrarVenta) {
+			do_btnMostrarVenta_actionPerformed(e);
+		}
+		if (e.getSource() == btnMostrarVentaCompleta) {
+			do_btnMostrarVentaCompleta_actionPerformed(e);
+		}
 		if (e.getSource() == btnTotal) {
 			do_btnTotal_actionPerformed(e);
 		}
@@ -888,6 +918,18 @@ private JLabel lblVendedor;
 			}
 		}
 	}
+	protected void do_btnMostrarVentaCompleta_actionPerformed(ActionEvent e) {
+		modoTabla = "COMPLETA";
+		ListarVentasDelDia();
+	}
+	protected void do_btnMostrarVenta_actionPerformed(ActionEvent e) {
+		modoTabla = "VENTA";
+		ListarVenta();
+	}
+	protected void do_btnMostrarDetalleVenta_actionPerformed(ActionEvent e) {
+		modoTabla = "DETALLE";
+		ListarDetalleVenta();
+	}
 	public void ListarVentasDelDia() {
 	    DefaultTableModel modelo = new DefaultTableModel();
 	    MantHistorialVentas mhv = new MantHistorialVentas();
@@ -941,25 +983,122 @@ private JLabel lblVendedor;
 
 	    tablaVenta.setModel(modelo);
 	}
+	
+	private String modoTabla = "COMPLETA";
+	
 	protected void do_tablaVenta_mouseClicked(MouseEvent e) {
 		int fila = tablaVenta.getSelectedRow();
-		txtCodNoEditable.setText(String.valueOf(tablaVenta.getValueAt(fila, 0)));
-		txtDniClienteVenta.setText(String.valueOf(tablaVenta.getValueAt(fila, 2)));
-		cboTipoPago.setSelectedItem(String.valueOf(tablaVenta.getValueAt(fila, 13)));
-		cboComprobante.setSelectedItem(String.valueOf(tablaVenta.getValueAt(fila, 14)));
-		int idEmpleado = Integer.parseInt(tablaVenta.getValueAt(fila, 15).toString());
-		cboIdVendedor.setSelectedItem(idEmpleado);
-		txtNombreVendedor.setText(String.valueOf(tablaVenta.getValueAt(fila, 16)));
-		txtIdDetalle.setText(String.valueOf(tablaVenta.getValueAt(fila, 1)));
-		txtCodEditable.setText(String.valueOf(tablaVenta.getValueAt(fila, 0)));
-		txtIdProductoVenta.setText(String.valueOf(tablaVenta.getValueAt(fila, 7)));
-		txtCantidadVenta.setText(String.valueOf(tablaVenta.getValueAt(fila, 12)));
+	    if (fila == -1) return;
+	    
+	    LimpiarVentaCompleta();
+
+	    switch (modoTabla) {
+	        case "COMPLETA":
+	            txtCodNoEditable.setText(String.valueOf(tablaVenta.getValueAt(fila, 0)));
+	            txtIdDetalle.setText(String.valueOf(tablaVenta.getValueAt(fila, 1)));
+	            txtDniClienteVenta.setText(String.valueOf(tablaVenta.getValueAt(fila, 2)));
+	            cboTipoPago.setSelectedItem(String.valueOf(tablaVenta.getValueAt(fila, 13)));
+	            cboComprobante.setSelectedItem(String.valueOf(tablaVenta.getValueAt(fila, 14)));
+	            cboIdVendedor.setSelectedItem(Integer.parseInt(tablaVenta.getValueAt(fila, 15).toString()));
+	            txtNombreVendedor.setText(String.valueOf(tablaVenta.getValueAt(fila, 16)));
+	            txtCodEditable.setText(String.valueOf(tablaVenta.getValueAt(fila, 0)));
+	            txtIdProductoVenta.setText(String.valueOf(tablaVenta.getValueAt(fila, 7)));
+	            txtCantidadVenta.setText(String.valueOf(tablaVenta.getValueAt(fila, 12)));
+	            break;
+
+	        case "VENTA":
+	            txtCodNoEditable.setText(String.valueOf(tablaVenta.getValueAt(fila, 0)));
+	            txtDniClienteVenta.setText(String.valueOf(tablaVenta.getValueAt(fila, 1)));
+	            cboTipoPago.setSelectedItem(String.valueOf(tablaVenta.getValueAt(fila, 6)));
+	            cboComprobante.setSelectedItem(String.valueOf(tablaVenta.getValueAt(fila, 7)));
+	            cboIdVendedor.setSelectedItem(Integer.parseInt(tablaVenta.getValueAt(fila, 8).toString()));
+	            txtNombreVendedor.setText(String.valueOf(tablaVenta.getValueAt(fila, 9)));
+	            break;
+
+	        case "DETALLE":
+	        	txtCodEditable.setText(String.valueOf(tablaVenta.getValueAt(fila, 0)));
+	            txtIdDetalle.setText(String.valueOf(tablaVenta.getValueAt(fila, 1)));  
+	            txtIdProductoVenta.setText(String.valueOf(tablaVenta.getValueAt(fila, 2))); 
+	            txtCantidadVenta.setText(String.valueOf(tablaVenta.getValueAt(fila, 7))); 
+	            break;
+	    }
+	}
+	public void ListarVenta() {
+	    DefaultTableModel modelo = new DefaultTableModel();
+	    MantVenta mv = new MantVenta();
+	    ArrayList<Venta> lista = mv.MostrarVenta();
+
+	    modelo.addColumn("Código Venta");
+	    modelo.addColumn("DNI Cliente");
+	    modelo.addColumn("Nombre Cliente");
+	    modelo.addColumn("Teléfono Cliente");
+	    modelo.addColumn("Fecha");
+	    modelo.addColumn("Hora");;
+	    modelo.addColumn("Tipo Pago");
+	    modelo.addColumn("Comprobante");
+	    modelo.addColumn("ID Vendedor");
+	    modelo.addColumn("Vendedor");
+	    modelo.addColumn("Total");
+
+	    modelo.setRowCount(lista.size());
+	    int i = 0;
+
+	    for (Venta v : lista) {
+	        modelo.setValueAt(v.getCodigoVenta(), i, 0);
+	        modelo.setValueAt(v.getCliente().getDniCliente(), i, 1);
+	        modelo.setValueAt(v.getCliente().getNombreCliente(), i, 2);
+	        modelo.setValueAt(v.getCliente().getTelefonoCliente(), i, 3);
+	        modelo.setValueAt(v.getFechaVenta(), i, 4);
+	        modelo.setValueAt(v.getHoraVenta(), i, 5);
+	        modelo.setValueAt(v.getTipopagoVenta(), i, 6);
+	        modelo.setValueAt(v.getComprobanteVenta(), i, 7);
+	        modelo.setValueAt(v.getEmpleado().getIdEmpleado(), i, 8);
+	        modelo.setValueAt(v.getEmpleado().getNombreEmpleado(), i, 9);
+	        modelo.setValueAt(v.getTotalVenta(), i, 10);
+	        i++;
+	    }
+
+	    tablaVenta.setModel(modelo);
+	}
+	public void ListarDetalleVenta() {
+	    DefaultTableModel modelo = new DefaultTableModel();
+	    MantDetalleVenta mdv = new MantDetalleVenta();
+	    ArrayList<DetalleVenta> lista = mdv.MostrarDetalleVenta();
+
+	    modelo.addColumn("Código Venta");
+	    modelo.addColumn("Detalle");
+	    modelo.addColumn("ID Producto");
+	    modelo.addColumn("Categoría Producto");
+	    modelo.addColumn("Nombre Producto");
+	    modelo.addColumn("Garantía");
+	    modelo.addColumn("Precio");
+	    modelo.addColumn("Cantidad");
+	    modelo.addColumn("Subtotal");
+
+	    modelo.setRowCount(lista.size());
+	    int i = 0;
+
+	    for (DetalleVenta dv : lista) {
+	    	
+	        modelo.setValueAt(dv.getVenta().getCodigoVenta(), i, 0);
+	        modelo.setValueAt(dv.getIdDetalleVenta(), i, 1);
+	        modelo.setValueAt(dv.getProducto().getIdProducto(), i, 2);
+	        modelo.setValueAt(dv.getProducto().getCategoriaProducto(), i, 3);
+	        modelo.setValueAt(dv.getProducto().getNombreProducto(), i, 4);
+	        modelo.setValueAt(dv.getProducto().getGarantiaProducto(), i, 5);
+	        modelo.setValueAt(dv.getProducto().getPrecioProducto(), i, 6);
+	        modelo.setValueAt(dv.getCantidadDetalleVenta(), i, 7);
+	        modelo.setValueAt(dv.getSubtotalDetalleVenta(), i, 8);
+	        i++;
+	    }
+
+	    tablaVenta.setModel(modelo);
 	}
 	protected void do_btnRegistrarVenta_actionPerformed(ActionEvent e) {
 		try {
-			
-			if(txtDniClienteVenta.getText().length()==0 || txtDniClienteVenta.getText().length()==0 || txtIdProductoVenta.getText().length()==0||txtCantidadVenta.getText().length()==0) {
-				JOptionPane.showMessageDialog(this, "Ingrese todos los datos para realizar la venta.");
+			modoTabla = "VENTA";
+			if(txtDniClienteVenta.getText().length()==0) {
+				JOptionPane.showMessageDialog(this, "Ingrese todos los datos para registrar los datos.");
 			}
 			else {
 				Cliente c = new Cliente(txtDniClienteVenta.getText());
@@ -975,6 +1114,7 @@ private JLabel lblVendedor;
 				MantVenta mv = new MantVenta();
 				mv.AgregarVenta(v);
 				JOptionPane.showMessageDialog(this, "Venta registrada correctamente.");
+				ListarVenta();
 			}
 			
 							
@@ -983,33 +1123,42 @@ private JLabel lblVendedor;
 		}
 	}
 	protected void do_btnRegistrarDetalleVentas_actionPerformed(ActionEvent e) {
-
-		if(txtDniClienteVenta.getText().length()==0 || txtDniClienteVenta.getText().length()==0 || txtIdProductoVenta.getText().length()==0||txtCantidadVenta.getText().length()==0) {
-			JOptionPane.showMessageDialog(this, "Ingrese todos los datos para realizar la venta.");
+		try {
+			modoTabla = "DETALLE";
+			if(txtCodEditable.getText().length() == 0 || txtIdProductoVenta.getText().length()==0||txtCantidadVenta.getText().length()==0) {
+				JOptionPane.showMessageDialog(this, "Ingrese todos los datos para registrar los datos.");
+			}
+			else {
+				Venta v = new Venta(Integer.parseInt(txtCodEditable.getText()));
+				Producto p = new Producto(Integer.parseInt(txtIdProductoVenta.getText()));	
+				DetalleVenta dv = new DetalleVenta(v, p, Integer.parseInt(txtCantidadVenta.getText()));
+				MantProducto mp= new MantProducto();
+				MantVenta mv = new MantVenta();
+				
+				if (!mv.BuscarVenta(txtCodEditable.getText())) {
+	                JOptionPane.showMessageDialog(this, "Código de venta no encontrado");
+	                return;
+	            }
+				if(	mp.BuscarProducto(Integer.parseInt(txtIdProductoVenta.getText())) == null) {
+					JOptionPane.showMessageDialog(this, "Producto no encontrado");
+					return;}
+				MantDetalleVenta mdv = new MantDetalleVenta();
+				mdv.AgregarDetalleVenta(dv);
+				
+				
+				mv.CalcularTotalVenta(v.getCodigoVenta());
+				ListarProducto("");
+				JOptionPane.showMessageDialog(this, "Detalle de Venta registrada correctamente");
+				ListarDetalleVenta();
+				LimpiarVentaCompleta();	
+			}
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
 		}
-		else {
-			Venta v = new Venta(Integer.parseInt(txtCodEditable.getText()));
-			Producto p = new Producto(Integer.parseInt(txtIdProductoVenta.getText()));	
-			DetalleVenta dv = new DetalleVenta(v, p, Integer.parseInt(txtCantidadVenta.getText()));
-			MantProducto mp= new MantProducto();
-			if(	mp.BuscarProducto(Integer.parseInt(txtIdProductoVenta.getText())) == null) {
-				JOptionPane.showMessageDialog(this, "Producto no encontrado");
-				return;}
-			MantDetalleVenta mdv = new MantDetalleVenta();
-			mdv.AgregarDetalleVenta(dv);
-			
-			MantVenta mv = new MantVenta();
-			mv.CalcularTotalVenta(v.getCodigoVenta());
-			ListarProducto("");
-			JOptionPane.showMessageDialog(this, "Detalle de Venta registrada correctamente");
-			ListarVentasDelDia();
-			LimpiarVentaCompleta();	
-		}
-		
 	}
 	protected void do_btnModificarVenta_actionPerformed(ActionEvent e) {
 		try {
-			if(txtDniClienteVenta.getText().length()==0 || txtDniClienteVenta.getText().length()==0 || txtIdProductoVenta.getText().length()==0||txtCantidadVenta.getText().length()==0) {
+			if(txtDniClienteVenta.getText().length()==0) {
 				JOptionPane.showMessageDialog(this, "Ingrese todos los datos para poder modificar los datos.");
 			}
 			else {
@@ -1022,7 +1171,15 @@ private JLabel lblVendedor;
 				
 				MantVenta mv = new MantVenta();
 		        mv.ModificarVenta(v);
-		        ListarVentasDelDia();
+		        
+		        switch (modoTabla) {
+                case "VENTA":
+                    ListarVenta();
+                    break;
+                case "COMPLETA":
+                    ListarVentasDelDia();
+                    break;
+            }
 		        LimpiarVentaCompleta();
 			}
 			
@@ -1033,20 +1190,33 @@ private JLabel lblVendedor;
 	}
 	protected void do_btnModificarDetalleVenta_actionPerformed(ActionEvent e) {
 		try {
-			Venta v = new Venta(Integer.parseInt(txtCodEditable.getText()));
-			Producto p = new Producto(Integer.parseInt(txtIdProductoVenta.getText()));
-			
-			DetalleVenta dv = new DetalleVenta(Integer.parseInt(txtIdDetalle.getText()), v, p, 
-					Integer.parseInt(txtCantidadVenta.getText()));
-			
-			MantDetalleVenta mdv = new MantDetalleVenta();
-			mdv.ModificarDetalleVenta(dv);
-			
-			MantVenta mv = new MantVenta();
-			mv.CalcularTotalVenta(v.getCodigoVenta());
-			ListarProducto("");
-			ListarVentasDelDia();
-			LimpiarVentaCompleta();
+			if(txtCodEditable.getText().length() == 0 || txtIdProductoVenta.getText().length()==0||txtCantidadVenta.getText().length()==0) {
+				JOptionPane.showMessageDialog(this, "Ingrese todos los datos para modificar los datos.");
+			}
+			else {
+				Venta v = new Venta(Integer.parseInt(txtCodEditable.getText()));
+				Producto p = new Producto(Integer.parseInt(txtIdProductoVenta.getText()));
+				
+				DetalleVenta dv = new DetalleVenta(Integer.parseInt(txtIdDetalle.getText()), v, p, 
+						Integer.parseInt(txtCantidadVenta.getText()));
+				
+				MantDetalleVenta mdv = new MantDetalleVenta();
+				mdv.ModificarDetalleVenta(dv);
+				
+				MantVenta mv = new MantVenta();
+				mv.CalcularTotalVenta(v.getCodigoVenta());
+				ListarProducto("");
+				
+				 switch (modoTabla) {
+	                case "DETALLE":
+	                    ListarDetalleVenta();
+	                    break;
+	                case "COMPLETA":
+	                    ListarVentasDelDia();
+	                    break;
+	            }
+				LimpiarVentaCompleta();
+			}
 			
 		} catch (Exception e2) {
 			JOptionPane.showMessageDialog(this, "Verifique los datos del detalle de venta. Intente nuevamente.");
@@ -1096,6 +1266,9 @@ private JLabel lblVendedor;
 	//                                                                               CALCULAR TOTAL DE VENTA
 	private ArrayList<Double> listaSubtotales = new ArrayList<>();
 	private JButton btnTotal;
+	private JButton btnMostrarVenta;
+	private JButton btnMostrarDetalleVenta;
+	private JButton btnMostrarVentaCompleta;
 	
 	protected void do_btnSuma_actionPerformed(ActionEvent e) {
 		try {

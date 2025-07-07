@@ -85,4 +85,19 @@ public void ModificarVenta(Venta v) {
         System.out.println("ERROR al modificar venta: " + e);
     }
 }
+public boolean BuscarVenta(String codigo) {
+    boolean existe = false;
+    try {
+        Connection cnx = ConexionMySQL.getConexion();
+        CallableStatement csta = cnx.prepareCall("{call sp_BuscarVenta(?)}");
+        csta.setString(1, codigo);
+        ResultSet rs = csta.executeQuery();
+        if (rs.next()) {
+            existe = true; // si hay alguna fila, la venta existe
+        }
+    } catch (Exception e) {
+        System.out.println("ERROR al verificar venta: " + e);
+    }
+    return existe;
+}
 }

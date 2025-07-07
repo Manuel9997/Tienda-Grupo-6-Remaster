@@ -556,6 +556,12 @@ call sp_ModificarDetalleVenta(5, 245, 2);
 call sp_MostrarDetalleVenta();
 call sp_MostrarHIstorialVentas();
 
+create procedure sp_BuscarVenta(
+codVenta int
+)
+select * from Venta where codigo_venta = codVenta;
+
+call sp_BuscarVenta(2);
 
 DELIMITER $$
 create procedure sp_BuscarHistorialVentas(IN codVenta INT)
