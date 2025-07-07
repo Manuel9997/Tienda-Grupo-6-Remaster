@@ -15,89 +15,63 @@ import clase.Proveedor;
 import clase.Venta;
 
 public class MantHistorialVentas {
-	
-	public ArrayList<HistorialVentas> ConsultarHistorialVentasFiltrado(String filtro) {
-	    ArrayList<HistorialVentas> lista = new ArrayList<>();
-	    Connection conexion = null;
-	    CallableStatement cs = null; // Usar CallableStatement para llamar a Stored Procedures
-	    ResultSet rs = null;
+	public ArrayList<HistorialVentas> MostrarHistorialVentas() {
+        ArrayList<HistorialVentas> lista = new ArrayList<>();
 
-	    try {
-	        conexion = ConexionMySQL.getConexion();
-	        String sql = "{CALL sp_MostrarHistorialVentasconfiltro(?)}"; 
-	        cs = conexion.prepareCall(sql);
-	        cs.setString(1, filtro); 
-	        rs = cs.executeQuery();
+        try {
+            Connection cnx = ConexionMySQL.getConexion();
+            CallableStatement csta = cnx.prepareCall("{call sp_MostrarHistorialVentas()}");
+            ResultSet rs = csta.executeQuery();
 
+            while (rs.next()) {
+                Cliente cliente = new Cliente(
+                    rs.getString("dni_cliente"),
+                    rs.getString("nombre_cliente"),
+                    rs.getString("telefono_cliente")
+                );
 
-	        while (rs.next()) {
+                Empleado empleado = new Empleado(
+                		rs.getInt("id_empleado"),
+                		rs.getString("nombre_empleado"));
 
-	            String codigoVentaStr = String.valueOf(rs.getInt("codigo_venta")); 
-	            String categoriaProducto = rs.getString("categoria_producto");
-	            String nombreCliente = rs.getString("nombre_cliente");
-	            String dniCliente = rs.getString("dni_cliente");
-	            String idEmpleadoStr = String.valueOf(rs.getInt("id_empleado"));
-	            String nombreEmpleado = rs.getString("nombre_empleado");
+                Producto producto = new Producto(
+                    rs.getInt("id_producto"),
+                    rs.getString("categoria_producto"),
+                    rs.getString("nombre_producto"),
+                    rs.getString("garantia_producto"),
+                    rs.getDouble("precio_producto")
+                );
 
-	            if (codigoVentaStr.contains(filtro) ||
-	                categoriaProducto.contains(filtro) ||
-	                nombreCliente.contains(filtro) ||
-	                dniCliente.contains(filtro) ||
-	                idEmpleadoStr.contains(filtro) ||
-	                nombreEmpleado.contains(filtro))
-	            {
-	                Cliente cliente = new Cliente(
-	                    dniCliente,
-	                    nombreCliente,
-	                    rs.getString("telefono_cliente")
-	                );
+                Venta venta = new Venta(
+                    rs.getInt("codigo_venta"),
+                    cliente,
+                    rs.getDate("fecha_venta"),
+                    rs.getTime("hora_venta"),
+                    rs.getString("tipopago_venta"),
+                    rs.getString("comprobante_venta"),
+                    empleado,
+                    rs.getDouble("total_venta")
+                );
 
-	                Empleado empleado = new Empleado(
-	                    rs.getInt("id_empleado"),
-	                    nombreEmpleado
-	                );
+                DetalleVenta detalleVenta = new DetalleVenta(
+                	rs.getInt("id_detalleVenta"),
+                	venta,
+                	producto,
+                	rs.getInt("cantidad_detalleVenta"),
+                	rs.getDouble("subtotal_detalleVenta")	
+                );
 
-	                Producto producto = new Producto(
-	                    rs.getInt("id_producto"),
-	                    categoriaProducto,
-	                    rs.getString("nombre_producto"),
-	                    rs.getString("garantia_producto"),
-	                    rs.getDouble("precio_producto")
-	                );
+                HistorialVentas historialVentas = new HistorialVentas(venta, detalleVenta);
 
-	                Venta venta = new Venta(
-	                    rs.getInt("codigo_venta"),
-	                    cliente,
-	                    rs.getDate("fecha_venta"),
-	                    rs.getTime("hora_venta"),
-	                    rs.getString("tipopago_venta"),
-	                    rs.getString("comprobante_venta"),
-	                    empleado,
-	                    rs.getDouble("total_venta")
-	                );
+                lista.add(historialVentas);
+            }
 
-	                DetalleVenta detalleVenta = new DetalleVenta(
-	                    rs.getInt("id_detalleVenta"),
-	                    venta,
-	                    producto,
-	                    rs.getInt("cantidad_detalleVenta"),
-	                    rs.getDouble("subtotal_detalleVenta")
-	                );
+        } catch (Exception e) {
+            System.out.println("ERROR al listar historial de ventas: " + e);
+        }
 
-	                HistorialVentas historialVentas = new HistorialVentas(venta, detalleVenta);
-	                lista.add(historialVentas);
-	            }
-	        }
-
-	    } catch (Exception e) {
-	        System.err.println("ERROR general al consultar historial de ventas: " + e.getMessage());
-	        e.printStackTrace();
-	
-	    }
-	    return lista;
-	}
-	
-
+        return lista;
+    }
 	
 	public ArrayList<HistorialVentas> MostrarVentasDelDia() {
 	    ArrayList<HistorialVentas> lista = new ArrayList<>();
@@ -156,7 +130,63 @@ public class MantHistorialVentas {
 
 	    return lista;
 	}
-	
+	public ArrayList<HistorialVentas> ConsultarHistorialVentas(String filtro) {
+		ArrayList<HistorialVentas> lista = new ArrayList<>();
+		try {
+			Connection cnx = ConexionMySQL.getConexion();
+			CallableStatement csta = cnx.prepareCall("{call sp_ConsultarHistorialVentas(?)}");
+			csta.setString(1, filtro);
+			ResultSet rs = csta.executeQuery();
+
+			while (rs.next()) {
+				Cliente cliente = new Cliente(
+		                rs.getString("dni_cliente"),
+		                rs.getString("nombre_cliente"),
+		                rs.getString("telefono_cliente")
+		            );
+
+		            Empleado empleado = new Empleado(
+		            	rs.getInt("id_empleado"),
+		                rs.getString("nombre_empleado")
+		            );
+
+		            Producto producto = new Producto(
+		                rs.getInt("id_producto"),
+		                rs.getString("categoria_producto"),
+		                rs.getString("nombre_producto"),
+		                rs.getString("garantia_producto"),
+		                rs.getDouble("precio_producto")
+		            );
+
+		            Venta venta = new Venta(
+		                rs.getInt("codigo_venta"),
+		                cliente,
+		                rs.getDate("fecha_venta"),
+		                rs.getTime("hora_venta"),
+		                rs.getString("tipopago_venta"),
+		                rs.getString("comprobante_venta"),
+		                empleado,
+		                rs.getDouble("total_venta")
+		            );
+
+		            DetalleVenta detalleVenta = new DetalleVenta(
+		            	rs.getInt("id_detalleVenta"),
+		                venta,
+		                producto,
+		                rs.getInt("cantidad_detalleVenta"),
+		                rs.getDouble("subtotal_detalleVenta")
+		            );
+
+		            HistorialVentas historial = new HistorialVentas(venta, detalleVenta);
+
+		            lista.add(historial);
+		        }
+			
+		} catch (Exception e) {
+			System.out.println("ERROR al consultar historial: " + e);
+		}
+		return lista;
+	}
 
 	public void EliminarHistorial(int idventa) {
 	    try {

@@ -77,6 +77,62 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 	private JLabel lblDni;
 	private JLabel lblCantidad;
 	private JTextField txtCantidadVenta;
+private JLabel lblVendedor;
+	
+	private JLabel lblRegistroDeVentas;
+	private JButton jlabelmodo;
+	private JScrollPane scrollPane;
+	private JLabel lblNewLabel_1;
+	private JLabel lblclock;
+	private JTabbedPane tabbedPane;
+	private JPanel panelVenta;
+	private JPanel panelProducto;
+	private JTextField txtIdBuscarProducto;
+	private JLabel lblIdProducto;
+	private JScrollPane scrollPane_1;
+	private JPanel panelCliente;
+	private JLabel lblDniCliente;
+	private JLabel lblIdNombreCliente;
+	private JLabel lblTeleCliente;
+	private JTextField txtDniCliente;
+	private JTextField txtNombreCliente;
+	private JTextField txtTelefonoCliente;
+	private JScrollPane scrollPane_2;
+	private JTable tablaCliente;
+	private JButton btnRegistrarCliente;
+	private JButton btnModificarCliente;
+	private JTable tablaProducto;
+	private JTextField txtBuscarCliente;
+	private JLabel lblIdProducto_1;
+	private JLabel lblCod;
+	private JTextField txtCodEditable;
+	private JLabel lblIdVendedor;
+	private JComboBox cboIdVendedor;
+	private JTextField txtNombreVendedor;
+	private JTable tablaVenta;
+	private JTextField txtDniClienteVenta;
+	private JTextField txtIdProductoVenta;
+	private JButton btnRegistrarDetalleVentas;
+	private JButton btnModificarDetalleVenta;
+	private JButton btnModificarVenta;
+	private JPanel panel;
+	private JTextField txtPrecioVenta;
+	private JTextField txtCantVenta;
+	private JLabel lblPrecio;
+	private JLabel lblCantidadVenta;
+	private JButton btnSuma;
+	private JScrollPane scrollPane_3;
+	private JTextArea txtS;
+	private JButton btnBorrar;
+	private JButton btnRegistrarVenta;
+	private JButton btnEliminarVenta;
+	private JLabel lblCodNoEditable;
+	private JTextField txtCodNoEditable;
+	private JLabel lblIdDetalle;
+	private JTextField txtIdDetalle;
+	private JButton btnBorrarVenta;
+	private JButton btnBorrarCliente;
+	private JButton btnMostrarCliente;
 	public int day;
 	public int year;
 	public int month;
@@ -181,9 +237,7 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 				catch(InterruptedException e) {
 					e.printStackTrace();
 				}
-			
-
-				
+					
 			}
 		};
 
@@ -366,12 +420,6 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 					panelVenta.add(btnModificarDetalleVenta);
 				}
 				{
-					btnEliminarDetalleVenta = new JButton("Eliminar");
-					btnEliminarDetalleVenta.setFont(new Font("Verdana", Font.PLAIN, 13));
-					btnEliminarDetalleVenta.setBounds(925, 172, 116, 25);
-					panelVenta.add(btnEliminarDetalleVenta);
-				}
-				{
 					btnModificarVenta = new JButton("Modificar");
 					btnModificarVenta.addActionListener(this);
 					btnModificarVenta.setFont(new Font("Verdana", Font.PLAIN, 13));
@@ -394,12 +442,6 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 						txtCantVenta.setColumns(10);
 						txtCantVenta.setBounds(66, 59, 96, 19);
 						panel.add(txtCantVenta);
-					}
-					{
-						btnTotal = new JButton("Total");
-						btnTotal.addActionListener(this);
-						btnTotal.setBounds(20, 88, 85, 21);
-						panel.add(btnTotal);
 					}
 					{
 						lblPrecio = new JLabel("Precio:");
@@ -430,6 +472,12 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 							btnBorrar.addActionListener(this);
 							btnBorrar.setBounds(110, 88, 85, 21);
 							panel.add(btnBorrar);
+						}
+						{
+							btnTotal = new JButton("Total");
+							btnTotal.addActionListener(this);
+							btnTotal.setBounds(20, 88, 85, 21);
+							panel.add(btnTotal);
 						}
 						{
 							btnRegistrarVenta = new JButton("Registrar");
@@ -623,6 +671,9 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 		 LlenarCombo();
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnTotal) {
+			do_btnTotal_actionPerformed(e);
+		}
 		if (e.getSource() == btnBorrarCliente) {
 			do_btnBorrarCliente_actionPerformed(e);
 		}
@@ -660,82 +711,6 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 			do_btnNewButton_actionPerformed(e);
 		}
 	}
-	private JLabel lblVendedor;
-	
-	private JLabel lblRegistroDeVentas;
-	private JButton jlabelmodo;
-	private JScrollPane scrollPane;
-	private JLabel lblNewLabel_1;
-	private JLabel lblclock;
-	private JTabbedPane tabbedPane;
-	private JPanel panelVenta;
-	private JPanel panelProducto;
-	private JTextField txtIdBuscarProducto;
-	private JLabel lblIdProducto;
-	private JScrollPane scrollPane_1;
-	private JPanel panelCliente;
-	private JLabel lblDniCliente;
-	private JLabel lblIdNombreCliente;
-	private JLabel lblTeleCliente;
-	private JTextField txtDniCliente;
-	private JTextField txtNombreCliente;
-	private JTextField txtTelefonoCliente;
-	private JScrollPane scrollPane_2;
-	private JTable tablaCliente;
-	private JButton btnRegistrarCliente;
-	private JButton btnModificarCliente;
-	private JTable tablaProducto;
-	private JTextField txtBuscarCliente;
-	private JLabel lblIdProducto_1;
-	private JLabel lblCod;
-	private JTextField txtCodEditable;
-	private JLabel lblIdVendedor;
-	private JComboBox cboIdVendedor;
-	private JTextField txtNombreVendedor;
-	private JTable tablaVenta;
-	private JTextField txtDniClienteVenta;
-	private JTextField txtIdProductoVenta;
-	private JButton btnRegistrarDetalleVentas;
-	private JButton btnModificarDetalleVenta;
-	private JButton btnEliminarDetalleVenta;
-	private JButton btnModificarVenta;
-	private JPanel panel;
-	private JTextField txtPrecioVenta;
-	private JTextField txtCantVenta;
-	private JButton btnTotal;
-	private JLabel lblPrecio;
-	private JLabel lblCantidadVenta;
-	private JButton btnSuma;
-	public void ListarProducto(String filtro) {
-		DefaultTableModel modelo = new DefaultTableModel();
-		MantProducto mp = new MantProducto();
-		ArrayList<Producto> lista = new ArrayList<Producto>();
-		if(filtro.length() == 0) lista = mp.MostrarProducto();
-		else lista = mp.ConsultarProducto(filtro);
-		
-		modelo.setRowCount(lista.size());
-		Iterator<Producto> it = lista.iterator();
-		modelo.addColumn("ID");
-		modelo.addColumn("Categoría");
-		modelo.addColumn("Nombre");
-		modelo.addColumn("Garantía");
-		modelo.addColumn("Precio");
-		modelo.addColumn("Stock");
-		int i = 0;
-		
-		while (it.hasNext()) {
-			Object obj = it.next();
-			Producto p = (Producto)obj;
-			modelo.setValueAt(p.getIdProducto(), i, 0);
-			modelo.setValueAt(p.getCategoriaProducto(), i, 1);
-			modelo.setValueAt(p.getNombreProducto(), i, 2);
-			modelo.setValueAt(p.getGarantiaProducto(), i, 3);
-			modelo.setValueAt(p.getPrecioProducto(), i, 4);
-			modelo.setValueAt(p.getStockProducto(), i, 5);
-			i++;
-		}
-		tablaProducto.setModel(modelo);
-	}
 	public void keyPressed(KeyEvent e) {
 	}
 	public void keyReleased(KeyEvent e) {
@@ -769,54 +744,18 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 			do_txtDniCliente_keyTyped(e);
 		}
 	}
-	protected void do_txtIdProductoBuscar_keyReleased(KeyEvent e) {
-		String filtro = txtIdBuscarProducto.getText();
-		ListarProducto(filtro);
+	public void mouseEntered(MouseEvent e) {
 	}
-	protected void do_txtDniCliente_keyTyped(KeyEvent e) {
-		char validarNumeros = e.getKeyChar();
-		if(Character.isLetter(validarNumeros)) {
-			e.consume();
-			JOptionPane.showMessageDialog(this, "No permite letras");
-		}
+	public void mouseExited(MouseEvent e) {
 	}
-	protected void do_txtNombreCliente_keyTyped(KeyEvent e) {
-		char validarLetras = e.getKeyChar();
-		if(Character.isDigit(validarLetras)) {
-			e.consume();
-			JOptionPane.showMessageDialog(this, "No permite números");
-		}
+	public void mousePressed(MouseEvent e) {
 	}
-	protected void do_txtTelefonoCliente_keyTyped(KeyEvent e) {
-		char validarNumeros = e.getKeyChar();
-		if(Character.isLetter(validarNumeros)) {
-			e.consume();
-			JOptionPane.showMessageDialog(this, "No permite letras");
-		}
+	public void mouseReleased(MouseEvent e) {
 	}
-	public void ListarCliente(String filtro) {
-		DefaultTableModel modelo = new DefaultTableModel();
-		MantCliente mc = new MantCliente();
-		ArrayList<Cliente> lista = new ArrayList<Cliente>();
-		if(filtro.length() == 0) lista = mc.MostrarCliente();
-		else lista = mc.ConsultarCliente(filtro);
-		
-		modelo.setRowCount(lista.size());
-		Iterator<Cliente> it = lista.iterator();
-	    modelo.addColumn("DNI");
-	    modelo.addColumn("Nombre");
-	    modelo.addColumn("Teléfono");
-		int i = 0;
-		
-		while (it.hasNext()) {
-			Object obj = it.next();
-			Cliente c = (Cliente)obj;
-	        modelo.setValueAt(c.getDniCliente(), i, 0);
-	        modelo.setValueAt(c.getNombreCliente(), i, 1);
-	        modelo.setValueAt(c.getTelefonoCliente(), i, 2);
-	        i++;
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getSource() == cboIdVendedor) {
+			do_cboIdVendedor_itemStateChanged(e);
 		}
-		tablaCliente.setModel(modelo);
 	}
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == panelCliente) {
@@ -868,13 +807,380 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 			do_tablaCliente_mouseClicked(e);
 		}
 	}
-	public void mouseEntered(MouseEvent e) {
+	//                                                                                             REGISTRO VENTAS
+	protected void do_txtDniClienteVenta_keyTyped(KeyEvent e) {
+		char validarNumeros = e.getKeyChar();
+		if(!(Character.isDigit(validarNumeros) || validarNumeros =='\b')) {
+			e.consume();
+			if(Character.isLetter(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permite letras.");
+			}
+			else if(Character.isWhitespace(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco.");
+			}
+			else {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "Solo se admiten números.");
+			}
+		}
 	}
-	public void mouseExited(MouseEvent e) {
+	protected void do_txtCodEditable_keyTyped(KeyEvent e) {
+		char validarNumeros = e.getKeyChar();
+		if(!(Character.isDigit(validarNumeros) || validarNumeros =='\b')) {
+			e.consume();
+			if(Character.isLetter(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permite letras.");
+			}
+			else if(Character.isWhitespace(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco.");
+			}
+			else {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "Solo se admiten números.");
+			}
+		}
 	}
-	public void mousePressed(MouseEvent e) {
+	protected void do_txtIdProductoVenta_keyTyped(KeyEvent e) {
+		char validarNumeros = e.getKeyChar();
+		if(!(Character.isDigit(validarNumeros) || validarNumeros =='\b')) {
+			e.consume();
+			if(Character.isLetter(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permite letras.");
+			}
+			else if(Character.isWhitespace(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco.");
+			}
+			else {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "Solo se admiten números.");
+			}
+		}
 	}
-	public void mouseReleased(MouseEvent e) {
+	protected void do_txtCantidadVenta_keyTyped(KeyEvent e) {
+		char validarNumeros = e.getKeyChar();
+		if(!(Character.isDigit(validarNumeros) || validarNumeros =='\b')) {
+			e.consume();
+			if(Character.isLetter(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permite letras.");
+			}
+			else if(Character.isWhitespace(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco.");
+			}
+			else {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "Solo se admiten números.");
+			}
+		}
+	}
+	public void ListarVentasDelDia() {
+	    DefaultTableModel modelo = new DefaultTableModel();
+	    MantHistorialVentas mhv = new MantHistorialVentas();
+	    ArrayList<HistorialVentas> lista = mhv.MostrarVentasDelDia();
+
+	    modelo.addColumn("Código Venta");
+	    modelo.addColumn("Detalle");
+	    modelo.addColumn("DNI Cliente");
+	    modelo.addColumn("Nombre Cliente");
+	    modelo.addColumn("Teléfono Cliente");
+	    modelo.addColumn("Fecha");
+	    modelo.addColumn("Hora");
+	    modelo.addColumn("ID Producto");
+	    modelo.addColumn("Categoría Producto");
+	    modelo.addColumn("Nombre Producto");
+	    modelo.addColumn("Garantía");
+	    modelo.addColumn("Precio");
+	    modelo.addColumn("Cantidad");
+	    modelo.addColumn("Tipo Pago");
+	    modelo.addColumn("Comprobante");
+	    modelo.addColumn("ID Vendedor");
+	    modelo.addColumn("Vendedor");
+	    modelo.addColumn("Subtotal");
+	    modelo.addColumn("Total");
+
+	    modelo.setRowCount(lista.size());
+	    int i = 0;
+
+	    for (HistorialVentas hv : lista) {
+	        modelo.setValueAt(hv.getVenta().getCodigoVenta(), i, 0);
+	        modelo.setValueAt(hv.getDetalleVenta().getIdDetalleVenta(), i, 1);
+	        modelo.setValueAt(hv.getVenta().getCliente().getDniCliente(), i, 2);
+	        modelo.setValueAt(hv.getVenta().getCliente().getNombreCliente(), i, 3);
+	        modelo.setValueAt(hv.getVenta().getCliente().getTelefonoCliente(), i, 4);
+	        modelo.setValueAt(hv.getVenta().getFechaVenta(), i, 5);
+	        modelo.setValueAt(hv.getVenta().getHoraVenta(), i, 6);
+	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getIdProducto(), i, 7);
+	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getCategoriaProducto(), i, 8);
+	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getNombreProducto(), i, 9);
+	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getGarantiaProducto(), i, 10);
+	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getPrecioProducto(), i, 11);
+	        modelo.setValueAt(hv.getDetalleVenta().getCantidadDetalleVenta(), i, 12);
+	        modelo.setValueAt(hv.getVenta().getTipopagoVenta(), i, 13);
+	        modelo.setValueAt(hv.getVenta().getComprobanteVenta(), i, 14);
+	        modelo.setValueAt(hv.getVenta().getEmpleado().getIdEmpleado(), i, 15);
+	        modelo.setValueAt(hv.getVenta().getEmpleado().getNombreEmpleado(), i, 16);
+	        modelo.setValueAt(hv.getDetalleVenta().getSubtotalDetalleVenta(), i, 17);
+	        modelo.setValueAt(hv.getVenta().getTotalVenta(), i, 18);
+	        i++;
+	    }
+
+	    tablaVenta.setModel(modelo);
+	}
+	protected void do_tablaVenta_mouseClicked(MouseEvent e) {
+		int fila = tablaVenta.getSelectedRow();
+		txtCodNoEditable.setText(String.valueOf(tablaVenta.getValueAt(fila, 0)));
+		txtDniClienteVenta.setText(String.valueOf(tablaVenta.getValueAt(fila, 2)));
+		cboTipoPago.setSelectedItem(String.valueOf(tablaVenta.getValueAt(fila, 13)));
+		cboComprobante.setSelectedItem(String.valueOf(tablaVenta.getValueAt(fila, 14)));
+		int idEmpleado = Integer.parseInt(tablaVenta.getValueAt(fila, 15).toString());
+		cboIdVendedor.setSelectedItem(idEmpleado);
+		txtNombreVendedor.setText(String.valueOf(tablaVenta.getValueAt(fila, 16)));
+		txtIdDetalle.setText(String.valueOf(tablaVenta.getValueAt(fila, 1)));
+		txtCodEditable.setText(String.valueOf(tablaVenta.getValueAt(fila, 0)));
+		txtIdProductoVenta.setText(String.valueOf(tablaVenta.getValueAt(fila, 7)));
+		txtCantidadVenta.setText(String.valueOf(tablaVenta.getValueAt(fila, 12)));
+	}
+	protected void do_btnRegistrarVenta_actionPerformed(ActionEvent e) {
+		try {
+			Cliente c = new Cliente(txtDniClienteVenta.getText());
+			Empleado emple = new Empleado(Integer.parseInt(cboIdVendedor.getSelectedItem().toString()));
+			
+			Venta v = new Venta(c, cboTipoPago.getSelectedItem().toString(), 
+					cboComprobante.getSelectedItem().toString(), emple);
+			
+			MantVenta mv = new MantVenta();
+			mv.AgregarVenta(v);
+			JOptionPane.showMessageDialog(this, "Venta registrada correctamente");
+							
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
+		}
+	}
+	protected void do_btnRegistrarDetalleVentas_actionPerformed(ActionEvent e) {
+		Venta v = new Venta(Integer.parseInt(txtCodEditable.getText()));
+		Producto p = new Producto(Integer.parseInt(txtIdProductoVenta.getText()));
+		if(p.getStockProducto() < Integer.parseInt(txtCantidadVenta.getText())) {
+			JOptionPane.showMessageDialog(this, "Stock Insuficiente");
+			return;
+		}
+		
+		DetalleVenta dv = new DetalleVenta(v, p, Integer.parseInt(txtCantidadVenta.getText()));
+		
+		MantDetalleVenta mdv = new MantDetalleVenta();
+		mdv.AgregarDetalleVenta(dv);
+		
+		MantVenta mv = new MantVenta();
+		mv.CalcularTotalVenta(v.getCodigoVenta());
+		ListarProducto("");
+		JOptionPane.showMessageDialog(this, "Detalle de Venta registrada correctamente");
+		ListarVentasDelDia();
+		LimpiarVentaCompleta();	
+	}
+	protected void do_btnModificarVenta_actionPerformed(ActionEvent e) {
+		try {
+			Cliente c = new Cliente(txtDniClienteVenta.getText());
+			Empleado emple = new Empleado(Integer.parseInt(cboIdVendedor.getSelectedItem().toString()));
+			
+			Venta v = new Venta(Integer.parseInt(txtCodNoEditable.getText()), c, 
+					cboTipoPago.getSelectedItem().toString(), 
+					cboComprobante.getSelectedItem().toString(), emple);
+			
+			MantVenta mv = new MantVenta();
+	        mv.ModificarVenta(v);
+	        ListarVentasDelDia();
+	        LimpiarVentaCompleta();
+	        
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
+		}
+	}
+	protected void do_btnModificarDetalleVenta_actionPerformed(ActionEvent e) {
+		try {
+			Venta v = new Venta(Integer.parseInt(txtCodEditable.getText()));
+			Producto p = new Producto(Integer.parseInt(txtIdProductoVenta.getText()));
+			
+			DetalleVenta dv = new DetalleVenta(Integer.parseInt(txtIdDetalle.getText()), v, p, 
+					Integer.parseInt(txtCantidadVenta.getText()));
+			
+			MantDetalleVenta mdv = new MantDetalleVenta();
+			mdv.ModificarDetalleVenta(dv);
+			
+			MantVenta mv = new MantVenta();
+			mv.CalcularTotalVenta(v.getCodigoVenta());
+			ListarProducto("");
+			ListarVentasDelDia();
+			LimpiarVentaCompleta();
+			
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(this, "Verifique los datos del detalle de venta. Intente nuevamente.");
+		}
+	}
+	void LimpiarVentaCompleta() {
+		txtCodNoEditable.setText("");
+		txtDniClienteVenta.setText("");
+		txtIdDetalle.setText("");
+		txtCodEditable.setText("");
+		txtIdProductoVenta.setText("");
+		txtCantidadVenta.setText("");
+	}
+	protected void do_btnBorrarVenta_actionPerformed(ActionEvent e) {
+		LimpiarVentaCompleta();
+	}
+	//                                                                             LLENAR EL COMBO DEL VENDEDOR
+	protected void do_cboIdVendedor_itemStateChanged(ItemEvent e) {
+		String id = cboIdVendedor.getSelectedItem().toString();
+		LlenarTexto(id); //para que se llenen los cuadros de texto del interfaz
+	}
+	public void LlenarTexto(String id) {
+		ArrayList<Empleado>lista = new ArrayList<Empleado>();
+		MantEmpleado me = new MantEmpleado();
+		lista = me.ConsultarEmpleado(id);
+		Iterator it = lista.iterator();
+		int i = 0;
+		while (it.hasNext()) {
+			Object obj = it.next();
+			Empleado e = (Empleado) obj;
+			txtNombreVendedor.setText(e.getNombreEmpleado());
+			i++;
+		}
+	}
+	public void LlenarCombo() {
+		ArrayList<Empleado> lista = new ArrayList<Empleado>();
+		MantEmpleado me = new MantEmpleado();
+		lista = me.MostrarEmpleado(); // trae todos los empleados
+
+		for (Empleado e : lista) {
+			// Solo agregar al combo si el estado es "Activo"
+			if (e.getEstadoEmpleado().equalsIgnoreCase("Activo")) {
+				cboIdVendedor.addItem(e.getIdEmpleado());
+			}
+		}
+	}
+	//                                                                               CALCULAR TOTAL DE VENTA
+	private ArrayList<Double> listaSubtotales = new ArrayList<>();
+	private JButton btnTotal;
+	
+	protected void do_btnSuma_actionPerformed(ActionEvent e) {
+		try {
+			double precio = Double.parseDouble(txtPrecioVenta.getText());
+	        int cantidad = Integer.parseInt(txtCantVenta.getText());
+	        
+	        double subtotal = precio * cantidad;
+	        listaSubtotales.add(subtotal);
+	        
+	        txtS.append("Subtotal: S/. " + subtotal + "\n");
+	        
+	        txtPrecioVenta.setText("");
+	        txtCantVenta.setText("");
+	      
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(this, "Ingrese un precio y cantidad válidos.");
+		}	
+	}
+	protected void do_btnTotal_actionPerformed(ActionEvent e) {
+		if (listaSubtotales.isEmpty()) {
+	        JOptionPane.showMessageDialog(this, "No hay subtotales registrados.");
+	        return;
+	    }
+	    double total = 0;
+	    for (double subtotal : listaSubtotales) {
+	        total += subtotal;
+	    }
+
+	    txtS.append("TOTAL: S/. " + total + "\n");
+
+	    listaSubtotales.clear(); 
+	}
+	protected void do_btnBorrar_actionPerformed(ActionEvent e) {
+		txtS.setText("");
+	}
+	//                                                                                       PRODUCTO
+	public void ListarProducto(String filtro) {
+		DefaultTableModel modelo = new DefaultTableModel();
+		MantProducto mp = new MantProducto();
+		ArrayList<Producto> lista = new ArrayList<Producto>();
+		if(filtro.length() == 0) lista = mp.MostrarProducto();
+		else lista = mp.ConsultarProducto(filtro);
+		
+		modelo.setRowCount(lista.size());
+		Iterator<Producto> it = lista.iterator();
+		modelo.addColumn("ID");
+		modelo.addColumn("Categoría");
+		modelo.addColumn("Nombre");
+		modelo.addColumn("Garantía");
+		modelo.addColumn("Precio");
+		modelo.addColumn("Stock");
+		int i = 0;
+		
+		while (it.hasNext()) {
+			Object obj = it.next();
+			Producto p = (Producto)obj;
+			modelo.setValueAt(p.getIdProducto(), i, 0);
+			modelo.setValueAt(p.getCategoriaProducto(), i, 1);
+			modelo.setValueAt(p.getNombreProducto(), i, 2);
+			modelo.setValueAt(p.getGarantiaProducto(), i, 3);
+			modelo.setValueAt(p.getPrecioProducto(), i, 4);
+			modelo.setValueAt(p.getStockProducto(), i, 5);
+			i++;
+		}
+		tablaProducto.setModel(modelo);
+	}
+	protected void do_txtIdProductoBuscar_keyReleased(KeyEvent e) {
+		String filtro = txtIdBuscarProducto.getText();
+		ListarProducto(filtro);
+	}
+	//                                                                                       CLIENTE
+	protected void do_txtDniCliente_keyTyped(KeyEvent e) {
+		char validarNumeros = e.getKeyChar();
+		if(Character.isLetter(validarNumeros)) {
+			e.consume();
+			JOptionPane.showMessageDialog(this, "No permite letras");
+		}
+	}
+	protected void do_txtNombreCliente_keyTyped(KeyEvent e) {
+		char validarLetras = e.getKeyChar();
+		if(Character.isDigit(validarLetras)) {
+			e.consume();
+			JOptionPane.showMessageDialog(this, "No permite números");
+		}
+	}
+	protected void do_txtTelefonoCliente_keyTyped(KeyEvent e) {
+		char validarNumeros = e.getKeyChar();
+		if(Character.isLetter(validarNumeros)) {
+			e.consume();
+			JOptionPane.showMessageDialog(this, "No permite letras");
+		}
+	}
+	public void ListarCliente(String filtro) {
+		DefaultTableModel modelo = new DefaultTableModel();
+		MantCliente mc = new MantCliente();
+		ArrayList<Cliente> lista = new ArrayList<Cliente>();
+		if(filtro.length() == 0) lista = mc.MostrarCliente();
+		else lista = mc.ConsultarCliente(filtro);
+		
+		modelo.setRowCount(lista.size());
+		Iterator<Cliente> it = lista.iterator();
+	    modelo.addColumn("DNI");
+	    modelo.addColumn("Nombre");
+	    modelo.addColumn("Teléfono");
+		int i = 0;
+		
+		while (it.hasNext()) {
+			Object obj = it.next();
+			Cliente c = (Cliente)obj;
+	        modelo.setValueAt(c.getDniCliente(), i, 0);
+	        modelo.setValueAt(c.getNombreCliente(), i, 1);
+	        modelo.setValueAt(c.getTelefonoCliente(), i, 2);
+	        i++;
+		}
+		tablaCliente.setModel(modelo);
 	}
 	protected void do_tablaCliente_mouseClicked(MouseEvent e) {
 		int fila = tablaCliente.getSelectedRow();
@@ -892,8 +1198,7 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 				MantCliente mc = new MantCliente();
 				mc.AgregarCliente(c);
 				ListarCliente("");
-				LimpiarCliente();
-								
+				LimpiarCliente();					
 			}
 			
 		} catch (Exception e2) {
@@ -906,7 +1211,7 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 			
 			MantCliente mc = new MantCliente();
 			mc.ModificarCliente(c);
-			ListarCliente(txtDniCliente.getText()); // Solo ese cliente
+			ListarCliente(txtDniCliente.getText()); // Solo se mostrará ese cliente
 			tablaCliente.setRowSelectionInterval(0, 0);
 			LimpiarCliente();
 			
@@ -929,99 +1234,9 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 	protected void do_btnBorrarCliente_actionPerformed(ActionEvent e) {
 		LimpiarCliente();
 	}
-	//KeyTyped DNICLiente
-	protected void do_txtDniClienteVenta_keyTyped(KeyEvent e) {
-		char validarNumeros = e.getKeyChar();
-		if(!(Character.isDigit(validarNumeros) || validarNumeros =='\b')) {
-			e.consume();
-			if(Character.isLetter(validarNumeros)) {
-				e.consume();
-				JOptionPane.showMessageDialog(this, "No se permite letras.");
-			}
-			else if(Character.isEmoji(validarNumeros)) {
-				e.consume();
-				JOptionPane.showMessageDialog(this, "No se permiten símbolos extraños.");
-			}
-			else if(Character.isWhitespace(validarNumeros)) {
-				e.consume();
-				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco.");
-			}
-			else {
-				e.consume();
-				JOptionPane.showMessageDialog(this, "Solo se admiten números.");
-			}
-		}
-	}
-	protected void do_txtCodEditable_keyTyped(KeyEvent e) {
-		char validarNumeros = e.getKeyChar();
-		if(!(Character.isDigit(validarNumeros) || validarNumeros =='\b')) {
-			e.consume();
-			if(Character.isLetter(validarNumeros)) {
-				e.consume();
-				JOptionPane.showMessageDialog(this, "No se permite letras.");
-			}
-			else if(Character.isEmoji(validarNumeros)) {
-				e.consume();
-				JOptionPane.showMessageDialog(this, "No se permiten símbolos extraños.");
-			}
-			else if(Character.isWhitespace(validarNumeros)) {
-				e.consume();
-				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco.");
-			}
-			else {
-				e.consume();
-				JOptionPane.showMessageDialog(this, "Solo se admiten números.");
-			}
-		}
-	}
-	protected void do_txtIdProductoVenta_keyTyped(KeyEvent e) {
-		char validarNumeros = e.getKeyChar();
-		if(!(Character.isDigit(validarNumeros) || validarNumeros =='\b')) {
-			e.consume();
-			if(Character.isLetter(validarNumeros)) {
-				e.consume();
-				JOptionPane.showMessageDialog(this, "No se permite letras.");
-			}
-			else if(Character.isEmoji(validarNumeros)) {
-				e.consume();
-				JOptionPane.showMessageDialog(this, "No se permiten símbolos extraños.");
-			}
-			else if(Character.isWhitespace(validarNumeros)) {
-				e.consume();
-				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco.");
-			}
-			else {
-				e.consume();
-				JOptionPane.showMessageDialog(this, "Solo se admiten números.");
-			}
-		}
-	}
-	protected void do_txtCantidadVenta_keyTyped(KeyEvent e) {
-		char validarNumeros = e.getKeyChar();
-		if(!(Character.isDigit(validarNumeros) || validarNumeros =='\b')) {
-			e.consume();
-			if(Character.isLetter(validarNumeros)) {
-				e.consume();
-				JOptionPane.showMessageDialog(this, "No se permite letras.");
-			}
-			else if(Character.isEmoji(validarNumeros)) {
-				e.consume();
-				JOptionPane.showMessageDialog(this, "No se permiten símbolos extraños.");
-			}
-			else if(Character.isWhitespace(validarNumeros)) {
-				e.consume();
-				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco.");
-			}
-			else {
-				e.consume();
-				JOptionPane.showMessageDialog(this, "Solo se admiten números.");
-			}
-		}
-	}
 	
 	//AGREGAR ESTILOS DE VISUALIZACION
 	
-
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
 		String actual = jlabelmodo.getText();
 		if(actual == "Modo Normal") {        
@@ -1197,231 +1412,8 @@ public class VenEmpleado extends JFrame implements ActionListener, KeyListener, 
 		    jlabelmodo.setText("Modo Normal");
 		}
 	}
-	
-	private ArrayList<Double> listaSubtotales = new ArrayList<>();
-	private JScrollPane scrollPane_3;
-	private JTextArea txtS;
-	private JButton btnBorrar;
-	private JButton btnRegistrarVenta;
-	private JButton btnEliminarVenta;
-	private JLabel lblCodNoEditable;
-	private JTextField txtCodNoEditable;
-	private JLabel lblIdDetalle;
-	private JTextField txtIdDetalle;
-	private JButton btnBorrarVenta;
-	private JButton btnBorrarCliente;
-	private JButton btnMostrarCliente;
-	
-	protected void do_btnSuma_actionPerformed(ActionEvent e) {
-		try {
-			double precio = Double.parseDouble(txtPrecioVenta.getText());
-	        int cantidad = Integer.parseInt(txtCantVenta.getText());
-	        
-	        double subtotal = precio * cantidad;
-	        listaSubtotales.add(subtotal);
-	        
-	        txtS.append("Subtotal: S/. " + subtotal + "\n");
-	        
-	        txtPrecioVenta.setText("");
-	        txtCantVenta.setText("");
-	      
-		} catch (Exception e2) {
-			JOptionPane.showMessageDialog(this, "Ingrese un precio y cantidad válidos.");
-		}	
-	}
-	protected void do_btnBorrar_actionPerformed(ActionEvent e) {
-		txtS.setText("");
-	}
-	public void ListarVentasDelDia() {
-	    DefaultTableModel modelo = new DefaultTableModel();
-	    MantHistorialVentas mhv = new MantHistorialVentas();
-	    ArrayList<HistorialVentas> lista = mhv.MostrarVentasDelDia();
+	//                                                                                              MÚSICA
 
-	    modelo.addColumn("Código Venta");
-	    modelo.addColumn("Detalle");
-	    modelo.addColumn("DNI Cliente");
-	    modelo.addColumn("Nombre Cliente");
-	    modelo.addColumn("Teléfono Cliente");
-	    modelo.addColumn("Fecha");
-	    modelo.addColumn("Hora");
-	    modelo.addColumn("ID Producto");
-	    modelo.addColumn("Categoría Producto");
-	    modelo.addColumn("Nombre Producto");
-	    modelo.addColumn("Garantía");
-	    modelo.addColumn("Precio");
-	    modelo.addColumn("Cantidad");
-	    modelo.addColumn("Tipo Pago");
-	    modelo.addColumn("Comprobante");
-	    modelo.addColumn("ID Vendedor");
-	    modelo.addColumn("Vendedor");
-	    modelo.addColumn("Subtotal");
-	    modelo.addColumn("Total");
-
-	    modelo.setRowCount(lista.size());
-	    int i = 0;
-
-	    for (HistorialVentas hv : lista) {
-	        modelo.setValueAt(hv.getVenta().getCodigoVenta(), i, 0);
-	        modelo.setValueAt(hv.getDetalleVenta().getIdDetalleVenta(), i, 1);
-	        modelo.setValueAt(hv.getVenta().getCliente().getDniCliente(), i, 2);
-	        modelo.setValueAt(hv.getVenta().getCliente().getNombreCliente(), i, 3);
-	        modelo.setValueAt(hv.getVenta().getCliente().getTelefonoCliente(), i, 4);
-	        modelo.setValueAt(hv.getVenta().getFechaVenta(), i, 5);
-	        modelo.setValueAt(hv.getVenta().getHoraVenta(), i, 6);
-	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getIdProducto(), i, 7);
-	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getCategoriaProducto(), i, 8);
-	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getNombreProducto(), i, 9);
-	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getGarantiaProducto(), i, 10);
-	        modelo.setValueAt(hv.getDetalleVenta().getProducto().getPrecioProducto(), i, 11);
-	        modelo.setValueAt(hv.getDetalleVenta().getCantidadDetalleVenta(), i, 12);
-	        modelo.setValueAt(hv.getVenta().getTipopagoVenta(), i, 13);
-	        modelo.setValueAt(hv.getVenta().getComprobanteVenta(), i, 14);
-	        modelo.setValueAt(hv.getVenta().getEmpleado().getIdEmpleado(), i, 15);
-	        modelo.setValueAt(hv.getVenta().getEmpleado().getNombreEmpleado(), i, 16);
-	        modelo.setValueAt(hv.getDetalleVenta().getSubtotalDetalleVenta(), i, 17);
-	        modelo.setValueAt(hv.getVenta().getTotalVenta(), i, 18);
-	        i++;
-	    }
-
-	    tablaVenta.setModel(modelo);
-	}
-	protected void do_tablaVenta_mouseClicked(MouseEvent e) {
-		int fila = tablaVenta.getSelectedRow();
-		txtCodNoEditable.setText(String.valueOf(tablaVenta.getValueAt(fila, 0)));
-		txtDniClienteVenta.setText(String.valueOf(tablaVenta.getValueAt(fila, 2)));
-		cboTipoPago.setSelectedItem(String.valueOf(tablaVenta.getValueAt(fila, 13)));
-		cboComprobante.setSelectedItem(String.valueOf(tablaVenta.getValueAt(fila, 14)));
-		int idEmpleado = Integer.parseInt(tablaVenta.getValueAt(fila, 15).toString());
-		cboIdVendedor.setSelectedItem(idEmpleado);
-		txtNombreVendedor.setText(String.valueOf(tablaVenta.getValueAt(fila, 16)));
-		txtIdDetalle.setText(String.valueOf(tablaVenta.getValueAt(fila, 1)));
-		txtCodEditable.setText(String.valueOf(tablaVenta.getValueAt(fila, 0)));
-		txtIdProductoVenta.setText(String.valueOf(tablaVenta.getValueAt(fila, 7)));
-		txtCantidadVenta.setText(String.valueOf(tablaVenta.getValueAt(fila, 12)));
-	}
-	public void itemStateChanged(ItemEvent e) {
-		if (e.getSource() == cboIdVendedor) {
-			do_cboIdVendedor_itemStateChanged(e);
-		}
-	}
-	protected void do_cboIdVendedor_itemStateChanged(ItemEvent e) {
-		String id = cboIdVendedor.getSelectedItem().toString();
-		LlenarTexto(id); //para que se llenen los cuadros de texto del interfaz
-	}
-	public void LlenarTexto(String id) {
-		ArrayList<Empleado>lista = new ArrayList<Empleado>();
-		MantEmpleado me = new MantEmpleado();
-		lista = me.ConsultarEmpleado(id);
-		Iterator it = lista.iterator();
-		int i = 0;
-		while (it.hasNext()) {
-			Object obj = it.next();
-			Empleado e = (Empleado) obj;
-			txtNombreVendedor.setText(e.getNombreEmpleado());
-			i++;
-		}
-	}
-	public void LlenarCombo() {
-		ArrayList<Empleado>lista = new ArrayList<Empleado>();
-		MantEmpleado me = new MantEmpleado();
-		lista = me.MostrarEmpleado();
-		Iterator<Empleado>it = lista.iterator();
-		int i = 0;
-		while (it.hasNext()) {
-			Object obj = it.next();
-			Empleado e = (Empleado) obj;
-			cboIdVendedor.addItem(e.getIdEmpleado());
-		}
-	}
-
-	protected void do_btnRegistrarVenta_actionPerformed(ActionEvent e) {
-		try {
-			Cliente c = new Cliente(txtDniClienteVenta.getText());
-			Empleado emple = new Empleado(Integer.parseInt(cboIdVendedor.getSelectedItem().toString()));
-			
-			Venta v = new Venta(c, cboTipoPago.getSelectedItem().toString(), 
-					cboComprobante.getSelectedItem().toString(), emple);
-			
-			MantVenta mv = new MantVenta();
-			mv.AgregarVenta(v);
-			JOptionPane.showMessageDialog(this, "Venta registrada correctamente");
-							
-		} catch (Exception e2) {
-			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
-		}
-	}
-	protected void do_btnRegistrarDetalleVentas_actionPerformed(ActionEvent e) {
-		Venta v = new Venta(Integer.parseInt(txtCodEditable.getText()));
-		Producto p = new Producto(Integer.parseInt(txtIdProductoVenta.getText()));
-		if(p.getStockProducto() < Integer.parseInt(txtCantidadVenta.getText())) {
-			JOptionPane.showMessageDialog(this, "Stock Insuficiente");
-			return;
-		}
-		
-		DetalleVenta dv = new DetalleVenta(v, p, Integer.parseInt(txtCantidadVenta.getText()));
-		
-		MantDetalleVenta mdv = new MantDetalleVenta();
-		mdv.AgregarDetalleVenta(dv);
-		
-		MantVenta mv = new MantVenta();
-		mv.CalcularTotalVenta(v.getCodigoVenta());
-		ListarProducto("");
-		JOptionPane.showMessageDialog(this, "Detalle de Venta registrada correctamente");
-		ListarVentasDelDia();
-		LimpiarVentaCompleta();
-		
-		
-	}
-	protected void do_btnModificarVenta_actionPerformed(ActionEvent e) {
-		try {
-			Cliente c = new Cliente(txtDniClienteVenta.getText());
-			Empleado emple = new Empleado(Integer.parseInt(cboIdVendedor.getSelectedItem().toString()));
-			
-			Venta v = new Venta(Integer.parseInt(txtCodNoEditable.getText()), c, 
-					cboTipoPago.getSelectedItem().toString(), 
-					cboComprobante.getSelectedItem().toString(), emple);
-			
-			MantVenta mv = new MantVenta();
-	        mv.ModificarVenta(v);
-	        ListarVentasDelDia();
-	        LimpiarVentaCompleta();
-	        
-		} catch (Exception e2) {
-			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
-		}
-	}
-	protected void do_btnModificarDetalleVenta_actionPerformed(ActionEvent e) {
-		try {
-			Venta v = new Venta(Integer.parseInt(txtCodEditable.getText()));
-			Producto p = new Producto(Integer.parseInt(txtIdProductoVenta.getText()));
-			
-			DetalleVenta dv = new DetalleVenta(Integer.parseInt(txtIdDetalle.getText()), v, p, 
-					Integer.parseInt(txtCantidadVenta.getText()));
-			
-			MantDetalleVenta mdv = new MantDetalleVenta();
-			mdv.ModificarDetalleVenta(dv);
-			
-			MantVenta mv = new MantVenta();
-			mv.CalcularTotalVenta(v.getCodigoVenta());
-			ListarProducto("");
-			ListarVentasDelDia();
-			LimpiarVentaCompleta();
-			
-		} catch (Exception e2) {
-			JOptionPane.showMessageDialog(this, "Verifique los datos del detalle de venta. Intente nuevamente.");
-		}
-	}
-	void LimpiarVentaCompleta() {
-		txtCodNoEditable.setText("");
-		txtDniClienteVenta.setText("");
-		txtIdDetalle.setText("");
-		txtCodEditable.setText("");
-		txtIdProductoVenta.setText("");
-		txtCantidadVenta.setText("");
-	}
-	protected void do_btnBorrarVenta_actionPerformed(ActionEvent e) {
-		LimpiarVentaCompleta();
-	}
 	protected void do_panelVenta_mouseClicked(MouseEvent e) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		URL url = Inicio.class.getResource("/recursos/ErrorW.wav");
 		if(url == null) {

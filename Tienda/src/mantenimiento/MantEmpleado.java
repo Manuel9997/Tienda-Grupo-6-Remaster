@@ -25,7 +25,8 @@ public ArrayList<Empleado> MostrarEmpleado() {
                     rs.getString("cargo_empleado"),
                     rs.getString("jornada_empleado"),
                     rs.getString("horario_empleado"),
-                    rs.getDouble("sueldo_empleado")
+                    rs.getDouble("sueldo_empleado"),
+                    rs.getString("estado_empleado")
                 );
 			
 			lista.add(e);
@@ -48,6 +49,7 @@ public void AgregarEmpleado(Empleado e) {
         csta.setString(6, e.getJornadaEmpleado());
         csta.setString(7, e.getHorarioEmpleado());
         csta.setDouble(8, e.getSueldoEmpleado());
+        csta.setString(9, e.getEstadoEmpleado());
         csta.executeUpdate();
         
     } catch (Exception ex) {
@@ -67,21 +69,13 @@ public void ModificarEmpleado(Empleado e) {
         csta.setString(7, e.getJornadaEmpleado());
         csta.setString(8, e.getHorarioEmpleado());
         csta.setDouble(9, e.getSueldoEmpleado());
+        csta.setString(9, e.getEstadoEmpleado());
         csta.executeUpdate();
     } catch (Exception ex) {
         System.out.println("ERROR al modificar empleado: " + ex);
     }
 }
-public void EliminarEmpleado(int idEmpleado) {
-    try {
-        Connection cnx = ConexionMySQL.getConexion();
-        CallableStatement csta = cnx.prepareCall("{call sp_EliminarEmpleado(?)}");
-        csta.setInt(1, idEmpleado);
-        csta.executeUpdate();
-    } catch (Exception ex) {
-        System.out.println("ERROR al eliminar empleado: " + ex);
-    }
-}
+
 public Empleado BuscarEmpleado(int idEmpleado) {
     Empleado e = null;
     try {
@@ -99,7 +93,8 @@ public Empleado BuscarEmpleado(int idEmpleado) {
                 rs.getString("cargo_empleado"),
                 rs.getString("jornada_empleado"),
                 rs.getString("horario_empleado"),
-                rs.getDouble("sueldo_empleado")
+                rs.getDouble("sueldo_empleado"),
+                rs.getString("estado_empleado")
             );
         }
     } catch (Exception ex) {
@@ -127,7 +122,8 @@ public ArrayList<Empleado> ConsultarEmpleado(String texto) {
                 rs.getString("cargo_empleado"),
                 rs.getString("jornada_empleado"),
                 rs.getString("horario_empleado"),
-                rs.getDouble("sueldo_empleado")
+                rs.getDouble("sueldo_empleado"),
+                rs.getString("estado_empleado")
             );
             lista.add(e);
         }

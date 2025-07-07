@@ -18,7 +18,7 @@ public ArrayList<Producto> MostrarProducto() {
 		ResultSet rs = csta.executeQuery();
 		while (rs.next()) {
 			
-			Proveedor proveedor = new Proveedor(rs.getString("nombre_proveedor"));
+			Proveedor proveedor = new Proveedor(rs.getInt("id_proveedor"), rs.getString("nombre_proveedor"));
 			Producto producto = new Producto(
 					rs.getInt("id_producto"),
                     rs.getString("categoria_producto"),
@@ -47,8 +47,8 @@ public void AgregarProducto(Producto p) {
         csta.setString(3, p.getNombreProducto());
         csta.setString(4, p.getGarantiaProducto());
         csta.setInt(5, p.getProveedor().getIdProveedor());
-        csta.setDouble(5, p.getPrecioProducto());
-        csta.setInt(6, p.getStockProducto());
+        csta.setDouble(6, p.getPrecioProducto());
+        csta.setInt(7, p.getStockProducto());
         csta.executeUpdate();
     } catch (Exception e) {
         System.out.println("ERROR al agregar producto: " + e);
@@ -89,7 +89,7 @@ public Producto BuscarProducto(int idProducto) {
         csta.setInt(1, idProducto);
         ResultSet rs = csta.executeQuery();
         if (rs.next()) {
-        	Proveedor proveedor = new Proveedor("nombre_proveedor");
+        	Proveedor proveedor = new Proveedor(rs.getInt("id_proveedor"), rs.getString("nombre_proveedor"));
             producto = new Producto(
                 rs.getInt("id_producto"),
                 rs.getString("categoria_producto"),
@@ -120,7 +120,7 @@ public ArrayList<Producto> ConsultarProducto(String filtro) {
         	);
     
         while (rs.next()) {
-        	Proveedor proveedor = new Proveedor(rs.getString("nombre_proveedor"));
+        	Proveedor proveedor = new Proveedor(rs.getInt("id_proveedor"), rs.getString("nombre_proveedor"));
         	Producto producto = new Producto(
                 rs.getInt("id_producto"),
                 rs.getString("categoria_producto"),

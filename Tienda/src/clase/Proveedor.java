@@ -20,8 +20,9 @@ public Proveedor(int idProveedor, String rucProveedor, String nombreProveedor, S
 	this.fechaProveedor = fechaProveedor;
 }
 
-public Proveedor(String nombreProveedor) {
+public Proveedor(int idProveedor, String nombreProveedor) {
 
+	this.idProveedor = idProveedor;
 	this.nombreProveedor = nombreProveedor;
 }
 

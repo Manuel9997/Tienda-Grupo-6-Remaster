@@ -52,7 +52,7 @@ public void AgregarProveedor(Proveedor p) {
 		csta.setDate(8, new java.sql.Date(p.getFechaProveedor().getTime()));
 		csta.executeUpdate();	
 	} catch (Exception e) {
-		System.out.println("ERROR al agregar proveedor: " + e);		
+		System.out.println("ERROR al agregar proveedor: " + e);
 	}    
 }
 public void ModificarProveedor(Proveedor p) {
@@ -84,8 +84,6 @@ public void EliminarProveedor(int idproveedor) {
         System.out.println("ERROR al eliminar proveedor: " + e);
     }
 }
-
-
 
 public Proveedor BuscarProveedor(int idProveedor) {
 	Proveedor proveedor = null;

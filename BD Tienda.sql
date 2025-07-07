@@ -66,20 +66,22 @@ dni_empleado char(8) not null unique,
 nombre_empleado varchar(30) not null,
 telefono_empleado char(9) not null,
 fecha_empleado date default (current_date) not null,                    
-cargo_empleado varchar(10) not null,
+cargo_empleado varchar(15) not null,
 jornada_empleado varchar(20) not null,
 horario_empleado varchar(25) not null,
-sueldo_empleado real not null
+sueldo_empleado real not null,
+estado_empleado varchar(10) not null
 );
 select * from Empleado;
-insert into Empleado values(123, '74567892', 'Lucía Fernández Salas', '955321987', '2025-04-13', 'Cajero', 'Medio tiempo', '8:00 a.m. - 12:00 a.m.', 600);
-insert into Empleado values(245, '75678901', 'Ana Torres Benavides', '985654321', '2025-04-13', 'Vendedor', 'Tiempo completo', '8:00 a.m. - 5:00 p.m.', 1200);
-insert into Empleado values(378, '76789015', 'Valentina Ruiz Huertas', '935789123', '2025-04-14', 'Cajero', 'Tiempo completo', '8:00 a.m. - 5:00 p.m.', 1200);
-insert into Empleado values(412, '77890126', 'Sara Palacios Durand', '954987654', '2025-04-18', 'Vendedor', 'Medio tiempo', '1:00 p.m. - 5:00 p.m.', 600);
-insert into Empleado values(533, '78901237', 'Rogelio Vargas Ruiz', '975345678', '2025-05-02', 'Vendedor', 'Tiempo completo', '9:00 a.m. - 6:00 p.m.', 1200);
-insert into Empleado values(601, '79012348', 'Fabricio Peña Ramírez', '912432198', '2025-05-02', 'Vendedor', 'Tiempo completo', '7:00 a.m. - 4:00 p.m.', 1200);
-insert into Empleado values(714, '70123459', 'María Elena Hinostroza', '958678321', '2025-05-24', 'Cajero', 'Medio tiempo', '2:00 p.m. - 6:00 p.m.', 600);
-insert into Empleado values(829, '71234560', 'José Meza Burgos', '963876543', '2025-05-24', 'Vendedor', 'Tiempo completo', '10:00 a.m. - 7:00 p.m.', 1200);
+insert into Empleado values(111, '75236789', 'Patricio Rojas Castillo', '935478964', '2025-04-10', 'Administrador', 'Tiempo completo', '8:00 a.m. - 5:00 p.m.', 4000, 'Activo');
+insert into Empleado values(123, '74567892', 'Lucía Fernández Salas', '955321987', '2025-04-13', 'Cajero', 'Medio tiempo', '8:00 a.m. - 12:00 a.m.', 600, 'Inactivo');
+insert into Empleado values(245, '75678901', 'Ana Torres Benavides', '985654321', '2025-04-13', 'Vendedor', 'Tiempo completo', '8:00 a.m. - 5:00 p.m.', 1200, 'Activo');
+insert into Empleado values(378, '76789015', 'Valentina Ruiz Huertas', '935789123', '2025-04-14', 'Cajero', 'Tiempo completo', '8:00 a.m. - 5:00 p.m.', 1200, 'Activo');
+insert into Empleado values(412, '77890126', 'Sara Palacios Durand', '954987654', '2025-04-18', 'Vendedor', 'Medio tiempo', '1:00 p.m. - 5:00 p.m.', 600, 'Activo');
+insert into Empleado values(533, '78901237', 'Rogelio Vargas Ruiz', '975345678', '2025-05-02', 'Vendedor', 'Tiempo completo', '9:00 a.m. - 6:00 p.m.', 1200, 'Activo');
+insert into Empleado values(601, '79012348', 'Fabricio Peña Ramírez', '912432198', '2025-05-02', 'Vendedor', 'Tiempo completo', '8:00 a.m. - 5:00 p.m.', 1200, 'Activo');
+insert into Empleado values(714, '70123459', 'María Elena Hinostroza', '958678321', '2025-05-24', 'Cajero', 'Medio tiempo', '2:00 p.m. - 6:00 p.m.', 600, 'Activo');
+insert into Empleado values(829, '71234560', 'José Meza Burgos', '963876543', '2025-05-24', 'Vendedor', 'Tiempo completo', '8:00 a.m. - 5:00 p.m.', 1200, 'Activo');
 
 create procedure sp_MostrarEmpleado()
 select * from Empleado;
@@ -91,15 +93,16 @@ id int,
 dni char(8),
 nombre varchar(30),
 telefono char(9),
-cargo varchar(10), 
+cargo varchar(15), 
 jornada varchar(20),
 horario varchar(25), 
-sueldo real
+sueldo real,
+estado varchar(10)
 )
-insert into Empleado (id_empleado, dni_empleado, nombre_empleado, telefono_empleado, cargo_empleado, jornada_empleado, horario_empleado, sueldo_empleado) 
-values (id, dni, nombre, telefono, cargo, jornada, horario, sueldo);
+insert into Empleado (id_empleado, dni_empleado, nombre_empleado, telefono_empleado, cargo_empleado, jornada_empleado, horario_empleado, sueldo_empleado, estado_empleado) 
+values (id, dni, nombre, telefono, cargo, jornada, horario, sueldo, estado);
 
-call sp_AgregarEmpleado(900, '73547291', 'Carlos Mejía Milla', '927123456', 'Vendedor', 'Tiempo completo', '9:00 a.m. - 6:00 p.m.', 1200);
+call sp_AgregarEmpleado(900, '73547291', 'Carlos Mejía Milla', '927123456', 'Vendedor', 'Tiempo completo', '9:00 a.m. - 6:00 p.m.', 1200, 'Activo');
 call sp_MostrarEmpleado();
 
 create procedure sp_ModificarEmpleado( 
@@ -108,24 +111,17 @@ dni char(8),
 nombre varchar(30),
 telefono char(9),
 fecha date,
-cargo varchar(10), 
+cargo varchar(15), 
 jornada varchar(20),
 horario varchar(25), 
-sueldo real
+sueldo real,
+estado varchar(10)
 )
 update Empleado set dni_empleado = dni, nombre_empleado = nombre, telefono_empleado = telefono, fecha_empleado = fecha, cargo_empleado = cargo, jornada_empleado = jornada, 
-horario_empleado = horario, sueldo_empleado = sueldo
+horario_empleado = horario, sueldo_empleado = sueldo, estado_empleado = estado 
 where id_empleado = id;
 
-call sp_ModificarEmpleado(123, '74567892', 'Lucía Fernández Salas', '955321987', '2025-04-13', 'Vendedor', 'Medio tiempo', '8:00 a.m. - 12:00 a.m.', 600);
-call sp_MostrarEmpleado();
-
-create procedure sp_EliminarEmpleado(
-id int
-)
-delete from Empleado where id_empleado = id;
-
-call sp_EliminarEmpleado(123);
+call sp_ModificarEmpleado(123, '74567897', 'Lucía Fernández Salas', '955321987', '2025-04-13', 'Vendedor', 'Medio tiempo', '8:00 a.m. - 12:00 a.m.', 600, 'Inactivo');
 call sp_MostrarEmpleado();
 
 create procedure sp_BuscarEmpleado(
@@ -146,8 +142,6 @@ direccion_proveedor varchar(50) not null,
 estado_proveedor varchar(10) not null,
 fecha_proveedor date default (current_date) not null
 );
-
-
 select * from Proveedor;
 insert into Proveedor values(1, '20678901234', 'Electrónica y Cía SAC', '922334455', 'contactoelectronica@gmail.com', 'Calle Los Laureles 321, Chiclayo', 'Activo', '2025-04-10');
 insert into Proveedor values(2, '20789012345', 'Andes Tech Distribuciones S.R.L.', '933221100', 'infoandestech@gmail.com', 'Av. Cusco 123, Cusco', 'Activo', '2025-04-10');
@@ -245,6 +239,7 @@ p.id_producto,
 p.categoria_producto,
 p.nombre_producto,
 p.garantia_producto,
+prov.id_proveedor,
 prov.nombre_proveedor,
 p.precio_producto,
 p.stock_producto
@@ -281,14 +276,6 @@ update Producto set categoria_producto = categoria, nombre_producto = nombre, ga
 where id_producto = id;
 
 call sp_ModificarProducto(174, 'Impresora', 'Canon PIXMA G2160', '6 meses', 4, 750.00);
-call sp_MostrarProducto();
-
-create procedure sp_EliminarProducto(
-id int
-)
-delete from Producto where id_producto = id;
-
-call sp_EliminarProducto(190);
 call sp_MostrarProducto();
 
 create procedure sp_BuscarProducto(
@@ -353,18 +340,19 @@ foreign key (id_producto) references Producto(id_producto)
 );
 select * from DetalleVenta;
 insert into DetalleVenta values(1, 1, 145, 1, 2800);
-insert into DetalleVenta values(2, 2, 378, 2, 360);
-insert into DetalleVenta values(3, 3, 189, 1, 3500);
-insert into DetalleVenta values(4, 4, 489, 1, 3600);
-insert into DetalleVenta values(5, 5, 378, 1, 180);
-insert into DetalleVenta values(6, 6, 166, 1, 4200);
-insert into DetalleVenta values(7, 7, 378, 3, 540);
-insert into DetalleVenta values(8, 8, 158, 1, 130);
-insert into DetalleVenta values(9, 9, 173, 1, 220);
-insert into DetalleVenta values(10, 10, 230, 3, 267);
-
-
-
+insert into DetalleVenta values(2, 1, 378, 2, 360);
+insert into DetalleVenta values(3, 2, 189, 1, 3500);
+insert into DetalleVenta values(4, 3, 489, 1, 3600);
+insert into DetalleVenta values(5, 4, 378, 1, 180);
+insert into DetalleVenta values(6, 5, 166, 1, 4200);
+insert into DetalleVenta values(7, 6, 378, 3, 540);
+insert into DetalleVenta values(8, 6, 158, 1, 130);
+insert into DetalleVenta values(9, 6, 173, 1, 220);
+insert into DetalleVenta values(10, 7, 230, 3, 267);
+insert into DetalleVenta values(11, 8, 378, 2, 360);
+insert into DetalleVenta values(12, 9, 174, 1, 750);
+insert into DetalleVenta values(13, 9, 151, 1, 2200);
+insert into DetalleVenta values(14, 10, 169, 2, 480);
 
 #------------------------------------------------- PROCEDURES DE VENTA Y DETALLE VENTA -----------------------------------------------------
 create procedure sp_MostrarVenta()
@@ -478,7 +466,7 @@ end $$
 DELIMITER ;
 
 call sp_AgregarDetalleVenta(11, 151, 2);
-call sp_AgregarDetalleVenta(12, 489, 2);
+call sp_AgregarDetalleVenta(11, 489, 2);
 call sp_MostrarDetalleVenta();
 DELIMITER $$
 
@@ -638,74 +626,36 @@ DELIMITER ;
 
 call sp_MostrarVentasDelDia();
 
-
 DELIMITER $$
-CREATE PROCEDURE sp_MostrarHistorialVentasconfiltro(
-    IN p_filtro VARCHAR(50) 
-)
-BEGIN
-    SELECT
-        v.codigo_venta,
-        dv.id_detalleVenta,
-        c.dni_cliente,
-        c.nombre_cliente,
-        c.telefono_cliente,
-        v.fecha_venta,
-        v.hora_venta,
-        p.id_producto,
-        p.categoria_producto,
-        p.nombre_producto,
-        p.garantia_producto,
-        p.precio_producto,
-        dv.cantidad_detalleVenta,
-        v.tipopago_venta,
-        v.comprobante_venta,
-        e.id_empleado,
-        e.nombre_empleado,
-        dv.subtotal_detalleVenta,
-        v.total_venta
-    FROM
-        DetalleVenta dv
-    JOIN
-        Venta v ON dv.codigo_venta = v.codigo_venta
-    JOIN
-        Cliente c ON v.dni_cliente = c.dni_cliente 
-    JOIN
-        Empleado e ON v.id_empleado = e.id_empleado
-    JOIN
-        Producto p ON dv.id_producto = p.id_producto
-    WHERE
-        CAST(v.codigo_venta AS CHAR) LIKE CONCAT('%', p_filtro, '%') OR
-        p.categoria_producto LIKE CONCAT('%', p_filtro, '%') OR
-        c.nombre_cliente LIKE CONCAT('%', p_filtro, '%') OR
-        c.dni_cliente LIKE CONCAT('%', p_filtro, '%') OR
-        CAST(e.id_empleado AS CHAR) LIKE CONCAT('%', p_filtro, '%') OR
-        e.nombre_empleado LIKE CONCAT('%', p_filtro, '%');
-END $$
+create procedure sp_ConsultarHistorialVentas(in filtro varchar(50))
+begin
+select
+v.codigo_venta,
+dv.id_detalleVenta,
+c.dni_cliente,
+c.nombre_cliente,
+c.telefono_cliente,
+v.fecha_venta,
+v.hora_venta,
+p.id_producto,
+p.categoria_producto,
+p.nombre_producto,
+p.garantia_producto,
+p.precio_producto,
+dv.cantidad_detalleVenta,
+v.tipopago_venta,
+v.comprobante_venta,
+e.id_empleado,
+e.nombre_empleado,
+dv.subtotal_detalleVenta,
+v.total_venta
+from Venta as v
+join Cliente as c on v.dni_cliente = c.dni_cliente
+join Empleado as e on v.id_empleado = e.id_empleado
+join DetalleVenta as dv on v.codigo_venta = dv.codigo_venta
+join Producto as p on dv.id_producto = p.id_producto
+where c.dni_cliente like CONCAT('%', filtro, '%')
+or c.nombre_cliente like CONCAT('%', filtro, '%')
+order by v.codigo_venta asc;
+end $$
 DELIMITER ;
-
-
-DELIMITER $$
-CREATE PROCEDURE sp_EliminarHistorialVentas(
-    IN p_id INT
-)
-BEGIN
-    DELETE FROM DetalleVenta WHERE id_detalleVenta = p_id;
-    DELETE FROM Venta WHERE codigo_venta = p_id;
-END $$
-DELIMITER ;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

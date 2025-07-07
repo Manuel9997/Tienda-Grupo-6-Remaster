@@ -8,9 +8,11 @@ private String dniEmpleado, nombreEmpleado, telefonoEmpleado;
 private Date fechaEmpleado;
 private String cargoEmpleado, jornadaEmpleado, horarioEmpleado;
 private double sueldoEmpleado;
+private String estadoEmpleado;
 
 public Empleado(int idEmpleado, String dniEmpleado, String nombreEmpleado, String telefonoEmpleado, Date fechaEmpleado,
-		String cargoEmpleado, String jornadaEmpleado, String horarioEmpleado, double sueldoEmpleado) {
+		String cargoEmpleado, String jornadaEmpleado, String horarioEmpleado, double sueldoEmpleado,
+		String estadoEmpleado) {
 
 	this.idEmpleado = idEmpleado;
 	this.dniEmpleado = dniEmpleado;
@@ -21,6 +23,7 @@ public Empleado(int idEmpleado, String dniEmpleado, String nombreEmpleado, Strin
 	this.jornadaEmpleado = jornadaEmpleado;
 	this.horarioEmpleado = horarioEmpleado;
 	this.sueldoEmpleado = sueldoEmpleado;
+	this.estadoEmpleado = estadoEmpleado;
 }
 
 public Empleado(int idEmpleado) {
@@ -105,4 +108,11 @@ public void setSueldoEmpleado(double sueldoEmpleado) {
 	this.sueldoEmpleado = sueldoEmpleado;
 }
 
+public String getEstadoEmpleado() {
+	return estadoEmpleado;
+}
+
+public void setEstadoEmpleado(String estadoEmpleado) {
+	this.estadoEmpleado = estadoEmpleado;
+}
 }
