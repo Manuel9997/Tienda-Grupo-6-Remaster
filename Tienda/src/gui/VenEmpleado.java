@@ -433,12 +433,14 @@ private JLabel lblVendedor;
 					panel.setLayout(null);
 					{
 						txtPrecioVenta = new JTextField();
+						txtPrecioVenta.addKeyListener(this);
 						txtPrecioVenta.setBounds(66, 30, 96, 19);
 						panel.add(txtPrecioVenta);
 						txtPrecioVenta.setColumns(10);
 					}
 					{
 						txtCantVenta = new JTextField();
+						txtCantVenta.addKeyListener(this);
 						txtCantVenta.setColumns(10);
 						txtCantVenta.setBounds(66, 59, 96, 19);
 						panel.add(txtCantVenta);
@@ -722,6 +724,12 @@ private JLabel lblVendedor;
 		}
 	}
 	public void keyTyped(KeyEvent e) {
+		if (e.getSource() == txtCantVenta) {
+			do_txtCantVenta_keyTyped(e);
+		}
+		if (e.getSource() == txtPrecioVenta) {
+			do_txtPrecioVenta_keyTyped(e);
+		}
 		if (e.getSource() == txtCantidadVenta) {
 			do_txtCantidadVenta_keyTyped(e);
 		}
@@ -949,55 +957,75 @@ private JLabel lblVendedor;
 	}
 	protected void do_btnRegistrarVenta_actionPerformed(ActionEvent e) {
 		try {
-			Cliente c = new Cliente(txtDniClienteVenta.getText());
-			Empleado emple = new Empleado(Integer.parseInt(cboIdVendedor.getSelectedItem().toString()));
-			MantCliente mc= new MantCliente();
-			if(	mc.BuscarCliente(txtDniClienteVenta.getText()) == null) {
-				JOptionPane.showMessageDialog(this, "Cliente no encontrado");
-				return;}
 			
-			Venta v = new Venta(c, cboTipoPago.getSelectedItem().toString(), 
-					cboComprobante.getSelectedItem().toString(), emple);
+			if(txtDniClienteVenta.getText().length()==0 || txtDniClienteVenta.getText().length()==0 || txtIdProductoVenta.getText().length()==0||txtCantidadVenta.getText().length()==0) {
+				JOptionPane.showMessageDialog(this, "Ingrese todos los datos para realizar la venta.");
+			}
+			else {
+				Cliente c = new Cliente(txtDniClienteVenta.getText());
+				Empleado emple = new Empleado(Integer.parseInt(cboIdVendedor.getSelectedItem().toString()));
+				MantCliente mc= new MantCliente();
+				if(	mc.BuscarCliente(txtDniClienteVenta.getText()) == null) {
+					JOptionPane.showMessageDialog(this, "Cliente no encontrado");
+					return;}
+				
+				Venta v = new Venta(c, cboTipoPago.getSelectedItem().toString(), 
+						cboComprobante.getSelectedItem().toString(), emple);
+				
+				MantVenta mv = new MantVenta();
+				mv.AgregarVenta(v);
+				JOptionPane.showMessageDialog(this, "Venta registrada correctamente.");
+			}
 			
-			MantVenta mv = new MantVenta();
-			mv.AgregarVenta(v);
-			JOptionPane.showMessageDialog(this, "Venta registrada correctamente");
 							
 		} catch (Exception e2) {
 			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
 		}
 	}
 	protected void do_btnRegistrarDetalleVentas_actionPerformed(ActionEvent e) {
-		Venta v = new Venta(Integer.parseInt(txtCodEditable.getText()));
-		Producto p = new Producto(Integer.parseInt(txtIdProductoVenta.getText()));	
-		DetalleVenta dv = new DetalleVenta(v, p, Integer.parseInt(txtCantidadVenta.getText()));
-		MantProducto mp= new MantProducto();
-		if(	mp.BuscarProducto(Integer.parseInt(txtIdProductoVenta.getText())) == null) {
-			JOptionPane.showMessageDialog(this, "Producto no encontrado");
-			return;}
-		MantDetalleVenta mdv = new MantDetalleVenta();
-		mdv.AgregarDetalleVenta(dv);
+
+		if(txtDniClienteVenta.getText().length()==0 || txtDniClienteVenta.getText().length()==0 || txtIdProductoVenta.getText().length()==0||txtCantidadVenta.getText().length()==0) {
+			JOptionPane.showMessageDialog(this, "Ingrese todos los datos para realizar la venta.");
+		}
+		else {
+			Venta v = new Venta(Integer.parseInt(txtCodEditable.getText()));
+			Producto p = new Producto(Integer.parseInt(txtIdProductoVenta.getText()));	
+			DetalleVenta dv = new DetalleVenta(v, p, Integer.parseInt(txtCantidadVenta.getText()));
+			MantProducto mp= new MantProducto();
+			if(	mp.BuscarProducto(Integer.parseInt(txtIdProductoVenta.getText())) == null) {
+				JOptionPane.showMessageDialog(this, "Producto no encontrado");
+				return;}
+			MantDetalleVenta mdv = new MantDetalleVenta();
+			mdv.AgregarDetalleVenta(dv);
+			
+			MantVenta mv = new MantVenta();
+			mv.CalcularTotalVenta(v.getCodigoVenta());
+			ListarProducto("");
+			JOptionPane.showMessageDialog(this, "Detalle de Venta registrada correctamente");
+			ListarVentasDelDia();
+			LimpiarVentaCompleta();	
+		}
 		
-		MantVenta mv = new MantVenta();
-		mv.CalcularTotalVenta(v.getCodigoVenta());
-		ListarProducto("");
-		JOptionPane.showMessageDialog(this, "Detalle de Venta registrada correctamente");
-		ListarVentasDelDia();
-		LimpiarVentaCompleta();	
 	}
 	protected void do_btnModificarVenta_actionPerformed(ActionEvent e) {
 		try {
-			Cliente c = new Cliente(txtDniClienteVenta.getText());
-			Empleado emple = new Empleado(Integer.parseInt(cboIdVendedor.getSelectedItem().toString()));
+			if(txtDniClienteVenta.getText().length()==0 || txtDniClienteVenta.getText().length()==0 || txtIdProductoVenta.getText().length()==0||txtCantidadVenta.getText().length()==0) {
+				JOptionPane.showMessageDialog(this, "Ingrese todos los datos para poder modificar los datos.");
+			}
+			else {
+				Cliente c = new Cliente(txtDniClienteVenta.getText());
+				Empleado emple = new Empleado(Integer.parseInt(cboIdVendedor.getSelectedItem().toString()));
+				
+				Venta v = new Venta(Integer.parseInt(txtCodNoEditable.getText()), c, 
+						cboTipoPago.getSelectedItem().toString(), 
+						cboComprobante.getSelectedItem().toString(), emple);
+				
+				MantVenta mv = new MantVenta();
+		        mv.ModificarVenta(v);
+		        ListarVentasDelDia();
+		        LimpiarVentaCompleta();
+			}
 			
-			Venta v = new Venta(Integer.parseInt(txtCodNoEditable.getText()), c, 
-					cboTipoPago.getSelectedItem().toString(), 
-					cboComprobante.getSelectedItem().toString(), emple);
-			
-			MantVenta mv = new MantVenta();
-	        mv.ModificarVenta(v);
-	        ListarVentasDelDia();
-	        LimpiarVentaCompleta();
 	        
 		} catch (Exception e2) {
 			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
@@ -1091,6 +1119,10 @@ private JLabel lblVendedor;
 	        JOptionPane.showMessageDialog(this, "No hay subtotales registrados.");
 	        return;
 	    }
+		else if(txtPrecioVenta.getText().length()==0 || txtPrecioVenta.getText().length()==0) {
+			JOptionPane.showMessageDialog(this, "Ingrese números en los campos.");
+	        return;
+		}
 	    double total = 0;
 	    for (double subtotal : listaSubtotales) {
 	        total += subtotal;
@@ -1458,6 +1490,51 @@ private JLabel lblVendedor;
 	        float dB = (float) (min + (max - min) * (volume / 100.0));
 	        volumeControl.setValue(dB);
 	    }
+	}
+	//KEYTYPED ventas de los productos
+	protected void do_txtPrecioVenta_keyTyped(KeyEvent e) {
+		char validarNumeros = e.getKeyChar();
+		if(!(Character.isDigit(validarNumeros) || validarNumeros =='\b')) {
+			e.consume();
+			if(Character.isLetter(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permite letras.");
+			}
+			else if(Character.isEmoji(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permite símbolos extraños.");
+			}
+			else if(Character.isWhitespace(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco.");
+			}
+			else {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "Solo se admiten números.");
+			}
+		}
+	}
+	protected void do_txtCantVenta_keyTyped(KeyEvent e) {
+		char validarNumeros = e.getKeyChar();
+		if(!(Character.isDigit(validarNumeros) || validarNumeros =='\b')) {
+			e.consume();
+			if(Character.isLetter(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permite letras.");
+			}
+			else if(Character.isEmoji(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permite símbolos extraños.");
+			}
+			else if(Character.isWhitespace(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco.");
+			}
+			else {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "Solo se admiten números.");
+			}
+		}
 	}
 }
 

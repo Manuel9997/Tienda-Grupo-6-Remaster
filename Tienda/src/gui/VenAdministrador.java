@@ -1489,46 +1489,98 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	}
 	//                                                                                             PROVEEDOR
 	protected void do_txtIDProveedor_keyTyped(KeyEvent e) {
-		//para que solamente acepte ingresar números
 		char validarNumeros = e.getKeyChar();
-		if(Character.isLetter(validarNumeros)) {
+		if(!(Character.isDigit(validarNumeros) || validarNumeros =='\b')) {
 			e.consume();
-			JOptionPane.showMessageDialog(this, "No permite letras");
+			if(Character.isLetter(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permite letras.");
+			}
+			else if(Character.isEmoji(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permite símbolos extraños.");
+			}
+			else if(Character.isWhitespace(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco.");
+			}
+			else {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "Solo se admiten números.");
+			}
 		}
 	}
 	protected void do_txtRucProveedor_keyTyped(KeyEvent e) {
-		//para que solamente acepte ingresar números
 		char validarNumeros = e.getKeyChar();
-		if(Character.isLetter(validarNumeros)) {
+		if(!(Character.isDigit(validarNumeros) || validarNumeros =='\b')) {
 			e.consume();
-			JOptionPane.showMessageDialog(this, "No permite letras");
+			if(Character.isLetter(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permite letras.");
+			}
+			else if(Character.isEmoji(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permite símbolos extraños.");
+			}
+			else if(Character.isWhitespace(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco.");
+			}
+			else {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "Solo se admiten números.");
+			}
 		}
 	}
 	protected void do_txtTelefonoProveedor_keyTyped(KeyEvent e) {
-		//para que solamente acepte ingresar números
 		char validarNumeros = e.getKeyChar();
-		if(Character.isLetter(validarNumeros)) {
+		if(!(Character.isDigit(validarNumeros) || validarNumeros =='\b')) {
 			e.consume();
-			JOptionPane.showMessageDialog(this, "No permite letras");
+			if(Character.isLetter(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permite letras.");
+			}
+			else if(Character.isEmoji(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se permite símbolos extraños.");
+			}
+			else if(Character.isWhitespace(validarNumeros)) {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "No se admiten espacios en blanco.");
+			}
+			else {
+				e.consume();
+				JOptionPane.showMessageDialog(this, "Solo se admiten números.");
+			}
 		}
 	}
 
 	protected void do_txtNombreProveedor_keyTyped(KeyEvent e) {
-		//para que solamente acepte ingresar letras
-		char validarLetras = e.getKeyChar();
-		if(Character.isDigit(validarLetras)) {
-			e.consume();
-			JOptionPane.showMessageDialog(this, "No permite números");
-		}
+		char c = e.getKeyChar();
+	    String letrasValidas = "áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ '\b'";
+	    if (letrasValidas.indexOf(c) == -1) {
+	        e.consume();
+
+	        if (Character.isDigit(c)) {
+	            JOptionPane.showMessageDialog(this, "No se permiten números.");
+	        } else {
+	            JOptionPane.showMessageDialog(this, "Solo se permiten letras del alfabeto español y espacios.");
+	        }
+	    }
 	}
 
 	protected void do_txtEstadoProveedor_keyTyped(KeyEvent e) {
-		//para que solamente acepte ingresar letras
-		char validarLetras = e.getKeyChar();
-		if(Character.isDigit(validarLetras)) {
-			e.consume();
-			JOptionPane.showMessageDialog(this, "No permite números");
-		}
+		char c = e.getKeyChar();
+	    String letrasValidas = "áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ '\b'";
+	    if (letrasValidas.indexOf(c) == -1) {
+	        e.consume();
+
+	        if (Character.isDigit(c)) {
+	            JOptionPane.showMessageDialog(this, "No se permiten números.");
+	        } else {
+	            JOptionPane.showMessageDialog(this, "Solo se permiten letras del alfabeto español y espacios.");
+	        }
+	    }
 	}
 	public void ListarProveedor(String filtro) {
 		DefaultTableModel modelo = new DefaultTableModel();
