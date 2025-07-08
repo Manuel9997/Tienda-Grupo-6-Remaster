@@ -40,7 +40,7 @@ public ArrayList<Empleado> MostrarEmpleado() {
 public void AgregarEmpleado(Empleado e) {
     try {
         Connection cnx = ConexionMySQL.getConexion();
-        CallableStatement csta = cnx.prepareCall("{call sp_AgregarEmpleado(?, ?, ?, ?, ?, ?, ?, ?)}");
+        CallableStatement csta = cnx.prepareCall("{call sp_AgregarEmpleado(?, ?, ?, ?, ?, ?, ?, ?, ?)}");
         csta.setInt(1, e.getIdEmpleado());
         csta.setString(2, e.getDniEmpleado());
         csta.setString(3, e.getNombreEmpleado());
@@ -132,4 +132,32 @@ public ArrayList<Empleado> ConsultarEmpleado(String texto) {
     }
     return lista;
 }
+
+public Empleado BuscarEmpleadoporDNI(String dniEmpleado) {
+    Empleado e = null;
+    try {
+        Connection cnx = ConexionMySQL.getConexion();
+        CallableStatement csta = cnx.prepareCall("{call sp_BuscarEmpleadoporDni(?)}");
+        csta.setString(1, dniEmpleado);
+        ResultSet rs = csta.executeQuery();
+        if (rs.next()) {
+            e = new Empleado(
+                rs.getInt("id_empleado"),
+                rs.getString("dni_empleado"),
+                rs.getString("nombre_empleado"),
+                rs.getString("telefono_empleado"),
+                rs.getDate("fecha_empleado"),
+                rs.getString("cargo_empleado"),
+                rs.getString("jornada_empleado"),
+                rs.getString("horario_empleado"),
+                rs.getDouble("sueldo_empleado"),
+                rs.getString("estado_empleado")
+            );
+        }
+    } catch (Exception ex) {
+        System.out.println("ERROR al buscar empleado: " + ex);
+    }
+    return e;
+}
+
 }

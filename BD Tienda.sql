@@ -661,7 +661,23 @@ join Empleado as e on v.id_empleado = e.id_empleado
 join DetalleVenta as dv on v.codigo_venta = dv.codigo_venta
 join Producto as p on dv.id_producto = p.id_producto
 where c.dni_cliente like CONCAT('%', filtro, '%')
-or c.nombre_cliente like CONCAT('%', filtro, '%')
+or c.nombre_cliente like CONCAT('%'empleado, filtro, '%')
 order by v.codigo_venta asc;
 end $$
 DELIMITER ;
+
+
+DELIMITER $$
+create procedure sp_BuscarEmpleadoporDni(
+dni char(8)
+)
+select * from Empleado where dni_empleado = dni;
+DELIMITER ;
+
+
+create procedure sp_BuscarProveedorporRuc(
+ruc char(11)
+)
+select * from Proveedor where ruc_proveedor = ruc;
+DELIMITER ;
+

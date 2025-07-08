@@ -1182,16 +1182,45 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	protected void do_btnRegistrarEmpleado_actionPerformed(ActionEvent e) {
 		try {
 			Date fecha = java.sql.Date.valueOf(LocalDate.now());
+			
+			if(txtIdEmpleado.getText().length()==0 && txtDniEmpleado.getText().length()==0 && txtNombreEmpleado.getText().length()==0
+					&& txtTelefono.getText().length()==0 && txtSueldo.getText().length()==0 && txtEstadoEmpleado.getText().length()==0
+					) {
+				JOptionPane.showMessageDialog(this, "Rellene todos los campos.");
+				return;
+			}
+			else {
+			
+			if(txtDniEmpleado.getText().length()!=8) {
+				JOptionPane.showMessageDialog(this, "El DNI debe tener 8 dígitos");
+				return;
+			}
+			
+			if(txtTelefono.getText().length()!=9) {
+				JOptionPane.showMessageDialog(this, "El Teléfono debe tener 9 dígitos");
+				return;
+			}
+				
 			Empleado emple = new Empleado(Integer.parseInt(txtIdEmpleado.getText()), 
 					txtDniEmpleado.getText(), txtNombreEmpleado.getText(), 
 					txtTelefono.getText(), fecha, cboCargo.getSelectedItem().toString(), 
 					cboJornada.getSelectedItem().toString(), cboHorario.getSelectedItem().toString(), 
-					Double.parseDouble(txtSueldo.getText()), txtEstadoEmpleado.getText());
-			
+					Double.parseDouble(txtSueldo.getText()), txtEstadoEmpleado.getText());		
 			MantEmpleado me = new MantEmpleado();
+			if(me.BuscarEmpleado(Integer.parseInt(txtIdEmpleado.getText())) != null) {
+				JOptionPane.showMessageDialog(this, "Este ID ya se encuentra registrado");
+				return;
+			}
+			if(me.BuscarEmpleadoporDNI(txtIdEmpleado.getText()) != null) {
+				JOptionPane.showMessageDialog(this, "Este DNI ya se encuentra registrado");
+				return;
+			}
+			
+			
 			me.AgregarEmpleado(emple);
 			ListarEmpleado("");
 			LimpiarEmpleado();
+			}
 
 		} catch (Exception e2) {
 			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
@@ -1337,6 +1366,12 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	}
 	protected void do_btnRegistrarProducto_actionPerformed(ActionEvent e) {
 		try {
+			if(txtIdProducto.getText().length() == 0 && txtCategoria.getText().length()== 0  && txtNombreProducto.getText().length()== 0 
+					&& txtGarantia.getText().length()== 0  && txtIdProveedor.getText().length()== 0
+					&& txtPrecio.getText().length()== 0  && txtCantProducto.getText().length()== 0) {
+				JOptionPane.showMessageDialog(this, "Ingrese todos los datos para registrar");
+			}
+			else {
 			int idProveedor = Integer.parseInt(txtIdProveedor.getText());
 			Proveedor proveedor = new Proveedor(idProveedor);
 			MantProveedor mpv= new MantProveedor();
@@ -1350,9 +1385,15 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 					Integer.parseInt(txtCantProducto.getText()));
 			
 			MantProducto mp = new MantProducto();
+			if(	mp.BuscarProducto(Integer.parseInt(txtIdProducto.getText())) != null) {
+				JOptionPane.showMessageDialog(this, "ID del producto ya registrado");
+				return;}
+			
 			mp.AgregarProducto(p);
 			ListarProducto("");
 			LimpiarProducto();
+			JOptionPane.showMessageDialog(this, "Producto Registrado");
+			}
 							
 		} catch (Exception e2) {
 			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
@@ -1388,13 +1429,25 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	}
 	protected void do_btnRegistrarStock_actionPerformed(ActionEvent e) {	
 		try {
-			
+			if(txtIdProdStock.getText().length() == 0 && txtCantStock.getText().length()== 0 ) {
+				JOptionPane.showMessageDialog(this, "Ingrese todos los datos para registrar el nuevo stock");
+			}
+			else {
 			
 			Producto p = new Producto(Integer.parseInt(txtIdProdStock.getText()), Integer.parseInt(txtCantStock.getText()));
 			MantProducto mp = new MantProducto();
+			if(	mp.BuscarProducto(Integer.parseInt(txtIdProdStock.getText())) == null) {
+				JOptionPane.showMessageDialog(this, "Este producto no existe");	
+            return;}
+			if(Integer.parseInt(txtCantStock.getText()) <=0)
+			{
+	         	JOptionPane.showMessageDialog(this, "No se permite registrar un stock menor o igual a 0");	
+            return;}
 			mp.AumentarStock(p);
 			ListarProducto("");
 			LimpiarProductoStock();
+			JOptionPane.showMessageDialog(this, "Stock registrado correctamente");	
+			}
 			
 		} catch (Exception e2) {
 			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
@@ -1636,18 +1689,38 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	}
 	protected void do_btnRegistrarProveedor_actionPerformed(ActionEvent e) {
 		try {
+			if(txtIDProveedor.getText().length() == 0 && txtRucProveedor.getText().length()== 0 &&
+					txtNombreProveedor.getText().length() == 0 && txtTelefonoProveedor.getText().length()== 0 &&
+					txtCorreoProveedor.getText().length() == 0 && txtDireccionProveedor.getText().length()== 0
+					&& txtEstadoProveedor.getText().length()== 0) {
+				JOptionPane.showMessageDialog(this, "Ingrese todos los datos para registrar");
+			}
+			else {
 			Date fecha = java.sql.Date.valueOf(LocalDate.now());
 			Proveedor prov = new Proveedor(Integer.parseInt(txtIDProveedor.getText()), 
 					txtRucProveedor.getText(), txtNombreProveedor.getText(), 
 					txtTelefonoProveedor.getText(), txtCorreoProveedor.getText(), 
 					txtDireccionProveedor.getText(), txtEstadoProveedor.getText(), fecha);
-			
+			if(txtRucProveedor.getText().length() != 11) {
+				JOptionPane.showMessageDialog(this, "El ruc debe tener 11 dígitos");
+				return;
+			}
+			if(txtTelefonoProveedor.getText().length() != 9) {
+				JOptionPane.showMessageDialog(this, "El teléfono debe tener 9 dígitos");
+				return;
+			}
 			MantProveedor mprov = new MantProveedor();
+			if(	mprov.BuscarProveedor(Integer.parseInt(txtIDProveedor.getText())) != null) {
+				JOptionPane.showMessageDialog(this, "ID ya registrado");
+				return;}
+			if(	mprov.BuscarProveedorporRuc(txtRucProveedor.getText()) != null) {
+				JOptionPane.showMessageDialog(this, "RUC ya registrado");
+				return;}
 			mprov.AgregarProveedor(prov);
 			ListarProveedor("");
 			LimpiarProveedor();
 			JOptionPane.showMessageDialog(this, "Proveedor Añadido");
-							
+			}				
 		} catch (Exception e2) {
 			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
 		}

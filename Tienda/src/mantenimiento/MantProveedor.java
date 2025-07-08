@@ -108,6 +108,37 @@ public Proveedor BuscarProveedor(int idProveedor) {
        
 	return proveedor;   
 }
+
+public Proveedor BuscarProveedorporRuc(String ruc) {
+	Proveedor proveedor = null;
+	try {
+		Connection cnx = ConexionMySQL.getConexion();
+		CallableStatement csta = cnx.prepareCall("{call sp_BuscarProveedorporRuc(?)}");
+		csta.setString(1, ruc);
+		ResultSet rs = csta.executeQuery();
+		if (rs.next()) {
+			proveedor = new Proveedor(
+					rs.getInt("id_proveedor"),
+                    rs.getString("ruc_proveedor"),
+                    rs.getString("nombre_proveedor"),
+                    rs.getString("telefono_proveedor"),
+                    rs.getString("correo_proveedor"),
+                    rs.getString("direccion_proveedor"),
+                    rs.getString("estado_proveedor"),
+                    rs.getDate("fecha_proveedor")
+           );     
+		}  
+	} catch (Exception e) {
+		System.out.println("ERROR al buscar proveedor: " + e);    
+	}
+       
+	return proveedor;   
+}
+
+
+
+
+
 public ArrayList<Proveedor> ConsultarProveedor(String filtro) {
     ArrayList<Proveedor> lista = new ArrayList<>();
     try {

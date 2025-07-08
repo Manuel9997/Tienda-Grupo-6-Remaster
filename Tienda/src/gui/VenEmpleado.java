@@ -1399,12 +1399,29 @@ private JLabel lblVendedor;
 	}
 	protected void do_btnRegistrarCliente_actionPerformed(ActionEvent e) {
 		try {
-			Cliente c = new Cliente(txtDniCliente.getText(), txtNombreCliente.getText(), txtTelefonoCliente.getText());
 			if(txtDniCliente.getText().length()==0 && txtNombreCliente.getText().length()==0 && txtTelefonoCliente.getText().length()==0) {
-				JOptionPane.showMessageDialog(this, "Rellene los todos los campos.");
+				JOptionPane.showMessageDialog(this, "Rellene todos los campos.");
 			}
+			
 			else {
-				MantCliente mc = new MantCliente();
+				if(txtDniCliente.getText().length()!=8) {
+					JOptionPane.showMessageDialog(this, "El DNI debe tener 8 dígitos");
+					return;
+				}
+				Cliente c = new Cliente(txtDniCliente.getText(), txtNombreCliente.getText(), txtTelefonoCliente.getText());
+				 MantCliente mc = new MantCliente();
+				if(txtDniCliente.getText().length()!=8) {
+					JOptionPane.showMessageDialog(this, "El DNI debe tener 8 dígitos");
+					return;
+					}
+				if(txtTelefonoCliente.getText().length()!=9) {
+					JOptionPane.showMessageDialog(this, "El Teléfono debe tener 9 dígitos");
+					return;
+					}
+
+	         if(mc.BuscarCliente(txtDniCliente.getText()) != null) {
+				JOptionPane.showMessageDialog(this, "Cliente ya registrado");
+				return;}
 				mc.AgregarCliente(c);
 				ListarCliente("");
 				LimpiarCliente();					
