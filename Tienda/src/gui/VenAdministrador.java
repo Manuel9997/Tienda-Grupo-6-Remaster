@@ -761,6 +761,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 				}
 				{
 					txtBuscarProveedor = new JTextField();
+					txtBuscarProveedor.addKeyListener(this);
 					txtBuscarProveedor.setColumns(10);
 					txtBuscarProveedor.setBackground(Color.WHITE);
 					txtBuscarProveedor.setBounds(195, 36, 447, 25);
@@ -946,6 +947,9 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	}
 	
 	public void keyPressed(KeyEvent e) {
+		if (e.getSource() == txtBuscarProveedor) {
+			do_txtBuscarProveedor_keyPressed(e);
+		}
 		if (e.getSource() == txtBuscarHistorialVentas) {
 			do_txtBuscarHistorialVentas_keyPressed(e);
 		}
@@ -1842,4 +1846,8 @@ protected void do_btnModificarProveedor_actionPerformed(ActionEvent e) {
 			jlabelmodo.setText("Modo Normal");
 		}	
 	}	
+	protected void do_txtBuscarProveedor_keyPressed(KeyEvent e) {
+		String filtro = txtBuscarProveedor.getText();
+		ListarProveedor(filtro);
+	}
 }

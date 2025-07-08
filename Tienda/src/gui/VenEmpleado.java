@@ -1119,7 +1119,6 @@ private JLabel lblVendedor;
 			
 							
 		} catch (Exception e2) {
-			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
 		}
 	}
 	protected void do_btnRegistrarDetalleVentas_actionPerformed(ActionEvent e) {
@@ -1141,6 +1140,9 @@ private JLabel lblVendedor;
 	            }
 				if(	mp.BuscarProducto(Integer.parseInt(txtIdProductoVenta.getText())) == null) {
 					JOptionPane.showMessageDialog(this, "Producto no encontrado");
+					return;}
+				if(	mp.BuscarProducto(Integer.parseInt(txtIdProductoVenta.getText())).getStockProducto() < Integer.parseInt(txtCantidadVenta.getText())) {
+					JOptionPane.showMessageDialog(this, "Stock insuficiente, el stock actual es de: "+ mp.BuscarProducto(Integer.parseInt(txtIdProductoVenta.getText())).getStockProducto());
 					return;}
 				MantDetalleVenta mdv = new MantDetalleVenta();
 				mdv.AgregarDetalleVenta(dv);
