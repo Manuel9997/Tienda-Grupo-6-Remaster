@@ -293,125 +293,125 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 			panelEmpleado.setLayout(null);
 			{
 				lblIdBuscarE = new JLabel("Buscar:");
-				lblIdBuscarE.setBounds(141, 11, 67, 19);
+				lblIdBuscarE.setBounds(360, 11, 67, 19);
 				panelEmpleado.add(lblIdBuscarE);
 				lblIdBuscarE.setFont(new Font("Verdana", Font.PLAIN, 15));
 			}
 			{
 				txtBuscarEmple = new JTextField();
 				txtBuscarEmple.addKeyListener(this);
-				txtBuscarEmple.setBounds(216, 10, 447, 25);
+				txtBuscarEmple.setBounds(435, 10, 447, 25);
 				panelEmpleado.add(txtBuscarEmple);
 				txtBuscarEmple.setBackground(Color.WHITE);
 				txtBuscarEmple.setColumns(10);
 			}
 			{
 				lblRegistrarEmpleado = new JLabel("REGISTRAR EMPLEADO");
-				lblRegistrarEmpleado.setBounds(183, 60, 203, 19);
+				lblRegistrarEmpleado.setBounds(402, 60, 203, 19);
 				panelEmpleado.add(lblRegistrarEmpleado);
 				lblRegistrarEmpleado.setFont(new Font("Tahoma", Font.PLAIN, 19));
 			}
 			{
 				lblIdE = new JLabel("ID:");
-				lblIdE.setBounds(183, 100, 45, 19);
+				lblIdE.setBounds(402, 100, 45, 19);
 				panelEmpleado.add(lblIdE);
 				lblIdE.setFont(new Font("Verdana", Font.PLAIN, 15));
 			}
 			{
 				txtIdEmpleado = new JTextField();
 				txtIdEmpleado.addKeyListener(this);
-				txtIdEmpleado.setBounds(215, 99, 96, 25);
+				txtIdEmpleado.setBounds(434, 99, 96, 25);
 				panelEmpleado.add(txtIdEmpleado);
 				txtIdEmpleado.setColumns(10);
 			}
 			{
 				lblDniE = new JLabel("DNI:");
-				lblDniE.setBounds(341, 100, 45, 19);
+				lblDniE.setBounds(560, 100, 45, 19);
 				panelEmpleado.add(lblDniE);
 				lblDniE.setFont(new Font("Verdana", Font.PLAIN, 15));
 			}
 			{
 				txtDniEmpleado = new JTextField();
 				txtDniEmpleado.addKeyListener(this);
-				txtDniEmpleado.setBounds(379, 99, 117, 25);
+				txtDniEmpleado.setBounds(598, 99, 117, 25);
 				panelEmpleado.add(txtDniEmpleado);
 				txtDniEmpleado.setColumns(10);
 			}
 			{
 				lblNombreCompletoE = new JLabel("Nombre completo:");
-				lblNombreCompletoE.setBounds(183, 139, 158, 19);
+				lblNombreCompletoE.setBounds(402, 139, 158, 19);
 				panelEmpleado.add(lblNombreCompletoE);
 				lblNombreCompletoE.setFont(new Font("Verdana", Font.PLAIN, 15));
 			}
 			{
 				txtNombreEmpleado = new JTextField();
 				txtNombreEmpleado.addKeyListener(this);
-				txtNombreEmpleado.setBounds(331, 138, 349, 25);
+				txtNombreEmpleado.setBounds(550, 138, 349, 25);
 				panelEmpleado.add(txtNombreEmpleado);
 				txtNombreEmpleado.setColumns(10);
 			}
 			{
 				lblTelefono = new JLabel("Teléfono:");
-				lblTelefono.setBounds(183, 177, 87, 19);
+				lblTelefono.setBounds(402, 177, 87, 19);
 				panelEmpleado.add(lblTelefono);
 				lblTelefono.setFont(new Font("Verdana", Font.PLAIN, 15));
 			}
 			{
 				txtTelefono = new JTextField();
 				txtTelefono.addKeyListener(this);
-				txtTelefono.setBounds(269, 176, 117, 25);
+				txtTelefono.setBounds(488, 176, 117, 25);
 				panelEmpleado.add(txtTelefono);
 				txtTelefono.setColumns(10);
 			}
 			{
 				lblCargo = new JLabel("Cargo:");
-				lblCargo.setBounds(396, 179, 69, 19);
+				lblCargo.setBounds(615, 179, 69, 19);
 				panelEmpleado.add(lblCargo);
 				lblCargo.setFont(new Font("Verdana", Font.PLAIN, 15));
 			}
 			{
 				cboCargo = new JComboBox();
-				cboCargo.setBounds(456, 177, 117, 25);
+				cboCargo.setBounds(675, 177, 117, 25);
 				panelEmpleado.add(cboCargo);
 				cboCargo.setModel(new DefaultComboBoxModel(new String[] {"Cajero", "Vendedor"}));
 				cboCargo.setFont(new Font("Verdana", Font.PLAIN, 15));
 			}
 			{
 				lblJornada = new JLabel("Jornada:");
-				lblJornada.setBounds(183, 218, 69, 19);
+				lblJornada.setBounds(402, 218, 69, 19);
 				panelEmpleado.add(lblJornada);
 				lblJornada.setFont(new Font("Verdana", Font.PLAIN, 15));
 			}
 			{
 				cboJornada = new JComboBox();
-				cboJornada.setBounds(269, 215, 146, 25);
+				cboJornada.setBounds(488, 215, 146, 25);
 				panelEmpleado.add(cboJornada);
 				cboJornada.setModel(new DefaultComboBoxModel(new String[] {"Tiempo completo", "Medio tiempo"}));
 				cboJornada.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			}
 			{
 				lblHorario = new JLabel("Horario:");
-				lblHorario.setBounds(425, 218, 69, 19);
+				lblHorario.setBounds(644, 218, 69, 19);
 				panelEmpleado.add(lblHorario);
 				lblHorario.setFont(new Font("Verdana", Font.PLAIN, 15));
 			}
 			{
 				cboHorario = new JComboBox();
-				cboHorario.setBounds(490, 215, 173, 25);
+				cboHorario.setBounds(709, 215, 173, 25);
 				panelEmpleado.add(cboHorario);
 				cboHorario.setModel(new DefaultComboBoxModel(new String[] {"7:00 a.m. - 4:00 p.m.", "8:00 a.m. - 5:00 p.m.", "8:00 a.m. - 12:00 a.m.", "9:00 a.m. - 6:00 p.m.", "10:00 a.m. - 7:00 p.m.", "12:00 a.m. - 4:00 p.m.", "1:00 p.m. - 5:00 p.m.", "2:00 p.m. - 6:00 p.m."}));
 				cboHorario.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			}
 			{
 				btnRegistrarEmpleado = new JButton("Registrar");
-				btnRegistrarEmpleado.setBounds(281, 353, 116, 25);
+				btnRegistrarEmpleado.setBounds(500, 353, 116, 25);
 				panelEmpleado.add(btnRegistrarEmpleado);
 				btnRegistrarEmpleado.addActionListener(this);
 				btnRegistrarEmpleado.setFont(new Font("Verdana", Font.PLAIN, 13));
 			}
 			{
 				btnModificarEmpleado = new JButton("Modificar");
-				btnModificarEmpleado.setBounds(414, 353, 116, 25);
+				btnModificarEmpleado.setBounds(633, 353, 116, 25);
 				panelEmpleado.add(btnModificarEmpleado);
 				btnModificarEmpleado.addActionListener(this);
 				btnModificarEmpleado.setFont(new Font("Verdana", Font.PLAIN, 13));
@@ -435,34 +435,34 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 				{
 					lblSueldo = new JLabel("Sueldo:");
 					lblSueldo.setFont(new Font("Verdana", Font.PLAIN, 15));
-					lblSueldo.setBounds(183, 260, 69, 19);
+					lblSueldo.setBounds(402, 260, 69, 19);
 					panelEmpleado.add(lblSueldo);
 				}
 				{
 					txtSueldo = new JTextField();
 					txtSueldo.addKeyListener(this);
 					txtSueldo.setColumns(10);
-					txtSueldo.setBounds(269, 259, 117, 25);
+					txtSueldo.setBounds(488, 259, 117, 25);
 					panelEmpleado.add(txtSueldo);
 				}
 				{
 					txtEstadoEmpleado = new JTextField();
 					txtEstadoEmpleado.addKeyListener(this);
 					txtEstadoEmpleado.setColumns(10);
-					txtEstadoEmpleado.setBounds(490, 259, 117, 25);
+					txtEstadoEmpleado.setBounds(709, 259, 117, 25);
 					panelEmpleado.add(txtEstadoEmpleado);
 				}
 				{
 					lblEstado = new JLabel("Estado:");
 					lblEstado.setFont(new Font("Verdana", Font.PLAIN, 15));
-					lblEstado.setBounds(427, 260, 69, 19);
+					lblEstado.setBounds(646, 260, 69, 19);
 					panelEmpleado.add(lblEstado);
 				}
 				{
 					btnBorrarEmpleado = new JButton("Borrar");
 					btnBorrarEmpleado.addActionListener(this);
 					btnBorrarEmpleado.setFont(new Font("Verdana", Font.PLAIN, 13));
-					btnBorrarEmpleado.setBounds(718, 174, 116, 25);
+					btnBorrarEmpleado.setBounds(937, 174, 116, 25);
 					panelEmpleado.add(btnBorrarEmpleado);
 				}
 				{
@@ -482,7 +482,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 			{
 				lblIdBuscarP = new JLabel("Buscar:");
 				lblIdBuscarP.setFont(new Font("Verdana", Font.PLAIN, 15));
-				lblIdBuscarP.setBounds(119, 11, 69, 19);
+				lblIdBuscarP.setBounds(336, 11, 69, 19);
 				panelProducto.add(lblIdBuscarP);
 			}
 			{
@@ -490,129 +490,129 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 				txtIdProdBuscar.addKeyListener(this);
 				txtIdProdBuscar.setColumns(10);
 				txtIdProdBuscar.setBackground(Color.WHITE);
-				txtIdProdBuscar.setBounds(198, 10, 447, 25);
+				txtIdProdBuscar.setBounds(415, 10, 447, 25);
 				panelProducto.add(txtIdProdBuscar);
 			}
 			{
 				lblRegistrarProducto = new JLabel("REGISTRAR PRODUCTO");
 				lblRegistrarProducto.setFont(new Font("Tahoma", Font.PLAIN, 19));
-				lblRegistrarProducto.setBounds(217, 58, 203, 19);
+				lblRegistrarProducto.setBounds(434, 58, 203, 19);
 				panelProducto.add(lblRegistrarProducto);
 			}
 			{
 				lblIdP = new JLabel("ID:");
 				lblIdP.setFont(new Font("Verdana", Font.PLAIN, 15));
-				lblIdP.setBounds(217, 98, 45, 19);
+				lblIdP.setBounds(434, 98, 45, 19);
 				panelProducto.add(lblIdP);
 			}
 			{
 				txtIdProducto = new JTextField();
 				txtIdProducto.addKeyListener(this);
 				txtIdProducto.setColumns(10);
-				txtIdProducto.setBounds(249, 97, 96, 25);
+				txtIdProducto.setBounds(466, 97, 96, 25);
 				panelProducto.add(txtIdProducto);
 			}
 			{
 				lblCategoria = new JLabel("Categoría:");
 				lblCategoria.setFont(new Font("Verdana", Font.PLAIN, 15));
-				lblCategoria.setBounds(375, 98, 87, 19);
+				lblCategoria.setBounds(592, 98, 87, 19);
 				panelProducto.add(lblCategoria);
 			}
 			{
 				txtCategoria = new JTextField();
 				txtCategoria.addKeyListener(this);
 				txtCategoria.setColumns(10);
-				txtCategoria.setBounds(464, 97, 117, 25);
+				txtCategoria.setBounds(681, 97, 117, 25);
 				panelProducto.add(txtCategoria);
 			}
 			{
 				lblNombreP = new JLabel("Nombre:");
 				lblNombreP.setFont(new Font("Verdana", Font.PLAIN, 15));
-				lblNombreP.setBounds(217, 137, 87, 19);
+				lblNombreP.setBounds(434, 137, 87, 19);
 				panelProducto.add(lblNombreP);
 			}
 			{
 				txtNombreProducto = new JTextField();
 				txtNombreProducto.setColumns(10);
-				txtNombreProducto.setBounds(296, 136, 349, 25);
+				txtNombreProducto.setBounds(513, 136, 349, 25);
 				panelProducto.add(txtNombreProducto);
 			}
 			{
 				lblGarantia = new JLabel("Garantía:");
 				lblGarantia.setFont(new Font("Verdana", Font.PLAIN, 15));
-				lblGarantia.setBounds(217, 175, 87, 19);
+				lblGarantia.setBounds(434, 175, 87, 19);
 				panelProducto.add(lblGarantia);
 			}
 			{
 				lblPrecio = new JLabel("Precio:");
 				lblPrecio.setFont(new Font("Verdana", Font.PLAIN, 15));
-				lblPrecio.setBounds(217, 214, 69, 19);
+				lblPrecio.setBounds(434, 214, 69, 19);
 				panelProducto.add(lblPrecio);
 			}
 			{
 				lblCantProducto = new JLabel("Cantidad:");
 				lblCantProducto.setFont(new Font("Verdana", Font.PLAIN, 15));
-				lblCantProducto.setBounds(423, 215, 87, 19);
+				lblCantProducto.setBounds(640, 215, 87, 19);
 				panelProducto.add(lblCantProducto);
 			}
 			{
 				txtCantProducto = new JTextField();
 				txtCantProducto.addKeyListener(this);
 				txtCantProducto.setColumns(10);
-				txtCantProducto.setBounds(528, 213, 117, 25);
+				txtCantProducto.setBounds(745, 213, 117, 25);
 				panelProducto.add(txtCantProducto);
 			}
 			{
 				txtPrecio = new JTextField();
 				txtPrecio.addKeyListener(this);
 				txtPrecio.setColumns(10);
-				txtPrecio.setBounds(296, 213, 117, 25);
+				txtPrecio.setBounds(513, 213, 117, 25);
 				panelProducto.add(txtPrecio);
 			}
 			{
 				btnModificarProducto = new JButton("Modificar");
 				btnModificarProducto.addActionListener(this);
 				btnModificarProducto.setFont(new Font("Verdana", Font.PLAIN, 13));
-				btnModificarProducto.setBounds(374, 257, 116, 25);
+				btnModificarProducto.setBounds(591, 257, 116, 25);
 				panelProducto.add(btnModificarProducto);
 			}
 			{
 				lblRegistrarStock = new JLabel("REGISTRAR STOCK");
 				lblRegistrarStock.setFont(new Font("Tahoma", Font.PLAIN, 19));
-				lblRegistrarStock.setBounds(217, 308, 203, 19);
+				lblRegistrarStock.setBounds(434, 308, 203, 19);
 				panelProducto.add(lblRegistrarStock);
 			}
 			{
 				lblIdStock = new JLabel("ID:");
 				lblIdStock.setFont(new Font("Verdana", Font.PLAIN, 15));
-				lblIdStock.setBounds(217, 348, 45, 19);
+				lblIdStock.setBounds(434, 348, 45, 19);
 				panelProducto.add(lblIdStock);
 			}
 			{
 				txtIdProdStock = new JTextField();
 				txtIdProdStock.addKeyListener(this);
 				txtIdProdStock.setColumns(10);
-				txtIdProdStock.setBounds(249, 347, 96, 25);
+				txtIdProdStock.setBounds(466, 347, 96, 25);
 				panelProducto.add(txtIdProdStock);
 			}
 			{
 				lblCantStock = new JLabel("Cantidad:");
 				lblCantStock.setFont(new Font("Verdana", Font.PLAIN, 15));
-				lblCantStock.setBounds(375, 348, 87, 19);
+				lblCantStock.setBounds(592, 348, 87, 19);
 				panelProducto.add(lblCantStock);
 			}
 			{
 				txtCantStock = new JTextField();
 				txtCantStock.addKeyListener(this);
 				txtCantStock.setColumns(10);
-				txtCantStock.setBounds(464, 347, 117, 25);
+				txtCantStock.setBounds(681, 347, 117, 25);
 				panelProducto.add(txtCantStock);
 			}
 			{
 				btnRegistrarStock = new JButton("Registrar");
 				btnRegistrarStock.addActionListener(this);
 				btnRegistrarStock.setFont(new Font("Verdana", Font.PLAIN, 13));
-				btnRegistrarStock.setBounds(356, 382, 116, 25);
+				btnRegistrarStock.setBounds(573, 382, 116, 25);
 				panelProducto.add(btnRegistrarStock);
 			}
 			{
@@ -630,33 +630,33 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 				btnRegistrarProducto = new JButton("Registrar");
 				btnRegistrarProducto.addActionListener(this);
 				btnRegistrarProducto.setFont(new Font("Verdana", Font.PLAIN, 13));
-				btnRegistrarProducto.setBounds(227, 257, 116, 25);
+				btnRegistrarProducto.setBounds(444, 257, 116, 25);
 				panelProducto.add(btnRegistrarProducto);
 			}
 			{
 				txtGarantia = new JTextField();
 				txtGarantia.setColumns(10);
-				txtGarantia.setBounds(295, 174, 118, 25);
+				txtGarantia.setBounds(512, 174, 118, 25);
 				panelProducto.add(txtGarantia);
 			}
 			{
 				lblIdProveedor = new JLabel("ID Proveedor:");
 				lblIdProveedor.setFont(new Font("Verdana", Font.PLAIN, 15));
-				lblIdProveedor.setBounds(420, 175, 118, 19);
+				lblIdProveedor.setBounds(637, 175, 118, 19);
 				panelProducto.add(lblIdProveedor);
 			}
 			{
 				txtIdProveedor = new JTextField();
 				txtIdProveedor.addKeyListener(this);
 				txtIdProveedor.setColumns(10);
-				txtIdProveedor.setBounds(528, 174, 117, 25);
+				txtIdProveedor.setBounds(745, 174, 117, 25);
 				panelProducto.add(txtIdProveedor);
 			}
 			{
 				btnBorrarProducto = new JButton("Borrar");
 				btnBorrarProducto.addActionListener(this);
 				btnBorrarProducto.setFont(new Font("Verdana", Font.PLAIN, 13));
-				btnBorrarProducto.setBounds(689, 172, 116, 25);
+				btnBorrarProducto.setBounds(906, 172, 116, 25);
 				panelProducto.add(btnBorrarProducto);
 			}
 			{
@@ -699,7 +699,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 				{
 					lblHistorialVentas = new JLabel("HISTORIAL DE VENTAS");
 					lblHistorialVentas.setFont(new Font("Verdana", Font.PLAIN, 25));
-					lblHistorialVentas.setBounds(121, 27, 297, 46);
+					lblHistorialVentas.setBounds(216, 27, 297, 46);
 					panelVenta.add(lblHistorialVentas);
 				}
 				{
@@ -749,14 +749,14 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 					btnRegistrarProveedor = new JButton("Registrar");
 					btnRegistrarProveedor.addActionListener(this);
 					btnRegistrarProveedor.setFont(new Font("Verdana", Font.PLAIN, 13));
-					btnRegistrarProveedor.setBounds(294, 248, 116, 25);
+					btnRegistrarProveedor.setBounds(524, 245, 116, 25);
 					panelProveedor.add(btnRegistrarProveedor);
 				}
 				{
 					btnModificarProveedor = new JButton("Modificar");
 					btnModificarProveedor.addActionListener(this);
 					btnModificarProveedor.setFont(new Font("Verdana", Font.PLAIN, 13));
-					btnModificarProveedor.setBounds(441, 248, 116, 25);
+					btnModificarProveedor.setBounds(671, 245, 116, 25);
 					panelProveedor.add(btnModificarProveedor);
 				}
 				{
@@ -764,13 +764,13 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 					txtBuscarProveedor.addKeyListener(this);
 					txtBuscarProveedor.setColumns(10);
 					txtBuscarProveedor.setBackground(Color.WHITE);
-					txtBuscarProveedor.setBounds(195, 36, 447, 25);
+					txtBuscarProveedor.setBounds(425, 33, 447, 25);
 					panelProveedor.add(txtBuscarProveedor);
 				}
 				{
 					lblId = new JLabel("ID:");
 					lblId.setFont(new Font("Verdana", Font.PLAIN, 15));
-					lblId.setBounds(77, 81, 31, 14);
+					lblId.setBounds(307, 78, 31, 14);
 					panelProveedor.add(lblId);
 				}
 				{
@@ -778,13 +778,13 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 					txtIDProveedor.addKeyListener(this);
 					txtIDProveedor.setColumns(10);
 					txtIDProveedor.setBackground(Color.WHITE);
-					txtIDProveedor.setBounds(106, 78, 78, 25);
+					txtIDProveedor.setBounds(336, 75, 78, 25);
 					panelProveedor.add(txtIDProveedor);
 				}
 				{
 					lblRuc = new JLabel("RUC:");
 					lblRuc.setFont(new Font("Verdana", Font.PLAIN, 15));
-					lblRuc.setBounds(229, 81, 44, 14);
+					lblRuc.setBounds(459, 78, 44, 14);
 					panelProveedor.add(lblRuc);
 				}
 				{
@@ -792,13 +792,13 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 					txtRucProveedor.addKeyListener(this);
 					txtRucProveedor.setColumns(10);
 					txtRucProveedor.setBackground(Color.WHITE);
-					txtRucProveedor.setBounds(283, 78, 164, 25);
+					txtRucProveedor.setBounds(513, 75, 164, 25);
 					panelProveedor.add(txtRucProveedor);
 				}
 				{
-					lblNombre = new JLabel("NOMBRE:");
+					lblNombre = new JLabel("Nombre:");
 					lblNombre.setFont(new Font("Verdana", Font.PLAIN, 15));
-					lblNombre.setBounds(478, 81, 84, 14);
+					lblNombre.setBounds(708, 78, 84, 14);
 					panelProveedor.add(lblNombre);
 				}
 				{
@@ -806,13 +806,13 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 					txtNombreProveedor.addKeyListener(this);
 					txtNombreProveedor.setColumns(10);
 					txtNombreProveedor.setBackground(Color.WHITE);
-					txtNombreProveedor.setBounds(555, 78, 219, 25);
+					txtNombreProveedor.setBounds(785, 75, 219, 25);
 					panelProveedor.add(txtNombreProveedor);
 				}
 				{
-					lblTelfono = new JLabel("TELÉFONO:");
+					lblTelfono = new JLabel("Teléfono:");
 					lblTelfono.setFont(new Font("Verdana", Font.PLAIN, 15));
-					lblTelfono.setBounds(77, 122, 107, 14);
+					lblTelfono.setBounds(307, 119, 107, 14);
 					panelProveedor.add(lblTelfono);
 				}
 				{
@@ -820,13 +820,13 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 					txtTelefonoProveedor.addKeyListener(this);
 					txtTelefonoProveedor.setColumns(10);
 					txtTelefonoProveedor.setBackground(Color.WHITE);
-					txtTelefonoProveedor.setBounds(171, 119, 134, 25);
+					txtTelefonoProveedor.setBounds(401, 116, 134, 25);
 					panelProveedor.add(txtTelefonoProveedor);
 				}
 				{
-					lblCorreo = new JLabel("CORREO:");
+					lblCorreo = new JLabel("Correo:");
 					lblCorreo.setFont(new Font("Verdana", Font.PLAIN, 15));
-					lblCorreo.setBounds(331, 122, 78, 14);
+					lblCorreo.setBounds(561, 119, 78, 14);
 					panelProveedor.add(lblCorreo);
 				}
 				{
@@ -834,13 +834,13 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 					txtCorreoProveedor.addKeyListener(this);
 					txtCorreoProveedor.setColumns(10);
 					txtCorreoProveedor.setBackground(Color.WHITE);
-					txtCorreoProveedor.setBounds(411, 119, 201, 25);
+					txtCorreoProveedor.setBounds(641, 116, 201, 25);
 					panelProveedor.add(txtCorreoProveedor);
 				}
 				{
-					lblDireccin = new JLabel("DIRECCIÓN:");
+					lblDireccin = new JLabel("DIrección:");
 					lblDireccin.setFont(new Font("Verdana", Font.PLAIN, 15));
-					lblDireccin.setBounds(77, 169, 107, 14);
+					lblDireccin.setBounds(307, 166, 107, 14);
 					panelProveedor.add(lblDireccin);
 				}
 				{
@@ -848,13 +848,13 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 					txtDireccionProveedor.addKeyListener(this);
 					txtDireccionProveedor.setColumns(10);
 					txtDireccionProveedor.setBackground(Color.WHITE);
-					txtDireccionProveedor.setBounds(185, 166, 178, 25);
+					txtDireccionProveedor.setBounds(401, 163, 178, 25);
 					panelProveedor.add(txtDireccionProveedor);
 				}
 				{
-					lblCorreo_2 = new JLabel("ESTADO:");
+					lblCorreo_2 = new JLabel("Estado:");
 					lblCorreo_2.setFont(new Font("Verdana", Font.PLAIN, 15));
-					lblCorreo_2.setBounds(373, 172, 78, 14);
+					lblCorreo_2.setBounds(603, 169, 78, 14);
 					panelProveedor.add(lblCorreo_2);
 				}
 				{
@@ -862,13 +862,13 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 					txtEstadoProveedor.addKeyListener(this);
 					txtEstadoProveedor.setColumns(10);
 					txtEstadoProveedor.setBackground(Color.WHITE);
-					txtEstadoProveedor.setBounds(465, 169, 134, 25);
+					txtEstadoProveedor.setBounds(695, 166, 134, 25);
 					panelProveedor.add(txtEstadoProveedor);
 				}
 				{
-					lblNewLabel = new JLabel("BUSCAR:");
+					lblNewLabel = new JLabel("Buscar:");
 					lblNewLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
-					lblNewLabel.setBounds(106, 42, 84, 14);
+					lblNewLabel.setBounds(336, 39, 84, 14);
 					panelProveedor.add(lblNewLabel);
 				}
 				{
@@ -882,12 +882,12 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 					btnBorrarProveedor = new JButton("Borrar");
 					btnBorrarProveedor.addActionListener(this);
 					btnBorrarProveedor.setFont(new Font("Verdana", Font.PLAIN, 13));
-					btnBorrarProveedor.setBounds(675, 134, 116, 25);
+					btnBorrarProveedor.setBounds(905, 131, 116, 25);
 					panelProveedor.add(btnBorrarProveedor);
 				}
 			}
 			lblclock = new JLabel("");
-			lblclock.setBounds(579, 10, 256, 19);
+			lblclock.setBounds(1090, 10, 256, 19);
 			contentPane.add(lblclock);
 			lblclock.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			

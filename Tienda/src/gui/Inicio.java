@@ -60,6 +60,7 @@ public class Inicio extends JFrame implements ActionListener, WindowListener {
 	private JSlider controlvol;
 	private static FloatControl volumeControl;
 	private JMenuItem mnSalir;
+	private JMenuItem mnProgramador;
 
 	/**
 	 * Launch the application.
@@ -231,6 +232,12 @@ public class Inicio extends JFrame implements ActionListener, WindowListener {
             
             mnSalir = new JMenuItem("Salir");
             mnSalir.addActionListener(this);
+            {
+            	mnProgramador = new JMenuItem("Programador");
+            	mnProgramador.addActionListener(this);
+            	mnProgramador.setFont(new Font("Verdana", Font.PLAIN, 17));
+            	mnNewMenu.add(mnProgramador);
+            }
             mnSalir.setFont(new Font("Verdana", Font.PLAIN, 17));
             mnNewMenu.add(mnSalir);
 
@@ -287,6 +294,9 @@ public class Inicio extends JFrame implements ActionListener, WindowListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == mnProgramador) {
+			do_mnProgramador_actionPerformed(e);
+		}
 		if (e.getSource() == mnSalir) {
 			do_mnSalir_actionPerformed(e);
 		}
@@ -352,5 +362,9 @@ public class Inicio extends JFrame implements ActionListener, WindowListener {
 	}
 	protected void do_this_windowClosed(WindowEvent e) {
 		System.exit(0);
+	}
+	protected void do_mnProgramador_actionPerformed(ActionEvent e) {
+		VenProgramador vProgra = new VenProgramador();
+		vProgra.setVisible(true);
 	}
 }

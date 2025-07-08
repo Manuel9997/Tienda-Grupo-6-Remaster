@@ -273,64 +273,64 @@ private JLabel lblVendedor;
 				panelVenta.setLayout(null);
 				{
 					cboTipoPago = new JComboBox();
-					cboTipoPago.setBounds(387, 132, 116, 25);
+					cboTipoPago.setBounds(449, 144, 116, 25);
 					panelVenta.add(cboTipoPago);
 					cboTipoPago.setFont(new Font("Verdana", Font.PLAIN, 15));
 					cboTipoPago.setModel(new DefaultComboBoxModel(new String[] {"Efectivo", "Débito", "Crédito", "Yape/Plin"}));
 				}
 				{
 					cboComprobante = new JComboBox();
-					cboComprobante.setBounds(387, 167, 116, 25);
+					cboComprobante.setBounds(449, 179, 116, 25);
 					panelVenta.add(cboComprobante);
 					cboComprobante.setFont(new Font("Verdana", Font.PLAIN, 15));
 					cboComprobante.setModel(new DefaultComboBoxModel(new String[] {"Boleta", "Factura"}));
 				}
 				{
 					lblNewLabel = new JLabel("Tipo de pago:");
-					lblNewLabel.setBounds(265, 132, 116, 25);
+					lblNewLabel.setBounds(327, 144, 116, 25);
 					panelVenta.add(lblNewLabel);
 					lblNewLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
 				}
 				{
 					lblComprobante = new JLabel("Comprobante:");
-					lblComprobante.setBounds(265, 167, 116, 25);
+					lblComprobante.setBounds(327, 179, 116, 25);
 					panelVenta.add(lblComprobante);
 					lblComprobante.setFont(new Font("Verdana", Font.PLAIN, 15));
 				}
 				{
 					lblId = new JLabel("ID Producto:");
-					lblId.setBounds(697, 137, 99, 25);
+					lblId.setBounds(759, 149, 99, 25);
 					panelVenta.add(lblId);
 					lblId.setFont(new Font("Verdana", Font.PLAIN, 15));
 				}
 				{
 					lblDni = new JLabel("DNI:");
-					lblDni.setBounds(265, 99, 44, 25);
+					lblDni.setBounds(327, 111, 44, 25);
 					panelVenta.add(lblDni);
 					lblDni.setFont(new Font("Verdana", Font.PLAIN, 15));
 				}
 				{
 					lblCantidad = new JLabel("Cantidad:");
-					lblCantidad.setBounds(697, 170, 99, 25);
+					lblCantidad.setBounds(759, 182, 99, 25);
 					panelVenta.add(lblCantidad);
 					lblCantidad.setFont(new Font("Verdana", Font.PLAIN, 15));
 				}
 				{
 					txtCantidadVenta = new JTextField();
 					txtCantidadVenta.addKeyListener(this);
-					txtCantidadVenta.setBounds(806, 172, 96, 25);
+					txtCantidadVenta.setBounds(868, 184, 96, 25);
 					panelVenta.add(txtCantidadVenta);
 					txtCantidadVenta.setColumns(10);
 				}
 				{
 					lblVendedor = new JLabel("Vendedor:");
-					lblVendedor.setBounds(265, 237, 84, 25);
+					lblVendedor.setBounds(327, 249, 84, 25);
 					panelVenta.add(lblVendedor);
 					lblVendedor.setFont(new Font("Verdana", Font.PLAIN, 15));
 				}
 				{
 					lblRegistroDeVentas = new JLabel("REGISTRO DE VENTAS");
-					lblRegistroDeVentas.setBounds(436, 13, 284, 38);
+					lblRegistroDeVentas.setBounds(562, 13, 284, 38);
 					panelVenta.add(lblRegistroDeVentas);
 					lblRegistroDeVentas.setFont(new Font("Verdana", Font.PLAIN, 23));
 				}
@@ -354,81 +354,81 @@ private JLabel lblVendedor;
 				}
 				{
 					lblNewLabel_1 = new JLabel("");
-					lblNewLabel_1.setBounds(385, 10, 54, 47);
+					lblNewLabel_1.setBounds(511, 10, 54, 47);
 					panelVenta.add(lblNewLabel_1);
 					lblNewLabel_1.setIcon(new ImageIcon(VenEmpleado.class.getResource("/recursos/check.png")));
 				}
 				{
 					lblCod = new JLabel("Cód:");
 					lblCod.setFont(new Font("Verdana", Font.PLAIN, 15));
-					lblCod.setBounds(697, 99, 44, 25);
+					lblCod.setBounds(759, 111, 44, 25);
 					panelVenta.add(lblCod);
 				}
 				{
 					txtCodEditable = new JTextField();
 					txtCodEditable.addKeyListener(this);
 					txtCodEditable.setColumns(10);
-					txtCodEditable.setBounds(751, 102, 96, 25);
+					txtCodEditable.setBounds(813, 114, 96, 25);
 					panelVenta.add(txtCodEditable);
 				}
 				{
 					lblIdVendedor = new JLabel("ID Vendedor:");
 					lblIdVendedor.setFont(new Font("Verdana", Font.PLAIN, 15));
-					lblIdVendedor.setBounds(265, 202, 116, 25);
+					lblIdVendedor.setBounds(327, 214, 116, 25);
 					panelVenta.add(lblIdVendedor);
 				}
 				{
 					cboIdVendedor = new JComboBox();
 					cboIdVendedor.addItemListener(this);
 					cboIdVendedor.setFont(new Font("Verdana", Font.PLAIN, 15));
-					cboIdVendedor.setBounds(386, 202, 117, 25);
+					cboIdVendedor.setBounds(448, 214, 117, 25);
 					panelVenta.add(cboIdVendedor);
 				}
 				{
 					txtNombreVendedor =  new JTextField();
 					txtNombreVendedor.setEnabled(false);
 					txtNombreVendedor.setColumns(10);
-					txtNombreVendedor.setBounds(348, 239, 155, 25);
+					txtNombreVendedor.setBounds(410, 251, 155, 25);
 					panelVenta.add(txtNombreVendedor);
 				}
 				{
 					txtDniClienteVenta = new JTextField();
 					txtDniClienteVenta.addKeyListener(this);
 					txtDniClienteVenta.setColumns(10);
-					txtDniClienteVenta.setBounds(348, 99, 117, 25);
+					txtDniClienteVenta.setBounds(410, 111, 117, 25);
 					panelVenta.add(txtDniClienteVenta);
 				}
 				{
 					txtIdProductoVenta = new JTextField();
 					txtIdProductoVenta.addKeyListener(this);
 					txtIdProductoVenta.setColumns(10);
-					txtIdProductoVenta.setBounds(806, 137, 96, 25);
+					txtIdProductoVenta.setBounds(868, 149, 96, 25);
 					panelVenta.add(txtIdProductoVenta);
 				}
 				{
 					btnRegistrarDetalleVentas = new JButton("Registrar");
 					btnRegistrarDetalleVentas.addActionListener(this);
 					btnRegistrarDetalleVentas.setFont(new Font("Verdana", Font.PLAIN, 13));
-					btnRegistrarDetalleVentas.setBounds(925, 99, 116, 25);
+					btnRegistrarDetalleVentas.setBounds(987, 111, 116, 25);
 					panelVenta.add(btnRegistrarDetalleVentas);
 				}
 				{
 					btnModificarDetalleVenta = new JButton("Modificar");
 					btnModificarDetalleVenta.addActionListener(this);
 					btnModificarDetalleVenta.setFont(new Font("Verdana", Font.PLAIN, 13));
-					btnModificarDetalleVenta.setBounds(925, 134, 116, 25);
+					btnModificarDetalleVenta.setBounds(987, 146, 116, 25);
 					panelVenta.add(btnModificarDetalleVenta);
 				}
 				{
 					btnModificarVenta = new JButton("Modificar");
 					btnModificarVenta.addActionListener(this);
 					btnModificarVenta.setFont(new Font("Verdana", Font.PLAIN, 13));
-					btnModificarVenta.setBounds(535, 167, 116, 25);
+					btnModificarVenta.setBounds(597, 179, 116, 25);
 					panelVenta.add(btnModificarVenta);
 				}
 				{
 					panel = new JPanel();
-					panel.setBounds(10, 13, 217, 245);
+					panel.setBounds(10, 29, 217, 245);
 					panelVenta.add(panel);
 					panel.setLayout(null);
 					{
@@ -485,39 +485,39 @@ private JLabel lblVendedor;
 							btnRegistrarVenta = new JButton("Registrar");
 							btnRegistrarVenta.addActionListener(this);
 							btnRegistrarVenta.setFont(new Font("Verdana", Font.PLAIN, 13));
-							btnRegistrarVenta.setBounds(535, 132, 116, 25);
+							btnRegistrarVenta.setBounds(597, 144, 116, 25);
 							panelVenta.add(btnRegistrarVenta);
 						}
 						{
 							btnEliminarVenta = new JButton("Eliminar");
 							btnEliminarVenta.setFont(new Font("Verdana", Font.PLAIN, 13));
-							btnEliminarVenta.setBounds(535, 203, 116, 25);
+							btnEliminarVenta.setBounds(597, 215, 116, 25);
 							panelVenta.add(btnEliminarVenta);
 						}
 						{
 							lblCodNoEditable = new JLabel("Cód:");
 							lblCodNoEditable.setFont(new Font("Verdana", Font.PLAIN, 15));
-							lblCodNoEditable.setBounds(265, 64, 44, 25);
+							lblCodNoEditable.setBounds(327, 76, 44, 25);
 							panelVenta.add(lblCodNoEditable);
 						}
 						{
 							txtCodNoEditable = new JTextField();
 							txtCodNoEditable.setEnabled(false);
 							txtCodNoEditable.setColumns(10);
-							txtCodNoEditable.setBounds(348, 64, 96, 25);
+							txtCodNoEditable.setBounds(410, 76, 96, 25);
 							panelVenta.add(txtCodNoEditable);
 						}
 						{
 							lblIdDetalle = new JLabel("ID Detalle:");
 							lblIdDetalle.setFont(new Font("Verdana", Font.PLAIN, 15));
-							lblIdDetalle.setBounds(697, 67, 90, 25);
+							lblIdDetalle.setBounds(759, 79, 90, 25);
 							panelVenta.add(lblIdDetalle);
 						}
 						{
 							txtIdDetalle = new JTextField();
 							txtIdDetalle.setEnabled(false);
 							txtIdDetalle.setColumns(10);
-							txtIdDetalle.setBounds(806, 67, 96, 25);
+							txtIdDetalle.setBounds(868, 79, 96, 25);
 							panelVenta.add(txtIdDetalle);
 						}
 						{
@@ -531,14 +531,14 @@ private JLabel lblVendedor;
 							btnMostrarVenta = new JButton("Mostrar");
 							btnMostrarVenta.addActionListener(this);
 							btnMostrarVenta.setFont(new Font("Verdana", Font.PLAIN, 13));
-							btnMostrarVenta.setBounds(535, 99, 116, 25);
+							btnMostrarVenta.setBounds(597, 111, 116, 25);
 							panelVenta.add(btnMostrarVenta);
 						}
 						{
 							btnMostrarDetalleVenta = new JButton("Mostrar");
 							btnMostrarDetalleVenta.addActionListener(this);
 							btnMostrarDetalleVenta.setFont(new Font("Verdana", Font.PLAIN, 13));
-							btnMostrarDetalleVenta.setBounds(925, 68, 116, 25);
+							btnMostrarDetalleVenta.setBounds(987, 80, 116, 25);
 							panelVenta.add(btnMostrarDetalleVenta);
 						}
 						{
@@ -562,13 +562,13 @@ private JLabel lblVendedor;
 					txtIdBuscarProducto = new JTextField();
 					txtIdBuscarProducto.addKeyListener(this);
 					txtIdBuscarProducto.setColumns(10);
-					txtIdBuscarProducto.setBounds(247, 66, 406, 25);
+					txtIdBuscarProducto.setBounds(515, 65, 406, 25);
 					panelProducto.add(txtIdBuscarProducto);
 				}
 				{
 					lblIdProducto = new JLabel("Buscar:");
 					lblIdProducto.setFont(new Font("Verdana", Font.PLAIN, 15));
-					lblIdProducto.setBounds(172, 64, 81, 25);
+					lblIdProducto.setBounds(440, 63, 81, 25);
 					panelProducto.add(lblIdProducto);
 				}
 				{
@@ -590,41 +590,41 @@ private JLabel lblVendedor;
 				panelCliente.setLayout(null);
 				{
 					lblDniCliente = new JLabel("DNI:");
-					lblDniCliente.setFont(new Font("Tahoma", Font.PLAIN, 15));
-					lblDniCliente.setBounds(64, 86, 99, 25);
+					lblDniCliente.setFont(new Font("Verdana", Font.PLAIN, 15));
+					lblDniCliente.setBounds(314, 84, 99, 25);
 					panelCliente.add(lblDniCliente);
 				}
 				{
 					lblIdNombreCliente = new JLabel("Nombre:");
-					lblIdNombreCliente.setFont(new Font("Tahoma", Font.PLAIN, 15));
-					lblIdNombreCliente.setBounds(64, 133, 99, 25);
+					lblIdNombreCliente.setFont(new Font("Verdana", Font.PLAIN, 15));
+					lblIdNombreCliente.setBounds(314, 131, 99, 25);
 					panelCliente.add(lblIdNombreCliente);
 				}
 				{
 					lblTeleCliente = new JLabel("Teléfono:");
-					lblTeleCliente.setFont(new Font("Tahoma", Font.PLAIN, 15));
-					lblTeleCliente.setBounds(64, 179, 99, 25);
+					lblTeleCliente.setFont(new Font("Verdana", Font.PLAIN, 15));
+					lblTeleCliente.setBounds(314, 177, 99, 25);
 					panelCliente.add(lblTeleCliente);
 				}
 				{
 					txtDniCliente = new JTextField();
 					txtDniCliente.addKeyListener(this);
 					txtDniCliente.setColumns(10);
-					txtDniCliente.setBounds(137, 86, 117, 25);
+					txtDniCliente.setBounds(387, 84, 117, 25);
 					panelCliente.add(txtDniCliente);
 				}
 				{
 					txtNombreCliente = new JTextField();
 					txtNombreCliente.addKeyListener(this);
 					txtNombreCliente.setColumns(10);
-					txtNombreCliente.setBounds(137, 133, 370, 25);
+					txtNombreCliente.setBounds(387, 131, 370, 25);
 					panelCliente.add(txtNombreCliente);
 				}
 				{
 					txtTelefonoCliente = new JTextField();
 					txtTelefonoCliente.addKeyListener(this);
 					txtTelefonoCliente.setColumns(10);
-					txtTelefonoCliente.setBounds(137, 179, 117, 25);
+					txtTelefonoCliente.setBounds(387, 177, 117, 25);
 					panelCliente.add(txtTelefonoCliente);
 				}
 				{
@@ -642,27 +642,27 @@ private JLabel lblVendedor;
 					btnRegistrarCliente = new JButton("Registrar");
 					btnRegistrarCliente.addActionListener(this);
 					btnRegistrarCliente.setFont(new Font("Verdana", Font.PLAIN, 13));
-					btnRegistrarCliente.setBounds(613, 105, 116, 25);
+					btnRegistrarCliente.setBounds(863, 103, 116, 25);
 					panelCliente.add(btnRegistrarCliente);
 				}
 				{
 					btnModificarCliente = new JButton("Modificar");
 					btnModificarCliente.addActionListener(this);
 					btnModificarCliente.setFont(new Font("Verdana", Font.PLAIN, 13));
-					btnModificarCliente.setBounds(613, 155, 116, 25);
+					btnModificarCliente.setBounds(863, 153, 116, 25);
 					panelCliente.add(btnModificarCliente);
 				}
 				{
 					txtBuscarCliente = new JTextField();
 					txtBuscarCliente.addKeyListener(this);
 					txtBuscarCliente.setColumns(10);
-					txtBuscarCliente.setBounds(236, 23, 406, 25);
+					txtBuscarCliente.setBounds(392, 22, 441, 25);
 					panelCliente.add(txtBuscarCliente);
 				}
 				{
 					lblIdProducto_1 = new JLabel("Buscar:");
 					lblIdProducto_1.setFont(new Font("Verdana", Font.PLAIN, 15));
-					lblIdProducto_1.setBounds(158, 23, 81, 25);
+					lblIdProducto_1.setBounds(314, 22, 81, 25);
 					panelCliente.add(lblIdProducto_1);
 				}
 				{
@@ -683,7 +683,7 @@ private JLabel lblVendedor;
 		}
 		{
 			lblclock = new JLabel("");
-			lblclock.setBounds(551, 10, 284, 25);
+			lblclock.setBounds(1062, 10, 284, 25);
 			contentPane.add(lblclock);
 			lblclock.setFont(new Font("Verdana", Font.PLAIN, 14));
 		}
