@@ -65,4 +65,14 @@ public void ModificarDetalleVenta(DetalleVenta dv) {
         System.out.println("ERROR al modificar detalle de venta: " + e);
     }
 }
+public void EliminarDetalleVenta(int idDetalle) {
+    try {
+        Connection cnx = ConexionMySQL.getConexion();
+        CallableStatement csta = cnx.prepareCall("{call sp_EliminarDetalleVenta(?)}");
+        csta.setInt(1, idDetalle);
+        csta.executeUpdate();
+    } catch (Exception e) {
+        System.out.println("ERROR al eliminar detalle de venta: " + e);
+    }
+}
 }

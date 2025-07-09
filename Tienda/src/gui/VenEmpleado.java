@@ -133,6 +133,11 @@ private JLabel lblVendedor;
 	private JButton btnBorrarVenta;
 	private JButton btnBorrarCliente;
 	private JButton btnMostrarCliente;
+	private JButton btnTotal;
+	private JButton btnMostrarVenta;
+	private JButton btnMostrarDetalleVenta;
+	private JButton btnMostrarVentaCompleta;
+	private JButton btnEliminarDetalleVenta;
 	public int day;
 	public int year;
 	public int month;
@@ -490,6 +495,7 @@ private JLabel lblVendedor;
 						}
 						{
 							btnEliminarVenta = new JButton("Eliminar");
+							btnEliminarVenta.addActionListener(this);
 							btnEliminarVenta.setFont(new Font("Verdana", Font.PLAIN, 13));
 							btnEliminarVenta.setBounds(597, 215, 116, 25);
 							panelVenta.add(btnEliminarVenta);
@@ -547,6 +553,13 @@ private JLabel lblVendedor;
 							btnMostrarVentaCompleta.setFont(new Font("Verdana", Font.PLAIN, 13));
 							btnMostrarVentaCompleta.setBounds(1079, 318, 116, 25);
 							panelVenta.add(btnMostrarVentaCompleta);
+						}
+						{
+							btnEliminarDetalleVenta = new JButton("Eliminar");
+							btnEliminarDetalleVenta.addActionListener(this);
+							btnEliminarDetalleVenta.setFont(new Font("Verdana", Font.PLAIN, 13));
+							btnEliminarDetalleVenta.setBounds(987, 183, 116, 25);
+							panelVenta.add(btnEliminarDetalleVenta);
 						}
 						btnSuma.addActionListener(this);
 					}
@@ -694,6 +707,12 @@ private JLabel lblVendedor;
 		 LlenarCombo();
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnEliminarDetalleVenta) {
+			do_btnEliminarDetalleVenta_actionPerformed(e);
+		}
+		if (e.getSource() == btnEliminarVenta) {
+			do_btnEliminarVenta_actionPerformed(e);
+		}
 		if (e.getSource() == btnMostrarDetalleVenta) {
 			do_btnMostrarDetalleVenta_actionPerformed(e);
 		}
@@ -1134,7 +1153,7 @@ private JLabel lblVendedor;
 				MantProducto mp= new MantProducto();
 				MantVenta mv = new MantVenta();
 				
-				if (!mv.BuscarVenta(txtCodEditable.getText())) {
+				if (!mv.BuscarVenta(Integer.parseInt(txtCodEditable.getText()))) {
 	                JOptionPane.showMessageDialog(this, "Código de venta no encontrado");
 	                return;
 	            }
@@ -1235,6 +1254,83 @@ private JLabel lblVendedor;
 	protected void do_btnBorrarVenta_actionPerformed(ActionEvent e) {
 		LimpiarVentaCompleta();
 	}
+	protected void do_btnEliminarVenta_actionPerformed(ActionEvent e) {
+	    try {
+	        if (txtCodNoEditable.getText().trim().isEmpty()) {
+	            JOptionPane.showMessageDialog(this, "Seleccione una venta para eliminar.");
+	            return;
+	        }
+
+	        int codVenta = Integer.parseInt(txtCodNoEditable.getText());
+
+	        int confirmacion = JOptionPane.showConfirmDialog(this,
+	                "¿Está seguro de que desea eliminar esta venta y todos sus detalles?",
+	                "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+
+	        if (confirmacion == JOptionPane.YES_OPTION) {
+	            MantVenta mv = new MantVenta();
+	            mv.EliminarVentayDetalles(codVenta);
+	            JOptionPane.showMessageDialog(this, "Venta eliminada correctamente.");
+
+	            LimpiarVentaCompleta();
+
+	            // Refrescar la tabla según el modo actual
+	            switch (modoTabla) {
+	                case "COMPLETA":
+	                    ListarVentasDelDia();
+	                    break;
+	                case "VENTA":
+	                    ListarVenta();
+	                    break;
+	                case "DETALLE":
+	                    ListarDetalleVenta();
+	                    break;
+	            }
+	        }
+	    } catch (Exception e2) {
+	        JOptionPane.showMessageDialog(this, "Error al eliminar la venta. Verifique la selección.");
+	    }
+	}
+	protected void do_btnEliminarDetalleVenta_actionPerformed(ActionEvent e) {
+		  try {
+		        if (txtIdDetalle.getText().isEmpty()) {
+		            JOptionPane.showMessageDialog(this, "Seleccione un detalle a eliminar.");
+		            return;
+		        }
+
+		        int confirmacion = JOptionPane.showConfirmDialog(this,
+		            "¿Está seguro de que desea eliminar este detalle de venta?",
+		            "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+
+		        if (confirmacion == JOptionPane.YES_OPTION) {
+		            int idDetalle = Integer.parseInt(txtIdDetalle.getText());
+
+		            MantDetalleVenta mdv = new MantDetalleVenta();
+		            mdv.EliminarDetalleVenta(idDetalle);
+
+		            JOptionPane.showMessageDialog(this, "Detalle de venta eliminado correctamente.");
+
+		            // Refrescar tabla según el modo actual
+		            switch (modoTabla) {
+		                case "COMPLETA": 
+		                	ListarVentasDelDia(); 
+		                	break;
+		                case "VENTA": 
+		                	ListarVenta(); 
+		                	break;
+		                case "DETALLE": 
+		                	ListarDetalleVenta(); 
+		                	break;
+		            }
+
+		            LimpiarVentaCompleta();
+		        }
+
+		    } catch (Exception ex) {
+		        JOptionPane.showMessageDialog(this, "Error al eliminar el detalle de venta.");
+		        ex.printStackTrace();
+		    }
+	}
 	//                                                                             LLENAR EL COMBO DEL VENDEDOR
 	protected void do_cboIdVendedor_itemStateChanged(ItemEvent e) {
 		String id = cboIdVendedor.getSelectedItem().toString();
@@ -1267,10 +1363,6 @@ private JLabel lblVendedor;
 	}
 	//                                                                               CALCULAR TOTAL DE VENTA
 	private ArrayList<Double> listaSubtotales = new ArrayList<>();
-	private JButton btnTotal;
-	private JButton btnMostrarVenta;
-	private JButton btnMostrarDetalleVenta;
-	private JButton btnMostrarVentaCompleta;
 	
 	protected void do_btnSuma_actionPerformed(ActionEvent e) {
 		try {
@@ -1311,6 +1403,7 @@ private JLabel lblVendedor;
 		txtS.setText("");
 	}
 	//                                                                                       PRODUCTO
+	
 	public void ListarProducto(String filtro) {
 		DefaultTableModel modelo = new DefaultTableModel();
 		MantProducto mp = new MantProducto();
@@ -1409,7 +1502,7 @@ private JLabel lblVendedor;
 					return;
 				}
 				Cliente c = new Cliente(txtDniCliente.getText(), txtNombreCliente.getText(), txtTelefonoCliente.getText());
-				 MantCliente mc = new MantCliente();
+				MantCliente mc = new MantCliente();
 				if(txtDniCliente.getText().length()!=8) {
 					JOptionPane.showMessageDialog(this, "El DNI debe tener 8 dígitos");
 					return;

@@ -19,6 +19,7 @@ import mantenimiento.MantEmpleado;
 import mantenimiento.MantHistorialVentas;
 import mantenimiento.MantProducto;
 import mantenimiento.MantProveedor;
+import mantenimiento.MantVenta;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -143,8 +144,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	private JLabel lblNewLabel;
 	private JLabel lblEliminarVenta;
 	private JLabel lblEliminar;
-	private JTextField txtideliminarhistorial;
-	private JButton btEliminar;
+	private JTextField txtEliminarHistorial;
 	private JTabbedPane tabbedPane;
 	private JPanel panelEmpleado;
 	private JPanel panelProducto;
@@ -169,6 +169,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	private JButton btnMostrarProducto;
 	private JButton btnMostrarProveedor;
 	private JButton btnBorrarProveedor;
+	private JButton btnEliminarVenta;
 	/**
 	 * Launch the application.
 	 */
@@ -715,18 +716,18 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 					panelVenta.add(lblEliminar);
 				}
 				{
-					txtideliminarhistorial = new JTextField();
-					txtideliminarhistorial.setColumns(10);
-					txtideliminarhistorial.setBackground(Color.WHITE);
-					txtideliminarhistorial.setBounds(796, 85, 55, 25);
-					panelVenta.add(txtideliminarhistorial);
+					txtEliminarHistorial = new JTextField();
+					txtEliminarHistorial.setColumns(10);
+					txtEliminarHistorial.setBackground(Color.WHITE);
+					txtEliminarHistorial.setBounds(796, 85, 55, 25);
+					panelVenta.add(txtEliminarHistorial);
 				}
 				{
-					btEliminar = new JButton("Eliminar");
-					btEliminar.setFont(new Font("Verdana", Font.PLAIN, 14));
-					btEliminar.addActionListener(this);
-					btEliminar.setBounds(861, 84, 109, 25);
-					panelVenta.add(btEliminar);
+					btnEliminarVenta = new JButton("Eliminar");
+					btnEliminarVenta.addActionListener(this);
+					btnEliminarVenta.setFont(new Font("Verdana", Font.PLAIN, 13));
+					btnEliminarVenta.setBounds(878, 83, 116, 25);
+					panelVenta.add(btnEliminarVenta);
 				}
 			}
 			{
@@ -899,6 +900,9 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		ListarProveedor("");
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnEliminarVenta) {
+			do_btnEliminarVenta_actionPerformed(e);
+		}
 		if (e.getSource() == btnModificarProveedor) {
 			do_btnModificarProveedor_actionPerformed(e);
 		}
@@ -919,9 +923,6 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		}
 		if (e.getSource() == btnMostrarEmpleado) {
 			do_btnMostrarEmpleado_actionPerformed(e);
-		}
-		if (e.getSource() == btEliminar) {
-			do_btEliminar_actionPerformed(e);
 		}
 		if (e.getSource() == btnRegistrarProveedor) {
 			do_btnRegistrarProveedor_actionPerformed(e);
@@ -1477,7 +1478,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		if(filtro.length() == 0) lista = mhv.ConsultarHistorialVentas(filtro);
 		else lista = mhv.ConsultarHistorialVentas(filtro);
 
-	    modelo.addColumn("ID Venta");
+	    modelo.addColumn("Cód Venta");
 	    modelo.addColumn("ID Detalle");
 	    modelo.addColumn("DNI Cliente");
 	    modelo.addColumn("Nombre Cliente");
@@ -1531,18 +1532,31 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	}
 	protected void do_tablaHistorialVentas_mouseClicked(MouseEvent e) {
 		int fila = tablaHistorialVentas.getSelectedRow();
-		txtideliminarhistorial.setText(String.valueOf(tablaHistorialVentas.getValueAt(fila, 0)));
+		txtEliminarHistorial.setText(String.valueOf(tablaHistorialVentas.getValueAt(fila, 0)));
 
 	}
-	protected void do_btEliminar_actionPerformed(ActionEvent e) {
-		
-		try {
-			MantHistorialVentas mv = new MantHistorialVentas();
-			mv.EliminarHistorial(Integer.parseInt(txtideliminarhistorial.getText()));
-		ListarHistorialVentas("");
-		} catch (Exception e2) {
-			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
-		}
+	protected void do_btnEliminarVenta_actionPerformed(ActionEvent e) {
+	    try {
+	        if (txtEliminarHistorial.getText().trim().isEmpty()) {
+	            JOptionPane.showMessageDialog(this, "Ingrese una venta para eliminar.");
+	            return;
+	        }
+
+	        int codVenta = Integer.parseInt(txtEliminarHistorial.getText());
+
+	        int confirmacion = JOptionPane.showConfirmDialog(this,
+	                "¿Está seguro de que desea eliminar esta venta y todos sus detalles?",
+	                "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+
+	        if (confirmacion == JOptionPane.YES_OPTION) {
+	            MantVenta mv = new MantVenta();
+	            mv.EliminarVentayDetalles(codVenta);
+	            JOptionPane.showMessageDialog(this, "Venta eliminada correctamente.");
+	            ListarHistorialVentas("");
+	        }
+	    } catch (Exception e2) {
+	        JOptionPane.showMessageDialog(this, "Error al eliminar la venta. Verifique.");
+	    }
 	}
 	//                                                                                             PROVEEDOR
 	protected void do_txtIDProveedor_keyTyped(KeyEvent e) {
@@ -1670,12 +1684,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 			modelo.setValueAt(pro.getFechaProveedor(), i, 7);
 			i++;	
 		}
-		tablaProveedor.setModel(modelo);
-	  
-	  
-	  
-	  
-	  
+		tablaProveedor.setModel(modelo); 
 	}
 	protected void do_tablaProveedor_mouseClicked(MouseEvent e) {
 		int fila = tablaProveedor.getSelectedRow();
@@ -1735,8 +1744,9 @@ protected void do_btnModificarProveedor_actionPerformed(ActionEvent e) {
 			
 			MantProveedor mprov = new MantProveedor();
 			mprov.ModificarProveedor(prov);
+			ListarEmpleado(txtIDProveedor.getText()); // Solo se mostrará ese empleado
+			tablaProveedor.setRowSelectionInterval(0, 0);
 			LimpiarProveedor();
-			ListarProveedor("");
 			
 		} catch (Exception e2) {
 			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
@@ -1757,6 +1767,10 @@ protected void do_btnModificarProveedor_actionPerformed(ActionEvent e) {
 	}
 	protected void do_btnBorrarProveedor_actionPerformed(ActionEvent e) {
 		LimpiarProveedor();
+	}
+	protected void do_txtBuscarProveedor_keyPressed(KeyEvent e) {
+		String filtro = txtBuscarProveedor.getText();
+		ListarProveedor(filtro);
 	}
 	//                                                                                             MÚSICA
 	
@@ -1919,8 +1933,4 @@ protected void do_btnModificarProveedor_actionPerformed(ActionEvent e) {
 			jlabelmodo.setText("Modo Normal");
 		}	
 	}	
-	protected void do_txtBuscarProveedor_keyPressed(KeyEvent e) {
-		String filtro = txtBuscarProveedor.getText();
-		ListarProveedor(filtro);
-	}
 }

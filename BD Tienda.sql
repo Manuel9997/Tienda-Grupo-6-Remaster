@@ -131,6 +131,11 @@ select * from Empleado where id_empleado = id;
 
 call sp_BuscarEmpleado(601);
 
+create procedure sp_BuscarEmpleadoporDni(
+dni char(8)
+)
+select * from Empleado where dni_empleado = dni;
+
 #------------------------------------------------------------- PROVEEDOR ------------------------------------------------------------------
 create table Proveedor (
 id_proveedor int primary key,
@@ -194,6 +199,11 @@ id int
 select * from Proveedor where id_proveedor = id;
 
 call sp_BuscarProveedor(6);
+
+create procedure sp_BuscarProveedorporRuc(
+ruc char(11)
+)
+select * from Proveedor where ruc_proveedor = ruc;
 
 #------------------------------------------------------------- PRODUCTO -----------------------------------------------------------------
 create table Producto(
@@ -556,6 +566,47 @@ call sp_ModificarDetalleVenta(5, 245, 2);
 call sp_MostrarDetalleVenta();
 call sp_MostrarHIstorialVentas();
 
+DELIMITER $$
+create procedure sp_EliminarVentayDetalles(in codVenta int)
+begin
+-- Primero se elimina los detalles relacionados
+delete from DetalleVenta where codigo_venta = codVenta;
+
+-- Luego elimina la venta
+delete from Venta where codigo_venta = codVenta;
+end $$
+DELIMITER ;
+
+call sp_EliminarVentayDetalles(6);
+
+DELIMITER $$
+create procedure sp_EliminarDetalleVenta(
+in idDetalle int
+)
+begin
+declare codVenta int;
+
+-- 1. Obtener el código de venta asociado al detalle
+select codigo_venta into codVenta
+from DetalleVenta
+where id_detalleVenta = idDetalle;
+
+-- 2. Eliminar el detalle
+delete from DetalleVenta where id_detalleVenta = idDetalle;
+
+-- 3. Verificar si ya no hay más detalles para esa venta
+if not exists (
+select 1 from DetalleVenta where codigo_venta = codVenta
+) then
+
+-- 4. Eliminar la venta si ya no tiene detalles
+delete from Venta where codigo_venta = codVenta;
+end if;
+end $$
+DELIMITER ;
+
+call sp_EliminarDetalleVenta(2); 
+
 create procedure sp_BuscarVenta(
 codVenta int
 )
@@ -661,23 +712,7 @@ join Empleado as e on v.id_empleado = e.id_empleado
 join DetalleVenta as dv on v.codigo_venta = dv.codigo_venta
 join Producto as p on dv.id_producto = p.id_producto
 where c.dni_cliente like CONCAT('%', filtro, '%')
-or c.nombre_cliente like CONCAT('%'empleado, filtro, '%')
+or c.nombre_cliente like CONCAT('%', filtro, '%')
 order by v.codigo_venta asc;
 end $$
 DELIMITER ;
-
-
-DELIMITER $$
-create procedure sp_BuscarEmpleadoporDni(
-dni char(8)
-)
-select * from Empleado where dni_empleado = dni;
-DELIMITER ;
-
-
-create procedure sp_BuscarProveedorporRuc(
-ruc char(11)
-)
-select * from Proveedor where ruc_proveedor = ruc;
-DELIMITER ;
-
