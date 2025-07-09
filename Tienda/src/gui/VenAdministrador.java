@@ -57,6 +57,7 @@ import java.sql.Date;
 import java.awt.event.MouseEvent;
 import javax.swing.JSeparator;
 import javax.swing.JSlider;
+import java.awt.SystemColor;
 
 public class VenAdministrador extends JFrame implements ActionListener, KeyListener, MouseListener {
 
@@ -83,7 +84,6 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 	private JTextField txtBuscarEmple;
 	private JLabel lblclock;
 	private JScrollPane scrollPane;
-	private JButton jlabelmodo;
 	private JPanel panelVenta;
 	private JScrollPane scrollPane_1;
 	private JLabel lblIdBuscarP;
@@ -289,6 +289,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 			contentPane.add(tabbedPane);
 			
 			panelEmpleado = new JPanel();
+			panelEmpleado.setBackground(SystemColor.activeCaption);
 			panelEmpleado.addMouseListener(this);
 			tabbedPane.addTab("Empleado", null, panelEmpleado, null);
 			panelEmpleado.setLayout(null);
@@ -418,10 +419,6 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 				btnModificarEmpleado.setFont(new Font("Verdana", Font.PLAIN, 13));
 			}
 			{
-				jlabelmodo = new JButton("Modo Oscuro");
-				jlabelmodo.setBounds(10, 231, 133, 33);
-				panelEmpleado.add(jlabelmodo);
-				jlabelmodo.setFont(new Font("Verdana", Font.PLAIN, 14));
 				{
 					scrollPane = new JScrollPane();
 					scrollPane.setBounds(10, 400, 1311, 275);
@@ -473,10 +470,10 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 					btnMostrarEmpleado.setBounds(1205, 365, 116, 25);
 					panelEmpleado.add(btnMostrarEmpleado);
 				}
-				jlabelmodo.addActionListener(this);
 			}
 			
 			panelProducto = new JPanel();
+			panelProducto.setBackground(SystemColor.activeCaption);
 			panelProducto.addMouseListener(this);
 			tabbedPane.addTab("Producto", null, panelProducto, null);
 			panelProducto.setLayout(null);
@@ -669,6 +666,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 			}
 			{
 				panelVenta = new JPanel();
+				panelVenta.setBackground(SystemColor.activeCaption);
 				panelVenta.addMouseListener(this);
 				tabbedPane.addTab("Venta", null, panelVenta, null);
 				panelVenta.setLayout(null);
@@ -732,6 +730,7 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 			}
 			{
 				panelProveedor = new JPanel();
+				panelProveedor.setBackground(SystemColor.activeCaption);
 				panelProveedor.addMouseListener(this);
 				tabbedPane.addTab("Proveedor", null, panelProveedor, null);
 				panelProveedor.setLayout(null);
@@ -935,9 +934,6 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 		}
 		if (e.getSource() == btnRegistrarProducto) {
 			do_btnRegistrarProducto_actionPerformed(e);
-		}
-		if (e.getSource() == jlabelmodo) {
-			do_btnNewButton_actionPerformed(e);
 		}
 		if (e.getSource() == btnModificarEmpleado) {
 			do_btnModificarEmpleado_actionPerformed(e);
@@ -1212,12 +1208,10 @@ public class VenAdministrador extends JFrame implements ActionListener, KeyListe
 				JOptionPane.showMessageDialog(this, "Este ID ya se encuentra registrado");
 				return;
 			}
-			if(me.BuscarEmpleadoporDNI(txtIdEmpleado.getText()) != null) {
+			if(me.BuscarEmpleadoporDNI(txtDniEmpleado.getText()) != null) {
 				JOptionPane.showMessageDialog(this, "Este DNI ya se encuentra registrado");
 				return;
 			}
-			
-			
 			me.AgregarEmpleado(emple);
 			ListarEmpleado("");
 			LimpiarEmpleado();
@@ -1744,9 +1738,8 @@ protected void do_btnModificarProveedor_actionPerformed(ActionEvent e) {
 			
 			MantProveedor mprov = new MantProveedor();
 			mprov.ModificarProveedor(prov);
-			ListarEmpleado(txtIDProveedor.getText()); // Solo se mostrará ese empleado
-			tablaProveedor.setRowSelectionInterval(0, 0);
 			LimpiarProveedor();
+			ListarProveedor(""); 
 			
 		} catch (Exception e2) {
 			JOptionPane.showMessageDialog(this, "Verifique los datos ingresados. Intente de nuevo.");
@@ -1844,93 +1837,4 @@ protected void do_btnModificarProveedor_actionPerformed(ActionEvent e) {
 		 setVolume(50);  
 		 clipreproduciendo.start();
 	} 
-	//                                                                                          COLOR DEL INTERFAZ
-	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
-		String actual = jlabelmodo.getText();
-		if(actual == "Modo Normal") {		
-			contentPane.setBackground(UIManager.getColor("Button.light"));
-			lblIdBuscarE.setForeground(Color.BLACK);
-			txtBuscarEmple.setBackground(Color.WHITE);
-			lblIdE.setForeground(Color.BLACK);
-			lblDniE.setForeground(Color.BLACK);
-			lblNombreCompletoE.setForeground(Color.BLACK);
-			lblTelefono.setForeground(Color.BLACK);
-			lblCargo.setForeground(Color.BLACK);
-			lblJornada.setForeground(Color.BLACK);
-			lblHorario.setForeground(Color.BLACK);
-			lblRegistrarEmpleado.setForeground(Color.BLACK);
-			lblclock.setForeground(Color.BLACK);
-			txtIdEmpleado.setBackground(Color.WHITE);
-			txtDniEmpleado.setBackground(Color.WHITE);
-			txtNombreEmpleado.setBackground(Color.WHITE);
-			txtTelefono.setBackground(Color.WHITE);
-			cboCargo.setBackground(Color.WHITE);
-			cboJornada.setBackground(Color.WHITE);
-			cboHorario.setBackground(Color.WHITE);
-					
-			txtBuscarEmple.setForeground(Color.BLACK);
-			txtIdEmpleado.setForeground(Color.BLACK);
-			txtDniEmpleado.setForeground(Color.BLACK);
-			txtNombreEmpleado.setForeground(Color.BLACK);
-			txtTelefono.setForeground(Color.BLACK);
-			cboCargo.setForeground(Color.BLACK);
-			cboJornada.setForeground(Color.BLACK);
-			cboHorario.setForeground(Color.BLACK);
-			jlabelmodo.setText("Modo Oscuro");
-		}
-		else if(actual == "Modo Oscuro"){
-			contentPane.setBackground(Color.BLACK);
-			lblIdBuscarE.setForeground(Color.LIGHT_GRAY);
-			txtBuscarEmple.setBackground(Color.LIGHT_GRAY);
-			lblIdE.setForeground(Color.LIGHT_GRAY);
-			lblDniE.setForeground(Color.LIGHT_GRAY);
-			lblNombreCompletoE.setForeground(Color.LIGHT_GRAY);
-			lblTelefono.setForeground(Color.LIGHT_GRAY);
-			lblCargo.setForeground(Color.LIGHT_GRAY);
-			lblJornada.setForeground(Color.LIGHT_GRAY);
-			lblHorario.setForeground(Color.LIGHT_GRAY);
-			lblRegistrarEmpleado.setForeground(Color.LIGHT_GRAY);
-			lblclock.setForeground(Color.LIGHT_GRAY);
-			txtIdEmpleado.setBackground(Color.LIGHT_GRAY);
-			txtDniEmpleado.setBackground(Color.LIGHT_GRAY);
-			txtNombreEmpleado.setBackground(Color.LIGHT_GRAY);
-			txtTelefono.setBackground(Color.LIGHT_GRAY);
-			cboCargo.setBackground(Color.LIGHT_GRAY);
-			cboJornada.setBackground(Color.LIGHT_GRAY);
-			cboHorario.setBackground(Color.LIGHT_GRAY);
-			jlabelmodo.setText("Modo Frío");
-		}	
-		
-		else if(actual == "Modo Frío") {
-			contentPane.setBackground(new Color(10, 25, 45));
-			lblIdBuscarE.setForeground(new Color(150, 220, 255));
-			txtBuscarEmple.setBackground(new Color(30, 80, 120));
-			lblIdE.setForeground(new Color(150, 220, 255));
-			lblDniE.setForeground(new Color(150, 220, 255));
-			lblNombreCompletoE.setForeground(new Color(150, 220, 255));
-			lblTelefono.setForeground(new Color(150, 220, 255));
-			lblCargo.setForeground(new Color(150, 220, 255));
-			lblJornada.setForeground(new Color(150, 220, 255));
-			lblHorario.setForeground(new Color(150, 220, 255));
-			lblRegistrarEmpleado.setForeground(new Color(150, 220, 255));
-			lblclock.setForeground(new Color(150, 220, 255));
-			txtIdEmpleado.setBackground(new Color(30, 80, 120));
-			txtDniEmpleado.setBackground(new Color(30, 80, 120));
-			txtNombreEmpleado.setBackground(new Color(30, 80, 120));
-			txtTelefono.setBackground(new Color(30, 80, 120));
-			cboCargo.setBackground(new Color(30, 80, 120));
-			cboJornada.setBackground(new Color(30, 80, 120));
-			cboHorario.setBackground(new Color(30, 80, 120));
-
-			txtBuscarEmple.setForeground(Color.WHITE);
-			txtIdEmpleado.setForeground(Color.WHITE);
-			txtDniEmpleado.setForeground(Color.WHITE);
-			txtNombreEmpleado.setForeground(Color.WHITE);
-			txtTelefono.setForeground(Color.WHITE);
-			cboCargo.setForeground(Color.WHITE);
-			cboJornada.setForeground(Color.WHITE);
-			cboHorario.setForeground(Color.WHITE);		
-			jlabelmodo.setText("Modo Normal");
-		}	
-	}	
-}
+	}

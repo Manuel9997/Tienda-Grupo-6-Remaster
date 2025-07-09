@@ -111,8 +111,8 @@ public ArrayList<Producto> ConsultarProducto(String filtro) {
     try {
         java.sql.Statement sta = ConexionMySQL.getConexion().createStatement();
         ResultSet rs = sta.executeQuery( "SELECT p.id_producto, p.categoria_producto, p.nombre_producto, " +
-        		"p.garantia_producto, " +
-        	    "prov.nombre_proveedor, p.precio_producto, p.stock_producto " +
+        		"p.garantia_producto, " + 
+        	    "prov.id_proveedor, prov.nombre_proveedor, p.precio_producto, p.stock_producto " +
         	    "FROM Producto p " +
         	    "JOIN Proveedor prov ON p.id_proveedor = prov.id_proveedor " +
         	    "WHERE CAST(p.id_producto AS CHAR) LIKE '%" + filtro + "%' " +
